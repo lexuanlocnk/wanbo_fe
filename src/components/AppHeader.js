@@ -63,7 +63,7 @@ function AppHeader() {
               Tin tức
             </Nav.Link>
 
-            <Nav.Link href="#1" className="Home">
+            <Nav.Link href="/contact" className="Home">
               Liên hệ
             </Nav.Link>
           </Nav>
