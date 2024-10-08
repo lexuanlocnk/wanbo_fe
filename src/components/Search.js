@@ -8,9 +8,10 @@ import search from "../assets/search-512.webp";
 import call from "../assets/call.png";
 import user from "../assets/user.png";
 import "../components/AppHeader.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Search() {
+  const navigate = useNavigate();
   return (
     <Navbar
       expand="lg"
@@ -21,6 +22,7 @@ function Search() {
         fluid
         className="d-flex justify-content-center align-items-center"
       >
+        <a href="/home">
         <img
           alt=""
           src={wanboLogo}
@@ -28,6 +30,7 @@ function Search() {
           height="40"
           className="d-inline-block align-top me-5"
         />
+        </a>
         <Navbar.Toggle aria-controls="navbarScroll" />
 
         <Navbar.Collapse
@@ -42,7 +45,7 @@ function Search() {
               border: "1px solid #ccc",
               outline: "none",
               paddingLeft: 15,
-              borderRadius: 5
+              borderRadius: 5,
             }}
             placeholder="Tìm kiếm"
           />
@@ -68,9 +71,9 @@ function Search() {
               className="d-inline-block align-top"
             />
           </div>
-          <a href="#">
+         
             Gọi mua hàng <br /> 01245668899
-          </a>
+         
         </div>
 
         <div className="d-flex align-items-center mx-4">
@@ -83,13 +86,14 @@ function Search() {
               className="d-inline-block align-top"
             />
           </div>
-          <a href="#">
+       
             Tài khoản <br />
-            <a href="#">Đăng nhập</a>
-          </a>
+            Đăng nhập
         </div>
 
-        <Button variant="outline-light">Giỏ hàng</Button>
+        <Button variant="outline-light" onClick={() => navigate("/cart")}>
+          Giỏ hàng
+        </Button>
       </Container>
     </Navbar>
   );

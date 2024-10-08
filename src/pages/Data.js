@@ -2,44 +2,44 @@ const items = [
   {
     id: 1,
     name: "Ống kính",
-    quantity: 5,
-    image:
+    quantitysale: 5,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/dslr-2-150x150.jpg?v=1683297627343",
   },
   {
     id: 2,
     name: "Máy quay phim",
-    quantity: 3,
-    image:
+    quantitysale: 3,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/may-quay-150x150.jpg?v=1683297651577",
   },
   {
     id: 3,
     name: "Camera hành động",
-    quantity: 2,
-    image:
+    quantitysale: 2,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/camera-hanh-dong-1-150x150.jpg?v=1683297682213",
   },
   {
     id: 4,
     name: "Drone",
-    quantity: 4,
-    image:
+    quantitysale: 4,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/flycam-1-150x150.jpg?v=1683297730937",
   },
   {
     id: 6,
     name: "Phụ kiện máy ảnh",
-    quantity: 4,
-    image:
+    quantitysale: 4,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/flash-va-phu-kien-150x150.jpg?v=1683297785537",
   },
 
   {
     id: 7,
     name: "Máy ảnh",
-    quantity: 4,
-    image:
+    quantitysale: 4,
+    images:
       "https://bizweb.dktcdn.net/100/482/909/collections/dslr-150x150.jpg?v=1683297601377",
   },
 ];
@@ -49,82 +49,83 @@ const newItems = [
   {
     id: 8,
     name: "Canon RF 24mm f/1.8 Macro IS STM",
-    quantity: 6,
+    quantitysale: 6,
     price: 18900000,
     originalPrice: 20490000, // Giá gốc
     discountPercentage: Math.round(((20490000 - 18900000) / 20490000) * 100), // Tính phần trăm giảm giá
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/1657621852-img-1793116.jpg?v=1683646745713",
   },
   {
     id: 9,
     name: "Nikon NIKKOR Z DX 18-140mm f/3.5-6.3 VR",
-    quantity: 10,
+    quantitysale: 10,
     price: 18900000,
     originalPrice: 21490000,
     discountPercentage: Math.round(((21490000 - 18900000) / 21490000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/1634117738-1649436.jpg?v=1683645019827",
   },
   {
     id: 10,
     name: "Nikon NIKKOR Z 800mm f/6.3 VR S",
-    quantity: 20,
+    quantitysale: 20,
     price: 150000000,
     originalPrice: 163990000,
     discountPercentage: Math.round(((163990000 - 150000000) / 163990000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/1649202634-1679311.jpg?v=1683644275687",
   },
   {
     id: 11,
     name: "Nikon NIKKOR Z 85mm f/1.2 S",
-    quantity: 8,
+    quantitysale: 8,
     price: 65000000,
     originalPrice: 70000000,
     discountPercentage: Math.round(((70000000 - 65000000) / 70000000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/1675723846-1744705.jpg?v=1683641663417",
   },
   {
     id: 12,
     name: "Samyang AF 75mm f/1.8 Fujifilm X",
-    quantity: 15,
+    quantitysale: 15,
     price: 9900000,
     originalPrice: 9900000,
     discountPercentage: Math.round(((9900000 - 9900000) / 9900000) * 100),
 
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/samyang-75mm-x-1.jpg?v=1683641155277",
   },
   {
     id: 13,
     name: "Máy ảnh Nikon D850 (Body Only)",
-    quantity: 15,
+    quantitysale: 15,
     price: 50990000,
     originalPrice: 57990000,
     discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
 
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
   },
   {
     id: 14,
     name: "Máy ảnh Nikon D780 + Lens 24-120mm F/4G ED Nano",
+    quantitysale: 1,
     price: 50990000,
     originalPrice: 57990000,
     discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/nikon-d780-with-24-120-lens-7-500x500.jpg?v=1683467618777",
   },
   {
     id: 15,
     name: "Máy ảnh Nikon D6 Body Only",
-    quantity: 15,
+    quantitysale: 15,
     price: 140000000,
     originalPrice: 162000000,
     discountPercentage: Math.round(((162000000 - 140000000) / 162000000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/thumb/large/100/482/909/products/nikon-d6-01-500x500.jpg?v=1683467136367",
   },
 ];
@@ -139,8 +140,8 @@ const cameraItem = [
     discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
-      "https://example.com/nikon-d850-second-image.jpg",
-      "https://example.com/nikon-d850-third-image.jpg",
+      "https://example.com/nikon-d850-second-images.jpg",
+      "https://example.com/nikon-d850-third-images.jpg",
     ],
     description:
       "Nikon D850 là một máy ảnh DSLR cao cấp với cảm biến FullFrame 45.7MP và bộ xử lý hình ảnh EXPEED 5. Được thiết kế cho các nhiếp ảnh gia chuyên nghiệp và yêu cầu cao về chất lượng hình ảnh.",
@@ -153,8 +154,8 @@ const cameraItem = [
     discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/nikon-d780-with-24-120-lens-7-500x500.jpg?v=1683467618777",
-      "https://example.com/nikon-d780-second-image.jpg",
-      "https://example.com/nikon-d780-third-image.jpg",
+      "https://example.com/nikon-d780-second-images.jpg",
+      "https://example.com/nikon-d780-third-images.jpg",
     ],
     description:
       "Nikon D780 là sự kết hợp giữa một máy ảnh DSLR truyền thống và công nghệ mirrorless tiên tiến, kèm theo ống kính 24-120mm cho khả năng chụp linh hoạt trong mọi tình huống.",
@@ -167,8 +168,8 @@ const cameraItem = [
     discountPercentage: Math.round(((159990000 - 138990000) / 159990000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/nikon-d6-01-500x500.jpg?v=1683467136367",
-      "https://example.com/nikon-d6-second-image.jpg",
-      "https://example.com/nikon-d6-third-image.jpg",
+      "https://example.com/nikon-d6-second-images.jpg",
+      "https://example.com/nikon-d6-third-images.jpg",
     ],
     description:
       "Nikon D6 là dòng máy ảnh DSLR hàng đầu của Nikon, nổi bật với khả năng chụp ảnh tốc độ cao và hiệu suất cao cấp cho các nhiếp ảnh gia chuyên nghiệp.",
@@ -181,8 +182,8 @@ const cameraItem = [
     discountPercentage: Math.round(((19990000 - 18590000) / 19990000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/canon-eos-850d-body-2-500x500.jpg?v=1683451497817",
-      "https://example.com/canon-850d-second-image.jpg",
-      "https://example.com/canon-850d-third-image.jpg",
+      "https://example.com/canon-850d-second-images.jpg",
+      "https://example.com/canon-850d-third-images.jpg",
     ],
     description:
       "Canon EOS 850D là một máy ảnh DSLR tầm trung, với khả năng quay video 4K và hệ thống lấy nét tiên tiến, lý tưởng cho cả người mới bắt đầu và những người dùng có kinh nghiệm.",
@@ -195,8 +196,8 @@ const cameraItem = [
     discountPercentage: Math.round(((44000000 - 35990000) / 44000000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/canon-eos-77d-500x500.jpg?v=1683450750903",
-      "https://example.com/canon-77d-second-image.jpg",
-      "https://example.com/canon-77d-third-image.jpg",
+      "https://example.com/canon-77d-second-images.jpg",
+      "https://example.com/canon-77d-third-images.jpg",
     ],
     description:
       "Canon EOS 77D là một máy ảnh DSLR linh hoạt với khả năng điều khiển trực quan, phù hợp với các nhiếp ảnh gia muốn nâng cao chất lượng hình ảnh của mình.",
@@ -209,8 +210,8 @@ const cameraItem = [
     discountPercentage: Math.round(((53680000 - 44680000) / 53680000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/canon-eos-6d-ii-with-24-105-f4l-ii-1-500x500.jpg?v=1683450055773",
-      "https://example.com/canon-6d-second-image.jpg",
-      "https://example.com/canon-6d-third-image.jpg",
+      "https://example.com/canon-6d-second-images.jpg",
+      "https://example.com/canon-6d-third-images.jpg",
     ],
     description:
       "Canon EOS 6D Mark II là máy ảnh FullFrame nhỏ gọn với hiệu suất cao, thiết kế cho những ai đang tìm kiếm máy ảnh mạnh mẽ với khả năng quay video và chụp ảnh chuyên nghiệp.",
@@ -223,8 +224,8 @@ const cameraItem = [
     discountPercentage: Math.round(((53290000 - 36290000) / 53290000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/canon-eos-5d-mark-iv-500x500.jpg?v=1683449123350",
-      "https://example.com/canon-5d-second-image.jpg",
-      "https://example.com/canon-5d-third-image.jpg",
+      "https://example.com/canon-5d-second-images.jpg",
+      "https://example.com/canon-5d-third-images.jpg",
     ],
     description:
       "Canon EOS 5D Mark IV là máy ảnh DSLR đa năng, nổi tiếng với chất lượng ảnh tuyệt vời, khả năng quay video 4K và tính năng xử lý linh hoạt cho các nhiếp ảnh gia chuyên nghiệp.",
@@ -341,7 +342,7 @@ const videoItem = [
     price: 53190000,
     originalPrice: 0,
     discountPercentage: Math.round(((0 - 50990000) / 0) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/z-cam-e2-1-500x500.jpg?v=1683648724707",
   },
   {
@@ -350,7 +351,7 @@ const videoItem = [
     price: 59990000,
     originalPrice: 65500000,
     discountPercentage: Math.round(((65500000 - 50990000) / 65500000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/canon-xf705-01-500x500.jpg?v=1683646361700",
   },
   {
@@ -359,7 +360,7 @@ const videoItem = [
     price: 82990000,
     originalPrice: 89990000,
     discountPercentage: Math.round(((89990000 - 82990000) / 89990000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/sony-fx3-1-500x500.jpg?v=1683647423603",
   },
   {
@@ -368,7 +369,7 @@ const videoItem = [
     price: 30000000,
     originalPrice: 0,
     discountPercentage: Math.round(((0 - 18590000) / 0) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/canon-xf705-01-500x500.jpg?v=1683646361700",
   },
   {
@@ -377,7 +378,7 @@ const videoItem = [
     price: 33000000,
     originalPrice: 0,
     discountPercentage: Math.round(((0 - 35990000) / 0) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/canon-xf705-01-500x500.jpg?v=1683646361700",
   },
   {
@@ -386,7 +387,7 @@ const videoItem = [
     price: 44680000,
     originalPrice: 53680000,
     discountPercentage: Math.round(((53680000 - 44680000) / 53680000) * 100),
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/products/canon-eos-6d-ii-with-24-105-f4l-ii-1-500x500.jpg?v=1683450055773",
   },
 ];
@@ -399,7 +400,7 @@ const newsItems = [
     date: "01/10/2024",
     description:
       "Fujifilm X-T5 đã được người hâm mộ nhà Fuji hào hứng mong chờ ngày ra mắt trong một thời gian dài, và liệu rằng sản phẩm này có làm thỏa mãn được sự kỳ vọng rất lớn từ phía người dùng? Và nếu anh em còn đang phân vân có nên nâng cấp chiếc máy này không thì hãy xem hết bài viết đánh giá Fujifilm X-T5 chi tiết ngay dưới đây của VJShop nhé!",
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/articles/danh-gia-fujifilm-x-t5-20.jpg?v=1683728993297",
   },
   {
@@ -408,7 +409,7 @@ const newsItems = [
     date: "02/10/2024",
     description:
       "hững chiếc điện thoại thông minh càng được nâng cấp về camera và khiến chúng trở thành những thiết bị ghi hình không thể thiếu. Hiểu được điều đó các hãng phụ kiện liên tục đưa ra những mẫu gimbal dành riêng cho điện thoại với vô vàn chức năng ấn tượng",
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/articles/so-sanh-insta360-flow-va-osmo-action-6-17.jpg?v=1683728778797",
   },
   {
@@ -417,7 +418,7 @@ const newsItems = [
     date: "03/10/2024",
     description:
       "Aputure mới đây đã công bố 2 chiếc đèn LED Amaran 150c và 300c có nguồn điện 150W và 300W full-color. 2 chiếc đèn này được thiết kế riêng cho các nhà làm phim, cả có thể kết hợp với bộ điều chỉnh ánh sáng Spotlight SE và Light Dome Mini SE.",
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/articles/ra-mat-2-chiec-den-amaran-150c-va-300c-1.jpg?v=1683728443837",
   },
 
@@ -427,7 +428,7 @@ const newsItems = [
     date: "03/10/2024",
     description:
       "Một cuộc đua có phần “lập dị” đã được tổ chức với sự tham gia của hàng loạt phương tiện đặc biệt? Ô tô máy ảnh Nikon này là một trong hàng trăm chiếc xe kỳ lạ được chế tạo bởi nhà phát minh Ấn Độ K Sudhakar.",
-    image:
+    images:
       "https://bizweb.dktcdn.net/100/482/909/articles/o-to-may-anh-nikon-2.jpg?v=1683728478247",
   },
 ];

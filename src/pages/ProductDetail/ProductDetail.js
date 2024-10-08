@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { newItems, newsItems, cameraItem, lendItem } from "../Data";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Detail.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import Modal from 'react-bootstrap/Modal';
 
 import Accordion from "react-bootstrap/Accordion";
 import { auto } from "@popperjs/core";
 import LightboxButton from "../../components/LightboxButton";
 import ModelDetail from "../../components/ModelDetail";
+import BoxProduct from "../../components/BoxProduct";
+import { CartContext } from "../Cart/CartContext";
 
 const ProductDetail = ({ children, eventKey }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const product = lendItem.find((item) => item.id === parseInt(id));
+
+  // Lấy hàm addToCart từ context
+  const { addToCart } = useContext(CartContext);
 
   //model
   const [modalShow, setModalShow] = useState(false);
@@ -40,9 +47,15 @@ const ProductDetail = ({ children, eventKey }) => {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
+  const [smShow, setSmShow] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity }); // Thêm sản phẩm vào giỏ hàng
+    setSmShow(true) // Chuyển hướng đến trang giỏ hàng
+  };
 
   if (!product) {
-    return <h1 className="m-5">Sản phẩm</h1>; // Hoặc thông báo lỗi khác
+    return <h1 className="m-5">Sản phẩm</h1>;
   }
 
   return (
@@ -101,6 +114,7 @@ const ProductDetail = ({ children, eventKey }) => {
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
             <Row className="quantity-controls mt-1 ms-1 align-items-center">
               Số lượng:
+              
               <div className="ms-3 align-items-center detailQuantity">
                 <button
                   className="btn"
@@ -126,9 +140,29 @@ const ProductDetail = ({ children, eventKey }) => {
               Giao hàng tận nơi hoặc nhận tại cửa hàng
             </Button>
             <div className="d-flex justify-content-between">
-              <Button variant="primary" className="adddetail">
+              <Button
+                variant="primary"
+                className="adddetail"
+                onClick={handleAddToCart}
+              >
                 THÊM VÀO GIỎ HÀNG
               </Button>
+
+              {/* modal */}
+              <Modal
+                // size="lg"
+                show={smShow}
+                onHide={() => setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="example-modal-sizes-title-sm">
+                    Thêm sản phẩm
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Đã thêm <b>{product.name}</b> vào giỏ hàng</Modal.Body>
+              </Modal>
+
               <Button variant="primary" className="adddetail">
                 Trả góp <br />
                 (Mua trả góp lãi suất thấp)
@@ -166,10 +200,9 @@ const ProductDetail = ({ children, eventKey }) => {
                 style={{ width: "45%", height: "auto" }}
               />
 
-              <Accordion className="d-flex flex-column align-items-center shadow3 mt-5">
+              <Accordion className="d-flex flex-column align-items-center shadow4 mt-5">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>
-                    {" "}
                     <b>Xem thêm</b>
                   </Accordion.Header>
                   <Accordion.Body style={{ width: "100%" }}>
@@ -267,11 +300,11 @@ const ProductDetail = ({ children, eventKey }) => {
                   <Card
                     key={item.id}
                     className="m-1 d-flex flex-column flex-md-row" // Flex theo cột khi màn hình nhỏ, theo hàng khi màn hình lớn
-                  style={{border:"none"}}
+                    style={{ border: "none" }}
                   >
                     <Card.Img
                       variant="top"
-                      src={item.image}
+                      src={item.images}
                       className="p-2"
                       style={{
                         width: "25%",
@@ -294,59 +327,9 @@ const ProductDetail = ({ children, eventKey }) => {
 
         <h3 className="my-4">SẢN PHẨM CÙNG LOẠI</h3>
 
-        <div className="row">
+        <div className="d-flex justify-content-center mx-2">
           {topItems.map((item) => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg mb-4" key={item.id}>
-              <Card
-                className="border rounded shadow4"
-                style={{ width: "100%" }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={item.images}
-                  className="p-4 img"
-                  style={{ objectFit: "cover", height: "auto" }}
-                />
-
-                {item.discountPercentage > 0 && (
-                  <Card.Text className="sale">
-                    -{item.discountPercentage}%
-                  </Card.Text>
-                )}
-
-                <Card.Body>
-                  <a
-                    href={`/product/${item.id}`}
-                    className="card-title"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <Card.Title
-                      style={{
-                        whiteSpace: "normal",
-                        wordWrap: "break-word",
-                        height: 55,
-                        fontSize: 17,
-                      }}
-                    >
-                      {item.name}
-                    </Card.Title>
-                  </a>
-
-                  <Card.Text className="price">
-                    {item.price.toLocaleString("vi-VN")} VND
-                  </Card.Text>
-                  <Card.Text className="original-price">
-                    {item.discountPercentage > 0 ? (
-                      <>
-                        {item.originalPrice.toLocaleString("vi-VN")} VND <br />
-                      </>
-                    ) : (
-                      <br />
-                    )}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
+            <BoxProduct key={item.id} item={item} />
           ))}
         </div>
       </div>

@@ -4,21 +4,28 @@ import Home from "../pages/Home/Home";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import Introduce from "../pages/Introduce/Introduce";
 import News from "../pages/News/News";
+import Cart from "../pages/Cart/Cart";
+import { CartContext, CartProvider } from "../pages/Cart/CartContext";
+import Pathname from "./Pathname";
 
 const AppContent = () => {
   return (
-    <Routes>
-      <Route path="/home" element={<Home />} />
+    <CartProvider>
+      <Pathname/>
+      <Routes>
+        <Route path="/home" element={<Home />} />
 
-      <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
 
-      <Route path="/introduce" element={<Introduce />} />
+        <Route path="/introduce" element={<Introduce />} />
 
-      <Route path="/news" element={<News />} />
-      
-      <Route path="/" element={<Navigate to="home" replace />} />
+        <Route path="/news" element={<News />} />
 
-    </Routes>
+        <Route path="/cart" element={<Cart />} />
+
+        <Route path="/" element={<Navigate to="home" replace />} />
+      </Routes>
+    </CartProvider>
   );
 };
 

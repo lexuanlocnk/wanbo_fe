@@ -6,11 +6,8 @@ import DefaultLayout from "./Layout/DefaultLayout";
 function App() {
   return (
     <div>
-      {/* Sử dụng BrowserRouter để bao bọc các Routes */}
       <Router>
-        {/* Đảm bảo Routes bao quanh các Route */}
         <Routes>
-          {/* Route cho path "/" và element là DefaultLayout */}
           <Route path="*" element={<DefaultLayout />} />
         </Routes>
       </Router>

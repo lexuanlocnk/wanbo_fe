@@ -62,7 +62,7 @@
 a {
   text-decoration: none;
   font-size: 14px;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
 }
 
 a:hover {
