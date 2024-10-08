@@ -33,7 +33,6 @@ export default function Footer() {
               Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
               chương trình khuyến mại khác
             </Card.Text>
-
           </Card.ImgOverlay>
         </Card>
       </section>
@@ -46,7 +45,6 @@ export default function Footer() {
                 alt=""
                 src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/logo_footer.png?1708522711041"
                 width="150px"
-                
                 className="d-inline-block align-top mb-5"
               />
               <p>
@@ -142,7 +140,19 @@ export default function Footer() {
           </MDBRow>
         </MDBContainer>
       </section>
-
+      {/* <div style={{width: "100%"}}>
+        <ifram
+          width="100%"
+          height="500"
+          frameBorder="0"
+          scrolling="no"
+          marginHeight="0"
+          marginWidth="0"
+          src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=245%20Tr%E1%BA%A7n%20Quang%20Kh%E1%BA%A3i,%20P.%20T%C3%A2n%20%C4%90%E1%BB%8Bnh,%20Qu%E1%BA%ADn%201,%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh+(Showroom%20SMC)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        >
+          <a href="https://www.gps.ie/">gps systems</a>
+        </ifram>
+      </div> */}
       <div
         className="text-center p-4"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
