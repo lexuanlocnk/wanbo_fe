@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 
 import Accordion from "react-bootstrap/Accordion";
 import { auto } from "@popperjs/core";
@@ -15,6 +15,8 @@ import LightboxButton from "../../components/LightboxButton";
 import ModelDetail from "../../components/ModelDetail";
 import BoxProduct from "../../components/BoxProduct";
 import { CartContext } from "../Cart/CartContext";
+import FeaturedNews from "../../components/FeaturedNews";
+import BoxCart from "../../components/BoxCart";
 
 const ProductDetail = ({ children, eventKey }) => {
   const navigate = useNavigate();
@@ -51,7 +53,7 @@ const ProductDetail = ({ children, eventKey }) => {
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity }); // Thêm sản phẩm vào giỏ hàng
-    setSmShow(true) // Chuyển hướng đến trang giỏ hàng
+    setSmShow(true);
   };
 
   if (!product) {
@@ -114,7 +116,6 @@ const ProductDetail = ({ children, eventKey }) => {
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
             <Row className="quantity-controls mt-1 ms-1 align-items-center">
               Số lượng:
-              
               <div className="ms-3 align-items-center detailQuantity">
                 <button
                   className="btn"
@@ -150,17 +151,19 @@ const ProductDetail = ({ children, eventKey }) => {
 
               {/* modal */}
               <Modal
-                // size="lg"
+                size="lg"
                 show={smShow}
                 onHide={() => setSmShow(false)}
                 aria-labelledby="example-modal-sizes-title-sm"
               >
                 <Modal.Header closeButton>
                   <Modal.Title id="example-modal-sizes-title-sm">
-                    Thêm sản phẩm
+                    Đã thêm <b>{product.name}</b> vào giỏ hàng
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Đã thêm <b>{product.name}</b> vào giỏ hàng</Modal.Body>
+                <Modal.Body>
+                  <BoxCart />
+                </Modal.Body>
               </Modal>
 
               <Button variant="primary" className="adddetail">
@@ -289,38 +292,8 @@ const ProductDetail = ({ children, eventKey }) => {
               />
             </Col>
 
-            <Col
-              className="p-3 mt-4"
-              style={{ height: "auto", backgroundColor: "white" }}
-            >
-              <h5>Tin nổi bật</h5>
-              <hr />
-              <div className="d-flex flex-wrap">
-                {newsItems.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="m-1 d-flex flex-column flex-md-row" // Flex theo cột khi màn hình nhỏ, theo hàng khi màn hình lớn
-                    style={{ border: "none" }}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={item.images}
-                      className="p-2"
-                      style={{
-                        width: "25%",
-                        height: "auto",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <div className="d-flex flex-column justify-content-center mx-2">
-                      <Card.Title className="mb-0">{item.title}</Card.Title>
-                      <a href={`/product`} className="card-title">
-                        <h6 className="mb-0">Xem thêm</h6>
-                      </a>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+            <Col style={{ height: "auto", backgroundColor: "white" }}>
+              <FeaturedNews />
             </Col>
           </Col>
         </Row>

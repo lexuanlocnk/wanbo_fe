@@ -7,19 +7,24 @@ import Home from "../pages/Home/Home";
 import AppContent from "../components/AppContent";
 import Address from "../components/Address";
 import BackToTop from "../components/BackToTop";
+import { CartProvider } from "../pages/Cart/CartContext";
+import Breadcrumb from "../components/Breadcrumb";
 
 const DefaultLayout = () => {
   return (
     <div>
-      <BackToTop/>
-      
-      <Address/>
-      <Search />
-      <AppHeader />
+      <CartProvider>
+        <BackToTop />
 
-      <AppContent/>
+        <Address />
+        <Search />
+        <AppHeader />
+        <Breadcrumb/>
 
-      <Footer />
+        <AppContent />
+
+        <Footer />
+      </CartProvider>
     </div>
   );
 };

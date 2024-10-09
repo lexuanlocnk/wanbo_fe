@@ -4,28 +4,33 @@ import Home from "../pages/Home/Home";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import Introduce from "../pages/Introduce/Introduce";
 import News from "../pages/News/News";
+import NewsDetai from "../pages/News/NewsDetail";
 import Cart from "../pages/Cart/Cart";
 import { CartContext, CartProvider } from "../pages/Cart/CartContext";
-import Pathname from "./Pathname";
+import Login from "../pages/Account/Login";
+import Register from "../pages/Account/Register";
 
 const AppContent = () => {
   return (
-    <CartProvider>
-      <Pathname/>
-      <Routes>
-        <Route path="/home" element={<Home />} />
+    <Routes>
+      <Route path="/home" element={<Home />} />
 
-        <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/login" element={<Login />} />
 
-        <Route path="/introduce" element={<Introduce />} />
+      <Route path="/register" element={<Register />} />
 
-        <Route path="/news" element={<News />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
 
-        <Route path="/cart" element={<Cart />} />
+      <Route path="/introduce" element={<Introduce />} />
 
-        <Route path="/" element={<Navigate to="home" replace />} />
-      </Routes>
-    </CartProvider>
+      <Route path="/news" element={<News />} />
+
+      <Route path="/news/:id" element={<NewsDetai />} />
+
+      <Route path="/cart" element={<Cart />} />
+
+      <Route path="/" element={<Navigate to="home" replace />} />
+    </Routes>
   );
 };
 

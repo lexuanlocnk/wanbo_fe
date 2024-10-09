@@ -4,12 +4,22 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { FormCheck } from "react-bootstrap";
+import { Collapse, Form, FormCheck } from "react-bootstrap";
+import BoxCart from "../../components/BoxCart";
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]); // Lưu trữ các mục được chọn
-  const [selectAll, setSelectAll] = useState(false); // Trạng thái cho checkbox "Chọn tất cả"
+  const [selectAll, setSelectAll] = useState(false);
+  
+  const [deliveryDate, setDeliveryDate] = useState(""); // Ngày giao hàng
+  const [isCompanyInvoice, setIsCompanyInvoice] = useState(false); // Trạng thái checkbox "Xuất hóa đơn công ty"
+  const [companyInfo, setCompanyInfo] = useState({
+    name: "",
+    taxCode: "",
+    address: "",
+    email: "",
+  });
 
   // Hàm để tăng số lượng
   const increaseQuantity = (id) => {
@@ -56,6 +66,11 @@ const Cart = () => {
     0
   );
 
+  // Hàm xử lý khi checkbox "Xuất hóa đơn công ty" được chọn
+  const handleCompanyInvoiceChange = () => {
+    setIsCompanyInvoice(!isCompanyInvoice);
+  };
+
   return (
     <div style={{ backgroundColor: "#f4f4f4" }}>
       <div className="cart-container p-5">
@@ -64,128 +79,99 @@ const Cart = () => {
           <p>Giỏ hàng của bạn trống.</p>
         ) : (
           <div>
-            <Button
-              variant="danger"
-              className="p-2 mb-2"
-              style={{ width: "10%" }}
-              onClick={handleRemoveSelectedItems}
-              disabled={selectedItems.length === 0} // Chỉ bật nút khi có mục được chọn
-            >
-              Xóa
-            </Button>
-            <div style={{ backgroundColor: "white" }} className="p-5">
-              {/* Tiêu đề cột */}
-              <Row className="fw-bold">
-                <Col md={1}>
-                  <FormCheck
-                    checked={selectAll}
-                    onChange={handleSelectAll} // Chọn tất cả hoặc bỏ chọn tất cả
-                  />
+            <div>
+              <Row style={{ backgroundColor: "white" }}>
+                <Col md={9} className="p-5">
+                 {/* list cart */}
+                  <BoxCart/>
                 </Col>
 
-                <Col md={2}>Hình ảnh</Col>
-                <Col md={2}>Tên sản phẩm</Col>
-                <Col md={2}>Giá</Col>
-                <Col md={2}>Số lượng</Col>
-                <Col md={2}>Tổng</Col>
-                <Col md={1}>Tác vụ</Col>
-              </Row>
-              <hr />
-              {/* Hiển thị các sản phẩm trong giỏ hàng */}
-              {cartItems.map((item) => (
-                <Row className="align-items-center" key={item.id}>
-                  <Col md={1}>
-                    <FormCheck
-                      checked={selectedItems.includes(item.id)}
-                      onChange={() => handleSelectItem(item.id)}
-                    />
-                  </Col>
-                  <Col md={2}>
-                    <img
-                      src={item.images}
-                      alt={item.name}
-                      className="img-fluid p-3"
-                      style={{ maxWidth: "150px", height: "auto" }}
-                    />
-                  </Col>
-                  <Col md={2}>
-                    <Card.Title>{item.name}</Card.Title>
-                  </Col>
-                  <Col md={2}>
-                    <Card.Text style={{ fontSize: 17, color: "red" }}>
-                      {item.price.toLocaleString("vi-VN")} VND
-                    </Card.Text>
-                  </Col>
-
-                  <Col md={2} className="d-flex align-items-center">
-                    {/* Nút trừ số lượng */}
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={() => decreaseQuantity(item.id, item.quantity)}
-                      className="me-2"
-                    >
-                      -
-                    </Button>
-
-                    <Card.Text
-                      style={{
-                        height: 5,
-                        width: 18,
-                        textAlign: "center",
-                        fontSize: 15,
-                      }}
-                    >
-                      {item.quantity}
-                    </Card.Text>
-
-                    {/* Nút cộng số lượng */}
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={() => increaseQuantity(item.id)}
-                      className="ms-2"
-                    >
-                      +
-                    </Button>
-                  </Col>
-
-                  <Col md={2}>
-                    <Card.Text style={{ fontSize: 17, color: "red" }}>
-                      {(item.price * item.quantity).toLocaleString("vi-VN")} VND
-                    </Card.Text>
-                  </Col>
-
-                  <Col md={1}>
-                    <Button
-                      variant="danger"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      <i className="bi bi-trash"></i>
-                    </Button>
-                  </Col>
+                {/* Phần thời gian giao hàng */}
+                <Col md={3} className="my-5">
+                  <h5 variant="success" style={{ width: "100%" }}>
+                    Thời gian giao hàng
+                  </h5>
                   <hr />
-                </Row>
-              ))}
-
-              <Row className="mt-4">
-                <Col md={{ span: 3, offset: 9 }} className="text-end">
-                  <div
-                    style={{ justifyContent: "space-between", display: "flex" }}
-                  >
-                    <h5> Tổng cộng:</h5>
-
-                    <span style={{ color: "red" }}>
-                      <h5>{totalPrice.toLocaleString("vi-VN")} VND</h5>
-                    </span>
+                  <div className="mt-3">
+                    <div className="d-flex">
+                      <input
+                        type="date"
+                        value={deliveryDate}
+                        onChange={(e) => setDeliveryDate(e.target.value)}
+                        className="form-control"
+                      />
+                      <Form.Select aria-label="Chọn thời gian" className="ms-3">
+                        <option>Chọn thời gian</option>
+                        <option value="1">08h00 - 12h00</option>
+                        <option value="2">14h00 - 18h00</option>
+                        <option value="3">19h00 - 21h00</option>
+                      </Form.Select>
+                    </div>
                   </div>
-                  <Button
-                    variant="success"
-                    className="mt-4 p-2"
-                    style={{ width: "100%" }}
-                  >
-                    Thanh toán
-                  </Button>
+
+                  <div className="mt-2">
+                    <FormCheck
+                      label="Xuất hóa đơn công ty"
+                      checked={isCompanyInvoice}
+                      onChange={handleCompanyInvoiceChange}
+                    />
+                  </div>
+
+                  {/* Sử dụng Collapse để thêm hiệu ứng xổ xuống */}
+                  <Collapse in={isCompanyInvoice}>
+                    <div>
+                      <div className="mt-3">
+                        <input
+                          type="text"
+                          placeholder="Tên công ty"
+                          value={companyInfo.name}
+                          onChange={(e) =>
+                            setCompanyInfo({
+                              ...companyInfo,
+                              name: e.target.value,
+                            })
+                          }
+                          className="form-control mt-3"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Mã số thuế"
+                          value={companyInfo.taxCode}
+                          onChange={(e) =>
+                            setCompanyInfo({
+                              ...companyInfo,
+                              taxCode: e.target.value,
+                            })
+                          }
+                          className="form-control mt-3"
+                        />
+                        <textarea
+                          type="text"
+                          placeholder="Địa chỉ công ty (bao gồm Phường/Xã, Quận/Huyện, Tỉnh/Thành phố nếu có)"
+                          value={companyInfo.address}
+                          onChange={(e) =>
+                            setCompanyInfo({
+                              ...companyInfo,
+                              address: e.target.value,
+                            })
+                          }
+                          className="form-control mt-3"
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email nhận hoá đơn"
+                          value={companyInfo.email}
+                          onChange={(e) =>
+                            setCompanyInfo({
+                              ...companyInfo,
+                              email: e.target.value,
+                            })
+                          }
+                          className="form-control mt-3"
+                        />
+                      </div>
+                    </div>
+                  </Collapse>
                 </Col>
               </Row>
             </div>

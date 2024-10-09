@@ -1,6 +1,7 @@
+import React, { useContext } from "react";
+import { CartContext } from "../pages/Cart/CartContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import wanboLogo from "../assets/logo.webp";
@@ -9,9 +10,17 @@ import call from "../assets/call.png";
 import user from "../assets/user.png";
 import "../components/AppHeader.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Badge, Col } from "react-bootstrap";
 
 function Search() {
   const navigate = useNavigate();
+  const { cartItems } = useContext(CartContext);
+
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <Navbar
       expand="lg"
@@ -22,15 +31,15 @@ function Search() {
         fluid
         className="d-flex justify-content-center align-items-center"
       >
-        <a href="/home">
-        <img
-          alt=""
-          src={wanboLogo}
-          width="auto"
-          height="40"
-          className="d-inline-block align-top me-5"
-        />
-        </a>
+        <Link to="/home">
+          <img
+            alt="Wanbo Logo"
+            src={wanboLogo}
+            width="auto"
+            height="40"
+            className="d-inline-block align-top me-5"
+          />
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
 
         <Navbar.Collapse
@@ -52,7 +61,7 @@ function Search() {
 
           <Button className="search">
             <img
-              alt=""
+              alt="Search"
               src={search}
               width="auto"
               height="30"
@@ -64,34 +73,48 @@ function Search() {
         <div className="d-flex align-items-center">
           <div className="me-2">
             <img
-              alt=""
+              alt="Call"
               src={call}
               width="auto"
               height="30"
               className="d-inline-block align-top"
             />
           </div>
-         
-            Gọi mua hàng <br /> 01245668899
-         
+          Gọi mua hàng <br /> 01245678910
         </div>
 
         <div className="d-flex align-items-center mx-4">
           <div className="me-2">
             <img
-              alt=""
+              alt="User"
               src={user}
               width="auto"
               height="30"
               className="d-inline-block align-top"
             />
           </div>
-       
-            Tài khoản <br />
-            Đăng nhập
+
+          <Col >
+            <a href={`/login`} style={{color: "white"}}>Tài khoản</a> <br />
+            <a href={`/login`} style={{color: "white"}}>Đăng nhập</a>
+          </Col>
         </div>
 
-        <Button variant="outline-light" onClick={() => navigate("/cart")}>
+        <Button
+          variant="outline-light"
+          onClick={() => navigate("/cart")}
+          style={{ position: "relative" }}
+        >
+          <Badge
+            bg="primary"
+            style={{ position: "absolute", left: 27, top: 7 }}
+          >
+            {totalItems}
+          </Badge>
+          <span
+            className="bi bi-basket"
+            style={{ fontSize: 24, marginRight: 15 }}
+          />
           Giỏ hàng
         </Button>
       </Container>

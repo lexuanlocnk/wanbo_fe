@@ -140,8 +140,8 @@ const cameraItem = [
     discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
     images: [
       "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
-      "https://example.com/nikon-d850-second-images.jpg",
-      "https://example.com/nikon-d850-third-images.jpg",
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
     ],
     description:
       "Nikon D850 là một máy ảnh DSLR cao cấp với cảm biến FullFrame 45.7MP và bộ xử lý hình ảnh EXPEED 5. Được thiết kế cho các nhiếp ảnh gia chuyên nghiệp và yêu cầu cao về chất lượng hình ảnh.",
@@ -402,69 +402,62 @@ const newsItems = [
       "Fujifilm X-T5 đã được người hâm mộ nhà Fuji hào hứng mong chờ ngày ra mắt trong một thời gian dài, và liệu rằng sản phẩm này có làm thỏa mãn được sự kỳ vọng rất lớn từ phía người dùng? Và nếu anh em còn đang phân vân có nên nâng cấp chiếc máy này không thì hãy xem hết bài viết đánh giá Fujifilm X-T5 chi tiết ngay dưới đây của VJShop nhé!",
     images:
       "https://bizweb.dktcdn.net/100/482/909/articles/danh-gia-fujifilm-x-t5-20.jpg?v=1683728993297",
+    content: `
+      <h2>Giới thiệu Fujifilm X-T5</h2>
+      <p>Fujifilm X-T5 là một bước tiến lớn trong dòng sản phẩm của Fujifilm, với thiết kế hoài cổ nhưng tích hợp nhiều công nghệ hiện đại.</p>
+      <h3>Thiết kế cổ điển nhưng mạnh mẽ</h3>
+      <p>X-T5 mang đậm phong cách cổ điển với thiết kế hoài niệm, nhưng bên trong lại là bộ cảm biến 40MP, hỗ trợ quay video 6K - một tính năng hiếm có ở dòng máy mirrorless.</p>
+      <p>...</p>
+    `,
   },
   {
     id: 2,
-    title: "So Sánh Insta360 Flow Và DJI Osmo Mobile 6:",
+    title: "So Sánh Insta360 Flow Và DJI Osmo Mobile 6",
     date: "02/10/2024",
     description:
-      "hững chiếc điện thoại thông minh càng được nâng cấp về camera và khiến chúng trở thành những thiết bị ghi hình không thể thiếu. Hiểu được điều đó các hãng phụ kiện liên tục đưa ra những mẫu gimbal dành riêng cho điện thoại với vô vàn chức năng ấn tượng",
+      "Những chiếc điện thoại thông minh càng được nâng cấp về camera và khiến chúng trở thành những thiết bị ghi hình không thể thiếu. Hiểu được điều đó các hãng phụ kiện liên tục đưa ra những mẫu gimbal dành riêng cho điện thoại với vô vàn chức năng ấn tượng.",
     images:
       "https://bizweb.dktcdn.net/100/482/909/articles/so-sanh-insta360-flow-va-osmo-action-6-17.jpg?v=1683728778797",
+    content: `
+      <h2>So sánh Insta360 Flow và DJI Osmo Mobile 6</h2>
+      <p>Cả hai gimbal đều cung cấp sự ổn định tuyệt vời khi quay video bằng điện thoại. Tuy nhiên, chúng có những khác biệt về tính năng và thiết kế.</p>
+      <h3>Tính năng nổi bật</h3>
+      <p>Insta360 Flow nổi bật với tính năng AI theo dõi đối tượng, trong khi DJI Osmo Mobile 6 tập trung vào sự tiện dụng và tính năng gấp gọn.</p>
+      <p>...</p>
+    `,
   },
   {
     id: 3,
-    title: "Aputure Ra Mắt Đèn Amaran 150c Và 300c Dành Riêng Cho Các Nhà",
+    title: "Aputure Ra Mắt Đèn Amaran 150c Và 300c Dành Riêng Cho Các Nhà Làm Phim",
     date: "03/10/2024",
     description:
       "Aputure mới đây đã công bố 2 chiếc đèn LED Amaran 150c và 300c có nguồn điện 150W và 300W full-color. 2 chiếc đèn này được thiết kế riêng cho các nhà làm phim, cả có thể kết hợp với bộ điều chỉnh ánh sáng Spotlight SE và Light Dome Mini SE.",
     images:
       "https://bizweb.dktcdn.net/100/482/909/articles/ra-mat-2-chiec-den-amaran-150c-va-300c-1.jpg?v=1683728443837",
+    content: `
+      <h2>Amaran 150c và 300c</h2>
+      <p>Hai chiếc đèn mới từ Aputure mang lại nhiều tính năng đáng kinh ngạc cho các nhà làm phim chuyên nghiệp. Với khả năng chiếu sáng mạnh mẽ và đa sắc, chúng cung cấp khả năng điều chỉnh linh hoạt cho mọi cảnh quay.</p>
+      <p>...</p>
+    `,
   },
-
   {
     id: 4,
-    title: "Bất Ngờ Chưa Máy Ảnh Nikon Có Thể Chạy Bon Bon Trên Đường",
+    title: "Bất Ngờ Chưa: Máy Ảnh Nikon Có Thể Chạy Bon Bon Trên Đường",
     date: "03/10/2024",
     description:
-      "Một cuộc đua có phần “lập dị” đã được tổ chức với sự tham gia của hàng loạt phương tiện đặc biệt? Ô tô máy ảnh Nikon này là một trong hàng trăm chiếc xe kỳ lạ được chế tạo bởi nhà phát minh Ấn Độ K Sudhakar.",
+      "Một cuộc đua có phần 'lập dị' đã được tổ chức với sự tham gia của hàng loạt phương tiện đặc biệt? Ô tô máy ảnh Nikon này là một trong hàng trăm chiếc xe kỳ lạ được chế tạo bởi nhà phát minh Ấn Độ K Sudhakar.",
     images:
       "https://bizweb.dktcdn.net/100/482/909/articles/o-to-may-anh-nikon-2.jpg?v=1683728478247",
+    content: `
+      <h2>Chiếc ô tô độc đáo từ Nikon</h2>
+      <p>Ô tô máy ảnh Nikon không chỉ là phương tiện di chuyển, mà còn là biểu tượng sáng tạo của nhà phát minh Ấn Độ K Sudhakar. Cuộc đua này thu hút rất nhiều sự quan tâm từ giới truyền thông và những người yêu công nghệ.</p>
+      <p>...</p>
+    `,
   },
 ];
 
-const slides = [
-  {
-    id: 1,
-    src: [
-      "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-      "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-      "https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_640.jpg",
-      "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-      "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-    ],
-    alt: "Hình ảnh 1",
-  },
-  {
-    id: 2,
-    src: "https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_640.jpg",
-    alt: "Hình ảnh 2",
-  },
-  // Thêm nhiều hình ảnh khác nếu cần
-];
 
-const advancedSlides = [
-  {
-    id: 1,
-    src: "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-    alt: "Hình ảnh nâng cao 1",
-  },
-  {
-    id: 2,
-    src: "https://cdn.pixabay.com/photo/2023/10/29/14/37/pumpkins-8350480_1280.jpg",
-    alt: "Hình ảnh nâng cao 2",
-  },
-  // Thêm nhiều hình ảnh nâng cao khác nếu cần
-];
 
-export { slides, items, newItems, cameraItem, videoItem, newsItems, lendItem };
+
+
+export {items, newItems, cameraItem, videoItem, newsItems, lendItem };

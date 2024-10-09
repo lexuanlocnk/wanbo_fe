@@ -253,7 +253,6 @@ const Home = (props) => {
         </Carouselm>
       </div>
 
-      
       {/* May anh */}
       <div className="row align-items-center mx-5 my-5">
         <div className="col-md-2">
@@ -416,7 +415,11 @@ const Home = (props) => {
             className="m-1"
           >
             <div className="img-container">
-              <Card.Img variant="top" src={item.images} className="hover-zoom" />
+              <Card.Img
+                variant="top"
+                src={item.images}
+                className="hover-zoom"
+              />
             </div>
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
@@ -424,7 +427,7 @@ const Home = (props) => {
               <Card.Text className="text-truncate-3">
                 {item.description}
               </Card.Text>
-              <a href={`/product`} className="card-title">
+              <a href={`/news/${item.id}`} className="card-title">
                 <h6>Xem thêm</h6>
               </a>
             </Card.Body>

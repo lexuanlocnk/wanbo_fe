@@ -69,4 +69,21 @@ a:hover {
   color: rgb(81, 150, 211);
 }
 
+/* hover box products */
 
+.hover-buttons {
+  position: absolute;
+  top: 40%;
+  left: 20%; /* Đặt các nút vào giữa Card */
+  display: none; /* Ẩn các nút ban đầu */
+  text-align: center;
+  z-index: 1;
+}
+
+.prdItem:hover .hover-buttons {
+  display: block; /* Hiển thị các nút khi hover */
+}
+
+.hover-buttons button {
+  margin: 5px;
+}
