@@ -4,11 +4,13 @@ import Home from "../pages/Home/Home";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import Introduce from "../pages/Introduce/Introduce";
 import News from "../pages/News/News";
-import NewsDetai from "../pages/News/NewsDetail";
+import NewsDetail from "../pages/News/NewsDetail";
 import Cart from "../pages/Cart/Cart";
 import { CartContext, CartProvider } from "../pages/Cart/CartContext";
 import Login from "../pages/Account/Login";
 import Register from "../pages/Account/Register";
+import NewProduct from "../pages/NewProduct/NewProduct";
+import Contact from "../pages/Contact/Contact";
 
 const AppContent = () => {
   return (
@@ -25,9 +27,13 @@ const AppContent = () => {
 
       <Route path="/news" element={<News />} />
 
-      <Route path="/news/:id" element={<NewsDetai />} />
+      <Route path="/news/:id" element={<NewsDetail />} />
 
       <Route path="/cart" element={<Cart />} />
+      
+      <Route path="/new-product" element={<NewProduct />} />
+
+      <Route path="/contact" element={<Contact />} />
 
       <Route path="/" element={<Navigate to="home" replace />} />
     </Routes>
