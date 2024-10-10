@@ -1,0 +1,50 @@
+/* Styles for news cards */
+.news-card {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  border: none;
+}
+
+.news-image {
+  width: 30%; /* Default width for larger screens */
+  height: auto;
+  border-radius: 15px;
+}
+
+.news-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .news-card {
+    flex-direction: column; /* When the screen is smaller, stack the content vertically */
+  }
+
+  .news-image {
+    width: 100%; /* Ensure image takes up full width on smaller screens */
+    margin: 0 auto; /* Center the image */
+    height: auto; /* Keep image aspect ratio */
+  }
+
+  .news-content {
+    text-align: center; /* Center text below the image */
+    padding: 10px;
+  }
+}
+
+.sticky-sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+}
+
+@media (max-width: 768px) {
+  .sticky-sidebar {
+    position: static; /* Khi màn hình nhỏ, cho phép phần sidebar trở lại bình thường */
+  }
+}

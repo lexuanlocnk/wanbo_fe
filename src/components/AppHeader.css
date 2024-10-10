@@ -1,66 +1,89 @@
 .Home {
-    margin: 0 15px; 
-    font-size: 18px
+  margin: 0 15px;
+  font-size: 18px;
 }
 
 .navbar .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
+  display: block;
+  margin-top: 0;
 }
-
 
 .navbar .dropdown-menu {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-
 .nav-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .sub-dropdown {
-    display: none; /* Ẩn dropdown con mặc định */
-  }
-  
-  .dropdown-item:hover .sub-dropdown {
-    display: block; /* Hiện dropdown con khi hover */
-  }
-  
-  .dropdown-item {
-    position: relative; /* Để dropdown con xuất hiện bên phải */
-  }
-  
-  .sub-dropdown {
-    position: absolute; /* Đặt dropdown con ở vị trí tuyệt đối */
-    left: 100%; /* Đẩy sang bên phải của item cha */
-    top: 0; /* Căn giữa theo chiều dọc */
-  }
-  .custom-navbar .nav-link {
-    color: white; /* Màu chữ mặc định */
+  display: none;
+}
+
+.dropdown-item:hover .sub-dropdown {
+  display: block;
+}
+
+.dropdown-item {
+  position: relative;
+}
+
+.sub-dropdown {
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+.custom-navbar .nav-link {
+  color: white;
+}
+
+.search {
+  position: absolute;
+  right: 100px;
 }
 
 /* --------------------------------------------------------- */
 .nav-link {
-    transition: text-decoration 0.9s ease;
+  transition: text-decoration 0.9s ease;
 }
 
 .custom-search {
-    width: 470px; 
-    max-width: 100%; 
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  max-width: 100%;
 }
 
 .custom-navbar {
-    background-color: #000; 
-   color: aliceblue;
+  background-color: #282c30;
+  color: aliceblue;
 }
 
-a{
-    text-decoration: none;
-    font-size: 14px;
-    color: aliceblue;
+a {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
 }
 
-a:hover{
-    color: rgb(81, 150, 211);
+a:hover {
+  color: rgb(81, 150, 211);
 }
 
+/* hover box products */
+
+.hover-buttons {
+  position: absolute;
+  top: 40%;
+  left: 20%; /* Đặt các nút vào giữa Card */
+  display: none; /* Ẩn các nút ban đầu */
+  text-align: center;
+  z-index: 1;
+}
+
+.prdItem:hover .hover-buttons {
+  display: block; /* Hiển thị các nút khi hover */
+}
+
+.hover-buttons button {
+  margin: 5px;
+}

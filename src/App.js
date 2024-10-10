@@ -1,18 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-import Home from './pages/Home';
-import AppHeader from './components/AppHeader';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Search from './components/Search';
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import đúng cách
+import DefaultLayout from "./Layout/DefaultLayout";
 
 function App() {
   return (
-    <div >
-      <Search/>
-
-      <AppHeader/>
-       {/* <Home/> */}
+    <div>
+      <Router>
+        <Routes>
+          <Route path="*" element={<DefaultLayout />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

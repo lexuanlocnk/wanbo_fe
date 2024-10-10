@@ -1,0 +1,104 @@
+.imgBanner img {
+  height: 207px;
+}
+
+p {
+  font-size: 13px;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: hidden; /* Ẩn thanh cuộn */
+}
+
+.shadow2 {
+  box-shadow: 0 0 10px 2px rgba(32, 31, 31, 0.234);
+}
+.shadow3 {
+  box-shadow: 0 0 5px 2px rgba(65, 63, 63, 0.234);
+}
+.shadow4 {
+  box-shadow: 0 0 10px 1px rgba(132, 131, 131, 0.234);
+}
+
+a :hover {
+  color: rgb(43, 0, 255);
+}
+
+/* cho Flash Sale */
+.original-price {
+  text-decoration: line-through; /* Gạch ngang */
+  font-size: 13px; /* Kích thước nhỏ hơn */
+  color: #999; /* Màu nhạt hơn */
+  margin-top: -15px;
+}
+
+.price {
+  font-size: 18px; /* Kích thước nhỏ hơn */
+  color: #ff0048; /* Màu nhạt hơn */
+  font-weight: 600;
+}
+
+.sale {
+  color: white;
+  background-color: red;
+  position: absolute;
+  border-radius: 5px;
+  top: 15px;
+  left: 15px;
+  width: 40px;
+  text-align: center;
+}
+
+/* may anh */
+.camera {
+  width: 50px;
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.img {
+  transition: 0.3s ease;
+}
+
+.img:hover {
+  filter: brightness(200%);
+}
+
+.img-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.hover-zoom {
+  transition: transform 0.3s ease;
+  width: 100%;
+  height: auto;
+}
+
+.hover-zoom:hover {
+  transform: scale(1.1);
+}
+
+.btn2 {
+  background-color: #c3c2c2;
+  border: none;
+  color: black;
+}
+
+.prdItem {
+  width: 260px;
+}
+
+.prdName {
+  white-space: "normal";
+  word-wrap: "break-word";
+  height: 55px;
+  font-size: 17px;
+}
