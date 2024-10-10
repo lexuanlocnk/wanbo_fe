@@ -5,11 +5,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormCheck } from "react-bootstrap";
 import ProductCart from "./ProductCart"; // Import component mới
+import { useNavigate } from "react-router-dom";
 
-const BoxCart = () => {
+const BoxCart = ({ isInModal }) => {
   const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const navigate = useNavigate();
 
   // Hàm để tăng số lượng
   const increaseQuantity = (id) => {
@@ -55,18 +57,23 @@ const BoxCart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/checkout");
+    }
+  };
 
   return (
     <Col>
-      <Button
-        variant="danger"
-        className="mb-5"
-        style={{ width: "10%" }}
-        onClick={handleRemoveSelectedItems}
-        disabled={selectedItems.length === 0}
-      >
-        Xóa tất cả
-      </Button>
+      <div style={{ width: "100%"}} className="text-end mb-4">
+        <a
+         className="py-3"
+          onClick={handleRemoveSelectedItems}
+          disabled={selectedItems.length === 0}
+        >
+          Xóa tất cả
+        </a>
+      </div>
 
       {/* Tiêu đề cột */}
       <div>
@@ -75,17 +82,22 @@ const BoxCart = () => {
             <FormCheck checked={selectAll} onChange={handleSelectAll} />
           </Col>
           <Col md={2}>Hình ảnh</Col>
-          <Col md={2}>Tên sản phẩm</Col>
+          <Col md={3}>Tên sản phẩm</Col>
           <Col md={2}>Giá</Col>
           <Col md={2}>Số lượng</Col>
           <Col md={2}>Tổng</Col>
-          <Col md={1}>Tác vụ</Col>
         </Row>
       </div>
       <hr />
 
       {/* Container cuộn cho các sản phẩm trong giỏ hàng */}
-      <div>
+      <div
+        style={{
+          height: isInModal ? "290px" : "auto", // Nếu là modal, đặt chiều cao cố định
+          overflowY: isInModal ? "auto" : "visible",
+          overflowX: "hidden",
+        }}
+      >
         {cartItems.map((item) => (
           <ProductCart
             key={item.id}
@@ -116,10 +128,11 @@ const BoxCart = () => {
           </div>
 
           <Button
-            variant="success"
+            variant="primary"
             className="mt-4 p-2"
             style={{ width: "100%" }}
             disabled={totalPrice === 0}
+            onClick={handleCheckout}
           >
             Thanh toán
           </Button>

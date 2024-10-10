@@ -74,7 +74,7 @@ const Cart = () => {
 
   return (
     <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="cart-container p-5">
+      <div className="container">
         <h3 className="mb-4">GIỎ HÀNG</h3>
         {cartItems.length === 0 ? (
           <p>Giỏ hàng của bạn trống.</p>
@@ -82,14 +82,14 @@ const Cart = () => {
           <div>
             <div>
               <Row style={{ backgroundColor: "white" }}>
-                <Col md={9} className="p-5 ">
+                <Col md={8} className="p-4 ">
                   {/* list cart */}
 
                   <BoxCart />
                 </Col>
 
                 {/* Phần thời gian giao hàng */}
-                <Col md={3} className="my-5">
+                <Col md={4} className="my-5">
                   <h5 variant="success" style={{ width: "100%" }}>
                     Thời gian giao hàng
                   </h5>

@@ -11,6 +11,7 @@ import Login from "../pages/Account/Login";
 import Register from "../pages/Account/Register";
 import NewProduct from "../pages/NewProduct/NewProduct";
 import Contact from "../pages/Contact/Contact";
+import Checkout from "../pages/Checkout/Checkout";
 
 const AppContent = () => {
   return (
@@ -34,6 +35,8 @@ const AppContent = () => {
       <Route path="/new-product" element={<NewProduct />} />
 
       <Route path="/contact" element={<Contact />} />
+
+      <Route path="/checkout" element={<Checkout />} />
 
       <Route path="/" element={<Navigate to="home" replace />} />
     </Routes>

@@ -8,7 +8,7 @@ import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
 import { useParams } from "react-router-dom";
 
-const NewsDetai = () => {
+const NewsDetail = () => {
   const { id } = useParams();
 
   // Tìm bài viết dựa trên id
@@ -63,4 +63,4 @@ const NewsDetai = () => {
   );
 };
 
-export default NewsDetai;
+export default NewsDetail;

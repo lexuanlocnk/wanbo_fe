@@ -50,12 +50,12 @@ function AppHeader() {
               Giới thiệu
             </Nav.Link>
 
-            <NavDropdown title="Sản phẩm" href="#action" className="Home">
-              <NavDropdown.Item href="#action1">
-                Wanbo T Series
+            <NavDropdown title="Sản phẩm" href="/new-product" className="Home">
+              <NavDropdown.Item href="/new-product">
+                Sẩn phẩm mới
               </NavDropdown.Item>
               <NavDropdown.Item href="#action2">
-                Wanbo X Series
+                Sản phẩm nổi bật
               </NavDropdown.Item>
             </NavDropdown>
 

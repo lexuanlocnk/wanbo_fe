@@ -12,7 +12,7 @@ const ProductCart = ({
   return (
     <>
       <Row className="align-items-center" key={item.id}>
-        <Col md={0}>
+        <Col md={1}>
           <FormCheck
             checked={selectedItems.includes(item.id)}
             onChange={() => handleSelectItem(item.id)}
@@ -30,8 +30,14 @@ const ProductCart = ({
             }}
           />
         </Col>
-        <Col md={2}>
-          <Card.Text style={{ fontSize: 15 }}>{item.name}</Card.Text>
+        <Col md={3}>
+          <Card.Text style={{ fontSize: 15 }}>
+            {item.name}
+            <br/>
+            <a variant="danger" onClick={() => removeFromCart(item.id)}>
+              <i className="bi bi-trash"></i>
+            </a>
+          </Card.Text>
         </Col>
 
         <Col md={2}>
@@ -79,11 +85,6 @@ const ProductCart = ({
           </Card.Text>
         </Col>
 
-        <Col md={1}>
-          <Button variant="danger" onClick={() => removeFromCart(item.id)}>
-            <i className="bi bi-trash"></i>
-          </Button>
-        </Col>
         <hr />
       </Row>
     </>

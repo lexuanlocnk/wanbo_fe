@@ -95,7 +95,7 @@ const BoxProduct = ({ item }) => {
               <Modal.Body>
               
             
-                  <BoxCart />
+                  <BoxCart isInModal={true}/>
             
               </Modal.Body>
             </Modal>
