@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { CartContext } from "../pages/Cart/CartContext";
+import { CartContext } from "../../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
 
@@ -70,18 +70,33 @@ const BoxProduct = ({ item }) => {
             </Button>
 
             <Modal
-              size="lg"
+              size="xl"
               show={smShow}
               onHide={() => setSmShow(false)}
               aria-labelledby="example-modal-sizes-title-sm"
             >
-              <Modal.Header closeButton>
+              <Modal.Header
+                closeButton
+                style={{ backgroundColor: "blue", color: "white" }}
+              >
                 <Modal.Title id="example-modal-sizes-title-sm">
-                  Đã thêm <b>{item.name}</b> vào giỏ hàng
+                  <i className="bi bi-check-circle me-2" />
+                  Đã thêm{" "}
+                  <a
+                    href={`/product/${item.id}`}
+                    style={{ fontSize: 24, color: "white" }}
+                  >
+                    [{item.name}]
+                  </a>{" "}
+                  vào giỏ hàng
                 </Modal.Title>
               </Modal.Header>
+
               <Modal.Body>
-                <BoxCart />
+              
+            
+                  <BoxCart />
+            
               </Modal.Body>
             </Modal>
 

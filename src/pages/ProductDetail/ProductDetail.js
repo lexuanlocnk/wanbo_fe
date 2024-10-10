@@ -13,10 +13,10 @@ import Accordion from "react-bootstrap/Accordion";
 import { auto } from "@popperjs/core";
 import LightboxButton from "../../components/LightboxButton";
 import ModelDetail from "../../components/ModelDetail";
-import BoxProduct from "../../components/BoxProduct";
+import BoxProduct from "../../components/componentProduct/BoxProduct";
 import { CartContext } from "../Cart/CartContext";
 import FeaturedNews from "../../components/FeaturedNews";
-import BoxCart from "../../components/BoxCart";
+import BoxCart from "../../components/componentProduct/BoxCart";
 
 const ProductDetail = ({ children, eventKey }) => {
   const navigate = useNavigate();

@@ -5,13 +5,14 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Collapse, Form, FormCheck } from "react-bootstrap";
-import BoxCart from "../../components/BoxCart";
+import BoxCart from "../../components/componentProduct/BoxCart";
+import "../../pages/Cart/Cart.css";
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]); // Lưu trữ các mục được chọn
   const [selectAll, setSelectAll] = useState(false);
-  
+
   const [deliveryDate, setDeliveryDate] = useState(""); // Ngày giao hàng
   const [isCompanyInvoice, setIsCompanyInvoice] = useState(false); // Trạng thái checkbox "Xuất hóa đơn công ty"
   const [companyInfo, setCompanyInfo] = useState({
@@ -81,9 +82,10 @@ const Cart = () => {
           <div>
             <div>
               <Row style={{ backgroundColor: "white" }}>
-                <Col md={9} className="p-5">
-                 {/* list cart */}
-                  <BoxCart/>
+                <Col md={9} className="p-5 ">
+                  {/* list cart */}
+
+                  <BoxCart />
                 </Col>
 
                 {/* Phần thời gian giao hàng */}

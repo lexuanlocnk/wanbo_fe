@@ -29,7 +29,7 @@ import {
 
 import "./Home.css";
 import { auto } from "@popperjs/core";
-import BoxProduct from "../../components/BoxProduct";
+import BoxProduct from "../../components/componentProduct/BoxProduct";
 
 const Home = (props) => {
   const responsive = {
