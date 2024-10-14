@@ -36,6 +36,10 @@
   margin-bottom: 20px;
   color: #000;
 }
+
+.group_contact {
+  margin-bottom: 10px;
+}
 .layout-contact .form-contact .group_contact input {
   padding: 5px 20px;
 }

@@ -172,13 +172,13 @@ const NewProduct = (props) => {
                 <ul className="pagination pagination-sm">
                   <li className="page-item">
                     <span
-                      className="page-link"
+                      className="page-link previous-but"
                       onClick={() => handlePageClick(currentPage - 1)}
                       style={{
                         cursor: currentPage === 1 ? "not-allowed" : "pointer",
                       }}
                     >
-                      &laquo; {/* Ký hiệu cho nút lùi */}
+                      &lt; {/* Ký hiệu cho nút lùi */}
                     </span>
                   </li>
                   {Array.from({ length: totalPages }, (_, i) => (
@@ -198,7 +198,7 @@ const NewProduct = (props) => {
                   ))}
                   <li className="page-item">
                     <span
-                      className="page-link"
+                      className="page-link next-but"
                       onClick={() => handlePageClick(currentPage + 1)}
                       style={{
                         cursor:
@@ -207,7 +207,7 @@ const NewProduct = (props) => {
                             : "pointer",
                       }}
                     >
-                      &raquo; {/* Ký hiệu cho nút tiến */}
+                      &gt; {/* Ký hiệu cho nút tiến */}
                     </span>
                   </li>
                 </ul>

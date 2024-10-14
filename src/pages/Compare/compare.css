@@ -1,0 +1,65 @@
+.title-head {
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+table .first-col {
+  width: 15% !important;
+  font-weight: 500;
+}
+.compare-table table tr td {
+  border: 1px solid #dddddd;
+  padding: 10px;
+  font-size: 12px;
+  width: calc(85% / 3);
+}
+.compare-table table tr td img {
+  max-width: 100%;
+  height: auto;
+  width: 240px;
+  object-fit: contain;
+}
+
+.img-fluid {
+  text-align: center;
+}
+
+.remove-item-but {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  background: #333;
+  color: #fff;
+  padding: 0 30px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.remove-item-but:hover {
+  background-color: #0077ff;
+  color: #fff;
+}
+.remove-item {
+  margin-top: 15px;
+  text-align: center;
+}
+.name .product-name {
+  font-size: 14px;
+}
+.price .product-price {
+  color: #ff0000;
+}
+.inner-table {
+  width: 100%;
+}
+.inner-table td {
+  border: none !important;
+}
+.inner-table tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.inner-table .name-product {
+  font-weight: 500;
+}

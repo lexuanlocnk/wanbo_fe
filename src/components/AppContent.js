@@ -12,6 +12,7 @@ import Register from "../pages/Account/Register";
 import NewProduct from "../pages/NewProduct/NewProduct";
 import Contact from "../pages/Contact/Contact";
 import Checkout from "../pages/Checkout/Checkout";
+import CompareProduct from "../pages/Compare/compare";
 
 const AppContent = () => {
   return (
@@ -31,7 +32,7 @@ const AppContent = () => {
       <Route path="/news/:id" element={<NewsDetail />} />
 
       <Route path="/cart" element={<Cart />} />
-      
+
       <Route path="/new-product" element={<NewProduct />} />
 
       <Route path="/contact" element={<Contact />} />
@@ -39,6 +40,8 @@ const AppContent = () => {
       <Route path="/checkout" element={<Checkout />} />
 
       <Route path="/" element={<Navigate to="home" replace />} />
+
+      <Route path="/compare-product" element={<CompareProduct />} />
     </Routes>
   );
 };
