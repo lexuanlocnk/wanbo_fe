@@ -114,24 +114,35 @@ const ProductDetail = ({ children, eventKey }) => {
               </p>
             </div>
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
+
             <Row className="quantity-controls mt-1 ms-1 align-items-center">
               Số lượng:
               <div className="ms-3 align-items-center detailQuantity">
-                <button
-                  className="btn"
-                  onClick={decreaseQuantity}
-                  style={{ border: "none" }}
-                >
-                  <b className="operationDetail">-</b>
-                </button>
-                <span className="quantity-display mx-2">{quantity}</span>
-                <button
-                  className="btn"
-                  onClick={increaseQuantity}
-                  style={{ border: "none" }}
-                >
-                  <b className="operationDetail">+</b>
-                </button>
+                <div className="border p-1">
+                  <button
+                    className=""
+                    onClick={decreaseQuantity}
+                    style={{
+                      border: "none",
+                      width: 30,
+                      backgroundColor: "white",
+                    }}
+                  >
+                    <b className="operationDetail">-</b>
+                  </button>
+                  <span className="quantity-display px-3">{quantity}</span>
+                  <button
+                    className=""
+                    onClick={increaseQuantity}
+                    style={{
+                      border: "none",
+                      width: 30,
+                      backgroundColor: "white",
+                    }}
+                  >
+                    <b className="operationDetail">+</b>
+                  </button>
+                </div>
               </div>
             </Row>
 
@@ -151,24 +162,36 @@ const ProductDetail = ({ children, eventKey }) => {
 
               {/* modal */}
               <Modal
-                size="lg"
+                size="xl"
                 show={smShow}
                 onHide={() => setSmShow(false)}
                 aria-labelledby="example-modal-sizes-title-sm"
               >
-                <Modal.Header closeButton>
+                <Modal.Header
+                  closeButton
+                  style={{ backgroundColor: "blue", color: "white" }}
+                >
                   <Modal.Title id="example-modal-sizes-title-sm">
-                    Đã thêm <b>{product.name}</b> vào giỏ hàng
+                    <i className="bi bi-check-circle me-2" />
+                    Đã thêm{" "}
+                    <a
+                      href={`/product/${product.id}`}
+                      style={{ fontSize: 24, color: "white" }}
+                    >
+                      [{product.name}]
+                    </a>{" "}
+                    vào giỏ hàng
                   </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
-                  <BoxCart />
+                  <BoxCart isInModal={true} />
                 </Modal.Body>
               </Modal>
 
               <Button variant="primary" className="adddetail">
                 Trả góp <br />
-                (Mua trả góp lãi suất thấp)
+                <p style={{ fontSize: 12 }}>(Mua trả góp lãi suất thấp)</p>
               </Button>
             </div>
             <Card className="mt-3">

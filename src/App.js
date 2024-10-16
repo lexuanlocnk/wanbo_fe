@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import đúng cách
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
 import DefaultLayout from "./Layout/DefaultLayout";
 
 function App() {

@@ -11,81 +11,101 @@ const ProductCart = ({
 }) => {
   return (
     <>
-      <Row className="align-items-center" key={item.id}>
-        <Col md={1}>
+      <Row className="align-items-center border-bottom" key={item.id}>
+        {/* Checkbox chọn sản phẩm */}
+        <Col  sm={1} className="d-flex justify-content-center" style={{ width: 45 }}>
           <FormCheck
             checked={selectedItems.includes(item.id)}
             onChange={() => handleSelectItem(item.id)}
           />
         </Col>
-        <Col md={2}>
+
+        {/* Hình ảnh sản phẩm */}
+        <Col xs={9} sm={2}>
           <img
             src={item.images}
             alt={item.name}
-            className="img-fluid p-3"
+            className="img-fluid p-1 p-md-3" // Giảm padding trên màn hình nhỏ
             style={{
-              maxWidth: "150px",
+              maxWidth: "100%",
               height: "auto",
-              marginLeft: -40,
             }}
           />
         </Col>
-        <Col md={3}>
-          <Card.Text style={{ fontSize: 15 }}>
+
+        {/* Tên sản phẩm và nút xóa */}
+        <Col xs={8} sm={3} className="text-start">
+          <Card.Text style={{ fontSize: 14 }} className="mb-1">
             {item.name}
-            <br/>
-            <a variant="danger" onClick={() => removeFromCart(item.id)}>
-              <i className="bi bi-trash"></i>
-            </a>
           </Card.Text>
+          <a
+            variant="danger"
+            onClick={() => removeFromCart(item.id)}
+            style={{ cursor: "pointer", fontSize: 12 }}
+          >
+            <i className="bi bi-trash"></i> Xóa
+          </a>
         </Col>
 
-        <Col md={2}>
-          <Card.Text style={{ fontSize: 15, color: "red" }}>
+        {/* Giá sản phẩm */}
+        <Col xs={6} sm={2} className="mt-2 mt-sm-0">
+          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
             {item.price.toLocaleString("vi-VN")} ₫
           </Card.Text>
         </Col>
 
-        <Col md={2} className="d-flex align-items-center">
-          {/* Nút trừ số lượng */}
-          <Button
-            variant="outline-secondary"
-            size="sm"
-            onClick={() => decreaseQuantity(item.id, item.quantity)}
-            className="me-2"
+        {/* Điều chỉnh số lượng */}
+        <Col xs={6} sm={2} className="mt-2 mt-sm-0">
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ border: "1px solid #DDDDDD", width: 80 }}
           >
-            -
-          </Button>
+            <button
+              variant="outline-secondary"
+              size="sm"
+              onClick={() => decreaseQuantity(item.id, item.quantity)}
+              className="mx-1 border-end"
+              style={{ border: "none", backgroundColor: "white" }}
+            >
+              -
+            </button>
 
-          <Card.Text
-            style={{
-              height: 5,
-              width: 18,
-              textAlign: "center",
-              fontSize: 15,
-            }}
-          >
-            {item.quantity}
-          </Card.Text>
+            <Card.Text
+              style={{
+                height: 5,
+                width: 18,
+                textAlign: "center",
+                fontSize: 14,
+              }}
+            >
+              {item.quantity}
+            </Card.Text>
 
-          {/* Nút cộng số lượng */}
-          <Button
-            variant="outline-secondary"
-            size="sm"
-            onClick={() => increaseQuantity(item.id)}
-            className="ms-2"
-          >
-            +
-          </Button>
+            <button
+              variant="outline-secondary"
+              size="sm"
+              onClick={() => increaseQuantity(item.id)}
+              className="ms-1 border-start"
+              style={{ border: "none", backgroundColor: "white" }}
+            >
+              +
+            </button>
+          </div>
         </Col>
 
-        <Col md={2}>
-          <Card.Text style={{ fontSize: 15, color: "red" }}>
+        {/* Tổng tiền */}
+        <Col xs={12} sm={2} className="d-none d-sm-block text-end mt-2 mt-sm-0">
+          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
             {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
           </Card.Text>
         </Col>
 
-        <hr />
+        {/* Tổng tiền hiện ở dưới trên màn hình xs */}
+        <Col xs={12} sm={2} className="d-block d-sm-none text-end mt-2">
+          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
+            Tổng: {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
+          </Card.Text>
+        </Col>
       </Row>
     </>
   );

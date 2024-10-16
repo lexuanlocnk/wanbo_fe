@@ -14,16 +14,16 @@ const FeaturedNews = () => {
             className="d-flex flex-column flex-md-row"
             style={{ border: "none" }}
           >
-            <Card.Img
-              variant="top"
-              src={item.images}
-              className="p-2"
-              style={{
-                width: "40%",
-                height: "auto",
-                objectFit: "cover",
-              }}
-            />
+         <Card.Img
+  variant="top"
+  src={item.images}
+  className="p-2 custom-img" // Sử dụng lớp tùy chỉnh
+  style={{
+    height: "auto",
+    objectFit: "cover",
+  }}
+/>
+
             <div className="d-flex flex-column justify-content-center mx-2">
               <Card.Text className="mb-0" style={{fontSize: "90%"}}>{item.title}</Card.Text>
               <a href={`/news/${item.id}`} className="card-title">

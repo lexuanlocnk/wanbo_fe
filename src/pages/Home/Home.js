@@ -34,72 +34,81 @@ import BoxProduct from "../../components/componentProduct/BoxProduct";
 const Home = (props) => {
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 6,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 1500 },
       items: 5,
     },
+    desktop1: {
+      breakpoint: { max: 1500, min: 1224 },
+      items: 4,
+    },
     tablet: {
-      breakpoint: { max: 1024, min: 564 },
+      breakpoint: { max: 1224, min: 904 },
       items: 3,
     },
+    tablet2: {
+      breakpoint: { max: 904, min: 650 },
+      items: 2,
+    },
     mobile: {
-      breakpoint: { max: 564, min: 0 },
+      breakpoint: { max: 650, min: 0 },
       items: 1,
     },
   };
 
   return (
     <div>
-      <div className="mx-5 my-4">
-        <div className="d-flex flex-md-row flex-column align-items-center">
-          <div style={{ width: "64%" }}>
-            <Carousel fade controls={true}>
-              <Carousel.Item interval={1000}>
-                <img
-                  alt=""
-                  src={img2}
-                  width="auto"
-                  className="d-block align-top hover-zoom"
-                />
-              </Carousel.Item>
-
-              <Carousel.Item interval={1000}>
-                <img
-                  alt=""
-                  src={img}
-                  width="auto"
-                  className="d-block align-top hover-zoom"
-                />
-              </Carousel.Item>
-            </Carousel>
-          </div>
-          <div className="m-3 "></div>
-
-          <div className="d-flex flex-column align-items-center">
-            {/* Banner 1 */}
-            <div className="img-container imgBanner">
-              <img
-                alt=""
-                src={imgBanner}
-                width="auto"
-                className="d-block align-top hover-zoom"
-              />
+      <div className="mx-4 my-4">
+        <div className=" mx-4 my-4">
+          <div className="row">
+            {/* Phần hình ảnh chính */}
+            <div className="col-lg-8 col-md-12 mb-4">
+              <Carousel fade controls={true}>
+                <Carousel.Item interval={1000}>
+                  <img
+                    alt=""
+                    src={img2}
+                    width="100%"
+                    className="d-block align-top hover-zoom"
+                  />
+                </Carousel.Item>
+                <Carousel.Item interval={1000}>
+                  <img
+                    alt=""
+                    src={img}
+                    width="100%"
+                    className="d-block align-top hover-zoom"
+                  />
+                </Carousel.Item>
+              </Carousel>
             </div>
 
-            <div style={{ margin: 15 }}></div>
+            {/* Phần các banner */}
+            <div className="col-lg-4 col-md-12">
+              <div className="row">
+                {/* Banner 1 */}
+                <div className="col-6 col-md-12 mb-4">
+                  <img
+                    alt=""
+                    src={imgBanner}
+                    width="100%"
+                    className="d-block align-top "
+                  />
+                </div>
 
-            {/* Banner 2 */}
-            <div className="img-container imgBanner">
-              <img
-                alt=""
-                src={imgBanner2}
-                width="auto"
-                className="d-block align-top hover-zoom"
-              />
+                {/* Banner 2 */}
+                <div className="col-6 col-md-12">
+                  <img
+                    alt=""
+                    src={imgBanner2}
+                    width="100%"
+                    className="d-block align-top"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -200,13 +209,13 @@ const Home = (props) => {
               <div
                 className="d-flex align-items-center me-3 mb-3"
                 key={item.id}
-                style={{ minWidth: "260px", borderRight: "1px solid gray" }}
+                style={{ borderRight: "1px solid gray" }}
               >
                 <div className="flex-grow-1">
                   <a href={`/product/${item.id}`} className="card-title">
                     <h5>{item.name}</h5>
                   </a>
-                  <p className="card-text">Số lượng: {item.quantity}</p>
+                  <p className="card-text">Số lượng: {item.quantitysale}</p>
                 </div>
                 <img
                   src={item.images}
@@ -225,11 +234,10 @@ const Home = (props) => {
       </div>
       {/* Flash Sale */}
       <div
-        className="px-5 py-4"
+        className=" align-items-center px-5 py-4"
         style={{ width: "100%", height: "auto", backgroundColor: "blue" }}
       >
         <h2 style={{ color: "white" }}>Flash Sale</h2>
-
         <Carouselm
           swipeable={true}
           draggable={true}
@@ -259,14 +267,47 @@ const Home = (props) => {
           <h3>Máy ảnh</h3>
         </div>
         <div className="col-md-10 d-flex justify-content-end">
-          <Button className="me-2 btn2">Máy ảnh DSLR</Button>
-          <Button className="me-2 btn2">Máy ảnh Mirrorless</Button>
-          <Button className="me-2 btn2">Máy ảnh Compact</Button>
-          <Button className="me-2 btn2">Máy ảnh Instax</Button>
-
-          <Button className="me-2 btn2">Máy ảnh Medium Format</Button>
-          <Button className="me-2 btn2">Máy ảnh Film</Button>
-          <Button className="btn2">Xem tất cả</Button>
+          <div className="d-none d-md-flex">
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh DSLR
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Mirrorless
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Compact
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Instax
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Medium Format
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Film
+            </Button>
+          </div>
+          <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+            Xem tất cả
+          </Button>
         </div>
 
         <div className="py-2">
@@ -300,11 +341,47 @@ const Home = (props) => {
           <h3>Ống kính</h3>
         </div>
         <div className="col-md-10 d-flex justify-content-end">
-          <Button className="me-2 btn2">Ống kính DSLR</Button>
-          <Button className="me-2 btn2">Ống kính Mirrorless</Button>
-          <Button className="me-2 btn2">Ống kính Cinema</Button>
-          <Button className="me-2 btn2">Ống kính Medium Format</Button>
-          <Button className="btn2">Xem tất cả</Button>
+          <div className="d-none d-md-flex">
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh DSLR
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Mirrorless
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Compact
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Instax
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Medium Format
+            </Button>
+            <Button
+              className="me-2 btn2"
+              style={{ backgroundColor: "#EEEEEE" }}
+            >
+              Máy ảnh Film
+            </Button>
+          </div>
+          <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+            Xem tất cả
+          </Button>
         </div>
 
         <div className="py-2">
@@ -343,66 +420,84 @@ const Home = (props) => {
         </a>
       </div>
       {/* Máy quay phim */}
-      <div className=" mx-5 my-4">
+      <div className="row align-items-center mx-5 my-4">
         <div>
           <h3>Máy quay phim</h3>
         </div>
 
         <div className="py-2">
-          <div className="py-2">
-            <Carouselm
-              swipeable={true}
-              draggable={true}
-              showDots={true}
-              responsive={responsive}
-              ssr={true}
-              infinite={true}
-              autoPlaySpeed={3000}
-              keyBoardControl={true}
-              customTransition="all 1.1s"
-              transitionDuration={1100}
-              containerClass="carousel-container"
-              dotListClass="custom-dot-list-style"
-              itemClass="carousel-item-padding-50-px"
-              autoPlay={props.deviceType !== "mobile" ? true : false}
-              deviceType={props.deviceType}
-            >
-              {videoItem.map((item) => (
-                <BoxProduct key={item.id} item={item} />
-              ))}
-            </Carouselm>
-          </div>
+          <Carouselm
+            swipeable={true}
+            draggable={true}
+            showDots={true}
+            responsive={responsive}
+            ssr={true}
+            infinite={true}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="all 1.1s"
+            transitionDuration={1100}
+            containerClass="carousel-container"
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-50-px"
+            autoPlay={props.deviceType !== "mobile" ? true : false}
+            deviceType={props.deviceType}
+          >
+            {videoItem.map((item) => (
+              <BoxProduct key={item.id} item={item} />
+            ))}
+          </Carouselm>
         </div>
       </div>
       {/* anh banner 2 */}
       <div className="img-container m-5 rounded">
-        <a href={`/product`} className="card-title ">
+        <a href="/product" className="card-title">
           <img
-            // alt="/product"
             src={imgBanner5}
-            width="100%"
-            className="d-block align-top hover-zoom"
+            className="d-block w-100 img-fluid align-top hover-zoom"
+            alt="Banner lớn"
           />
         </a>
       </div>
-      {/* anh banner 3 */}
-      <div className="m-5 d-flex justify-content-between">
-        <div className="img-container rounded">
-          <a href={`/product`}>
-            <img src={imgBanner6} className="bannerbottom hover-zoom" />
-          </a>
-        </div>
 
-        <div className="img-container rounded">
-          <a href={`/product`}>
-            <img src={imgBanner7} className="bannerbottom hover-zoom" />
-          </a>
-        </div>
+      {/* Ba hình ảnh banner nhỏ */}
+      <div className="m-5">
+        <div className="row g-4">
+          <div className="col-lg-4 col-md-4 col-sm-6">
+            <div className="img-container rounded">
+              <a href="/product">
+                <img
+                  src={imgBanner6}
+                  className="bannerbottom hover-zoom img-fluid"
+                  alt="Banner nhỏ 1"
+                />
+              </a>
+            </div>
+          </div>
 
-        <div className="img-container rounded">
-          <a href={`/product`}>
-            <img src={imgBanner8} className="bannerbottom hover-zoom" />
-          </a>
+          <div className="col-lg-4 col-md-4 col-sm-6">
+            <div className="img-container rounded">
+              <a href="/product">
+                <img
+                  src={imgBanner7}
+                  className="bannerbottom hover-zoom img-fluid"
+                  alt="Banner nhỏ 2"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-md-4 col-sm-6">
+            <div className="img-container rounded">
+              <a href="/product">
+                <img
+                  src={imgBanner8}
+                  className="bannerbottom hover-zoom img-fluid"
+                  alt="Banner nhỏ 3"
+                />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 

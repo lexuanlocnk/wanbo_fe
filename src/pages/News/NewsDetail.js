@@ -24,7 +24,7 @@ const NewsDetail = () => {
         <h4>TIN TỨC</h4>
         <Row className="justify-content-between">
           <Col
-            md={9}
+            lg={9}
             className="mt-3"
             style={{ backgroundColor: "white", height: "auto" }}
           >
@@ -51,7 +51,7 @@ const NewsDetail = () => {
             </div>
           </Col>
 
-          <Col md={3} xs={12} className="mt-3" style={{ marginRight: -12 }}>
+          <Col lg={3} xs={12} className="mt-3" style={{ marginRight: -12 }}>
             <div className="sticky-sidebar">
               <NewsCategory />
               <FeaturedNews />

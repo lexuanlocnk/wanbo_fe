@@ -39,7 +39,7 @@
 
 .search {
   position: absolute;
-  right: 100px;
+  right: 1px;
 }
 
 /* --------------------------------------------------------- */
@@ -87,3 +87,17 @@ a:hover {
 .hover-buttons button {
   margin: 5px;
 }
+
+/* Thêm vào tệp CSS */
+@media (min-width: 789px) {
+  .custom-img {
+    width: 40%;
+  }
+}
+
+@media (max-width: 788px) {
+  .custom-img {
+    width: 100%;
+  }
+}
+

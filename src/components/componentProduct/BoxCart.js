@@ -65,50 +65,65 @@ const BoxCart = ({ isInModal }) => {
 
   return (
     <Col>
-      <div style={{ width: "100%"}} className="text-end mb-4">
+      <div  className="text-end mb-4">
         <a
-         className="py-3"
+          className="py-3"
           onClick={handleRemoveSelectedItems}
           disabled={selectedItems.length === 0}
+          style={{ cursor: "pointer" }}
         >
           Xóa tất cả
         </a>
       </div>
 
       {/* Tiêu đề cột */}
-      <div>
+      <div className="border p-1">
         <Row className="fw-bold">
-          <Col md={1}>
+          <Col md={1} className="d-md-block d-none" style={{ width: 50 }}>
             <FormCheck checked={selectAll} onChange={handleSelectAll} />
           </Col>
-          <Col md={2}>Hình ảnh</Col>
-          <Col md={3}>Tên sản phẩm</Col>
-          <Col md={2}>Giá</Col>
-          <Col md={2}>Số lượng</Col>
-          <Col md={2}>Tổng</Col>
+          <Col md={2} className="d-md-block d-none">
+            Hình ảnh
+          </Col>
+          <Col md={3} className="d-md-block d-none">
+            Tên sản phẩm
+          </Col>
+          <Col md={2} className="d-md-block d-none">
+            Giá
+          </Col>
+          <Col md={2} className="d-md-block d-none">
+            Số lượng
+          </Col>
+          <Col md={2} className="d-md-block d-none"  style={{ textAlign: "center" }}>
+            Tổng
+          </Col>
+        </Row>
+        {/* Thêm hàng tiêu đề cho kích thước nhỏ hơn */}
+        <Row className="d-md-none fw-bold">
+          <Col className="text-center">Giỏ hàng của bạn</Col>
         </Row>
       </div>
-      <hr />
 
-      {/* Container cuộn cho các sản phẩm trong giỏ hàng */}
-      <div
-        style={{
-          height: isInModal ? "290px" : "auto", // Nếu là modal, đặt chiều cao cố định
-          overflowY: isInModal ? "auto" : "visible",
-          overflowX: "hidden",
-        }}
-      >
-        {cartItems.map((item) => (
-          <ProductCart
-            key={item.id}
-            item={item}
-            selectedItems={selectedItems}
-            handleSelectItem={handleSelectItem}
-            increaseQuantity={increaseQuantity}
-            decreaseQuantity={decreaseQuantity}
-            removeFromCart={removeFromCart}
-          />
-        ))}
+      <div className="border px-1 pt-1">
+        <div
+          style={{
+            height: isInModal ? "290px" : "auto", // Nếu là modal, đặt chiều cao cố định
+            overflowY: isInModal ? "auto" : "visible",
+            overflowX: "hidden",
+          }}
+        >
+          {cartItems.map((item) => (
+            <ProductCart
+              key={item.id}
+              item={item}
+              selectedItems={selectedItems}
+              handleSelectItem={handleSelectItem}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeFromCart={removeFromCart}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Phần tổng cộng */}

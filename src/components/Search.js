@@ -24,53 +24,55 @@ function Search() {
   return (
     <Navbar
       expand="lg"
-      className="custom-navbar px-5 py-4"
+      className="custom-navbar px-4 py-4"
       style={{ borderBottom: "1px solid gray" }}
     >
       <Container
         fluid
-        className="d-flex justify-content-center align-items-center"
+        className="d-flex justify-content-between align-items-center flex-wrap"
       >
-        <Link to="/home">
+        {/* Logo */}
+        <Link to="/home" className="d-flex align-items-center mb-2 mb-lg-0">
           <img
             alt="Wanbo Logo"
             src={wanboLogo}
             width="auto"
             height="40"
-            className="d-inline-block align-top me-5"
+            className="d-inline-block align-top"
           />
         </Link>
-        <Navbar.Toggle aria-controls="navbarScroll" />
 
+        {/* Toggle menu cho màn hình nhỏ */}
+        <Navbar.Toggle aria-controls="navbarScroll" className="me-2" />
+
+        {/* Thanh tìm kiếm */}
         <Navbar.Collapse
           id="navbarScroll"
-          className="mx-5"
-          style={{ position: "relative" }}
+          className="flex-grow-1 d-flex justify-content-center mx-0 mx-md-5"
         >
-          <input
-            style={{
-              width: "80%",
-              height: 43,
-              border: "1px solid #ccc",
-              outline: "none",
-              paddingLeft: 15,
-              borderRadius: 5,
-            }}
-            placeholder="Tìm kiếm"
-          />
-
-          <Button className="search">
-            <img
-              alt="Search"
-              src={search}
-              width="auto"
-              height="30"
-              className="d-inline-block align-top"
+          <div
+            className="d-flex w-100"
+            style={{ maxWidth: 600, position: "relative" }}
+          >
+            <input
+              className="form-control me-2"
+              style={{
+                height: 43,
+                border: "1px solid #ccc",
+                outline: "none",
+                paddingLeft: 15,
+                borderRadius: 5,
+              }}
+              placeholder="Tìm kiếm"
             />
-          </Button>
+            <Button className="search">
+              <div className="bi bi-search" style={{ padding: 2.8}}/>
+            </Button>
+          </div>
         </Navbar.Collapse>
 
-        <div className="d-flex align-items-center">
+        {/* Gọi mua hàng */}
+        <div className="d-none d-md-flex align-items-center text-center">
           <div className="me-2">
             <img
               alt="Call"
@@ -80,10 +82,14 @@ function Search() {
               className="d-inline-block align-top"
             />
           </div>
-          Gọi mua hàng <br /> 01245678910
+          <div>
+            Gọi mua hàng <br />{" "}
+            <span style={{ fontSize: "0.9rem" }}>01245678910</span>
+          </div>
         </div>
 
-        <div className="d-flex align-items-center mx-4">
+        {/* Tài khoản */}
+        <div className="d-flex align-items-center mx-lg-4 mt-1">
           <div className="me-2">
             <img
               alt="User"
@@ -93,17 +99,22 @@ function Search() {
               className="d-inline-block align-top"
             />
           </div>
-
-          <Col >
-            <a href={`/login`} style={{color: "white"}}>Tài khoản</a> <br />
-            <a href={`/login`} style={{color: "white"}}>Đăng nhập</a>
+          <Col>
+            <a href={`/login`} style={{ color: "white", fontSize: "0.9rem" }}>
+              Tài khoản
+            </a>{" "}
+            <br />
+            <a href={`/login`} style={{ color: "white", fontSize: "0.9rem" }}>
+              Đăng nhập
+            </a>
           </Col>
         </div>
 
+        {/* Giỏ hàng */}
         <Button
           variant="outline-light"
           onClick={() => navigate("/cart")}
-          style={{ position: "relative" }}
+          className="position-relative d-flex align-items-center mt-1"
         >
           <Badge
             bg="primary"
@@ -113,7 +124,7 @@ function Search() {
           </Badge>
           <span
             className="bi bi-basket"
-            style={{ fontSize: 24, marginRight: 15 }}
+            style={{ fontSize: 24, marginRight: 10 }}
           />
           Giỏ hàng
         </Button>
