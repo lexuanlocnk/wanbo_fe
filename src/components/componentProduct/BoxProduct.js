@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import { CartContext } from "../../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
+import ProductViewed from "../../ProductQuickView/ProductViewed";
+import "./box-product.css";
 import componentProduct from "./componentProduct.css"
 
 const BoxProduct = ({ item }) => {
@@ -11,6 +13,15 @@ const BoxProduct = ({ item }) => {
   const [smShow, setSmShow] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
+
+  const [quickView, setQuickView] = useState(false);
+
+  const [quantityView, setQuantityView] = useState(1);
+
+  const handleSetQuickView = () => {
+    console.log(item.images);
+    setQuickView(true);
+  };
 
   const handleAddToCart = () => {
     addToCart({
@@ -93,19 +104,31 @@ const BoxProduct = ({ item }) => {
                   vào giỏ hàng
                 </Modal.Title>
               </Modal.Header>
-
               <Modal.Body>
                 <BoxCart isInModal={true} />
               </Modal.Body>
             </Modal>
-
-            <Button variant="secondary">
+            {/* nút xem nhanh */}
+            <Button variant="secondary" onClick={handleSetQuickView}>
               <i className="bi bi-eye" />
             </Button>
-
-            <Button variant="secondary" href={`/compare-product`} className="ms-1">
-              <i className="bi bi-repeat" />
-           
+            <Modal
+              size="xl"
+              className=""
+              dialogClassName="modal-product-viewed"
+              show={quickView}
+            >
+              <Modal.Body className="box-product-viewed">
+                <ProductViewed
+                  item={item}
+                  quantityView={quantityView}
+                  setQuantityView={setQuantityView}
+                  setQuickView={setQuickView}
+                />
+              </Modal.Body>
+            </Modal>
+            <Button variant="secondary">
+              <i class="bi bi-repeat" />
             </Button>
           </div>
         </Card.Body>

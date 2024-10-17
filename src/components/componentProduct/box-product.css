@@ -1,0 +1,10 @@
+/* @media screen and (min-width: 769px) and (max-width: 1024px) {
+  .modal-product-viewed {
+    min-width: 700px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal-product-viewed {
+    min-width: 90%;
+  }
+} */

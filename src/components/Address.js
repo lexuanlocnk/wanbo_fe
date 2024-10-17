@@ -1,14 +1,6 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import wanboLogo from "../assets/logo.webp";
-import search from "../assets/search-512.webp";
-import call from "../assets/call.png";
-import user from "../assets/user.png";
 import "../components/AppHeader.css";
-import { Link } from "react-router-dom";
 
 function Address() {
   return (
@@ -17,6 +9,12 @@ function Address() {
       style={{ borderBottom: "1px solid gray" }}
     >
       <div className="container">Giờ mở cửa: 08:30 - 21:30 các ngày trong tuần</div>
+      <div className="compare-nav-container">
+        <a href="/compare-product">
+          <i className="bi bi-arrow-left-right" style={{ marginLeft: 5 }} />
+          <span style={{ marginLeft: 5 }}>So sánh sản phẩm</span>
+        </a>
+      </div>
     </Navbar>
   );
 }

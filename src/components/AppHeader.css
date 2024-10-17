@@ -65,15 +65,50 @@ a {
   color: rgb(0, 0, 0);
 }
 
-a:hover {
-  color: rgb(81, 150, 211);
-}
-
 /* hover box products */
 
+.hover-buttons {
+  position: absolute;
+  top: 40%;
+  left: 20%; /* Đặt các nút vào giữa Card */
+  display: none; /* Ẩn các nút ban đầu */
+  text-align: center;
+  z-index: 1;
+}
 
-/* Màn hình lớn (Desktop)  */
-@media (min-width: 992px) {
+.prdItem:hover .hover-buttons {
+  display: block; /* Hiển thị các nút khi hover */
+}
+
+.hover-buttons button {
+  margin: 5px;
+}
+
+.compare-nav-container a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.compare-nav-container a:hover {
+  color: #49b1fe;
+}
+
+.compare-nav-container a:hover i,
+.compare-nav-container a:hover span {
+  color: #49b1fe;
+}
+.search-input {
+  position: relative;
+}
+#navbarScroll .search-input,
+.form-control {
+  width: 100%;
+}
+
+/* Thêm vào tệp CSS */
+@media (min-width: 789px) {
   .custom-img {
     width: 40%;
   }
@@ -162,4 +197,9 @@ a:hover {
   }
 }
 
-
+@media screen and (max-width: 991px) {
+  #navbarScroll .search-input {
+    width: 100%;
+    max-width: unset !important;
+  }
+}

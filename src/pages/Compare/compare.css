@@ -8,6 +8,7 @@
 table .first-col {
   width: 15% !important;
   font-weight: 500;
+  white-space: nowrap;
 }
 .compare-table table tr td {
   border: 1px solid #dddddd;
@@ -20,6 +21,9 @@ table .first-col {
   height: auto;
   width: 240px;
   object-fit: contain;
+}
+.compare-table {
+  overflow: auto;
 }
 
 .img-fluid {
