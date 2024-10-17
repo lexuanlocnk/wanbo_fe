@@ -17,6 +17,9 @@ function Address() {
       style={{ borderBottom: "1px solid gray" }}
     >
       <>Giờ mở cửa: 08:30 - 21:30 các ngày trong tuần</>
+      <a href="/compare-product">
+      
+      </a>
     </Navbar>
   );
 }
