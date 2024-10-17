@@ -92,7 +92,7 @@
 .img-swiper-item .activeImg {
   border: 1px solid #2854e5;
 }
-h3 a {
+.right-detail h3 a {
   font-size: 24px;
 }
 h3.title-product a:hover,

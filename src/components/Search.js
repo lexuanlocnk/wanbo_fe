@@ -66,7 +66,7 @@ function Search() {
               placeholder="Tìm kiếm"
             />
             <Button className="search">
-              <div className="bi bi-search" style={{ padding: 2.8}}/>
+              <div className="bi bi-search" style={{ padding: 2.8 }} />
             </Button>
           </div>
         </Navbar.Collapse>

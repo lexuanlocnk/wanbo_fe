@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { CartContext } from "../../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
-import ProductViewed from "../ProductQuickView/ProductViewed";
+import ProductViewed from "../../ProductQuickView/ProductViewed";
 import "./box-product.css";
 
 const BoxProduct = ({ item }) => {
