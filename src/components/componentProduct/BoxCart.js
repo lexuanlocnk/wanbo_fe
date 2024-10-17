@@ -135,17 +135,17 @@ const BoxCart = ({ isInModal }) => {
               display: "flex",
             }}
           >
-            <h5> Tổng cộng:</h5>
+            <h6> Tổng cộng:</h6>
 
             <span style={{ color: "red" }}>
-              <h5>{totalPrice.toLocaleString("vi-VN")} ₫</h5>
+              <h6>{totalPrice.toLocaleString("vi-VN")} ₫</h6>
             </span>
           </div>
 
           <Button
             variant="primary"
             className="mt-4 p-2"
-            style={{ width: "100%" }}
+            style={{ width: "100%"}}
             disabled={totalPrice === 0}
             onClick={handleCheckout}
           >

@@ -30,9 +30,37 @@ import {
 import "./Home.css";
 import { auto } from "@popperjs/core";
 import BoxProduct from "../../components/componentProduct/BoxProduct";
+import FlashSaleCountdown from "../../components/FlashSaleCountdown";
 
 const Home = (props) => {
   const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 6,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1500 },
+      items: 5,
+    },
+    desktop1: {
+      breakpoint: { max: 1500, min: 1224 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1224, min: 904 },
+      items: 3,
+    },
+    tablet2: {
+      breakpoint: { max: 904, min: 650 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 650, min: 0 },
+      items: 2,
+    },
+  };
+
+  const responsive2 = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
       items: 6,
@@ -60,9 +88,9 @@ const Home = (props) => {
   };
 
   return (
-    <div>
-      <div className="mx-4 my-4">
-        <div className=" mx-4 my-4">
+    <div >
+      <div className="my-4 container" >
+        <div className="mt-4">
           <div className="row">
             {/* Phần hình ảnh chính */}
             <div className="col-lg-8 col-md-12 mb-4">
@@ -114,85 +142,95 @@ const Home = (props) => {
         </div>
 
         {/* tien ich */}
-        <div className="row mt-5">
-          <div className="col-md-3">
-            <div className="row">
-              <div className="col-md-3 text-center">
+        <div className="row text-center text-md-start mt-2 ">
+          {/* Đổi trả dễ dàng */}
+          <div className="col-6 col-sm-6 col-md-3">
+            <div className="d-flex align-items-center">
+              <div className="text-center me-3">
                 <img
                   alt=""
                   src={imgBanner3}
-                  width="auto"
-                  className="d-block align-top mx-auto img"
+                  width="50px"
+                  className="d-block align-top mx-auto"
                 />
               </div>
-              <div className="col-md-9 d-flex flex-column justify-content-center">
+              <div className="d-flex flex-column justify-content-center">
                 <h6>Đổi trả dễ dàng</h6>
-                <p>Đổi trả trong 30 ngày đầu tiên cho tất cả các sản phẩm</p>
+                <p className="d-none d-md-block">
+                  Đổi trả trong 30 ngày đầu tiên cho tất cả các sản phẩm
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="row">
-              <div className="col-md-3 text-center">
+          {/* Giao hàng toàn quốc */}
+          <div className="col-6 col-sm-6 col-md-3">
+            <div className="d-flex align-items-center">
+              <div className="text-center me-3">
                 <img
                   alt=""
                   src={imgBanner3}
-                  width="auto"
+                  width="50px"
                   className="d-block align-top mx-auto"
                 />
               </div>
-              <div className="col-md-9 d-flex flex-column justify-content-center">
+              <div className="d-flex flex-column justify-content-center">
                 <h6>Giao hàng toàn quốc</h6>
-                <p>
+                <p className="d-none d-md-block">
                   Miễn phí giao hàng với các đơn hàng trị giá trên 5.000.000Đ
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="row">
-              <div className="col-md-3 text-center">
+          {/* Quà tặng hấp dẫn */}
+          <div className="col-6 col-sm-6 col-md-3">
+            <div className="d-flex align-items-center">
+              <div className="text-center me-3">
                 <img
                   alt=""
                   src={imgBanner3}
-                  width="auto"
+                  width="50px"
                   className="d-block align-top mx-auto"
                 />
               </div>
-              <div className="col-md-9 d-flex flex-column justify-content-center">
+              <div className="d-flex flex-column justify-content-center">
                 <h6>Quà tặng hấp dẫn</h6>
-                <p>Chương trình khuyến mãi cực lớn và hấp dẫn hàng tháng</p>
+                <p className=" d-none d-md-block">
+                  Chương trình khuyến mãi cực lớn và hấp dẫn hàng tháng
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="row">
-              <div className="col-md-3 text-center">
+          {/* Hỗ trợ online 24/7 */}
+          <div className="col-6 col-sm-6 col-md-3">
+            <div className="d-flex align-items-center">
+              <div className="text-center me-3">
                 <img
                   alt=""
                   src={imgBanner3}
-                  width="auto"
+                  width="50px"
                   className="d-block align-top mx-auto"
                 />
               </div>
-              <div className="col-md-9 d-flex flex-column justify-content-center">
+              <div className="d-flex flex-column justify-content-center">
                 <h6>Hỗ trợ online 24/7</h6>
-                <p>Luôn hỗ trợ khách hàng 24/24 giờ các ngày trong tuần</p>
+                <p className=" d-none d-md-block">
+                  Luôn hỗ trợ khách hàng 24/24 giờ các ngày trong tuần
+                </p>
               </div>
             </div>
           </div>
         </div>
 
         {/* item phu kien */}
-        <div className="border rounded shadow4 p-4 my-4">
+        <div className="border rounded shadow4 p-4 my-3">
           <Carouselm
             swipeable={true}
             draggable={true}
             showDots={true}
-            responsive={responsive}
+            responsive={responsive2}
             ssr={true}
             infinite={true}
             autoPlaySpeed={3000}
@@ -232,12 +270,21 @@ const Home = (props) => {
           </Carouselm>
         </div>
       </div>
+
+
       {/* Flash Sale */}
       <div
-        className=" align-items-center px-5 py-4"
+        className=" align-items-center py-4"
         style={{ width: "100%", height: "auto", backgroundColor: "blue" }}
       >
-        <h2 style={{ color: "white" }}>Flash Sale</h2>
+        <div className="container">
+        <div className="d-flex  align-items-center flex-column-mobile">
+          <h2 style={{ color: "white" }} className="me-5">
+            Flash Sale
+          </h2>
+          <FlashSaleCountdown />
+        </div>
+
         <Carouselm
           swipeable={true}
           draggable={true}
@@ -260,54 +307,52 @@ const Home = (props) => {
           ))}
         </Carouselm>
       </div>
+      </div>
 
       {/* May anh */}
-      <div className="row align-items-center mx-5 my-5">
-        <div className="col-md-2">
+
+      <div className="row align-items-center container my-5 d-flex">
+        <div className=" col-6 col-md-2 d-flex">
           <h3>Máy ảnh</h3>
         </div>
-        <div className="col-md-10 d-flex justify-content-end">
-          <div className="d-none d-md-flex">
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh DSLR
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Mirrorless
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Compact
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Instax
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Medium Format
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Film
+        <div className=" col-6 col-md-10 d-flex justify-content-end">
+          <div className="d-flex">
+            <div className="d-none d-lg-flex">
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Mirrorless
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Compact
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Instax
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Medium Format
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Film
+              </Button>
+            </div>
+            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+              Xem tất cả
             </Button>
           </div>
-          <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
-            Xem tất cả
-          </Button>
         </div>
 
         <div className="py-2">
@@ -336,52 +381,48 @@ const Home = (props) => {
       </div>
 
       {/* Ong kính */}
-      <div className="row align-items-center mx-5 my-4">
-        <div className="col-md-2">
+      <div className="row align-items-center container my-4">
+      <div className=" col-6 col-md-2 d-flex">
           <h3>Ống kính</h3>
         </div>
-        <div className="col-md-10 d-flex justify-content-end">
-          <div className="d-none d-md-flex">
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh DSLR
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Mirrorless
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Compact
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Instax
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Medium Format
-            </Button>
-            <Button
-              className="me-2 btn2"
-              style={{ backgroundColor: "#EEEEEE" }}
-            >
-              Máy ảnh Film
+        <div className=" col-6 col-md-10 d-flex justify-content-end">
+          <div className="d-flex">
+            <div className="d-none d-lg-flex">
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Mirrorless
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Compact
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Instax
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Medium Format
+              </Button>
+              <Button
+                className="me-2 btn2"
+                style={{ backgroundColor: "#EEEEEE" }}
+              >
+                Máy ảnh Film
+              </Button>
+            </div>
+            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+              Xem tất cả
             </Button>
           </div>
-          <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
-            Xem tất cả
-          </Button>
         </div>
 
         <div className="py-2">
@@ -409,7 +450,7 @@ const Home = (props) => {
         </div>
       </div>
       {/* anh banner */}
-      <div className="img-container m-5 rounded">
+      <div className="img-container container my-2 rounded">
         <a href={`/product`} className="card-title ">
           <img
             // alt="/product"
@@ -420,7 +461,7 @@ const Home = (props) => {
         </a>
       </div>
       {/* Máy quay phim */}
-      <div className="row align-items-center mx-5 my-4">
+      <div className="row align-items-center container my-4">
         <div>
           <h3>Máy quay phim</h3>
         </div>
@@ -450,7 +491,7 @@ const Home = (props) => {
         </div>
       </div>
       {/* anh banner 2 */}
-      <div className="img-container m-5 rounded">
+      <div className="img-container my-5 rounded container">
         <a href="/product" className="card-title">
           <img
             src={imgBanner5}
@@ -461,7 +502,7 @@ const Home = (props) => {
       </div>
 
       {/* Ba hình ảnh banner nhỏ */}
-      <div className="m-5">
+      <div className="my-5 container">
         <div className="row g-4">
           <div className="col-lg-4 col-md-4 col-sm-6">
             <div className="img-container rounded">
@@ -502,12 +543,13 @@ const Home = (props) => {
       </div>
 
       {/* tin tuc */}
-      <div className="d-flex flex-wrap justify-content-around m-5">
+      <h5 className="container  mt-5">TIN TỨC</h5>
+      <div className="d-flex flex-wrap justify-content-around mb-5 container">
+        
         {newsItems.map((item) => (
           <Card
-            style={{ width: "320px", overflow: "hidden" }}
             key={item.id}
-            className="m-1"
+            className="m-1 news"
           >
             <div className="img-container">
               <Card.Img

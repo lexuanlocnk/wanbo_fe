@@ -13,10 +13,10 @@ import { Link } from "react-router-dom";
 function Address() {
   return (
     <Navbar
-      className="custom-navbar px-5"
+      className="custom-navbar "
       style={{ borderBottom: "1px solid gray" }}
     >
-      <>Giờ mở cửa: 08:30 - 21:30 các ngày trong tuần</>
+      <div className="container">Giờ mở cửa: 08:30 - 21:30 các ngày trong tuần</div>
     </Navbar>
   );
 }

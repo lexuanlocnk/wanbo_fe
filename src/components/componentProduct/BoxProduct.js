@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { CartContext } from "../../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
+import componentProduct from "./componentProduct.css"
 
 const BoxProduct = ({ item }) => {
   const { addToCart } = useContext(CartContext);
@@ -26,7 +27,7 @@ const BoxProduct = ({ item }) => {
 
   return (
     <div
-      className="me-3 ms-1 my-4 border rounded shadow4"
+      className="mx-2 my-4 border rounded shadow4"
       key={item.id}
       style={{ display: "inline-block", position: "relative" }}
     >
@@ -45,6 +46,7 @@ const BoxProduct = ({ item }) => {
           <Card.Text className="price">
             {item.price.toLocaleString("vi-VN")} VND
           </Card.Text>
+
           <Card.Text className="original-price">
             {item.discountPercentage > 0 ? (
               <>
@@ -93,19 +95,17 @@ const BoxProduct = ({ item }) => {
               </Modal.Header>
 
               <Modal.Body>
-              
-            
-                  <BoxCart isInModal={true}/>
-            
+                <BoxCart isInModal={true} />
               </Modal.Body>
             </Modal>
 
             <Button variant="secondary">
-              <i class="bi bi-eye" />
+              <i className="bi bi-eye" />
             </Button>
 
-            <Button variant="secondary">
-              <i class="bi bi-repeat" />
+            <Button variant="secondary" href={`/compare-product`} className="ms-1">
+              <i className="bi bi-repeat" />
+           
             </Button>
           </div>
         </Card.Body>

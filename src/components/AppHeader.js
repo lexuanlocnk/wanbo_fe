@@ -11,8 +11,8 @@ import "../components/AppHeader.css";
 
 function AppHeader() {
   return (
-    <Navbar expand="lg" className="custom-navbar px-4 ">
-      <Container fluid>
+    <Navbar expand="lg" className="custom-navbar ">
+      <Container >
         <DropdownButton id="dropdown-basic-button" title="Danh mục sản phẩm">
           <Dropdown.Item href="#/action-" className="">
             Máy ảnh

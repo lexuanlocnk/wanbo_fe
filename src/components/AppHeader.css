@@ -71,33 +71,95 @@ a:hover {
 
 /* hover box products */
 
-.hover-buttons {
-  position: absolute;
-  top: 40%;
-  left: 20%; /* Đặt các nút vào giữa Card */
-  display: none; /* Ẩn các nút ban đầu */
-  text-align: center;
-  z-index: 1;
-}
 
-.prdItem:hover .hover-buttons {
-  display: block; /* Hiển thị các nút khi hover */
-}
-
-.hover-buttons button {
-  margin: 5px;
-}
-
-/* Thêm vào tệp CSS */
-@media (min-width: 789px) {
+/* Màn hình lớn (Desktop)  */
+@media (min-width: 992px) {
   .custom-img {
     width: 40%;
   }
+  .news {
+    width: 24%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 600px;
+  }
+   .nameDK{
+    font-size: 30;
+  }
 }
 
-@media (max-width: 788px) {
+/* Màn hình trung bình (Tablet) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .custom-img {
+    width: 50%;
+  }
+  .news {
+    width: 48%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
+ 
+}
+
+/* Màn hình nhỏ (Mobile) */
+@media (max-width: 767px) {
   .custom-img {
     width: 100%;
   }
+  .news {
+    width: 100%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
 }
+
+
+/* <FlashSaleCountdown /> */
+.flash-sale-countdown {
+  background-color: yellow;
+  border-radius: 5px;
+}
+
+/* Màn hình lớn hơn 1024px */
+@media (min-width: 1400px) {
+  .meme{
+    position: absolute;
+    left: 29%;
+    width: 500px;
+  }
+}
+/* Màn hình lớn hơn 1024px */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .meme{
+    position: absolute;
+    left: 27%;
+    width: 400px;
+  }
+}
+
+/* Màn hình lớn hơn 1024px */
+@media (max-width: 1024px) {
+  .meme{
+    width: 100%;
+    margin-right: 15px;
+  }
+}
+
 

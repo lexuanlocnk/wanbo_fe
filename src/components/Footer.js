@@ -27,12 +27,45 @@ export default function Footer() {
             alt="Card image"
             height={180}
           />
-          <Card.ImgOverlay>
-            <Card.Title>Đăng ký để nhận tin tức khuyến mãi mới nhất</Card.Title>
-            <Card.Text>
-              Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
-              chương trình khuyến mại khác
-            </Card.Text>
+          <Card.ImgOverlay className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            {/* Nội dung bên trái chiếm 6 phần */}
+            <div
+              className=" text-content flex-grow-1 me-md-3"
+              style={{ flexBasis: "60%" }}
+            >
+              <Card.Title className="nameDK" >
+                Đăng ký để nhận tin tức khuyến mãi mới nhất
+              </Card.Title>
+              <Card.Text className="nameTT">
+                Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
+                chương trình khuyến mại khác.
+              </Card.Text>
+            </div>
+
+            {/* Thanh tìm kiếm chiếm 4 phần */}
+            <div
+              className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0"
+          
+            >
+              <Navbar.Collapse
+                id="navbarScroll"
+                className="flex-grow-1 d-flex justify-content-center mx-0 mx-md-5"
+                style={{width:"100%"}}
+              >
+                <div
+                  className="d-flex"
+                  style={{ position: "relative" }}
+                >
+                  <input
+                    className="form-control me-2 inputEmail"
+                    placeholder="Email của bạn"
+                  />
+                  <Button className="search">
+                    <div  style={{ padding: 2.8}} >Gửi</div>
+                  </Button>
+                </div>
+              </Navbar.Collapse>
+            </div>
           </Card.ImgOverlay>
         </Card>
       </section>
@@ -140,19 +173,6 @@ export default function Footer() {
           </MDBRow>
         </MDBContainer>
       </section>
-      {/* <div style={{width: "100%"}}>
-        <ifram
-          width="100%"
-          height="500"
-          frameBorder="0"
-          scrolling="no"
-          marginHeight="0"
-          marginWidth="0"
-          src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=245%20Tr%E1%BA%A7n%20Quang%20Kh%E1%BA%A3i,%20P.%20T%C3%A2n%20%C4%90%E1%BB%8Bnh,%20Qu%E1%BA%ADn%201,%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh+(Showroom%20SMC)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-        >
-          <a href="https://www.gps.ie/">gps systems</a>
-        </ifram>
-      </div> */}
       <div
         className="text-center p-4"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
