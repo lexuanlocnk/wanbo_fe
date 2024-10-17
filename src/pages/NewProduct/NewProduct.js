@@ -111,7 +111,7 @@ const NewProduct = (props) => {
             <img src={BannerCollection} alt="Banner Collection" />
           </div>
           <div className="sort-by">
-            <span>Sắp xếp theo</span>
+            <span className="sort-by-title">Sắp xếp theo</span>
             <ul className="sort-by-dropdown">
               <li>
                 <span>{selectedOption}</span>
@@ -125,17 +125,19 @@ const NewProduct = (props) => {
                 </ul>
               </li>
             </ul>
-            {sortOptions.map((option) => (
-              <div
-                key={option.value}
-                className={`sort-by-item ${
-                  activeSortOption === option.label ? "active" : ""
-                }`}
-                onClick={() => setActiveSortOption(option.label)}
-              >
-                {option.label}
-              </div>
-            ))}
+            <div className="box-sort-by-item">
+              {sortOptions.map((option) => (
+                <div
+                  key={option.value}
+                  className={`sort-by-item ${
+                    activeSortOption === option.label ? "active" : ""
+                  }`}
+                  onClick={() => setActiveSortOption(option.label)}
+                >
+                  {option.label}
+                </div>
+              ))}
+            </div>
           </div>
           <div className="products-view">
             <div className="row">
