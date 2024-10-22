@@ -38,7 +38,7 @@ const BoxProduct = ({ item }) => {
 
   return (
     <div
-      className="mx-2 my-4 border rounded shadow4"
+      className="my-4 border rounded shadow4 box-product mx-1"
       key={item.id}
       style={{ display: "inline-block", position: "relative" }}
     >

@@ -39,7 +39,7 @@
 
 .search {
   position: absolute;
-  right: 1px;
+  right: -14px;
 }
 
 /* --------------------------------------------------------- */
@@ -171,26 +171,31 @@ a {
   background-color: yellow;
   border-radius: 5px;
 }
+@media (min-width: 1401px) {
+  .meme{
+    position: absolute;
+    left: 24%;
+    width: 550px;
+  }
+}
 
-/* Màn hình lớn hơn 1024px */
-@media (min-width: 1400px) {
+@media (min-width: 1230px) and (max-width: 1400px) {
   .meme{
     position: absolute;
     left: 29%;
-    width: 500px;
-  }
-}
-/* Màn hình lớn hơn 1024px */
-@media (min-width: 1024px) and (max-width: 1400px) {
-  .meme{
-    position: absolute;
-    left: 27%;
     width: 400px;
   }
 }
 
-/* Màn hình lớn hơn 1024px */
-@media (max-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1230px) {
+  .meme{
+    position: absolute;
+    left: 27%;
+    width: 300px;
+  }
+}
+
+@media (max-width: 1023px) {
   .meme{
     width: 100%;
     margin-right: 15px;

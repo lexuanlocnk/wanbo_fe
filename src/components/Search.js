@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import wanboLogo from "../assets/logo.webp";
+import wanboLogo from "../assets/logo.webp"; //wanbo.png
 import call from "../assets/call.png";
 import user from "../assets/user.png";
 import "../components/AppHeader.css";
@@ -23,7 +23,7 @@ function Search() {
   return (
     <Navbar
       expand="lg"
-      className="custom-navbar py-4"
+      className="custom-navbar"
       style={{ borderBottom: "1px solid gray" }}
     >
       <Container
@@ -43,7 +43,7 @@ function Search() {
           </Link>
 
           {/* Thanh tìm kiếm và các nút */}
-          <div className="d-flex flex-column flex-md-row-reverse align-items-center w-100">
+          <div className="d-flex flex-column flex-md-row-reverse align-items-end w-100">
             <div className="d-flex align-items-center mt-2 mt-md-0">
               {/* Gọi mua hàng */}
               <div className="d-none d-md-flex align-items-center text-center me-3">
@@ -90,17 +90,17 @@ function Search() {
               <Button
                 variant="outline-light"
                 onClick={() => navigate("/cart")}
-                className="position-relative d-flex align-items-center"
+                className="position-relative d-flex align-items-end"
               >
                 <Badge
                   bg="primary"
-                  style={{ position: "absolute", left: 27, top: 7 }}
+                  style={{ position: "absolute", left: 27, top: 7, fontSize: 10 }}
                 >
                   {totalItems}
                 </Badge>
                 <span
                   className="bi bi-basket"
-                  style={{ fontSize: 24, marginRight: 10 }}
+                  style={{ fontSize: 22, marginRight: 15 }}
                 />
                 Giỏ hàng
               </Button>
@@ -111,8 +111,8 @@ function Search() {
         
         <div className="meme">
           <div
-            className="d-flex w-100 justify-content-center"
-            style={{ maxWidth: 600, position: "relative" }}
+            className="d-flex justify-content-center"
+            style={{ Width: 800, position: "relative" }}
           >
             <input
               className="form-control me-2"
