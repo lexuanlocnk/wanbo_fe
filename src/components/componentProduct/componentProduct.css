@@ -39,10 +39,16 @@
   .prdItem:hover .hover-buttons {
     display: block;
   }
+  .text-Tong{
+    font-size: 14px;
+  }
+  .FormCheck{
+    width: 45px;
+  }
 }
 
 /* Màn hình trung bình (Tablet) */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .prdName {
     height: 55px;
     font-size: 17px;
@@ -56,6 +62,14 @@
   .prdItem:hover .hover-buttons {
     display: none;
   }
+  .text-Tong{
+    font-size: 12px;
+  }
+  .FormCheck{
+    width: 40px;
+    justify-content: space-between;
+  }
+  
 }
 
 /* Màn hình nhỏ (Mobile) */
@@ -77,4 +91,11 @@
     flex-direction: column !important;
     text-align: center;
   }
+  .FormCheck{
+    width: 0px;
+  }
+  .text-end2{
+    text-align: end;
+  }
+
 }

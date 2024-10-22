@@ -43,7 +43,7 @@ const FlashSaleCountdown = () => {
 
   return (
     <div className="flash-sale-countdown">
-      <div className="countdown-timer p-1 ">
+      <div className="countdown-timer p-1 " style={{fontSize: 14}}>
         <span><b><i className="bi bi-alarm me-1"/> Kết thúc sau: </b> </span>
         <span><b>{timeLeft.days}</b> ngày</span> :{" "}
         <span><b>{timeLeft.hours}</b> giờ</span> :{" "}

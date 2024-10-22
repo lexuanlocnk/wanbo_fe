@@ -136,6 +136,7 @@ const Cart = () => {
                   </div>
                 </Col>
               </Row>
+              
             </div>
           </div>
         )}

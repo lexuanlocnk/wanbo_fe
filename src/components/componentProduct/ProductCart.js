@@ -13,7 +13,11 @@ const ProductCart = ({
     <>
       <Row className="align-items-center border-bottom" key={item.id}>
         {/* Checkbox chọn sản phẩm */}
-        <Col  sm={1} className="d-flex justify-content-center" style={{ width: 45 }}>
+        <Col
+          sm={1}
+          className="d-flex justify-content-center d-none d-md-flex FormCheck"
+       
+        >
           <FormCheck
             checked={selectedItems.includes(item.id)}
             onChange={() => handleSelectItem(item.id)}
@@ -21,11 +25,11 @@ const ProductCart = ({
         </Col>
 
         {/* Hình ảnh sản phẩm */}
-        <Col xs={9} sm={2}>
+        <Col xs={4} sm={2}>
           <img
             src={item.images}
             alt={item.name}
-            className="img-fluid p-1 p-md-3" // Giảm padding trên màn hình nhỏ
+            className="img-fluid p-1 p-md-3 mt-2"
             style={{
               maxWidth: "100%",
               height: "auto",
@@ -35,7 +39,7 @@ const ProductCart = ({
 
         {/* Tên sản phẩm và nút xóa */}
         <Col xs={8} sm={3} className="text-start">
-          <Card.Text style={{ fontSize: 14 }} className="mb-1">
+          <Card.Text className="text-Tong mb-1" >
             {item.name}
           </Card.Text>
           <a
@@ -48,14 +52,14 @@ const ProductCart = ({
         </Col>
 
         {/* Giá sản phẩm */}
-        <Col xs={6} sm={2} className="mt-2 mt-sm-0">
-          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
+        <Col xs={7} sm={2} className="mt-2 mt-sm-0 text-end2">
+          <Card.Text style={{color: "red", fontWeight: "600" }} className="text-Tong">
             {item.price.toLocaleString("vi-VN")} ₫
           </Card.Text>
         </Col>
 
         {/* Điều chỉnh số lượng */}
-        <Col xs={6} sm={2} className="mt-2 mt-sm-0">
+        <Col xs={5} sm={2} className="mt-2 mt-sm-0">
           <div
             className="d-flex align-items-center justify-content-center"
             style={{ border: "1px solid #DDDDDD", width: 80 }}
@@ -94,18 +98,16 @@ const ProductCart = ({
         </Col>
 
         {/* Tổng tiền */}
-        <Col xs={12} sm={2} className="d-none d-sm-block text-end mt-2 mt-sm-0">
-          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
+        <Col
+          sm={2}
+          className=" d-sm-block mt-2 mt-sm-0 d-none d-sm-flex text-end "
+          
+        >
+          <Card.Text style={{ color: "red", fontWeight: "600" }} className="text-Tong">
             {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
           </Card.Text>
         </Col>
 
-        {/* Tổng tiền hiện ở dưới trên màn hình xs */}
-        <Col xs={12} sm={2} className="d-block d-sm-none text-end mt-2">
-          <Card.Text style={{ fontSize: 14, color: "red", fontWeight: "600" }}>
-            Tổng: {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
-          </Card.Text>
-        </Col>
       </Row>
     </>
   );

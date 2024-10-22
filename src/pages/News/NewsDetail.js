@@ -20,7 +20,7 @@ const NewsDetail = () => {
 
   return (
     <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="p-5">
+      <div className="container py-5">
         <h4>TIN TỨC</h4>
         <Row className="justify-content-between">
           <Col

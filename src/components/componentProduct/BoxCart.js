@@ -65,7 +65,7 @@ const BoxCart = ({ isInModal }) => {
 
   return (
     <Col>
-      <div  className="text-end mb-4">
+      <div  className="mb-4 d-none d-sm-flex text-end ">
         <a
           className="py-3"
           onClick={handleRemoveSelectedItems}
@@ -79,10 +79,10 @@ const BoxCart = ({ isInModal }) => {
       {/* Tiêu đề cột */}
       <div className="border p-1">
         <Row className="fw-bold">
-          <Col md={1} className="d-md-block d-none" style={{ width: 50 }}>
+          <Col md={1} className="d-md-block d-none" style={{ width: 45 }}>
             <FormCheck checked={selectAll} onChange={handleSelectAll} />
           </Col>
-          <Col md={2} className="d-md-block d-none">
+          <Col md={2} className="d-md-block d-none " style={{ textAlign: "center" }}>
             Hình ảnh
           </Col>
           <Col md={3} className="d-md-block d-none">
@@ -94,7 +94,7 @@ const BoxCart = ({ isInModal }) => {
           <Col md={2} className="d-md-block d-none">
             Số lượng
           </Col>
-          <Col md={2} className="d-md-block d-none"  style={{ textAlign: "center" }}>
+          <Col md={2} className="d-md-block d-none"  >
             Tổng
           </Col>
         </Row>

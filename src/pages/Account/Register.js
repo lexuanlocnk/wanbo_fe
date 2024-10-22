@@ -31,24 +31,24 @@ const Register = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }} className="p-5">
-      <Container className="p-4" style={{ backgroundColor: "#ffffff" }}>
-        <Row className="justify-content-md-center">
-          <Col md={4}>
+    <div className="login-container p-5">
+      <Container className="p-4 login-box">
+        <Row className="justify-content-center">
+          <Col sm={12} md={10} lg={8} xl={4}>
             <h2 className="text-center" style={{ fontWeight: 400 }}>
               ĐĂNG KÝ
             </h2>
             <p className="text-center mb-4" style={{ fontSize: 14 }}>
-            Đã có tài khoản,{" "}
+              Đã có tài khoản,{" "}
               <a href={`/login`} style={{ color: "blue" }}>
-              đăng nhập tại đây
+                đăng nhập tại đây
               </a>
             </p>
 
             {error && <Alert variant="danger">{error}</Alert>}
 
             <Form onSubmit={handleSubmit} className="text-center">
-            <Form.Group controlId="formBasicEmail" className="mb-3">
+              <Form.Group controlId="formBasicEmail" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Họ"
@@ -101,16 +101,25 @@ const Register = () => {
 
               <p className="mt-4">Hoặc đăng nhập bằng</p>
 
-              <Button variant="primary" className="me-3" style={{width: 140}}>
-                <i className="bi bi-facebook me-3" />
-                Facebook
-              </Button>
+              <div className="d-flex justify-content-center">
+                <Button
+                  variant="primary"
+                  className="me-2"
+                  style={{ width: 140 }}
+                >
+                  <i className="bi bi-facebook me-2" />
+                  Facebook
+                </Button>
 
-              <Button variant="danger" className="ms-3" style={{width: 140}}> 
-                <i className="bi bi-google me-3" />
-                Google
-              </Button>
-
+                <Button
+                  variant="danger"
+                  className="ms-2"
+                  style={{ width: 140 }}
+                >
+                  <i className="bi bi-google me-2" />
+                  Google
+                </Button>
+              </div>
             </Form>
           </Col>
         </Row>

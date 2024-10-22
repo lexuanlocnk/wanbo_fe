@@ -312,10 +312,10 @@ const Home = (props) => {
       {/* May anh */}
 
       <div className="row align-items-center container my-5 d-flex">
-        <div className=" col-6 col-md-2 d-flex">
+        <div className=" col-6 col-md-3 d-flex">
           <h3>Máy ảnh</h3>
         </div>
-        <div className=" col-6 col-md-10 d-flex justify-content-end">
+        <div className=" col-6 col-md-9 d-flex justify-content-end">
           <div className="d-flex">
             <div className="d-none d-lg-flex">
               <Button

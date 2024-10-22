@@ -62,7 +62,7 @@ const ProductDetail = ({ children, eventKey }) => {
 
   return (
     <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="p-5">
+      <div className="container py-5">
         <div className="row p-4 pb-5" style={{ backgroundColor: "white" }}>
           <div
             className="col-md-7 d-flex flex-column align-items-center"
@@ -115,35 +115,35 @@ const ProductDetail = ({ children, eventKey }) => {
             </div>
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
 
-            <Row className="quantity-controls mt-1 ms-1 align-items-center">
-              Số lượng:
-              <div className="ms-3 align-items-center detailQuantity">
-                <div className="border p-1">
+            <Row className="mt-1 ms-1 align-items-center">
+              <Col xs="auto">Số lượng:</Col>
+              <Col xs="auto">
+                <div className="border p-1 d-flex align-items-center">
                   <button
-                    className=""
+                    className="btn btn-link p-0"
                     onClick={decreaseQuantity}
                     style={{
-                      border: "none",
                       width: 30,
                       backgroundColor: "white",
+                      textDecoration: "none"
                     }}
                   >
                     <b className="operationDetail">-</b>
                   </button>
                   <span className="quantity-display px-3">{quantity}</span>
                   <button
-                    className=""
+                    className="btn btn-link p-0"
                     onClick={increaseQuantity}
                     style={{
-                      border: "none",
                       width: 30,
                       backgroundColor: "white",
+                      textDecoration: "none"
                     }}
                   >
                     <b className="operationDetail">+</b>
                   </button>
                 </div>
-              </div>
+              </Col>
             </Row>
 
             {/* Nút mua hàng */}
@@ -321,13 +321,13 @@ const ProductDetail = ({ children, eventKey }) => {
           </Col>
         </Row>
 
-        <h3 className="my-4">SẢN PHẨM CÙNG LOẠI</h3>
+        {/* <h3 className="my-4">SẢN PHẨM CÙNG LOẠI</h3>
 
         <div className="d-flex justify-content-center mx-2">
           {topItems.map((item) => (
             <BoxProduct key={item.id} item={item} />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
