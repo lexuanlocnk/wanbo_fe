@@ -39,7 +39,7 @@
 
 .search {
   position: absolute;
-  right: 100px;
+  right: 1px;
 }
 
 /* --------------------------------------------------------- */
@@ -65,10 +65,6 @@ a {
   color: rgb(0, 0, 0);
 }
 
-a:hover {
-  color: rgb(81, 150, 211);
-}
-
 /* hover box products */
 
 .hover-buttons {
@@ -86,4 +82,124 @@ a:hover {
 
 .hover-buttons button {
   margin: 5px;
+}
+
+.compare-nav-container a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.compare-nav-container a:hover {
+  color: #49b1fe;
+}
+
+.compare-nav-container a:hover i,
+.compare-nav-container a:hover span {
+  color: #49b1fe;
+}
+.search-input {
+  position: relative;
+}
+#navbarScroll .search-input,
+.form-control {
+  width: 100%;
+}
+
+/* Thêm vào tệp CSS */
+@media (min-width: 789px) {
+  .custom-img {
+    width: 40%;
+  }
+  .news {
+    width: 24%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 600px;
+  }
+   .nameDK{
+    font-size: 30;
+  }
+}
+
+/* Màn hình trung bình (Tablet) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .custom-img {
+    width: 50%;
+  }
+  .news {
+    width: 48%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
+ 
+}
+
+/* Màn hình nhỏ (Mobile) */
+@media (max-width: 767px) {
+  .custom-img {
+    width: 100%;
+  }
+  .news {
+    width: 100%;
+  }
+  .inputEmail{
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
+}
+
+
+/* <FlashSaleCountdown /> */
+.flash-sale-countdown {
+  background-color: yellow;
+  border-radius: 5px;
+}
+
+/* Màn hình lớn hơn 1024px */
+@media (min-width: 1400px) {
+  .meme{
+    position: absolute;
+    left: 29%;
+    width: 500px;
+  }
+}
+/* Màn hình lớn hơn 1024px */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .meme{
+    position: absolute;
+    left: 27%;
+    width: 400px;
+  }
+}
+
+/* Màn hình lớn hơn 1024px */
+@media (max-width: 1024px) {
+  .meme{
+    width: 100%;
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  #navbarScroll .search-input {
+    width: 100%;
+    max-width: unset !important;
+  }
 }

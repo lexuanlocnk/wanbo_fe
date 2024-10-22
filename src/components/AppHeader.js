@@ -11,8 +11,8 @@ import "../components/AppHeader.css";
 
 function AppHeader() {
   return (
-    <Navbar expand="lg" className="custom-navbar px-5 ">
-      <Container fluid>
+    <Navbar expand="lg" className="custom-navbar ">
+      <Container >
         <DropdownButton id="dropdown-basic-button" title="Danh mục sản phẩm">
           <Dropdown.Item href="#/action-" className="">
             Máy ảnh
@@ -50,12 +50,12 @@ function AppHeader() {
               Giới thiệu
             </Nav.Link>
 
-            <NavDropdown title="Sản phẩm" href="#action" className="Home">
-              <NavDropdown.Item href="#action1">
-                Wanbo T Series
+            <NavDropdown title="Sản phẩm" href="/new-product" className="Home">
+              <NavDropdown.Item href="/new-product">
+                Sẩn phẩm mới
               </NavDropdown.Item>
               <NavDropdown.Item href="#action2">
-                Wanbo X Series
+                Sản phẩm nổi bật
               </NavDropdown.Item>
             </NavDropdown>
 
@@ -63,7 +63,7 @@ function AppHeader() {
               Tin tức
             </Nav.Link>
 
-            <Nav.Link href="#1" className="Home">
+            <Nav.Link href="/contact" className="Home">
               Liên hệ
             </Nav.Link>
           </Nav>

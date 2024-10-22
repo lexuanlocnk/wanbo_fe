@@ -1,0 +1,101 @@
+.prdName {
+  white-space: "normal";
+  word-wrap: "break-word";
+}
+
+/* cho Flash Sale */
+.original-price {
+  text-decoration: line-through; /* Gạch ngang */
+  font-size: 13px;
+  color: #999;
+  margin-top: -15px;
+}
+
+.price {
+  font-size: 18px;
+  color: #ff0048;
+  font-weight: 600;
+}
+
+.hover-buttons {
+  position: absolute;
+  top: 40%;
+  left: 20%; /* Đặt các nút vào giữa Card */
+  display: none; /* Ẩn các nút ban đầu */
+  text-align: center;
+  z-index: 1;
+}
+
+.hover-buttons button {
+  margin: 5px;
+}
+
+/* Màn hình lớn (Desktop)  */
+@media (min-width: 1024px) {
+  .prdName {
+    height: 58px;
+    font-size: 18px;
+  }
+  .prdItem:hover .hover-buttons {
+    display: block;
+  }
+  .text-Tong{
+    font-size: 14px;
+  }
+  .FormCheck{
+    width: 45px;
+  }
+}
+
+/* Màn hình trung bình (Tablet) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .prdName {
+    height: 55px;
+    font-size: 17px;
+  }
+  .price {
+    font-size: 17px;
+  }
+  .original-price {
+    font-size: 11px;
+  }
+  .prdItem:hover .hover-buttons {
+    display: none;
+  }
+  .text-Tong{
+    font-size: 12px;
+  }
+  .FormCheck{
+    width: 40px;
+    justify-content: space-between;
+  }
+  
+}
+
+/* Màn hình nhỏ (Mobile) */
+@media (max-width: 767px) {
+  .prdName {
+    height: 32px;
+    font-size: 12px;
+  }
+  .price {
+    font-size: 12px;
+  }
+  .original-price {
+    font-size: 10px;
+  }
+  .prdItem:hover .hover-buttons {
+    display: none;
+  }
+  .flex-column-mobile {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .FormCheck{
+    width: 0px;
+  }
+  .text-end2{
+    text-align: end;
+  }
+
+}

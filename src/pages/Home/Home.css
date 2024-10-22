@@ -25,19 +25,7 @@ a :hover {
   color: rgb(43, 0, 255);
 }
 
-/* cho Flash Sale */
-.original-price {
-  text-decoration: line-through; /* Gạch ngang */
-  font-size: 13px; /* Kích thước nhỏ hơn */
-  color: #999; /* Màu nhạt hơn */
-  margin-top: -15px;
-}
 
-.price {
-  font-size: 18px; /* Kích thước nhỏ hơn */
-  color: #ff0048; /* Màu nhạt hơn */
-  font-weight: 600;
-}
 
 .sale {
   color: white;
@@ -86,6 +74,10 @@ a :hover {
   transform: scale(1.1);
 }
 
+.btn2:hover {
+  color: #263bf3;
+}
+
 .btn2 {
   background-color: #c3c2c2;
   border: none;
@@ -93,12 +85,6 @@ a :hover {
 }
 
 .prdItem {
-  width: 260px;
+  width: 100%;
 }
 
-.prdName {
-  white-space: "normal";
-  word-wrap: "break-word";
-  height: 55px;
-  font-size: 17px;
-}

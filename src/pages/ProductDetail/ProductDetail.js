@@ -62,7 +62,7 @@ const ProductDetail = ({ children, eventKey }) => {
 
   return (
     <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="p-5">
+      <div className="container py-5">
         <div className="row p-4 pb-5" style={{ backgroundColor: "white" }}>
           <div
             className="col-md-7 d-flex flex-column align-items-center"
@@ -114,25 +114,36 @@ const ProductDetail = ({ children, eventKey }) => {
               </p>
             </div>
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
-            <Row className="quantity-controls mt-1 ms-1 align-items-center">
-              Số lượng:
-              <div className="ms-3 align-items-center detailQuantity">
-                <button
-                  className="btn"
-                  onClick={decreaseQuantity}
-                  style={{ border: "none" }}
-                >
-                  <b className="operationDetail">-</b>
-                </button>
-                <span className="quantity-display mx-2">{quantity}</span>
-                <button
-                  className="btn"
-                  onClick={increaseQuantity}
-                  style={{ border: "none" }}
-                >
-                  <b className="operationDetail">+</b>
-                </button>
-              </div>
+
+            <Row className="mt-1 ms-1 align-items-center">
+              <Col xs="auto">Số lượng:</Col>
+              <Col xs="auto">
+                <div className="border p-1 d-flex align-items-center">
+                  <button
+                    className="btn btn-link p-0"
+                    onClick={decreaseQuantity}
+                    style={{
+                      width: 30,
+                      backgroundColor: "white",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <b className="operationDetail">-</b>
+                  </button>
+                  <span className="quantity-display px-3">{quantity}</span>
+                  <button
+                    className="btn btn-link p-0"
+                    onClick={increaseQuantity}
+                    style={{
+                      width: 30,
+                      backgroundColor: "white",
+                      textDecoration: "none"
+                    }}
+                  >
+                    <b className="operationDetail">+</b>
+                  </button>
+                </div>
+              </Col>
             </Row>
 
             {/* Nút mua hàng */}
@@ -151,24 +162,36 @@ const ProductDetail = ({ children, eventKey }) => {
 
               {/* modal */}
               <Modal
-                size="lg"
+                size="xl"
                 show={smShow}
                 onHide={() => setSmShow(false)}
                 aria-labelledby="example-modal-sizes-title-sm"
               >
-                <Modal.Header closeButton>
+                <Modal.Header
+                  closeButton
+                  style={{ backgroundColor: "blue", color: "white" }}
+                >
                   <Modal.Title id="example-modal-sizes-title-sm">
-                    Đã thêm <b>{product.name}</b> vào giỏ hàng
+                    <i className="bi bi-check-circle me-2" />
+                    Đã thêm{" "}
+                    <a
+                      href={`/product/${product.id}`}
+                      style={{ fontSize: 24, color: "white" }}
+                    >
+                      [{product.name}]
+                    </a>{" "}
+                    vào giỏ hàng
                   </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
-                  <BoxCart />
+                  <BoxCart isInModal={true} />
                 </Modal.Body>
               </Modal>
 
               <Button variant="primary" className="adddetail">
                 Trả góp <br />
-                (Mua trả góp lãi suất thấp)
+                <p style={{ fontSize: 12 }}>(Mua trả góp lãi suất thấp)</p>
               </Button>
             </div>
             <Card className="mt-3">
@@ -298,13 +321,13 @@ const ProductDetail = ({ children, eventKey }) => {
           </Col>
         </Row>
 
-        <h3 className="my-4">SẢN PHẨM CÙNG LOẠI</h3>
+        {/* <h3 className="my-4">SẢN PHẨM CÙNG LOẠI</h3>
 
         <div className="d-flex justify-content-center mx-2">
           {topItems.map((item) => (
             <BoxProduct key={item.id} item={item} />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

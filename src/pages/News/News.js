@@ -9,12 +9,12 @@ import FeaturedNews from "../../components/FeaturedNews";
 
 const News = () => {
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="p-5">
+    <div className="" style={{ backgroundColor: "#f4f4f4" }}>
+      <div className="container py-5">
         <h4>TIN TỨC</h4>
         <Row className="justify-content-between">
           <Col
-            md={9}
+            lg={9}
             className="mt-3"
             style={{ backgroundColor: "white", height: "auto" }}
           >
@@ -57,7 +57,7 @@ const News = () => {
             </div>
           </Col>
 
-          <Col md={3} xs={12} className="mt-3" style={{ marginRight: -12 }}>
+          <Col lg={3} xs={12} className="mt-3" style={{ marginRight: -12 }}>
             <div className="sticky-sidebar">
               <NewsCategory />
               <FeaturedNews />

@@ -21,9 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Giả sử có điều kiện kiểm tra email và mật khẩu đúng (giả lập)
-    if (email === "admin@example.com" && password === "password123") {
-      // Điều hướng sang trang chủ sau khi đăng nhập thành công
+    if (email === "admin@gmail.com" && password === "123") {
       navigate("/home");
     } else {
       setError("Email hoặc mật khẩu không chính xác.");
@@ -31,10 +29,10 @@ const Login = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }} className="p-5">
-      <Container className="p-4" style={{ backgroundColor: "#ffffff" }}>
-        <Row className="justify-content-md-center">
-          <Col md={4}>
+    <div className="login-container p-5">
+      <Container className="p-4 login-box">
+        <Row className="justify-content-center">
+          <Col sm={12} md={10} lg={8} xl={4}>
             <h2 className="text-center" style={{ fontWeight: 400 }}>
               ĐĂNG NHẬP
             </h2>
@@ -55,7 +53,6 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  //   className="p-2"
                   style={{ padding: 12, backgroundColor: "#f4f4f4" }}
                 />
               </Form.Group>
@@ -98,7 +95,7 @@ const Login = () => {
                     </Form.Group>
 
                     <Button variant="primary" className="w-100 p-2">
-                       lấy lại mật khẩu
+                      Lấy lại mật khẩu
                     </Button>
                   </div>
                 </Collapse>
@@ -106,16 +103,17 @@ const Login = () => {
 
               <p>Hoặc đăng nhập bằng</p>
 
-              <Button variant="primary" className="me-3" style={{width: 140}}>
-                <i className="bi bi-facebook me-3" />
-                Facebook
-              </Button>
+              <div className="d-flex justify-content-center">
+                <Button variant="primary" className="me-2" style={{ width: 140 }}>
+                  <i className="bi bi-facebook me-2" />
+                  Facebook
+                </Button>
 
-              <Button variant="danger" className="ms-3" style={{width: 140}}> 
-                <i className="bi bi-google me-3" />
-                Google
-              </Button>
-
+                <Button variant="danger" className="ms-2" style={{ width: 140 }}>
+                  <i className="bi bi-google me-2" />
+                  Google
+                </Button>
+              </div>
             </Form>
           </Col>
         </Row>

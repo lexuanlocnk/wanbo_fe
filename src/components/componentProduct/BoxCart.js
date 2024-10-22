@@ -5,11 +5,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormCheck } from "react-bootstrap";
 import ProductCart from "./ProductCart"; // Import component mới
+import { useNavigate } from "react-router-dom";
 
-const BoxCart = () => {
+const BoxCart = ({ isInModal }) => {
   const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const navigate = useNavigate();
 
   // Hàm để tăng số lượng
   const increaseQuantity = (id) => {
@@ -55,48 +57,73 @@ const BoxCart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/checkout");
+    }
+  };
 
   return (
     <Col>
-      <Button
-        variant="danger"
-        className="mb-5"
-        style={{ width: "10%" }}
-        onClick={handleRemoveSelectedItems}
-        disabled={selectedItems.length === 0}
-      >
-        Xóa tất cả
-      </Button>
+      <div  className="mb-4 d-none d-sm-flex text-end ">
+        <a
+          className="py-3"
+          onClick={handleRemoveSelectedItems}
+          disabled={selectedItems.length === 0}
+          style={{ cursor: "pointer" }}
+        >
+          Xóa tất cả
+        </a>
+      </div>
 
       {/* Tiêu đề cột */}
-      <div>
+      <div className="border p-1">
         <Row className="fw-bold">
-          <Col md={1}>
+          <Col md={1} className="d-md-block d-none" style={{ width: 45 }}>
             <FormCheck checked={selectAll} onChange={handleSelectAll} />
           </Col>
-          <Col md={2}>Hình ảnh</Col>
-          <Col md={2}>Tên sản phẩm</Col>
-          <Col md={2}>Giá</Col>
-          <Col md={2}>Số lượng</Col>
-          <Col md={2}>Tổng</Col>
-          <Col md={1}>Tác vụ</Col>
+          <Col md={2} className="d-md-block d-none " style={{ textAlign: "center" }}>
+            Hình ảnh
+          </Col>
+          <Col md={3} className="d-md-block d-none">
+            Tên sản phẩm
+          </Col>
+          <Col md={2} className="d-md-block d-none">
+            Giá
+          </Col>
+          <Col md={2} className="d-md-block d-none">
+            Số lượng
+          </Col>
+          <Col md={2} className="d-md-block d-none"  >
+            Tổng
+          </Col>
+        </Row>
+        {/* Thêm hàng tiêu đề cho kích thước nhỏ hơn */}
+        <Row className="d-md-none fw-bold">
+          <Col className="text-center">Giỏ hàng của bạn</Col>
         </Row>
       </div>
-      <hr />
 
-      {/* Container cuộn cho các sản phẩm trong giỏ hàng */}
-      <div>
-        {cartItems.map((item) => (
-          <ProductCart
-            key={item.id}
-            item={item}
-            selectedItems={selectedItems}
-            handleSelectItem={handleSelectItem}
-            increaseQuantity={increaseQuantity}
-            decreaseQuantity={decreaseQuantity}
-            removeFromCart={removeFromCart}
-          />
-        ))}
+      <div className="border px-1 pt-1">
+        <div
+          style={{
+            height: isInModal ? "290px" : "auto", // Nếu là modal, đặt chiều cao cố định
+            overflowY: isInModal ? "auto" : "visible",
+            overflowX: "hidden",
+          }}
+        >
+          {cartItems.map((item) => (
+            <ProductCart
+              key={item.id}
+              item={item}
+              selectedItems={selectedItems}
+              handleSelectItem={handleSelectItem}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeFromCart={removeFromCart}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Phần tổng cộng */}
@@ -108,18 +135,19 @@ const BoxCart = () => {
               display: "flex",
             }}
           >
-            <h5> Tổng cộng:</h5>
+            <h6> Tổng cộng:</h6>
 
             <span style={{ color: "red" }}>
-              <h5>{totalPrice.toLocaleString("vi-VN")} ₫</h5>
+              <h6>{totalPrice.toLocaleString("vi-VN")} ₫</h6>
             </span>
           </div>
 
           <Button
-            variant="success"
+            variant="primary"
             className="mt-4 p-2"
-            style={{ width: "100%" }}
+            style={{ width: "100%"}}
             disabled={totalPrice === 0}
+            onClick={handleCheckout}
           >
             Thanh toán
           </Button>

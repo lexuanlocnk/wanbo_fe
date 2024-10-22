@@ -4,12 +4,24 @@ import Button from "react-bootstrap/Button";
 import { CartContext } from "../../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
+import ProductViewed from "../../ProductQuickView/ProductViewed";
+import "./box-product.css";
+import componentProduct from "./componentProduct.css"
 
 const BoxProduct = ({ item }) => {
   const { addToCart } = useContext(CartContext);
   const [smShow, setSmShow] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
+
+  const [quickView, setQuickView] = useState(false);
+
+  const [quantityView, setQuantityView] = useState(1);
+
+  const handleSetQuickView = () => {
+    console.log(item.images);
+    setQuickView(true);
+  };
 
   const handleAddToCart = () => {
     addToCart({
@@ -26,7 +38,7 @@ const BoxProduct = ({ item }) => {
 
   return (
     <div
-      className="me-3 ms-1 my-4 border rounded shadow4"
+      className="mx-2 my-4 border rounded shadow4"
       key={item.id}
       style={{ display: "inline-block", position: "relative" }}
     >
@@ -45,6 +57,7 @@ const BoxProduct = ({ item }) => {
           <Card.Text className="price">
             {item.price.toLocaleString("vi-VN")} VND
           </Card.Text>
+
           <Card.Text className="original-price">
             {item.discountPercentage > 0 ? (
               <>
@@ -91,19 +104,29 @@ const BoxProduct = ({ item }) => {
                   vào giỏ hàng
                 </Modal.Title>
               </Modal.Header>
-
               <Modal.Body>
-              
-            
-                  <BoxCart />
-            
+                <BoxCart isInModal={true} />
               </Modal.Body>
             </Modal>
-
-            <Button variant="secondary">
-              <i class="bi bi-eye" />
+            {/* nút xem nhanh */}
+            <Button variant="secondary" onClick={handleSetQuickView}>
+              <i className="bi bi-eye" />
             </Button>
-
+            <Modal
+              size="xl"
+              className=""
+              dialogClassName="modal-product-viewed"
+              show={quickView}
+            >
+              <Modal.Body className="box-product-viewed">
+                <ProductViewed
+                  item={item}
+                  quantityView={quantityView}
+                  setQuantityView={setQuantityView}
+                  setQuickView={setQuickView}
+                />
+              </Modal.Body>
+            </Modal>
             <Button variant="secondary">
               <i class="bi bi-repeat" />
             </Button>

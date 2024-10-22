@@ -17,23 +17,23 @@ const Breadcrumb = () => {
             {pathname}
           </Link>
         ) : (
-          <span className="breadcrumb-item active">{pathname}</span>
+          <span className="breadcrumb-item" style={{color: "#2854e5"}}>{pathname}</span>
         )}
-        {!isLast && <span className="breadcrumb-separator"> - </span>}
+        {!isLast && <span className="breadcrumb-separator"> {">"} </span>}
       </span>
     );
   });
 
   // Kiểm tra xem có phải là trang chủ không
-  if (location.pathname === "/") {
+  if (location.pathname === "/home") {
     return null; // Không hiển thị breadcrumb nếu ở trang chủ
   }
 
   return (
-    <nav aria-label="pathname" className="ps-5 py-2">
-      <div>
-        <Link to="/home">Trang chủ</Link>
-        <span className="breadcrumb-separator"> - </span>
+    <nav aria-label="pathname" className="py-2">
+      <div className="container">
+        <Link to="/home">Home</Link>
+        <span className="breadcrumb-separator"> {">"} </span>
         {breadcrumbItems}
       </div>
     </nav>
