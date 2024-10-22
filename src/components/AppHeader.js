@@ -34,12 +34,12 @@ function AppHeader() {
           <Dropdown.Item href="#/ac">Phụ kiện máy ảnh</Dropdown.Item>
         </DropdownButton>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "white"}}/>
 
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            style={{ maxHeight: "500px" }}
             navbarScroll
           >
             <Nav.Link href="/home" className="Home">
