@@ -38,7 +38,12 @@ const Cart = () => {
         ) : (
           <div>
             <div>
-              <Row style={{ backgroundColor: "white", justifyContent:"space-evenly" }}>
+              <Row
+                style={{
+                  backgroundColor: "white",
+                  justifyContent: "space-evenly",
+                }}
+              >
                 <Col lg={9} xs={12} className="p-4 ">
                   {/* list cart */}
                   <BoxCart />
@@ -51,22 +56,28 @@ const Cart = () => {
                       Thời gian giao hàng
                     </h5>
                     <div className="mt-3">
-                      <div className="d-flex">
+                      <div className="">
                         {/* Sử dụng DatePicker để chọn ngày */}
-                        <DatePicker
-                          selected={deliveryDate}
-                          onChange={(date) => setDeliveryDate(date)}
-                          className="form-control me-5"
-                          dateFormat="dd/MM/yyyy"
-                          minDate={new Date()} // Không cho phép chọn ngày trước hôm nay
-                          placeholderText="Chọn ngày"
-                        />
-                        <Form.Select aria-label="Chọn thời gian" className="ms-1">
-                          <option>Chọn thời gian</option>
-                          <option value="1">08h00 - 12h00</option>
-                          <option value="2">14h00 - 18h00</option>
-                          <option value="3">19h00 - 21h00</option>
-                        </Form.Select>
+                        <div className="date-picker-container">
+                          <span>Ngày</span>
+                          <DatePicker
+                            selected={deliveryDate}
+                            onChange={(date) => setDeliveryDate(date)}
+                            className="form-control"
+                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()} // Không cho phép chọn ngày trước hôm nay
+                            placeholderText="Chọn ngày"
+                          />
+                        </div>
+                        <div className="mt-1">
+                          <span className="">Thời gian</span>
+                          <Form.Select aria-label="Chọn thời gian" className="">
+                            <option>Chọn thời gian</option>
+                            <option value="1">08h00 - 12h00</option>
+                            <option value="2">14h00 - 18h00</option>
+                            <option value="3">19h00 - 21h00</option>
+                          </Form.Select>
+                        </div>
                       </div>
                     </div>
 
@@ -136,7 +147,6 @@ const Cart = () => {
                   </div>
                 </Col>
               </Row>
-              
             </div>
           </div>
         )}
