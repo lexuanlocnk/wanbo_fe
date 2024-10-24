@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .imgBanner img {
@@ -24,8 +24,6 @@ p {
 .shadow4 {
   box-shadow: 0 0 10px 1px rgba(236, 236, 236, 0.234);
 }
-
-
 
 .sale {
   color: white;
@@ -117,4 +115,18 @@ p {
     height: 40px;
     font-size: 12px;
   }
+}
+.flash-sale-carousel .react-multi-carousel-dot button {
+  background-color: rgb(40, 84, 229) !important;
+  border: 1px solid #fff !important;
+}
+.flash-sale-carousel .react-multi-carousel-dot--active button {
+  background-color: #fff !important;
+}
+.compare-drawer .ant-drawer-header {
+  background-color: rgb(40, 84, 229);
+}
+.compare-drawer .ant-drawer-title,
+.compare-drawer .ant-drawer-close {
+  color: #fff;
 }

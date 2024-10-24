@@ -98,7 +98,10 @@ const Home = (props) => {
             {/* Phần hình ảnh chính */}
             <div className="col-lg-8 col-md-12 mb-4">
               <Carousel fade controls={true} indicators={true}>
-                <Carousel.Item interval={4000} style={{ border: "none", borderRadius: 50 }}>
+                <Carousel.Item
+                  interval={4000}
+                  style={{ border: "none", borderRadius: 50 }}
+                >
                   <img
                     alt=""
                     src={img2}
@@ -113,7 +116,7 @@ const Home = (props) => {
                     src={img}
                     width="100%"
                     className="d-block align-top hover-zoom"
-                    style={{borderRadius: 7 }}
+                    style={{ borderRadius: 7 }}
                   />
                 </Carousel.Item>
               </Carousel>
@@ -277,7 +280,7 @@ const Home = (props) => {
 
       {/* Flash Sale */}
       <div
-        className=" align-items-center py-4 my-5"
+        className=" align-items-center py-4 my-5 flash-sale-carousel"
         style={{ width: "100%", height: "auto", backgroundColor: "#2854e5" }}
       >
         <div className="container">
@@ -285,7 +288,7 @@ const Home = (props) => {
             <h2 style={{ color: "white" }} className="">
               Flash Sale
             </h2>
-            <div className="mx-4"/>
+            <div className="mx-4" />
             <FlashSaleCountdown />
           </div>
 
@@ -325,7 +328,7 @@ const Home = (props) => {
               <div className="d-none d-lg-flex">
                 <Button
                   className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE", }}
+                  style={{ backgroundColor: "#EEEEEE" }}
                 >
                   Máy ảnh Mirrorless
                 </Button>
@@ -347,9 +350,15 @@ const Home = (props) => {
                 >
                   Máy ảnh Medium Format
                 </Button>
-                
               </div>
-              <Button className="btn2" style={{ backgroundColor: "#EEEEEE", border: "none", color: "black"  }}>
+              <Button
+                className="btn2"
+                style={{
+                  backgroundColor: "#EEEEEE",
+                  border: "none",
+                  color: "black",
+                }}
+              >
                 Xem tất cả
               </Button>
             </div>
@@ -413,9 +422,15 @@ const Home = (props) => {
                 >
                   Máy ảnh Medium Format
                 </Button>
-                
               </div>
-              <Button className="btn2" style={{ backgroundColor: "#EEEEEE", border: "none", color: "black" }}>
+              <Button
+                className="btn2"
+                style={{
+                  backgroundColor: "#EEEEEE",
+                  border: "none",
+                  color: "black",
+                }}
+              >
                 Xem tất cả
               </Button>
             </div>
@@ -552,7 +567,11 @@ const Home = (props) => {
             </div>
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
-              <Card.Text > <sapn className="bi bi-clock-history me-1"/>{item.date}</Card.Text>
+              <Card.Text>
+                {" "}
+                <sapn className="bi bi-clock-history me-1" />
+                {item.date}
+              </Card.Text>
               <Card.Text className="text-truncate-3">
                 {item.description}
               </Card.Text>

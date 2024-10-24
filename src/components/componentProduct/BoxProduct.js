@@ -7,6 +7,8 @@ import BoxCart from "./BoxCart";
 import ProductViewed from "../../ProductQuickView/ProductViewed";
 import "./box-product.css";
 import componentProduct from "./componentProduct.css";
+import { Drawer, Space } from "antd";
+import { bottom } from "@popperjs/core";
 
 const BoxProduct = ({ item }) => {
   const { addToCart } = useContext(CartContext);
@@ -17,6 +19,15 @@ const BoxProduct = ({ item }) => {
   const [quickView, setQuickView] = useState(false);
 
   const [quantityView, setQuantityView] = useState(1);
+
+  const [isCompared, setIsCompared] = useState(false);
+
+  const handleOpenCompare = () => {
+    setIsCompared(true);
+  };
+  const handleCloseCompare = () => {
+    setIsCompared(false);
+  };
 
   const handleSetQuickView = () => {
     console.log(item.images);
@@ -110,7 +121,7 @@ const BoxProduct = ({ item }) => {
                       right: 20,
                       cursor: "pointer",
                     }}
-                    onClick={() => setSmShow(false)} // sự kiện đóng modal 
+                    onClick={() => setSmShow(false)} // sự kiện đóng modal
                   />
                 </Modal.Title>
               </Modal.Header>
@@ -139,12 +150,44 @@ const BoxProduct = ({ item }) => {
               </Modal.Body>
             </Modal>
             {/* so sánh sản phẩm */}
-            <Button variant="secondary">
+            <Button variant="secondary" onClick={handleOpenCompare}>
               <i class="bi bi-repeat" />
             </Button>
           </div>
         </Card.Body>
       </Card>
+      <Drawer
+        title="So sánh sản phẩm"
+        placement={bottom}
+        width={500}
+        open={isCompared}
+        extra={<Space></Space>}
+        onClose={handleCloseCompare}
+        className="compare-drawer"
+      >
+        <div className="container">
+          <div className="item-compare-wrap">
+            <a className="item-compare-img-thumb">
+              <img src={item.images[0]}></img>
+            </a>
+            <div className="product-info">
+              <a className="product-name">{item.name}</a>
+              <div class="price-box">
+                <span class="price">
+                  {item.price.toLocaleString("vi-VN")} đ
+                </span>
+                <span class="compare-price">
+                  {item.originalPrice.toLocaleString("vi-VN")} đ
+                </span>
+              </div>
+              <div className="remove-compare-item">Xoá</div>
+            </div>
+          </div>
+          <div className="compare-navigate-but">
+            <a href="/compare-product">Đi đến trang so sánh sản phẩm</a>
+          </div>
+        </div>
+      </Drawer>
     </div>
   );
 };
