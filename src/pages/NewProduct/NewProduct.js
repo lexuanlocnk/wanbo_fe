@@ -130,7 +130,7 @@ const NewProduct = (props) => {
                 <div
                   key={option.value}
                   className={`sort-by-item ${
-                    activeSortOption === option.label ? "active" : ""
+                    activeSortOption === option.label ? "active2" : ""
                   }`}
                   onClick={() => setActiveSortOption(option.label)}
                 >
@@ -187,7 +187,7 @@ const NewProduct = (props) => {
                     <li
                       key={i}
                       className={`page-item ${
-                        currentPage === i + 1 ? "active" : ""
+                        currentPage === i + 1 ? "active2" : ""
                       }`}
                     >
                       <span

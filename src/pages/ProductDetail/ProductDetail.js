@@ -61,7 +61,7 @@ const ProductDetail = ({ children, eventKey }) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }}>
+    <div style={{ backgroundColor: "#f4f4f4" }}s>
       <div className="container py-5">
         <div className="row p-4 pb-5" style={{ backgroundColor: "white" }}>
           <div

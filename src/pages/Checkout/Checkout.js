@@ -37,7 +37,7 @@ const Checkout = () => {
       <div className="container">
         <Row className="py-4">
           {/* Cột Thông tin nhận hàng */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }}>
               <Card.Body>
                 <Col className="d-flex flex-row align-items-center justify-content-between">
@@ -102,7 +102,7 @@ const Checkout = () => {
           </Col>
 
           {/* Cột Vận chuyển */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }}>
               <Card.Body>
                 <Card.Title>Vận chuyển</Card.Title>
@@ -155,7 +155,7 @@ const Checkout = () => {
           </Col>
 
           {/* Cột Đơn hàng */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }} className="">
               <Card.Body>
                 <Card.Title>Đơn hàng ({totalItems} sản phẩm)</Card.Title>
@@ -237,6 +237,7 @@ const Checkout = () => {
                         width: "100%",
                         height: "100%",
                         backgroundColor: "#1E90FF",
+                        fontSize: 14
                       }}
                     >
                       Áp dụng
@@ -247,7 +248,7 @@ const Checkout = () => {
 
                 <Row>
                   <Col
-                    md={8}
+                    md={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -257,7 +258,7 @@ const Checkout = () => {
                   </Col>
 
                   <Col
-                    md={4}
+                    md={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",

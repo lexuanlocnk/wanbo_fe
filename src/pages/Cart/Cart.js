@@ -30,7 +30,7 @@ const Cart = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }}>
+    <div className="py-4" style={{ backgroundColor: "#f4f4f4" }}>
       <div className="container">
         <h3 className="mb-4">GIỎ HÀNG</h3>
         {cartItems.length === 0 ? (

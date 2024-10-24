@@ -12,29 +12,99 @@ import "../components/AppHeader.css";
 function AppHeader() {
   return (
     <Navbar expand="lg" className="custom-navbar ">
-      <Container >
-        <DropdownButton id="dropdown-basic-button" title="Danh mục sản phẩm">
-          <Dropdown.Item href="#/action-" className="">
-            Máy ảnh
-            <Dropdown className="sub-dropdown">
-              <Dropdown.Item href="#/subaction1">Sub Item 1</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Sub Item 2</Dropdown.Item>
-            </Dropdown>
+      <Container>
+        <DropdownButton id="dropdown-basic-button" title="DANH MỤC SẢN PHẨM">
+          <Dropdown.Item
+            href="#/action-"
+            className="d-flex justify-content-between"
+          >
+            <div>Máy ảnh</div>
+            <div>{">"}</div>
+
+            <div className="sub-dropdown">
+            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
+            </div>
           </Dropdown.Item>
-          <Dropdown.Item href="#/action">
-            Ống kính
-            <Dropdown className="sub-dropdown">
-              <Dropdown.Item href="#/subaction3">Sub Item 3</Dropdown.Item>
-              <Dropdown.Item href="#/subaction4">Sub Item 4</Dropdown.Item>
-            </Dropdown>
+
+          <Dropdown.Item
+            href="#/action-"
+            className="d-flex justify-content-between"
+          >
+            <div>Ống kính</div>
+            <div>{">"}</div>
+
+            <div className="sub-dropdown">
+            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
+            </div>
           </Dropdown.Item>
+
           <Dropdown.Item href="#/actio">Máy quay</Dropdown.Item>
-          <Dropdown.Item href="#/acti">Camera</Dropdown.Item>
-          <Dropdown.Item href="#/act">Drone</Dropdown.Item>
-          <Dropdown.Item href="#/ac">Phụ kiện máy ảnh</Dropdown.Item>
+
+          <Dropdown.Item
+            href="#/action-"
+            className="d-flex justify-content-between"
+          >
+            <div>Camera hành động</div>
+            <div>{">"}</div>
+
+            <div className="sub-dropdown">
+              <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
+            </div>
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            href="#/action-"
+            className="d-flex justify-content-between"
+          >
+            <div>Drone</div>
+            <div>{">"}</div>
+
+            <div className="sub-dropdown">
+            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
+            </div>
+          </Dropdown.Item>
+          <Dropdown.Item
+            href="#/action-"
+            className="d-flex justify-content-between"
+          >
+            <div>Phụ kiện máy ảnh</div>
+            <div>{">"}</div>
+
+            <div className="sub-dropdown">
+            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
+              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
+            </div>
+          </Dropdown.Item>
         </DropdownButton>
 
-        <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "white"}}/>
+        <Navbar.Toggle
+          aria-controls="navbarScroll"
+          style={{ backgroundColor: "white" }}
+        />
 
         <Navbar.Collapse id="navbarScroll">
           <Nav

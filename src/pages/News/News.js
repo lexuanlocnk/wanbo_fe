@@ -9,9 +9,9 @@ import FeaturedNews from "../../components/FeaturedNews";
 
 const News = () => {
   return (
-    <div className="" style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="container py-5">
-        <h4>TIN TỨC</h4>
+    <div className="py-4" style={{ backgroundColor: "#f4f4f4" }}>
+      <div className="container ">
+        <h4 >TIN TỨC</h4>
         <Row className="justify-content-between">
           <Col
             lg={9}
@@ -38,7 +38,8 @@ const News = () => {
                         Team dev
                       </Card.Text>
                       <p>|</p>
-                      <Card.Text className="bi bi-clock-history ms-2">
+                      <Card.Text className="ms-2">
+                        <span className="bi bi-clock-history me-1"/>
                         {item.date}
                       </Card.Text>
                     </div>

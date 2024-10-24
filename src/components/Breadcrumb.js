@@ -30,11 +30,13 @@ const Breadcrumb = () => {
   }
 
   return (
-    <nav aria-label="pathname" className="py-2">
-      <div className="container">
+    <nav aria-label="pathname" className="py-1">
+      <div className="container ">
+        <div className="timeOpen">
         <Link to="/home">Home</Link>
         <span className="breadcrumb-separator"> {">"} </span>
         {breadcrumbItems}
+        </div>
       </div>
     </nav>
   );

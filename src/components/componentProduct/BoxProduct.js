@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 import BoxCart from "./BoxCart";
 import ProductViewed from "../../ProductQuickView/ProductViewed";
 import "./box-product.css";
-import componentProduct from "./componentProduct.css"
+import componentProduct from "./componentProduct.css";
 
 const BoxProduct = ({ item }) => {
   const { addToCart } = useContext(CartContext);
@@ -38,7 +38,7 @@ const BoxProduct = ({ item }) => {
 
   return (
     <div
-      className="my-4 border rounded shadow4 box-product mx-1"
+      className="my-4 rounded box-product mx-1"
       key={item.id}
       style={{ display: "inline-block", position: "relative" }}
     >
@@ -78,6 +78,7 @@ const BoxProduct = ({ item }) => {
 
           {/* Nút hiện ở giữa khi hover */}
           <div className="hover-buttons">
+            {/* nút thêm vào giỏ */}
             <Button variant="secondary" onClick={handleAddToCart}>
               <i class="bi bi-cart-plus" />
             </Button>
@@ -89,25 +90,35 @@ const BoxProduct = ({ item }) => {
               aria-labelledby="example-modal-sizes-title-sm"
             >
               <Modal.Header
-                closeButton
-                style={{ backgroundColor: "blue", color: "white" }}
+                className="custom-modal-header"
+                style={{ backgroundColor: "#0d6efd", color: "white" }}
               >
-                <Modal.Title id="example-modal-sizes-title-sm">
+                <Modal.Title id="example-modal-sizes-title-sm " className="">
                   <i className="bi bi-check-circle me-2" />
                   Đã thêm{" "}
                   <a
                     href={`/product/${item.id}`}
-                    style={{ fontSize: 24, color: "white" }}
+                    style={{ fontSize: 20, color: "white", fontWeight: "400" }}
                   >
                     [{item.name}]
                   </a>{" "}
                   vào giỏ hàng
+                  <i
+                    className="bi bi-x-lg"
+                    style={{
+                      position: "absolute",
+                      right: 20,
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setSmShow(false)} // sự kiện đóng modal 
+                  />
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <BoxCart isInModal={true} />
               </Modal.Body>
             </Modal>
+
             {/* nút xem nhanh */}
             <Button variant="secondary" onClick={handleSetQuickView}>
               <i className="bi bi-eye" />
@@ -127,6 +138,7 @@ const BoxProduct = ({ item }) => {
                 />
               </Modal.Body>
             </Modal>
+            {/* so sánh sản phẩm */}
             <Button variant="secondary">
               <i class="bi bi-repeat" />
             </Button>

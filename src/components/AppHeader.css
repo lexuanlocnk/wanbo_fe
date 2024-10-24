@@ -1,19 +1,10 @@
 .Home {
   margin: 0 15px;
-  font-size: 18px;
-}
-
-.navbar .dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
+  font-size: 16px;
 }
 
 .navbar .dropdown-menu {
   transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-  text-decoration: underline;
 }
 
 .sub-dropdown {
@@ -34,18 +25,63 @@
   top: 0;
 }
 .custom-navbar .nav-link {
-  color: white;
+  color: rgb(255, 255, 255);
 }
-
+.nav-link:hover {
+  color: #54c9e9;
+}
 .search {
   position: absolute;
   right: -14px;
 }
 
-/* --------------------------------------------------------- */
-.nav-link {
-  transition: text-decoration 0.9s ease;
+/* Tùy chỉnh cho Dropdown Button chính */
+#dropdown-basic-button {
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: bold;
+  margin: -20px 0;
 }
+
+#dropdown-basic-button:hover {
+  background-color: #0056b3;
+  color: #f1f1f1;
+}
+
+/* Tùy chỉnh cho các Dropdown Item */
+.dropdown-item {
+  background-color: #f8f9fa;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+/* Tùy chỉnh cho các Sub-dropdown */
+.sub-dropdown {
+  margin-left: -1px;
+  background-color: #f1f1f1;
+}
+
+.sub-dropdown .dropdown-item {
+  color: #333;
+}
+
+.sub-dropdown .dropdown-item:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* --------------------------------------------------------- */
+
 
 .custom-search {
   justify-content: center;
@@ -70,14 +106,14 @@ a {
 .hover-buttons {
   position: absolute;
   top: 40%;
-  left: 20%; /* Đặt các nút vào giữa Card */
-  display: none; /* Ẩn các nút ban đầu */
+  left: 20%;
+  display: none;
   text-align: center;
   z-index: 1;
 }
 
 .prdItem:hover .hover-buttons {
-  display: block; /* Hiển thị các nút khi hover */
+  display: block;
 }
 
 .hover-buttons button {
@@ -115,7 +151,7 @@ a {
   .news {
     width: 24%;
   }
-  .inputEmail{
+  .inputEmail {
     height: 43px;
     border: 1px solid #ccc;
     outline: "none";
@@ -123,9 +159,7 @@ a {
     border-radius: 5;
     width: 600px;
   }
-   .nameDK{
-    font-size: 30;
-  }
+  
 }
 
 /* Màn hình trung bình (Tablet) */
@@ -136,7 +170,7 @@ a {
   .news {
     width: 48%;
   }
-  .inputEmail{
+  .inputEmail {
     height: 43px;
     border: 1px solid #ccc;
     outline: "none";
@@ -144,7 +178,6 @@ a {
     border-radius: 5;
     width: 350px;
   }
- 
 }
 
 /* Màn hình nhỏ (Mobile) */
@@ -155,7 +188,7 @@ a {
   .news {
     width: 100%;
   }
-  .inputEmail{
+  .inputEmail {
     height: 43px;
     border: 1px solid #ccc;
     outline: "none";
@@ -165,46 +198,291 @@ a {
   }
 }
 
-
 /* <FlashSaleCountdown /> */
 .flash-sale-countdown {
   background-color: yellow;
   border-radius: 5px;
 }
+
 @media (min-width: 1401px) {
-  .meme{
+  .meme {
     position: absolute;
     left: 24%;
     width: 550px;
   }
+  #dropdown-basic-button {
+    width: 300px;
+  }
+  .dropdown-item {
+    width: 300px;
+  }
+  .nameDK {
+    font-size: 30px;
+  }
+  .nameTT{
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 1230px) and (max-width: 1400px) {
-  .meme{
+  .meme {
     position: absolute;
     left: 29%;
     width: 400px;
   }
+  #dropdown-basic-button {
+    width: 280px;
+  }
+  .dropdown-item {
+    width: 280px;
+  }
+  .nameDK {
+    font-size: 25px;
+  }
+  .nameTT{
+    font-size: 12px;
+  }
 }
 
-@media (min-width: 1024px) and (max-width: 1230px) {
-  .meme{
+@media (min-width: 1024px) and (max-width: 1229px) {
+  .meme {
     position: absolute;
     left: 27%;
     width: 300px;
   }
-}
-
-@media (max-width: 1023px) {
-  .meme{
-    width: 100%;
-    margin-right: 15px;
+  #dropdown-basic-button {
+    width: 260px;
+  }
+  .dropdown-item {
+    width: 260px;
   }
 }
 
-@media screen and (max-width: 991px) {
+@media (max-width: 1023px) {
+  .meme {
+    width: 100%;
+    margin-right: 15px;
+  }
+  #dropdown-basic-button {
+    width: 260px;
+    padding: 10px;
+  }
+  .dropdown-item {
+    width: 260px;
+  }
+}
+
+@media (max-width: 991px) {
   #navbarScroll .search-input {
     width: 100%;
     max-width: unset !important;
+  }
+  #dropdown-basic-button {
+    width: 200px;
+    padding: 10px;
+  }
+  .dropdown-item {
+    width: 160px;
+  }
+}
+
+.truncate-text {
+  display: -webkit-box; /* Hiển thị theo dạng hộp linh hoạt */
+  -webkit-box-orient: vertical; /* Định hướng theo chiều dọc */
+  -webkit-line-clamp: 2; /* Hiển thị tối đa 3 dòng */
+  overflow: hidden; /* Bỏ đi phần văn bản thừa */
+  text-overflow: ellipsis; /* Thêm dấu "..." ở cuối */
+}
+
+/* Tùy chỉnh cho Dropdown Button chính */
+#dropdown-basic-button {
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: bold;
+  margin: -20px 0;
+}
+
+#dropdown-basic-button:hover {
+  background-color: #0056b3;
+  color: #f1f1f1;
+}
+
+/* Tùy chỉnh cho các Dropdown Item */
+.dropdown-item {
+  background-color: #f8f9fa;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+/* Tùy chỉnh cho các Sub-dropdown */
+.sub-dropdown {
+  margin-left: -1px;
+  background-color: #f1f1f1;
+}
+
+.sub-dropdown .dropdown-item {
+  color: #333;
+}
+
+.sub-dropdown .dropdown-item:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+
+/* Màn hình trung bình (Tablet) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .custom-img {
+    width: 40%;
+  }
+  .news {
+    width: 48%;
+  }
+  .inputEmail {
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
+}
+
+/* Màn hình nhỏ (Mobile) */
+@media (max-width: 767px) {
+  .custom-img {
+    width: 100%;
+  }
+  .news {
+    width: 100%;
+  }
+  .inputEmail {
+    height: 43px;
+    border: 1px solid #ccc;
+    outline: "none";
+    padding-left: 15;
+    border-radius: 5;
+    width: 350px;
+  }
+}
+
+@media (min-width: 1401px) {
+  .custom-img {
+    width: 30%;
+    height: 65px;
+
+  }
+  .meme {
+    position: absolute;
+    left: 24%;
+    width: 550px;
+  }
+  #dropdown-basic-button {
+    width: 300px;
+  }
+  .dropdown-item {
+    width: 300px;
+  }
+  .seemore {
+    font-size: 10px;
+  }
+  .truncate-text {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1230px) and (max-width: 1400px) {
+  .meme {
+    position: absolute;
+    left: 29%;
+    width: 400px;
+  }
+  #dropdown-basic-button {
+    width: 280px;
+  }
+  .dropdown-item {
+    width: 280px;
+  }
+
+  .seemore {
+    font-size: 10px;
+  }
+  .truncate-text {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1229px) {
+  .meme {
+    position: absolute;
+    left: 27%;
+    width: 300px;
+  }
+  #dropdown-basic-button {
+    width: 260px;
+  }
+  .dropdown-item {
+    width: 260px;
+  }
+  .seemore {
+    display: none;
+  }
+  .truncate-text {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 991px) and (max-width: 1023px) {
+  .meme {
+    width: 100%;
+    margin-right: 15px;
+  }
+  #dropdown-basic-button {
+    width: 260px;
+    padding: 10px;
+  }
+  .dropdown-item {
+    width: 260px;
+  }
+  .seemore {
+    display: none;
+  }
+  .truncate-text {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  #navbarScroll .search-input {
+    width: 100%;
+    max-width: unset !important;
+  }
+  #dropdown-basic-button {
+    width: 200px;
+    padding: 10px;
+  }
+  .dropdown-item {
+    width: 160px;
+  }
+  .seemore {
+    font-size: 15px;
+  }
+  .truncate-text {
+    font-size: 15px;
+    margin-top: 10px;
   }
 }

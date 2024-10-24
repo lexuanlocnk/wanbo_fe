@@ -12,3 +12,11 @@
   margin-right: 20px; 
 }
  */
+ .custom-modal-header .btn-close {
+  filter: brightness(100) invert(9); 
+}
+
+.custom-modal-header .btn-close:hover {
+  background-color: transparent; /* Xóa nền khi hover */
+  
+}

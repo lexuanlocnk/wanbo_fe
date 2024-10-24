@@ -27,13 +27,13 @@ export default function Footer() {
             height={180}
           />
           <Card.ImgOverlay className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            {/* Nội dung bên trái chiếm 6 phần */}
+           
             <div
               className=" text-content flex-grow-1 me-md-3"
               style={{ flexBasis: "60%" }}
             >
               <Card.Title className="nameDK" >
-                Đăng ký để nhận tin tức khuyến mãi mới nhất
+              ĐĂNG KÝ ĐỂ NHẬN TIN TỨC MỚI NHẤT
               </Card.Title>
               <Card.Text className="nameTT">
                 Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
@@ -41,26 +41,23 @@ export default function Footer() {
               </Card.Text>
             </div>
 
-            {/* Thanh tìm kiếm chiếm 4 phần */}
-            <div
-              className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0"
           
-            >
+            <div  className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0">
               <Navbar.Collapse
                 id="navbarScroll"
                 className="flex-grow-1 d-flex justify-content-center mx-0 mx-md-5"
-                style={{width:"100%"}}
+                style={{ width: "100%" }}
               >
-                <div
-                  className="d-flex"
-                  style={{ position: "relative" }}
-                >
+                <div className="d-flex" style={{ position: "relative" }}>
                   <input
-                    className="form-control me-2 inputEmail"
-                    placeholder="Email của bạn"
+                    className="form-control me-2 inputEmail p-4"
+                    placeholder="Nhập email của bạn"
+                    onFocus={(e) => {
+                      e.target.style.boxShadow = "none"; 
+                    }}
                   />
-                  <Button className="search">
-                    <div  style={{ padding: 2.8}} >Gửi</div>
+                  <Button className="search px-4">
+                    <div style={{ padding: 6 }}>Gửi</div>
                   </Button>
                 </div>
               </Navbar.Collapse>
@@ -80,17 +77,17 @@ export default function Footer() {
                 className="d-inline-block align-top mb-2"
               />
               <p>
-                <a href="#!" className="text-reset">
+                <a href="" className="text-reset22">
                   Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-reset2">
                   1900 6750
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
+                <a href="#!" className="text-reset2">
                   support@sapo.vn
                 </a>
               </p>
@@ -98,7 +95,9 @@ export default function Footer() {
 
             <MDBCol md="2" lg="2" xl="2" className="mx-auto">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">Về chúng tôi</h6>
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
+                  Về chúng tôi
+                </h6>
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
@@ -118,28 +117,28 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showAboutUs ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Trang chủ
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Giới thiệu
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Sản phẩm
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Tin tức
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    liên hệ
+                  <a href="#!" className="text-reset2">
+                    Liên hệ
                   </a>
                 </p>
               </div>
@@ -147,7 +146,9 @@ export default function Footer() {
 
             <MDBCol md="3" lg="2" xl="2" className="mx-auto">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">Chính sách</h6>
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
+                  Chính sách
+                </h6>
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
@@ -167,22 +168,22 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showPolicy ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Chính sách giao hàng
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Chính sách đổi trả
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Chính sách bán hàng
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Hướng dẫn trả góp
                   </a>
                 </p>
@@ -191,7 +192,7 @@ export default function Footer() {
 
             <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
                   Tư vấn khách hàng
                 </h6>
                 <div className="collapse-menu-btn">
@@ -214,21 +215,24 @@ export default function Footer() {
               <div className={`about-sub-item ${showAdvice ? "show" : ""}`}>
                 <p>
                   <MDBIcon icon="home" className="me-3" />
-                  Mua hàng: 1900 6750
+                  Mua hàng:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
                   <MDBIcon icon="envelope" className="me-3" />
-                  Khiếu nại: 1900 6750
+                  Khiếu nại:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="phone" className="me-3" /> Bảo hành: 1900 6750
+                  <MDBIcon icon="phone" className="me-3" /> Bảo hành:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="print" className="me-3" /> Phương thức thanh
-                  toán
+                  <h6 className="me-3 text-uppercase fw-bold text-reset2">
+                    Phương thức thanh toán
+                  </h6>
                 </p>
               </div>
-              <h6 className="text-uppercase fw-bold">Phương thức thanh toán</h6>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
@@ -238,7 +242,7 @@ export default function Footer() {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
         © Bản quyền thuộc về Lofi Team
-        <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
+        <a className="text-reset2 fw-bold" href="https://mdbootstrap.com/">
           | Cung cấp bởi Sapo
         </a>
       </div>

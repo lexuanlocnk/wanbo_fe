@@ -85,30 +85,41 @@ function Search() {
                   </a>
                 </Col>
               </div>
-
+              <a
+                className="bi-telephone d-block d-md-none"
+                style={{ fontSize: 22, marginRight: 15, color: "white" }}
+              />
               {/* Giỏ hàng */}
               <Button
-                variant="outline-light"
+                variant="outline-primary"
                 onClick={() => navigate("/cart")}
-                className="position-relative d-flex align-items-end"
-              >
+                className="position-relative d-flex align-items-end align-items-centers"
+                style={{color: "white", border: "1px solid white"}}
+              > 
+              
                 <Badge
                   bg="primary"
-                  style={{ position: "absolute", left: 27, top: 7, fontSize: 10 }}
+                  style={{
+                    position: "absolute",
+                    left: 27,
+                    top: 7,
+                    fontSize: 10,
+                  }}
                 >
                   {totalItems}
                 </Badge>
                 <span
-                  className="bi bi-basket"
+                  className="bi bi-basket "
                   style={{ fontSize: 22, marginRight: 15 }}
                 />
-                Giỏ hàng
+                <div className="d-none d-md-flex mb-1">Giỏ hàng</div>
+                
               </Button>
             </div>
           </div>
         </div>
         {/* Thanh tìm kiếm */}
-        
+
         <div className="meme">
           <div
             className="d-flex justify-content-center"
@@ -124,13 +135,15 @@ function Search() {
                 borderRadius: 5,
               }}
               placeholder="Tìm kiếm"
+              onFocus={(e) => {
+                e.target.style.boxShadow = "none"; // Loại bỏ hiệu ứng màu xanh
+              }}  
             />
             <Button className="search">
               <div className="bi bi-search" style={{ padding: 2.8 }} />
             </Button>
           </div>
         </div>
-
       </Container>
     </Navbar>
   );

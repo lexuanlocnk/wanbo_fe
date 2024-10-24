@@ -38,7 +38,9 @@
 .transition-dash-disappear {
   opacity: 0;
 }
-
+.text-reset2{
+  color: rgb(0, 0, 0);
+}
 @media screen and (max-width: 768px) {
   .about-sub-item {
     display: hidden;
@@ -47,15 +49,11 @@
   .fixed-dash {
     display: block;
   }
-  .title-new{
-    font-size: 90%;
-  }
+ 
 }
 @media screen and (min-width: 769px) {
   .about-sub-item {
     display: block;
   }
-  .title-new{
-    font-size: 60%;
-  }
+  
 }

@@ -4,7 +4,7 @@
 }
 
 .pricedetail {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 500;
   color: rgb(247, 0, 103);
 }
@@ -15,7 +15,7 @@
 
 .original-priceDetail {
   text-decoration: line-through; /* Gạch ngang */
-  font-size: 20px; /* Kích thước nhỏ hơn */
+  font-size: 18px; /* Kích thước nhỏ hơn */
   color: #999; /* Màu nhạt hơn */
 }
 
