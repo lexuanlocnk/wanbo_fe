@@ -54,9 +54,11 @@ function Search() {
                   height="30"
                   className="d-inline-block align-top me-2"
                 />
-                <div>
+                <div style={{ fontSize: 13, fontWeight: "600" }}>
                   Gọi mua hàng <br />
-                  <span style={{ fontSize: "0.9rem" }}>01245678910</span>
+                  <span >
+                    1900 6750
+                  </span>
                 </div>
               </div>
 
@@ -69,21 +71,12 @@ function Search() {
                   height="30"
                   className="d-inline-block align-top me-2"
                 />
-                <Col>
-                  <a
-                    href={`/login`}
-                    style={{ color: "white", fontSize: "0.9rem" }}
-                  >
-                    Tài khoản
-                  </a>
-                  <br />
-                  <a
-                    href={`/login`}
-                    style={{ color: "white", fontSize: "0.9rem" }}
-                  >
+                 <div style={{ fontSize: 13, fontWeight: "600", color: "white" }}>
+                  Tài khoản <br />
+                  <a href="/login" style={{color: "white"}} >
                     Đăng nhập
                   </a>
-                </Col>
+                </div>
               </div>
               <a
                 className="bi-telephone d-block d-md-none"
@@ -94,9 +87,8 @@ function Search() {
                 variant="outline-primary"
                 onClick={() => navigate("/cart")}
                 className="position-relative d-flex align-items-end align-items-centers"
-                style={{color: "white", border: "1px solid white"}}
-              > 
-              
+                style={{ color: "white", border: "1px solid white" }}
+              >
                 <Badge
                   bg="primary"
                   style={{
@@ -113,7 +105,6 @@ function Search() {
                   style={{ fontSize: 22, marginRight: 15 }}
                 />
                 <div className="d-none d-md-flex mb-1">Giỏ hàng</div>
-                
               </Button>
             </div>
           </div>
@@ -137,7 +128,7 @@ function Search() {
               placeholder="Tìm kiếm"
               onFocus={(e) => {
                 e.target.style.boxShadow = "none"; // Loại bỏ hiệu ứng màu xanh
-              }}  
+              }}
             />
             <Button className="search">
               <div className="bi bi-search" style={{ padding: 2.8 }} />

@@ -83,8 +83,8 @@ function ModelDetail(props) {
           </tbody>
         </Table>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+      <Modal.Footer className="d-flex justify-content-center">
+        <Button variant="primary" onClick={props.onHide}>Đóng</Button>
       </Modal.Footer>
     </Modal>
   );

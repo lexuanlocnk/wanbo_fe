@@ -65,12 +65,12 @@ const BoxCart = ({ isInModal }) => {
 
   return (
     <Col>
-      <div  className="mb-4 d-none d-sm-flex text-end ">
+      <div className=" d-none d-sm-flex text-end ">
         <a
-          className="py-3"
+          className="mb-2"
           onClick={handleRemoveSelectedItems}
           disabled={selectedItems.length === 0}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", marginTop: -3 }}
         >
           Xóa tất cả
         </a>

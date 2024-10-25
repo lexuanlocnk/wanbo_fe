@@ -56,12 +56,13 @@ const Cart = () => {
                         <DatePicker
                           selected={deliveryDate}
                           onChange={(date) => setDeliveryDate(date)}
-                          className="form-control me-5"
+                          className="form-control "
                           dateFormat="dd/MM/yyyy"
                           minDate={new Date()} // Không cho phép chọn ngày trước hôm nay
                           placeholderText="Chọn ngày"
+                          style={{fontSize: 14}}
                         />
-                        <Form.Select aria-label="Chọn thời gian" className="ms-1">
+                        <Form.Select aria-label="Chọn thời gian" className="ms-1" style={{fontSize: 14.5}}>
                           <option>Chọn thời gian</option>
                           <option value="1">08h00 - 12h00</option>
                           <option value="2">14h00 - 18h00</option>

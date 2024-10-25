@@ -98,7 +98,10 @@ const Home = (props) => {
             {/* Phần hình ảnh chính */}
             <div className="col-lg-8 col-md-12 mb-4">
               <Carousel fade controls={true} indicators={true}>
-                <Carousel.Item interval={4000} style={{ border: "none", borderRadius: 50 }}>
+                <Carousel.Item
+                  interval={4000}
+                  style={{ border: "none", borderRadius: 50 }}
+                >
                   <img
                     alt=""
                     src={img2}
@@ -113,7 +116,7 @@ const Home = (props) => {
                     src={img}
                     width="100%"
                     className="d-block align-top hover-zoom"
-                    style={{borderRadius: 7 }}
+                    style={{ borderRadius: 7 }}
                   />
                 </Carousel.Item>
               </Carousel>
@@ -160,8 +163,8 @@ const Home = (props) => {
                 />
               </div>
               <div className="d-flex flex-column justify-content-center">
-                <h6>Đổi trả dễ dàng</h6>
-                <p className="d-none d-md-block">
+                <h6 className="text-uppercase">Đổi trả dễ dàng</h6>
+                <p className="d-none d-md-block" style={{ color: "gray" }}>
                   Đổi trả trong 30 ngày đầu tiên cho tất cả các sản phẩm
                 </p>
               </div>
@@ -180,8 +183,8 @@ const Home = (props) => {
                 />
               </div>
               <div className="d-flex flex-column justify-content-center">
-                <h6>Giao hàng toàn quốc</h6>
-                <p className="d-none d-md-block">
+                <h6 className="text-uppercase">Giao hàng toàn quốc</h6>
+                <p className="d-none d-md-block" style={{ color: "gray" }}>
                   Miễn phí giao hàng với các đơn hàng trị giá trên 5.000.000Đ
                 </p>
               </div>
@@ -200,8 +203,8 @@ const Home = (props) => {
                 />
               </div>
               <div className="d-flex flex-column justify-content-center">
-                <h6>Quà tặng hấp dẫn</h6>
-                <p className=" d-none d-md-block">
+                <h6 className="text-uppercase">Quà tặng hấp dẫn</h6>
+                <p className=" d-none d-md-block" style={{ color: "gray" }}>
                   Chương trình khuyến mãi cực lớn và hấp dẫn hàng tháng
                 </p>
               </div>
@@ -220,8 +223,8 @@ const Home = (props) => {
                 />
               </div>
               <div className="d-flex flex-column justify-content-center">
-                <h6>Hỗ trợ online 24/7</h6>
-                <p className=" d-none d-md-block">
+                <h6 className="text-uppercase">Hỗ trợ online 24/7</h6>
+                <p className=" d-none d-md-block" style={{ color: "gray" }}>
                   Luôn hỗ trợ khách hàng 24/24 giờ các ngày trong tuần
                 </p>
               </div>
@@ -255,9 +258,11 @@ const Home = (props) => {
               >
                 <div className="flex-grow-1">
                   <a href={`/product/${item.id}`} className="card-title">
-                    <h6>{item.name}</h6>
+                    <h6 className="f16">{item.name}</h6>
                   </a>
-                  <p className="card-text">Số lượng: {item.quantitysale}</p>
+                  <p className="card-text tgray">
+                    Số lượng: {item.quantitysale}
+                  </p>
                 </div>
                 <img
                   src={item.images}
@@ -278,14 +283,14 @@ const Home = (props) => {
       {/* Flash Sale */}
       <div
         className=" align-items-center py-4 my-5"
-        style={{ width: "100%", height: "auto", backgroundColor: "#2854e5" }}
+        style={{ width: "100%", height: "auto", backgroundColor: "#0d6efd" }}
       >
         <div className="container">
           <div className="d-flex  align-items-center flex-column-mobile">
             <h2 style={{ color: "white" }} className="">
               Flash Sale
             </h2>
-            <div className="mx-4"/>
+            <div className="mx-4" />
             <FlashSaleCountdown />
           </div>
 
@@ -318,14 +323,22 @@ const Home = (props) => {
       <div className=" align-items-center container ">
         <div className="row">
           <div className=" col-6 col-md-3 d-flex">
-            <h3>Máy ảnh</h3>
+            <h5
+              style={{
+                textTransform: "uppercase",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              Máy ảnh
+            </h5>
           </div>
           <div className=" col-6 col-md-9 d-flex justify-content-end">
             <div className="d-flex">
               <div className="d-none d-lg-flex">
                 <Button
                   className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE", }}
+                  style={{ backgroundColor: "#EEEEEE" }}
                 >
                   Máy ảnh Mirrorless
                 </Button>
@@ -347,9 +360,15 @@ const Home = (props) => {
                 >
                   Máy ảnh Medium Format
                 </Button>
-                
               </div>
-              <Button className="btn2" style={{ backgroundColor: "#EEEEEE", border: "none", color: "black"  }}>
+              <Button
+                className="btn2"
+                style={{
+                  backgroundColor: "#EEEEEE",
+                  border: "none",
+                  color: "black",
+                }}
+              >
                 Xem tất cả
               </Button>
             </div>
@@ -384,7 +403,15 @@ const Home = (props) => {
       <div className=" align-items-center container">
         <div className="row">
           <div className=" col-6 col-md-2 d-flex">
-            <h3>Ống kính</h3>
+            <h5
+              style={{
+                textTransform: "uppercase",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              ống kính
+            </h5>
           </div>
           <div className=" col-6 col-md-10 d-flex justify-content-end">
             <div className="d-flex">
@@ -413,9 +440,15 @@ const Home = (props) => {
                 >
                   Máy ảnh Medium Format
                 </Button>
-                
               </div>
-              <Button className="btn2" style={{ backgroundColor: "#EEEEEE", border: "none", color: "black" }}>
+              <Button
+                className="btn2"
+                style={{
+                  backgroundColor: "#EEEEEE",
+                  border: "none",
+                  color: "black",
+                }}
+              >
                 Xem tất cả
               </Button>
             </div>
@@ -459,7 +492,15 @@ const Home = (props) => {
       {/* Máy quay phim */}
       <div className=" align-items-center container my-4">
         <div>
-          <h3>Máy quay phim</h3>
+          <h5
+            style={{
+              textTransform: "uppercase",
+              marginTop: 10,
+              fontWeight: "600",
+            }}
+          >
+            Máy quay phim
+          </h5>
         </div>
 
         <div className="py-2">
@@ -539,8 +580,9 @@ const Home = (props) => {
       </div>
 
       {/* tin tuc */}
-      <h5 className="container mt-5">TIN TỨC</h5>
-      <div className="d-flex flex-wrap justify-content-around mb-5 container">
+      <div className=" mt-5" />
+      <h5 className="container mt-5 fw-bold">TIN TỨC</h5>
+      <div className="d-flex flex-wrap justify-content-between mb-5 container">
         {newsItems.map((item) => (
           <Card key={item.id} className="m-1 news">
             <div className="img-container">
@@ -551,18 +593,26 @@ const Home = (props) => {
               />
             </div>
             <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <Card.Text > <sapn className="bi bi-clock-history me-1"/>{item.date}</Card.Text>
-              <Card.Text className="text-truncate-3">
+              <Card.Title className="f16 tblack fw-bold h6">{item.title}</Card.Title>
+              <div className="d-flex">
+                <Card.Text className="bi bi-person me-2 tgray">Team dev</Card.Text>
+                <p>|</p>
+                <Card.Text className="ms-2 tgray">
+                  <span className="bi bi-clock-history me-1" />
+                  {item.date}
+                </Card.Text>
+              </div>
+              <Card.Text className="text-truncate-3 tgray">
                 {item.description}
               </Card.Text>
               <a href={`/news/${item.id}`} className="card-title">
-                <h6>Xem thêm</h6>
+                <h6 className="h6 f14 tblack fw-bold">Xem thêm</h6>
               </a>
             </Card.Body>
           </Card>
         ))}
       </div>
+      <div className=" mb-5" />
     </div>
   );
 };

@@ -92,7 +92,7 @@ const Checkout = () => {
                   <Form.Group controlId="formNote" className="mt-3">
                     <Form.Control
                       as="textarea"
-                      rows={2}
+                      rows={3}
                       placeholder="Ghi chú (tùy chọn)"
                     />
                   </Form.Group>
@@ -236,7 +236,7 @@ const Checkout = () => {
                       style={{
                         width: "100%",
                         height: "100%",
-                        backgroundColor: "#1E90FF",
+                        backgroundColor: "#0d6efd",
                         fontSize: 14
                       }}
                     >
@@ -304,7 +304,7 @@ const Checkout = () => {
                     Tổng cộng:
                   </h5>
 
-                  <h5 style={{ color: "#1E90FF" }}>
+                  <h5 style={{ color: "#0d6efd" }}>
                     {(total + ship).toLocaleString("vi-VN")} ₫
                   </h5>
                 </div>
@@ -331,7 +331,7 @@ const Checkout = () => {
                       style={{
                         width: "100%",
                         height: 50,
-                        backgroundColor: "#1E90FF",
+                        backgroundColor: "#0d6efd",
                       }}
                     >
                       Đặt hàng

@@ -33,11 +33,12 @@
 .search {
   position: absolute;
   right: -14px;
+  background-color: #0d6efd; 
 }
 
 /* Tùy chỉnh cho Dropdown Button chính */
 #dropdown-basic-button {
-  background-color: #007bff;
+  background-color: #0d6efd;
   color: white;
   border-radius: 5px;
   padding: 20px;
@@ -200,7 +201,7 @@ a {
 
 /* <FlashSaleCountdown /> */
 .flash-sale-countdown {
-  background-color: yellow;
+  background-color: #ffe401;
   border-radius: 5px;
 }
 
@@ -217,10 +218,11 @@ a {
     width: 300px;
   }
   .nameDK {
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: bold;
   }
   .nameTT{
-    font-size: 15px;
+    font-size: 13px;
   }
 }
 
@@ -237,7 +239,7 @@ a {
     width: 280px;
   }
   .nameDK {
-    font-size: 25px;
+    font-size: 22px;
   }
   .nameTT{
     font-size: 12px;
@@ -378,8 +380,8 @@ a {
 
 @media (min-width: 1401px) {
   .custom-img {
-    width: 30%;
-    height: 65px;
+    width: 120px;
+    height: 60px;
 
   }
   .meme {

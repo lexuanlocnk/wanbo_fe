@@ -11,7 +11,7 @@ const News = () => {
   return (
     <div className="py-4" style={{ backgroundColor: "#f4f4f4" }}>
       <div className="container ">
-        <h4 >TIN TỨC</h4>
+      <h5 className="tblack fw-bold">TIN TỨC</h5>
         <Row className="justify-content-between">
           <Col
             lg={9}
@@ -22,7 +22,7 @@ const News = () => {
               {newsItems.map((item) => (
                 <Card
                   key={item.id}
-                  className="news-card" // Thêm class `news-card`
+                  className="news-card" 
                   style={{ border: "none" }}
                 >
                   <Card.Img
@@ -31,20 +31,20 @@ const News = () => {
                     className="news-image p-2 m-2"
                   />
                   <div className="d-flex flex-column justify-content-center mx-2 news-content">
-                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Title className="tblack fw-bold">{item.title}</Card.Title>
 
                     <div className="d-flex">
-                      <Card.Text className="bi bi-person me-2">
+                      <Card.Text className="bi bi-person me-2 tgray">
                         Team dev
                       </Card.Text>
                       <p>|</p>
                       <Card.Text className="ms-2">
-                        <span className="bi bi-clock-history me-1"/>
+                        <span className="bi bi-clock-history me-1 tgray"/>
                         {item.date}
                       </Card.Text>
                     </div>
 
-                    <Card.Text className="text-truncate-3">
+                    <Card.Text className="text-truncate-3 tgray">
                       {item.description}
                     </Card.Text>
                     <a href={`/news/${item.id}`} className="card-title">

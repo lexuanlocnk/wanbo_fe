@@ -27,13 +27,12 @@ export default function Footer() {
             height={180}
           />
           <Card.ImgOverlay className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-           
             <div
               className=" text-content flex-grow-1 me-md-3"
               style={{ flexBasis: "60%" }}
             >
-              <Card.Title className="nameDK" >
-              ĐĂNG KÝ ĐỂ NHẬN TIN TỨC MỚI NHẤT
+              <Card.Title className="nameDK">
+                ĐĂNG KÝ ĐỂ NHẬN TIN TỨC MỚI NHẤT
               </Card.Title>
               <Card.Text className="nameTT">
                 Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
@@ -41,8 +40,7 @@ export default function Footer() {
               </Card.Text>
             </div>
 
-          
-            <div  className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0">
+            <div className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0">
               <Navbar.Collapse
                 id="navbarScroll"
                 className="flex-grow-1 d-flex justify-content-center mx-0 mx-md-5"
@@ -53,7 +51,7 @@ export default function Footer() {
                     className="form-control me-2 inputEmail p-4"
                     placeholder="Nhập email của bạn"
                     onFocus={(e) => {
-                      e.target.style.boxShadow = "none"; 
+                      e.target.style.boxShadow = "none";
                     }}
                   />
                   <Button className="search px-4">
@@ -77,18 +75,35 @@ export default function Footer() {
                 className="d-inline-block align-top mb-2"
               />
               <p>
-                <a href="" className="text-reset22">
-                  Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
+                <a
+                  href=""
+                  className="text-reset22 d-flex  align-items-center  justify-content-center"
+                >
+                  <i className="bi bi-send me-2" style={{ fontSize: 25 }} />{" "}
+                  <div>
+                    Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
+                  </div>
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset2">
-                  1900 6750
+                <a
+                  href=""
+                  className="text-reset22 d-flex  align-items-center  "
+                >
+                  <i
+                    className="bi bi-telephone me-2"
+                    style={{ fontSize: 25 }}
+                  />
+                  <div>1900 6750</div>
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset2">
-                  support@sapo.vn
+                <a
+                  href=""
+                  className="text-reset22 d-flex  align-items-center  "
+                >
+                  <i className="bi bi-envelope me-2" style={{ fontSize: 25 }} />
+                  <div>support@sapo.vn</div>
                 </a>
               </p>
             </MDBCol>
@@ -214,23 +229,43 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showAdvice ? "show" : ""}`}>
                 <p>
-                  <MDBIcon icon="home" className="me-3" />
+                 
                   Mua hàng:{" "}
                   <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="envelope" className="me-3" />
+                 
                   Khiếu nại:{" "}
                   <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="phone" className="me-3" /> Bảo hành:{" "}
+                  Bảo hành:{" "}
                   <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <h6 className="me-3 text-uppercase fw-bold text-reset2">
+                  <h6 className=" text-uppercase fw-bold text-reset2">
                     Phương thức thanh toán
                   </h6>
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_1.png?1708522711041"
+                    className="d-inline-block align-top "
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_2.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_3.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_4.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
                 </p>
               </div>
             </MDBCol>

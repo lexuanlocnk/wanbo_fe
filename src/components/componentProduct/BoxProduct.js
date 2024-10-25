@@ -38,11 +38,11 @@ const BoxProduct = ({ item }) => {
 
   return (
     <div
-      className="my-4 rounded box-product mx-1"
+      className="my-4  rounded box-product mx-1"
       key={item.id}
-      style={{ display: "inline-block", position: "relative" }}
+      style={{ display: "inline-block", position: "relative"}}
     >
-      <Card className="prdItem">
+      <Card className="prdItem border-0 shadow4">
         <Card.Img variant="top" src={item.images} className="p-4 img" />
 
         {item.discountPercentage > 0 && (
@@ -58,7 +58,7 @@ const BoxProduct = ({ item }) => {
             {item.price.toLocaleString("vi-VN")} VND
           </Card.Text>
 
-          <Card.Text className="original-price">
+          <Card.Text className="original-price tgray fw-bold">
             {item.discountPercentage > 0 ? (
               <>
                 {item.originalPrice.toLocaleString("vi-VN")} VND <br />
@@ -70,7 +70,7 @@ const BoxProduct = ({ item }) => {
 
           <Card.Text>
             {item.quantitysale > 0 ? (
-              <>{item.quantitysale} sản phẩm đã bán</>
+              <> <b>{item.quantitysale}</b> sản phẩm đã bán</>
             ) : (
               <></>
             )}

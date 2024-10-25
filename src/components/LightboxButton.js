@@ -18,8 +18,8 @@ const LightboxButton = ({ productId }) => {
 
   return (
     <div>
-      <Button variant="secondary" onClick={() => setOpen(true)}>
-        Xem ảnh sản phẩm
+      <Button variant="outline-secondary" onClick={() => setOpen(true)} style={{backgroundColor: "white", color: "black", fontSize: 14}}>
+      <i class="bi bi-eye"></i>
       </Button>
 
       <Lightbox
