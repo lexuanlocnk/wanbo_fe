@@ -6,9 +6,6 @@ import img2 from "./../../assets/slider_2.webp";
 import imgBanner from "./../../assets/img_banner_slide.webp";
 import imgBanner2 from "./../../assets/img_banner_slide_2.webp";
 import imgBanner3 from "./../../assets/image_service1.webp";
-import imgBanner31 from "./../../assets/item/image_service2.webp";
-import imgBanner32 from "./../../assets/item/image_service3.webp";
-import imgBanner33 from "./../../assets/item/image_service4.webp";
 import imgBanner4 from "./../../assets/img_one_banner.webp";
 import imgBanner5 from "./../../assets/banner_bottom_1.webp";
 import imgBanner6 from "./../../assets/banner_bottom_2.webp";
@@ -91,8 +88,8 @@ const Home = (props) => {
   };
 
   return (
-    <div>
-      <div className="my-4 container">
+    <div >
+      <div className="my-4 container" >
         <div className="mt-4">
           <div className="row">
             {/* Phần hình ảnh chính */}
@@ -107,10 +104,9 @@ const Home = (props) => {
                     src={img2}
                     width="100%"
                     className="d-block align-top hover-zoom"
-                    style={{ borderRadius: 5 }}
                   />
                 </Carousel.Item>
-                <Carousel.Item interval={4000} style={{ border: "none" }}>
+                <Carousel.Item interval={1000}>
                   <img
                     alt=""
                     src={img}
@@ -149,7 +145,7 @@ const Home = (props) => {
           </div>
         </div>
 
-        {/* Đổi trả dễ dàng */}
+        {/* tien ich */}
         <div className="row text-center text-md-start mt-2 ">
           {/* Đổi trả dễ dàng */}
           <div className="col-6 col-sm-6 col-md-3">
@@ -177,7 +173,7 @@ const Home = (props) => {
               <div className="text-center me-3">
                 <img
                   alt=""
-                  src={imgBanner31}
+                  src={imgBanner3}
                   width="50px"
                   className="d-block align-top mx-auto"
                 />
@@ -197,7 +193,7 @@ const Home = (props) => {
               <div className="text-center me-3">
                 <img
                   alt=""
-                  src={imgBanner32}
+                  src={imgBanner3}
                   width="50px"
                   className="d-block align-top mx-auto"
                 />
@@ -217,7 +213,7 @@ const Home = (props) => {
               <div className="text-center me-3">
                 <img
                   alt=""
-                  src={imgBanner33}
+                  src={imgBanner3}
                   width="50px"
                   className="d-block align-top mx-auto"
                 />
@@ -253,8 +249,9 @@ const Home = (props) => {
           >
             {items.map((item) => (
               <div
-                className="d-flex align-items-center ps-3 pe-3 mb-3 border-end border-start"
+                className="d-flex align-items-center me-3 mb-3"
                 key={item.id}
+                style={{ borderRight: "1px solid gray" }}
               >
                 <div className="flex-grow-1">
                   <a href={`/product/${item.id}`} className="card-title">
@@ -267,7 +264,7 @@ const Home = (props) => {
                 <img
                   src={item.images}
                   alt={item.name}
-                  className="card-img-top "
+                  className="card-img-top img"
                   style={{
                     width: "100px",
                     objectFit: "cover",
@@ -279,6 +276,7 @@ const Home = (props) => {
           </Carouselm>
         </div>
       </div>
+
 
       {/* Flash Sale */}
       <div
@@ -294,28 +292,28 @@ const Home = (props) => {
             <FlashSaleCountdown />
           </div>
 
-          <Carouselm
-            swipeable={true}
-            draggable={true}
-            showDots={true}
-            responsive={responsive}
-            ssr={true}
-            infinite={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all 1.1s"
-            transitionDuration={1100}
-            containerClass="carousel-container"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-50-px"
-            autoPlay={props.deviceType !== "mobile" ? true : false}
-            deviceType={props.deviceType}
-          >
-            {newItems.map((item) => (
-              <BoxProduct key={item.id} item={item} />
-            ))}
-          </Carouselm>
-        </div>
+        <Carouselm
+          swipeable={true}
+          draggable={true}
+          showDots={true}
+          responsive={responsive}
+          ssr={true}
+          infinite={true}
+          autoPlaySpeed={3000}
+          keyBoardControl={true}
+          customTransition="all 1.1s"
+          transitionDuration={1100}
+          containerClass="carousel-container"
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-50-px"
+          autoPlay={props.deviceType !== "mobile" ? true : false}
+          deviceType={props.deviceType}
+        >
+          {newItems.map((item) => (
+            <BoxProduct key={item.id} item={item} />
+          ))}
+        </Carouselm>
+      </div>
       </div>
 
       {/* May anh */}
@@ -372,9 +370,13 @@ const Home = (props) => {
                 Xem tất cả
               </Button>
             </div>
+            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+              Xem tất cả
+            </Button>
           </div>
         </div>
-        <div className="py-2 mb-4">
+
+        <div className="py-2">
           <Carouselm
             swipeable={true}
             draggable={true}
@@ -452,8 +454,12 @@ const Home = (props) => {
                 Xem tất cả
               </Button>
             </div>
+            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+              Xem tất cả
+            </Button>
           </div>
         </div>
+
         <div className="py-2">
           <Carouselm
             swipeable={true}
@@ -490,7 +496,7 @@ const Home = (props) => {
         </a>
       </div>
       {/* Máy quay phim */}
-      <div className=" align-items-center container my-4">
+      <div className="row align-items-center container my-4">
         <div>
           <h5
             style={{
@@ -584,7 +590,10 @@ const Home = (props) => {
       <h5 className="container mt-5 fw-bold">TIN TỨC</h5>
       <div className="d-flex flex-wrap justify-content-between mb-5 container">
         {newsItems.map((item) => (
-          <Card key={item.id} className="m-1 news">
+          <Card
+            key={item.id}
+            className="m-1 news"
+          >
             <div className="img-container">
               <Card.Img
                 variant="top"

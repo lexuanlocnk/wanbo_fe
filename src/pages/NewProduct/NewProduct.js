@@ -3,6 +3,7 @@ import BannerCollection from "../../assets/images/banner-collection.png";
 import "./NewProduct.css";
 import ProductItem from "../../components/productItem/productItem";
 import ProductImg from "../../assets/images/product-img-test.png";
+import BoxProduct from "../../components/componentProduct/BoxProduct";
 
 const filters = [
   {
@@ -40,31 +41,100 @@ const sortOptions = [
 
 const productsData = [
   {
-    id: 1,
-    name: "Insta360 X3 (One X3)",
-    price: "11.560.000đ",
-    discount: "-14%",
+    id: 21,
+    name: "Máy ảnh Nikon D850 (Body Only)",
+    price: 50990000,
+    originalPrice: 57990000,
+    discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
+    images: [
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
+    ],
+    description:
+      "Nikon D850 là một máy ảnh DSLR cao cấp với cảm biến FullFrame 45.7MP và bộ xử lý hình ảnh EXPEED 5. Được thiết kế cho các nhiếp ảnh gia chuyên nghiệp và yêu cầu cao về chất lượng hình ảnh.",
   },
   {
-    id: 2,
-    name: "DJI Action 2 Dual-Screen",
-    price: "9.999.000đ",
-    discount: "-10%",
+    id: 22,
+    name: "Máy ảnh Nikon D780 + Lens 24-120mm F/4G ED Nano",
+    price: 50990000,
+    originalPrice: 57990000,
+    discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
+    images: [
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d780-with-24-120-lens-7-500x500.jpg?v=1683467618777",
+      "https://example.com/nikon-d780-second-images.jpg",
+      "https://example.com/nikon-d780-third-images.jpg",
+    ],
+    description:
+      "Nikon D780 là sự kết hợp giữa một máy ảnh DSLR truyền thống và công nghệ mirrorless tiên tiến, kèm theo ống kính 24-120mm cho khả năng chụp linh hoạt trong mọi tình huống.",
   },
-  { id: 3, name: "Sony Alpha A7 III", price: "50.000.000đ", discount: "-5%" },
-  { id: 4, name: "GoPro HERO10", price: "12.000.000đ", discount: "-20%" },
-  { id: 5, name: "Canon EOS R5", price: "90.000.000đ", discount: "-8%" },
-  { id: 6, name: "Panasonic Lumix S1", price: "35.000.000đ", discount: "-12%" },
-  { id: 7, name: "Fujifilm X-T4", price: "28.000.000đ", discount: "-18%" },
-  { id: 8, name: "Nikon Z6 II", price: "40.000.000đ", discount: "-15%" },
-  { id: 9, name: "Blackmagic 6K Pro", price: "60.000.000đ", discount: "-22%" },
-  { id: 10, name: "Leica Q2", price: "120.000.000đ", discount: "-3%" },
-  { id: 11, name: "Sigma fp L", price: "22.000.000đ", discount: "-7%" },
+  {
+    id: 23,
+    name: "Máy ảnh Nikon D6 Body Only",
+    price: 138990000,
+    originalPrice: 159990000,
+    discountPercentage: Math.round(((159990000 - 138990000) / 159990000) * 100),
+    images: [
+      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d6-01-500x500.jpg?v=1683467136367",
+      "https://example.com/nikon-d6-second-images.jpg",
+      "https://example.com/nikon-d6-third-images.jpg",
+    ],
+    description:
+      "Nikon D6 là dòng máy ảnh DSLR hàng đầu của Nikon, nổi bật với khả năng chụp ảnh tốc độ cao và hiệu suất cao cấp cho các nhiếp ảnh gia chuyên nghiệp.",
+  },
 ];
 
 const NewProduct = (props) => {
   const [selectedOption, setSelectedOption] = useState("Mặc định");
   const [activeSortOption, setActiveSortOption] = useState();
+  const [selectedFilters, setSelectedFilters] = useState([]);
+
+  const [selectedSortOptions, setSelectedSortOptions] = useState([]);
+
+  // Hàm xử lý khi chọn checkbox filter
+  const handleFilterChange = (filterTitle, option) => {
+    const isSelected = selectedFilters.some(
+      (selected) =>
+        selected.option === option && selected.filter === filterTitle
+    );
+
+    if (isSelected) {
+      setSelectedFilters(
+        selectedFilters.filter(
+          (selected) =>
+            !(selected.option === option && selected.filter === filterTitle)
+        )
+      );
+    } else {
+      setSelectedFilters([...selectedFilters, { filter: filterTitle, option }]);
+    }
+  };
+
+  // Hàm xử lý xoá tag
+  const handleRemoveFilterTag = (filter) => {
+    setSelectedFilters(
+      selectedFilters.filter(
+        (selected) =>
+          !(
+            selected.option === filter.option &&
+            selected.filter === filter.filter
+          )
+      )
+    );
+  };
+
+  const handleSelectSortOption = (option) => {
+    if (!selectedSortOptions.includes(option)) {
+      setSelectedSortOptions([...selectedSortOptions, option]);
+    }
+    setActiveSortOption(option.label);
+  };
+
+  const handleRemoveSortTag = (option) => {
+    setSelectedSortOptions(
+      selectedSortOptions.filter((item) => item.value !== option.value)
+    );
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9; // Hiển thị 9 sản phẩm mỗi trang
@@ -99,6 +169,12 @@ const NewProduct = (props) => {
                     type="checkbox"
                     value={option}
                     id={`${filter.title}-${idx}`}
+                    checked={selectedFilters.some(
+                      (selected) =>
+                        selected.option === option &&
+                        selected.filter === filter.title
+                    )}
+                    onChange={() => handleFilterChange(filter.title, option)}
                   />
                   <label htmlFor={`${filter.title}-${idx}`}>{option}</label>
                 </div>
@@ -110,18 +186,56 @@ const NewProduct = (props) => {
           <div className="banner-collection">
             <img src={BannerCollection} alt="Banner Collection" />
           </div>
+          {/* hiển thị danh sách tag được chọn */}
+          <div className="selected-tags">
+            {selectedFilters.map((filter, index) => (
+              <div key={index} className="tag">
+                {filter.option}
+                <span
+                  className="remove-tag"
+                  onClick={() => handleRemoveFilterTag(filter)}
+                >
+                  &times;
+                </span>
+              </div>
+            ))}
+            {selectedSortOptions.map((option) => (
+              <div key={option.value} className="tag">
+                {option.label}
+                <span
+                  className="remove-tag"
+                  onClick={() => handleRemoveSortTag(option)}
+                >
+                  &times;
+                </span>
+              </div>
+            ))}
+          </div>
           <div className="sort-by">
             <span className="sort-by-title">Sắp xếp theo</span>
             <ul className="sort-by-dropdown">
               <li>
-                <span>{selectedOption}</span>
+                <span className="selected">{selectedOption}</span>
                 <span className="dropdown-chevron"></span>
                 <ul className="content_ul">
-                  <li onClick={() => setSelectedOption("Mặc định")}>
+                  <li
+                    className="dropdown-option"
+                    onClick={() => setSelectedOption("Mặc định")}
+                  >
                     Mặc định
                   </li>
-                  <li onClick={() => setSelectedOption("A → Z")}>A → Z</li>
-                  <li onClick={() => setSelectedOption("Z → A")}>Z → A</li>
+                  <li
+                    className="dropdown-option"
+                    onClick={() => setSelectedOption("A → Z")}
+                  >
+                    A → Z
+                  </li>
+                  <li
+                    className="dropdown-option"
+                    onClick={() => setSelectedOption("Z → A")}
+                  >
+                    Z → A
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -132,7 +246,7 @@ const NewProduct = (props) => {
                   className={`sort-by-item ${
                     activeSortOption === option.label ? "active2" : ""
                   }`}
-                  onClick={() => setActiveSortOption(option.label)}
+                  onClick={() => handleSelectSortOption(option)}
                 >
                   {option.label}
                 </div>
@@ -143,30 +257,8 @@ const NewProduct = (props) => {
             <div className="row">
               {/* Hiển thị 9 sản phẩm trên trang hiện tại */}
               {currentProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="product-item col-6 col-xl-4 col-lg-4 col-md-4"
-                >
-                  <div className="item_product_main">
-                    <div className="product-thumbnail">
-                      <a className="image_thumb">
-                        <img
-                          width={480}
-                          height={480}
-                          src={ProductImg}
-                          loading="lazy"
-                          alt={product.name}
-                        />
-                      </a>
-                      <span className="smart">{product.discount}</span>
-                    </div>
-                    <div className="product-info">
-                      <div className="product-name">
-                        <a>{product.name}</a>
-                      </div>
-                      <div className="price-box">{product.price}</div>
-                    </div>
-                  </div>
+                <div className="product-item col-6 col-xl-4 col-lg-4 col-md-4">
+                  <BoxProduct key={product.id} item={product} />
                 </div>
               ))}
               {/* Pagination của Bootstrap */}
