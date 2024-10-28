@@ -11,8 +11,8 @@ import "../components/AppHeader.css";
 
 function AppHeader() {
   return (
-    <Navbar expand="lg" className="custom-navbar ">
-      <Container>
+    <Navbar expand="lg" className="custom-navbar pb-0">
+      <Container> 
         <DropdownButton id="dropdown-basic-button" title="DANH MỤC SẢN PHẨM">
           <Dropdown.Item
             href="#/action-"

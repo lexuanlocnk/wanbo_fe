@@ -27,23 +27,24 @@
 .custom-navbar .nav-link {
   color: rgb(255, 255, 255);
 }
-.nav-link:hover {
+.nav-link:hover,
+.navbar-nav .nav-link.show {
   color: #54c9e9;
 }
 .search {
   position: absolute;
   right: -14px;
-  background-color: #0d6efd; 
+  background-color: #0d6efd;
 }
 
 /* Tùy chỉnh cho Dropdown Button chính */
 #dropdown-basic-button {
   background-color: #0d6efd;
   color: white;
-  border-radius: 5px;
-  padding: 20px;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  height: 100%;
   font-weight: bold;
-  margin: -20px 0;
 }
 
 #dropdown-basic-button:hover {
@@ -82,7 +83,6 @@
 }
 
 /* --------------------------------------------------------- */
-
 
 .custom-search {
   justify-content: center;
@@ -160,7 +160,6 @@ a {
     border-radius: 5;
     width: 600px;
   }
-  
 }
 
 /* Màn hình trung bình (Tablet) */
@@ -221,7 +220,7 @@ a {
     font-size: 25px;
     font-weight: bold;
   }
-  .nameTT{
+  .nameTT {
     font-size: 13px;
   }
 }
@@ -241,22 +240,8 @@ a {
   .nameDK {
     font-size: 22px;
   }
-  .nameTT{
+  .nameTT {
     font-size: 12px;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1229px) {
-  .meme {
-    position: absolute;
-    left: 27%;
-    width: 300px;
-  }
-  #dropdown-basic-button {
-    width: 260px;
-  }
-  .dropdown-item {
-    width: 260px;
   }
 }
 
@@ -296,21 +281,6 @@ a {
   text-overflow: ellipsis; /* Thêm dấu "..." ở cuối */
 }
 
-/* Tùy chỉnh cho Dropdown Button chính */
-#dropdown-basic-button {
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  padding: 20px;
-  font-weight: bold;
-  margin: -20px 0;
-}
-
-#dropdown-basic-button:hover {
-  background-color: #0056b3;
-  color: #f1f1f1;
-}
-
 /* Tùy chỉnh cho các Dropdown Item */
 .dropdown-item {
   background-color: #f8f9fa;
@@ -340,7 +310,6 @@ a {
   background-color: #0056b3;
   color: white;
 }
-
 
 /* Màn hình trung bình (Tablet) */
 @media (min-width: 768px) and (max-width: 991px) {
@@ -382,7 +351,6 @@ a {
   .custom-img {
     width: 120px;
     height: 60px;
-
   }
   .meme {
     position: absolute;
