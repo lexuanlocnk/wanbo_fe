@@ -7,98 +7,50 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import HomeApi from "../api/homeApi";
 import "../components/AppHeader.css";
+import { useEffect, useState } from "react";
 
-function AppHeader() {
+const AppHeader = () => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const homeApi = new HomeApi();
+      try {
+        const response = await homeApi.getMenuCategory();
+        if (response.status && Array.isArray(response.data.data)) {
+          setCategories(response.data.data);
+        } else {
+          console.error("Expected an array but got:", response.data);
+        }
+      } catch (err) {
+        console.log("Fetch MenuCategory Data Error: ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
-    <Navbar expand="lg" className="custom-navbar pb-0">
-      <Container> 
+    <Navbar
+      expand="lg"
+      className="custom-navbar pb-0 "
+      style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
+    >
+      <Container>
         <DropdownButton id="dropdown-basic-button" title="DANH MỤC SẢN PHẨM">
-          <Dropdown.Item
-            href="#/action-"
-            className="d-flex justify-content-between"
-          >
-            <div>Máy ảnh</div>
-            <div>{">"}</div>
-
-            <div className="sub-dropdown">
-            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
-            </div>
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            href="#/action-"
-            className="d-flex justify-content-between"
-          >
-            <div>Ống kính</div>
-            <div>{">"}</div>
-
-            <div className="sub-dropdown">
-            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
-            </div>
-          </Dropdown.Item>
-
-          <Dropdown.Item href="#/actio">Máy quay</Dropdown.Item>
-
-          <Dropdown.Item
-            href="#/action-"
-            className="d-flex justify-content-between"
-          >
-            <div>Camera hành động</div>
-            <div>{">"}</div>
-
-            <div className="sub-dropdown">
-              <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
-            </div>
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            href="#/action-"
-            className="d-flex justify-content-between"
-          >
-            <div>Drone</div>
-            <div>{">"}</div>
-
-            <div className="sub-dropdown">
-            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item
-            href="#/action-"
-            className="d-flex justify-content-between"
-          >
-            <div>Phụ kiện máy ảnh</div>
-            <div>{">"}</div>
-
-            <div className="sub-dropdown">
-            <Dropdown.Item href="#/subaction1">Máy ảnh DSLR</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Mirrorless</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Compact</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Instax</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Medium</Dropdown.Item>
-              <Dropdown.Item href="#/subaction2">Máy ảnh Flim</Dropdown.Item>
-            </div>
-          </Dropdown.Item>
+          {categories.map((category) => (
+            <Dropdown.Item
+              key={category.friendly_url}
+              href={`/${category.friendly_url}`} // Link đến trang danh mục sản phẩm
+              className="d-flex justify-content-between"
+            >
+              <div>{category.cat_name}</div>
+            </Dropdown.Item>
+          ))}
         </DropdownButton>
 
         <Navbar.Toggle
@@ -141,6 +93,6 @@ function AppHeader() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default AppHeader;

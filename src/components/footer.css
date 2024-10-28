@@ -3,6 +3,11 @@
   justify-content: space-between;
   align-items: center;
 }
+.footer_company_name {
+  font-size: 120%;
+  font-weight: 600;
+  color: #000;
+}
 .transform-dash {
   font-size: 20px;
   display: none;
@@ -38,9 +43,10 @@
 .transition-dash-disappear {
   opacity: 0;
 }
-.text-reset2{
+.text-reset2 {
   color: rgb(0, 0, 0);
 }
+
 @media screen and (max-width: 768px) {
   .about-sub-item {
     display: hidden;
@@ -49,11 +55,9 @@
   .fixed-dash {
     display: block;
   }
- 
 }
 @media screen and (min-width: 769px) {
   .about-sub-item {
     display: block;
   }
-  
 }

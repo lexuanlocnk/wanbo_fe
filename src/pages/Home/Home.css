@@ -35,22 +35,22 @@ a :hover {
   font-size: 16px;
   font-weight: bold;
 }
-.tgray{
+.tgray {
   color: rgb(107, 107, 107);
 }
-.tprimary{
+.tprimary {
   color: #0d6efd;
 }
-.tblack{
+.tblack {
   color: #000000;
 }
-.h6:hover{
+.h6:hover {
   color: #0d6efd;
 }
-.f16{
+.f16 {
   font-size: 16px;
 }
-.f14{
+.f14 {
   font-size: 14px;
 }
 
@@ -111,7 +111,24 @@ a :hover {
   color: black;
 }
 
+.flashsale-carousel .react-multi-carousel-dot button {
+  border: none;
+  background-color: rgb(170, 197, 235);
+  opacity: 1;
+}
+
+.flashsale-carousel .react-multi-carousel-dot--active button {
+  background-color: #fff;
+}
+
+.react-multi-carousel-dot button {
+  border: none;
+  background-color: #c6c6ca;
+}
+.react-multi-carousel-dot--active button {
+  background-color: #0d6efd;
+}
+
 .prdItem {
   width: 100%;
 }
-

@@ -79,10 +79,10 @@ const ProductViewed = ({
               </div>
             </div>
             {/* thêm vào giỏ hàng */}
-            <div class="button_actions">
-              <button type="submit" class=" btn_add_to_cart ">
-                <i class="bi bi-cart3"></i>
-                <span class="btn-content text_1">Thêm vào giỏ hàng</span>
+            <div className="button_actions">
+              <button type="submit" className=" btn_add_to_cart ">
+                <i className="bi bi-cart3"></i>
+                <span className="btn-content text_1">Thêm vào giỏ hàng</span>
               </button>
             </div>
           </div>

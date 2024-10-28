@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
+import wanboLogo from "../assets/wanbo.png"; //wanbo.png
 import "./footer.css";
 
 export default function Footer() {
@@ -66,22 +67,22 @@ export default function Footer() {
 
       <section className="">
         <MDBContainer className="text-start text-md-start mt-5">
-          <MDBRow className="mt-3">
-            <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-2">
-              <img
+          <MDBRow className="mt-5 justify-content-center">
+            <MDBCol md="3" lg="4" xl="5" className=" mb-2">
+              {/* <img
                 alt=""
-                src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/logo_footer.png?1708522711041"
-                width="150px"
+                src={wanboLogo}
+                width="100%"
                 className="d-inline-block align-top mb-2"
-              />
+              /> */}
+              <span className="footer_company_name">
+                CÔNG TY TNHH THƯƠNG MẠI KẾT NỐI THÔNG MINH
+              </span>
               <p>
-                <a
-                  href=""
-                  className="text-reset22 d-flex  align-items-center  justify-content-center"
-                >
+                <a href="" className="text-reset22 d-flex  align-items-center ">
                   <i className="bi bi-send me-2" style={{ fontSize: 25 }} />{" "}
                   <div>
-                    Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
+                    245A Trần Quang Khải, P. Tân Định, Quận 1, Tp.Hồ Chí Minh
                   </div>
                 </a>
               </p>
@@ -94,7 +95,7 @@ export default function Footer() {
                     className="bi bi-telephone me-2"
                     style={{ fontSize: 25 }}
                   />
-                  <div>1900 6750</div>
+                  <div>Hotline: 093.886.9759</div>
                 </a>
               </p>
               <p>
@@ -103,12 +104,12 @@ export default function Footer() {
                   className="text-reset22 d-flex  align-items-center  "
                 >
                   <i className="bi bi-envelope me-2" style={{ fontSize: 25 }} />
-                  <div>support@sapo.vn</div>
+                  <div>Email: cskh@smartconnection.com.vn</div>
                 </a>
               </p>
             </MDBCol>
 
-            <MDBCol md="2" lg="2" xl="2" className="mx-auto">
+            <MDBCol md="2" lg="2" xl="2" className="">
               <div className="w-100 footer-title-menu">
                 <h6 className="text-uppercase mb-0 fw-bold text-reset2">
                   Về chúng tôi
@@ -159,7 +160,7 @@ export default function Footer() {
               </div>
             </MDBCol>
 
-            <MDBCol md="3" lg="2" xl="2" className="mx-auto">
+            <MDBCol md="3" lg="2" xl="2" className="">
               <div className="w-100 footer-title-menu">
                 <h6 className="text-uppercase mb-0 fw-bold text-reset2">
                   Chính sách
@@ -184,28 +185,33 @@ export default function Footer() {
               <div className={`about-sub-item ${showPolicy ? "show" : ""}`}>
                 <p>
                   <a href="#!" className="text-reset2">
-                    Chính sách giao hàng
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset2">
                     Chính sách đổi trả
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset2">
-                    Chính sách bán hàng
+                    Giao hàng & thanh toán
                   </a>
                 </p>
                 <p>
                   <a href="#!" className="text-reset2">
-                    Hướng dẫn trả góp
+                    Điều khoản bảo hành
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset2">
+                    Chính sách bảo mật
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset2">
+                    Chính sách Cookie
                   </a>
                 </p>
               </div>
             </MDBCol>
 
-            <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0">
+            <MDBCol md="4" lg="3" xl="3" className=" mb-md-0">
               <div className="w-100 footer-title-menu">
                 <h6 className="text-uppercase mb-0 fw-bold text-reset2">
                   Tư vấn khách hàng
@@ -229,12 +235,10 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showAdvice ? "show" : ""}`}>
                 <p>
-                 
                   Mua hàng:{" "}
                   <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                 
                   Khiếu nại:{" "}
                   <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>

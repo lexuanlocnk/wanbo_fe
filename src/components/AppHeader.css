@@ -25,11 +25,11 @@
   top: 0;
 }
 .custom-navbar .nav-link {
-  color: rgb(255, 255, 255);
+  color: #000;
 }
 .nav-link:hover,
 .navbar-nav .nav-link.show {
-  color: #54c9e9;
+  color: #0d6efd;
 }
 .search {
   position: absolute;
@@ -48,7 +48,7 @@
 }
 
 #dropdown-basic-button:hover {
-  background-color: #0056b3;
+  background-color: #0d6efd;
   color: #f1f1f1;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .dropdown-item:hover {
-  background-color: #007bff;
+  background-color: #0d6efd;
   color: white;
   cursor: pointer;
 }
@@ -78,8 +78,13 @@
 }
 
 .sub-dropdown .dropdown-item:hover {
-  background-color: #0056b3;
+  background-color: #0d6efd;
   color: white;
+}
+
+.button-cart:hover {
+  background-color: #fff !important;
+  border-color: #0d6efd !important;
 }
 
 /* --------------------------------------------------------- */
@@ -92,8 +97,8 @@
 }
 
 .custom-navbar {
-  background-color: #282c30;
-  color: aliceblue;
+  background-color: #fff;
+  color: #000;
 }
 
 a {
@@ -124,17 +129,18 @@ a {
 .compare-nav-container a {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: #000;
   text-decoration: none;
 }
 
 .compare-nav-container a:hover {
-  color: #49b1fe;
+  color: #0d6efd;
 }
 
 .compare-nav-container a:hover i,
-.compare-nav-container a:hover span {
-  color: #49b1fe;
+.compare-nav-container a:hover span,
+.login-nav-btn:hover {
+  color: #0d6efd !important;
 }
 .search-input {
   position: relative;
@@ -142,6 +148,9 @@ a {
 #navbarScroll .search-input,
 .form-control {
   width: 100%;
+}
+.navbar .dropdown-menu {
+  padding: 0;
 }
 
 /* Thêm vào tệp CSS */

@@ -36,13 +36,13 @@ const BoxProduct = ({ item }) => {
 
   const handleAddToCart = () => {
     addToCart({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      images: item.images,
+      id: item.ProductID,
+      name: item.ProductName,
+      price: item.Price,
+      images: item.Image,
       quantity: quantity,
       discountPercentage: item.discountPercentage,
-      originalPrice: item.originalPrice,
+      originalPrice: item.PriceOld,
     });
     setSmShow(true);
   };
