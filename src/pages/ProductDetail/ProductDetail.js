@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { newItems, newsItems, cameraItem, lendItem } from "../Data";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Detail.css";
 import Col from "react-bootstrap/Col";
@@ -17,12 +16,26 @@ import BoxProduct from "../../components/componentProduct/BoxProduct";
 import { CartContext } from "../Cart/CartContext";
 import FeaturedNews from "../../components/FeaturedNews";
 import BoxCart from "../../components/componentProduct/BoxCart";
+import HomeApi from "../../api/homeApi";
 
 const ProductDetail = ({ children, eventKey }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const product = lendItem.find((item) => item.id === parseInt(id));
+  const { urlProduct } = useParams();
+
+  const [product, setProduct] = useState(null);
+
+  // Gọi API với urlProduct để lấy chi tiết sản phẩm
+  // useEffect(() => {
+  //   const fetchProductDetail = async () => {
+  //     const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
+  //     const data = await response.json();
+  //     setProduct(data.productDetail);
+  //   };
+
+  //   fetchProductDetail();
+  // }, [urlProduct]);
+
 
   // Lấy hàm addToCart từ context
   const { addToCart } = useContext(CartContext);
@@ -31,10 +44,7 @@ const ProductDetail = ({ children, eventKey }) => {
   const [modalShow, setModalShow] = useState(false);
 
   //lấy 5 sản phẩm đầu tương tự
-  const topItems = lendItem.slice(0, 5);
-
-  // lưu hình ảnh đầu tiên
-  const [mainImage, setMainImage] = useState(product.images[0]);
+ 
 
   // State để lưu số lượng sản phẩm
   const [quantity, setQuantity] = useState(1);
@@ -71,7 +81,7 @@ const ProductDetail = ({ children, eventKey }) => {
           >
             <img
               className="img imgdetail fade-in"
-              src={mainImage}
+         
               alt={product.name}
             />
 
@@ -81,11 +91,8 @@ const ProductDetail = ({ children, eventKey }) => {
                   key={index}
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
-                  onClick={() => setMainImage(img)} // Cập nhật ảnh lớn khi nhấn vào
-                  style={{
-                    border:
-                      mainImage === img ? "1px solid #007bff" : "1px #ddd",
-                  }}
+                 
+                 
                   className="thumbnail-image"
                 />
               ))}

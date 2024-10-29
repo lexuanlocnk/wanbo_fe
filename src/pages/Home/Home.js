@@ -24,26 +24,33 @@ import BoxProduct from "../../components/componentProduct/BoxProduct";
 import FlashSaleCountdown from "../../components/FlashSaleCountdown";
 import HomeBanner from "../../components/homeBanner";
 import HomeApi from "../../api/homeApi";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const Home = (props) => {
-  // const [cameraItem, setCameraItem] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [flashSaleData, setFlashSaleData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchProjetorLists = async () => {
-  //     const homeApi = new HomeApi();
-  //     try {
-  //       const response = await homeApi.getProduct();
-  //       setCameraItem(response.data); // Lấy data từ response
-  //       console.log("projector: ", cameraItem);
-  //     } catch (err) {
-  //       console.log("Fetch MenuCategory Data Error: ", err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchProjetorLists();
-  // }, []);
+  useEffect(() => {
+    const fetchProjetorLists = async () => {
+      const homeApi = new HomeApi();
+      try {
+        const response = await homeApi.getProduct();
+        setCategoryData(response.data.data); // Lấy data từ response
+
+        const responseFl = await homeApi.getFlashSale();
+        setFlashSaleData(responseFl.data.ProductFlashSale);
+        
+        
+      } catch (err) {
+        console.log("Fetch MenuCategory Data Error: ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjetorLists();
+  }, []);
+
 
   const responsive = {
     superLargeDesktop: {
@@ -99,11 +106,13 @@ const Home = (props) => {
     },
   };
 
+
   return (
     <div>
       <div className="my-4 container">
         <HomeBanner />
-        {/* item phu kien */}
+
+        {/* item category Data */}
         <div className="border rounded shadow4 p-4 my-3">
           <Carouselm
             swipeable={true}
@@ -122,7 +131,7 @@ const Home = (props) => {
             autoPlay={props.deviceType !== "mobile" ? true : false}
             deviceType={props.deviceType}
           >
-            {items.map((item) => (
+           {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
               <div
                 className="d-flex align-items-center me-3 mb-3"
                 key={item.id}
@@ -130,14 +139,14 @@ const Home = (props) => {
               >
                 <div className="flex-grow-1">
                   <a href={`/product/${item.id}`} className="card-title">
-                    <h6 className="f16">{item.name}</h6>
+                    <h6 className="f16">{item?.Category}</h6>
                   </a>
                   <p className="card-text tgray">
-                    Số lượng: {item.quantitysale}
+                    Số lượng: {item.countProduct}
                   </p>
                 </div>
                 <img
-                  src={item.images}
+                  src={`${imageBaseUrl}${item.imageCategory}`}
                   alt={item.name}
                   className="card-img-top img"
                   style={{
@@ -147,7 +156,7 @@ const Home = (props) => {
                   }}
                 />
               </div>
-            ))}
+            )): []}
           </Carouselm>
         </div>
       </div>
@@ -156,117 +165,124 @@ const Home = (props) => {
       <div
         className=" align-items-center py-4 my-5 flashsale-carousel"
         style={{ width: "100%", height: "auto", backgroundColor: "#0d6efd" }}
-      >
-        <div className="container">
-          <div className="d-flex  align-items-center flex-column-mobile">
-            <h2 style={{ color: "white" }} className="">
-              Flash Sale
-            </h2>
-            <div className="mx-4" />
-            <FlashSaleCountdown />
-          </div>
-
-          <Carouselm
-            swipeable={true}
-            draggable={true}
-            showDots={true}
-            responsive={responsive}
-            ssr={true}
-            infinite={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all 1.1s"
-            transitionDuration={1100}
-            containerClass="carousel-container"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-50-px"
-            autoPlay={props.deviceType !== "mobile" ? true : false}
-            deviceType={props.deviceType}
-          >
-            {newItems.map((item) => (
-              <BoxProduct key={item.id} item={item} />
-            ))}
-          </Carouselm>
-        </div>
+      >          
+          <div className="container">
+            <div className="d-flex  align-items-center flex-column-mobile">
+              <h2 style={{ color: "white" }} className="">
+                Flash Sale
+               </h2>
+               <div className="mx-4" />
+              <FlashSaleCountdown />
+             </div>         
+                <Carouselm
+                  swipeable={true}
+                  draggable={true}
+                  showDots={true}
+                  responsive={responsive}
+                  ssr={true}
+                  infinite={true}
+                  autoPlaySpeed={3000}
+                  keyBoardControl={true}
+                  customTransition="all 1.1s"
+                  transitionDuration={1100}
+                  containerClass="carousel-container"
+                  dotListClass="custom-dot-list-style"
+                  itemClass="carousel-item-padding-50-px"
+                  autoPlay={props.deviceType !== "mobile" ? true : false}
+                  deviceType={props.deviceType}
+                >
+                  {flashSaleData && flashSaleData.length > 0 ? flashSaleData.map(( item ) => {
+                   return (              
+                      <BoxProduct key={item.ProductId} item={item} />                         
+                      )
+                    }):[] 
+                  }
+                </Carouselm>                             
+         </div>
       </div>
+      
 
       {/* May chieu */}
-
-      <div className=" align-items-center container ">
-        <div className="row">
-          <div className=" col-6 col-md-3 d-flex">
-            <h5
-              style={{
-                textTransform: "uppercase",
-                marginTop: 10,
-                fontWeight: "600",
-              }}
-            >
-              MÁY CHIẾU
-            </h5>
-          </div>
-          <div className=" col-6 col-md-9 d-flex justify-content-end">
-            <div className="d-flex">
-              <div className="d-none d-lg-flex">
-                <Button
-                  className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE" }}
+      {categoryData && categoryData.length > 0 ? categoryData.map(( item ) => {
+          return (
+            <div className=" align-items-center container ">
+            <div className="row">
+              <div className=" col-6 col-md-3 d-flex">
+                <h5
+                  style={{
+                    textTransform: "uppercase",
+                    marginTop: 10,
+                    fontWeight: "600",
+                  }}
                 >
-                  Máy ảnh Mirrorless
-                </Button>
-                <Button
-                  className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE" }}
-                >
-                  Máy ảnh Compact
-                </Button>
-                <Button
-                  className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE" }}
-                >
-                  Máy ảnh Instax
-                </Button>
-                <Button
-                  className="me-2 btn2"
-                  style={{ backgroundColor: "#EEEEEE" }}
-                >
-                  Máy ảnh Medium Format
+                 {item?.Category}
+                </h5>
+              </div>
+              <div className=" col-6 col-md-9 d-flex justify-content-end">
+                {/* <div className="d-flex">
+                  <div className="d-none d-lg-flex">
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Mirrorless
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Compact
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Instax
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Medium Format
+                    </Button>
+                  </div>
+                </div> */}
+                <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+                  Xem tất cả
                 </Button>
               </div>
             </div>
-            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
-              Xem tất cả
-            </Button>
-          </div>
-        </div>
-
-        <div className="py-2">
-          <Carouselm
-            swipeable={true}
-            draggable={true}
-            showDots={true}
-            responsive={responsive}
-            ssr={true}
-            infinite={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all 1.1s"
-            transitionDuration={1100}
-            containerClass="carousel-container"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-50-px"
-            autoPlay={props.deviceType !== "mobile" ? true : false}
-            deviceType={props.deviceType}
-          >
-            {cameraItem.map((item) => (
-              <BoxProduct key={item.id} item={item} />
-            ))}
-          </Carouselm>
-        </div>
-      </div>
+    
+            <div className="py-2">
+              <Carouselm
+                swipeable={true}
+                draggable={true}
+                showDots={true}
+                responsive={responsive}
+                ssr={true}
+                infinite={true}
+                autoPlaySpeed={50000}
+                keyBoardControl={true}
+                customTransition="all 1.1s"
+                transitionDuration={1100}
+                containerClass="carousel-container"
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-50-px"
+                autoPlay={props.deviceType !== "mobile" ? true : false}
+                deviceType={props.deviceType}
+              >
+                {item?.ProductChild && item.ProductChild?.length> 0 ? item.ProductChild?.map((item) => (
+                  <BoxProduct key={item.ProductId} item={item} />
+                )): []}
+              </Carouselm>
+            </div>
+          </div> 
+          )
+        }):[] 
+      }
 
       {/* Ong kính */}
-      <div className=" align-items-center container">
+      {/* <div className=" align-items-center container">
         <div className="row">
           <div className=" col-6 col-md-2 d-flex">
             <h5
@@ -337,7 +353,7 @@ const Home = (props) => {
             ))}
           </Carouselm>
         </div>
-      </div>
+      </div> */}
       {/* anh banner */}
       {/* <div className="img-container container my-2 rounded">
         <a href={`/product`} className="card-title ">
@@ -350,7 +366,7 @@ const Home = (props) => {
         </a>
       </div> */}
       {/* Máy quay phim */}
-      <div className="row align-items-center container my-4">
+      {/* <div className="row align-items-center container my-4">
         <div>
           <h5
             style={{
@@ -386,7 +402,7 @@ const Home = (props) => {
             ))}
           </Carouselm>
         </div>
-      </div>
+      </div> */}
       {/* anh banner 2 */}
       <div className="img-container my-5 rounded container">
         <a href="/product" className="card-title">

@@ -18,7 +18,7 @@ axiosClient.interceptors.response.use(
   }
 );
 
-const imageBaseUrl = "http://192.168.245.190:8000/uploads/";
+const imageBaseUrl = "http://192.168.245.190:8002/uploads/";
 
 export default axiosClient;
 export { imageBaseUrl };

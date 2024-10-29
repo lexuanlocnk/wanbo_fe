@@ -81,9 +81,10 @@ a :hover {
 .img {
   transition: 0.3s ease;
 }
-
-.img:hover {
-  filter: brightness(200%);
+.img {
+  
+  object-fit: cover; /* Đảm bảo hình ảnh vừa khung mà không méo */
+  object-position: center;
 }
 
 .img-container {

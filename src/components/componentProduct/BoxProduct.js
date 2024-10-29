@@ -9,6 +9,7 @@ import "./box-product.css";
 import componentProduct from "./componentProduct.css";
 import { Drawer, Space } from "antd";
 import { bottom } from "@popperjs/core";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const BoxProduct = ({ item }) => {
   const { addToCart } = useContext(CartContext);
@@ -45,47 +46,54 @@ const BoxProduct = ({ item }) => {
       originalPrice: item.PriceOld,
     });
     setSmShow(true);
-  };
-
+  };  
+  const sale = Math.round(((item.PriceOld - item.Price)/item.PriceOld)*100)
   return (
     <div
       className="my-4  rounded box-product mx-1"
-      key={item.id}
+      key={item.ProductId}
       style={{ display: "inline-block", position: "relative"}}
-    >
+    >    
+     <a href={`/product/${item.UrlProduct}`}>
       <Card className="prdItem border-0 shadow4">
-        <Card.Img variant="top" src={item.images} className="p-4 img" />
+        <Card.Img variant="top" style={{width: 268}} src={`${imageBaseUrl}${item.Image}`} className="p-4 img"/>
 
-        {item.discountPercentage > 0 && (
-          <Card.Text className="sale">-{item.discountPercentage}%</Card.Text>
+        {sale > 0 && (
+          <Card.Text className="sale">-{sale} %</Card.Text>
         )}
-
+        
         <Card.Body>
-          <a href={`/product/${item.id}`} className="card-title">
-            <Card.Title className="prdName">{item.name}</Card.Title>
-          </a>
+         
+            <Card.Title className="prdName">{item.ProductName}</Card.Title>
+        
 
           <Card.Text className="price">
-            {item.price.toLocaleString("vi-VN")} VND
+               {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}
           </Card.Text>
+          
+          {sale > 0 ? (
+            <Card.Text className="original-price tgray fw-bold" >         
+               {item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}  
+            </Card.Text>
+            ): 
+            <br/>
+          }
 
-          <Card.Text className="original-price tgray fw-bold">
-            {item.discountPercentage > 0 ? (
+
+          {/* <Card.Text>
+          {item.discountPercentage > 0 ? (
               <>
-                {item.originalPrice.toLocaleString("vi-VN")} VND <br />
+                {item.PriceOld} VND <br />
               </>
             ) : (
               <br />
             )}
-          </Card.Text>
-
-          <Card.Text>
             {item.quantitysale > 0 ? (
               <> <b>{item.quantitysale}</b> sản phẩm đã bán</>
             ) : (
               <></>
             )}
-          </Card.Text>
+          </Card.Text> */}
 
           {/* Nút hiện ở giữa khi hover */}
           <div className="hover-buttons">
@@ -156,7 +164,8 @@ const BoxProduct = ({ item }) => {
           </div>
         </Card.Body>
       </Card>
-      <Drawer
+      </a>
+      {/* <Drawer
         title="So sánh sản phẩm"
         placement={bottom}
         width={500}
@@ -187,7 +196,7 @@ const BoxProduct = ({ item }) => {
             <a href="/compare-product">Đi đến trang so sánh sản phẩm</a>
           </div>
         </div>
-      </Drawer>
+      </Drawer> */}
     </div>
   );
 };

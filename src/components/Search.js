@@ -126,7 +126,7 @@ function Search() {
               }}
             />
             <Button className="search">
-              <div className="bi bi-search" style={{ padding: 2.8 }} />
+              <div className="bi bi-search" style={{ padding: 2.7 }} />
             </Button>
           </div>
         </div>

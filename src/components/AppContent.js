@@ -23,7 +23,7 @@ const AppContent = () => {
 
       <Route path="/register" element={<Register />} />
 
-      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/product/:urlProduct" element={<ProductDetail />} />
 
       <Route path="/introduce" element={<Introduce />} />
 
