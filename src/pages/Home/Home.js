@@ -40,8 +40,7 @@ const Home = (props) => {
 
         const responseFl = await homeApi.getFlashSale();
         setFlashSaleData(responseFl.data.ProductFlashSale);
-        
-        
+             
       } catch (err) {
         console.log("Fetch MenuCategory Data Error: ", err);
       } finally {
@@ -407,9 +406,11 @@ const Home = (props) => {
       <div className="img-container my-5 rounded container">
         <a href="/product" className="card-title">
           <img
-            src={imgBanner5}
+          style={{height: 280, objectFit: "cover",border: 15}}
+            src="https://wanbo.cn/cdn/shop/files/3_33b7f516-cc50-4a3e-8487-ba768b98ca8b.jpg?v=1716813493&width=2000"
             className="d-block w-100 img-fluid align-top hover-zoom"
             alt="Banner lớn"
+            
           />
         </a>
       </div>  
@@ -421,7 +422,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner6}
+                  src="https://wanbo.cn/cdn/shop/files/1_5.jpg?v=1717726984&width=550"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 1"
                 />
@@ -433,7 +434,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner7}
+                  src="https://wanbo.cn/cdn/shop/files/2_3.jpg?v=1717726987&width=750"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 2"
                 />
@@ -445,7 +446,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner8}
+                  src="https://wanbo.cn/cdn/shop/files/211022-wanboT6_-_-_0337.jpg?v=1716115219&width=1500"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 3"
                 />

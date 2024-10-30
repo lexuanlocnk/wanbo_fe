@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { newsItems } from "../Data";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -6,13 +6,34 @@ import Card from "react-bootstrap/Card";
 import "./News.css"; 
 import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
+import { useParams } from "react-router-dom";
 
-const News = () => {
+const News = () => { 
+  const [product, setProduct] = useState(null);
+  const { urlNew } = useParams();
+
+  // useEffect(() => {
+  //   const fetchProductDetail = async () => {
+  //     try {
+  //       const response = await fetch(`http://192.168.245.190:8002/api/member/show-category/${urlNew}`);
+  //       const data = await response.json();
+  //        if (data.status === true && data.productDetail) {
+  //           setProduct(data.productDetail);
+  //         } 
+  //     } catch (error) {
+  //       console.error("Error fetching product:", error);
+  //     }
+  //   };
+
+  //   fetchProductDetail();
+  // }, [urlProduct]);
   return (
     <div className="py-4" style={{ backgroundColor: "#f4f4f4" }}>
       <div className="container ">
       <h5 className="tblack fw-bold">TIN TỨC</h5>
+
         <Row className="justify-content-between">
+
           <Col
             lg={9}
             className="mt-3"
@@ -47,7 +68,7 @@ const News = () => {
                     <Card.Text className="text-truncate-3 tgray">
                       {item.description}
                     </Card.Text>
-                    <a href={`/news/${item.id}`} className="card-title">
+                    <a href={`/new/${item.id}`} className="card-title">
                       <h6>
                         Xem thêm <span className="bi bi-arrow-right" />
                       </h6>
@@ -64,7 +85,9 @@ const News = () => {
               <FeaturedNews />
             </div>
           </Col>
+
         </Row>
+
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const AppHeader = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="/news" className="Home">
+            <Nav.Link href="/news/tin-khuyen-mai" className="Home">
               Tin tức
             </Nav.Link>
 

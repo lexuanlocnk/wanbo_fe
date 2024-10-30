@@ -31,69 +31,52 @@ const BoxProduct = ({ item }) => {
   };
 
   const handleSetQuickView = () => {
-    console.log(item.images);
+    console.log(item.Image);
     setQuickView(true);
   };
 
   const handleAddToCart = () => {
     addToCart({
-      id: item.ProductID,
+      id: item.ProductId,
       name: item.ProductName,
       price: item.Price,
       images: item.Image,
       quantity: quantity,
-      discountPercentage: item.discountPercentage,
       originalPrice: item.PriceOld,
     });
     setSmShow(true);
   };  
+
   const sale = Math.round(((item.PriceOld - item.Price)/item.PriceOld)*100)
   return (
     <div
-      className="my-4  rounded box-product mx-1"
+      className="my-4 rounded box-product mx-1"
       key={item.ProductId}
-      style={{ display: "inline-block", position: "relative"}}
+      style={{ display: "inline-block", position: "relative", width:"98%"}}
     >    
-     <a href={`/product/${item.UrlProduct}`}>
-      <Card className="prdItem border-0 shadow4">
-        <Card.Img variant="top" style={{width: 268}} src={`${imageBaseUrl}${item.Image}`} className="p-4 img"/>
-
+     
+      <Card className="prdItem border-0 shadow4" >
+      <a href={`/product/${item.UrlProduct}`}>
+        <Card.Img variant="top" src={`${imageBaseUrl}${item.Image}`} className="p-4 img"/>
+        </a>
         {sale > 0 && (
           <Card.Text className="sale">-{sale} %</Card.Text>
         )}
         
-        <Card.Body>
-         
-            <Card.Title className="prdName">{item.ProductName}</Card.Title>
-        
-
-          <Card.Text className="price">
+        <Card.Body>        
+          <div className="prdName">{item.ProductName}</div>
+          <div className="price">
                {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}
-          </Card.Text>
+          </div>
           
           {sale > 0 ? (
-            <Card.Text className="original-price tgray fw-bold" >         
+            <div className="original-price tgray fw-bold" >         
                {item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}  
-            </Card.Text>
+            </div>
             ): 
-            <br/>
+            <div style={{margin: 20}}></div>
           }
 
-
-          {/* <Card.Text>
-          {item.discountPercentage > 0 ? (
-              <>
-                {item.PriceOld} VND <br />
-              </>
-            ) : (
-              <br />
-            )}
-            {item.quantitysale > 0 ? (
-              <> <b>{item.quantitysale}</b> sản phẩm đã bán</>
-            ) : (
-              <></>
-            )}
-          </Card.Text> */}
 
           {/* Nút hiện ở giữa khi hover */}
           <div className="hover-buttons">
@@ -116,10 +99,10 @@ const BoxProduct = ({ item }) => {
                   <i className="bi bi-check-circle me-2" />
                   Đã thêm{" "}
                   <a
-                    href={`/product/${item.id}`}
+                    href={`/product/${item.UrlProduct}`}
                     style={{ fontSize: 20, color: "white", fontWeight: "400" }}
                   >
-                    [{item.name}]
+                    [{item.ProductName}]
                   </a>{" "}
                   vào giỏ hàng
                   <i
@@ -164,7 +147,7 @@ const BoxProduct = ({ item }) => {
           </div>
         </Card.Body>
       </Card>
-      </a>
+     
       {/* <Drawer
         title="So sánh sản phẩm"
         placement={bottom}

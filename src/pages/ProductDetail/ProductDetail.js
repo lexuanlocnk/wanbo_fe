@@ -17,24 +17,30 @@ import { CartContext } from "../Cart/CartContext";
 import FeaturedNews from "../../components/FeaturedNews";
 import BoxCart from "../../components/componentProduct/BoxCart";
 import HomeApi from "../../api/homeApi";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
-const ProductDetail = ({ children, eventKey }) => {
+const ProductDetail = ({ children, eventKey, item }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { urlProduct } = useParams();
 
   const [product, setProduct] = useState(null);
 
-  // Gọi API với urlProduct để lấy chi tiết sản phẩm
-  // useEffect(() => {
-  //   const fetchProductDetail = async () => {
-  //     const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
-  //     const data = await response.json();
-  //     setProduct(data.productDetail);
-  //   };
+  useEffect(() => {
+    const fetchProductDetail = async () => {
+      try {
+        const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
+        const data = await response.json();
+         if (data.status === true && data.productDetail) {
+            setProduct(data.productDetail);
+          } 
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
 
-  //   fetchProductDetail();
-  // }, [urlProduct]);
+    fetchProductDetail();
+  }, [urlProduct]);
 
 
   // Lấy hàm addToCart từ context
@@ -63,7 +69,14 @@ const ProductDetail = ({ children, eventKey }) => {
   const [smShow, setSmShow] = useState(false);
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity }); // Thêm sản phẩm vào giỏ hàng
+    addToCart({
+      id: product.ProductId,
+      name: product.ProductName,
+      price: product.Price,
+      images: product.Image,
+      quantity: quantity,
+      originalPrice: product.PriceOld,
+    });
     setSmShow(true);
   };
 
@@ -81,40 +94,48 @@ const ProductDetail = ({ children, eventKey }) => {
           >
             <img
               className="img imgdetail fade-in"
-         
+              src={`${imageBaseUrl}${product.Image}`}
               alt={product.name}
             />
 
             <div className="d-flex justify-content-between mt-3">
-              {product.images.map((img, index) => (
+              {/* này là 1 mảng ảnh */}
+              {/* {product.Image.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`Thumbnail ${index + 1}`}
-                 
-                 
+                  alt={`Thumbnail ${index + 1}`}                               
                   className="thumbnail-image"
                 />
-              ))}
+              ))} */}   
+
+              {product && product.Image && (
+                <img
+                  src={`${imageBaseUrl}${product.Image}`}
+                  alt="Thumbnail 1"
+                  className="thumbnail-image"
+                />
+              )}
+
             </div>
           </div>
 
           <div style={{ position: "absolute", width: "15%" }}>
-            <LightboxButton productId={product.id} />
+            <LightboxButton productId={product.ProductId} />
           </div>
 
           <div className="col-md-5">
-            <h4 className="fw-bold">{product.name}</h4>
-            <h6>Thương hiệu Canon</h6>
+            <h4 className="fw-bold">{product.ProductName}</h4>
+            <h6>Danh mục: {product.Category}</h6>
             <div className="d-flex align-items-center">
-              <p className="pricedetail me-3">
-                {product.price.toLocaleString("vi-VN")} VND
+              <p className="pricedetail me-3">               
+                {product.Price ? `${product.Price.toLocaleString("vi-VN")} đ` : "N/A"}
               </p>
 
               <p className="original-priceDetail">
-                {product.discountPercentage > 0 ? (
+                {product.PriceOld != null ? (
                   <>
-                    {product.originalPrice.toLocaleString("vi-VN")} VND <br />
+                    {product.PriceOld ? `${product.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}
                   </>
                 ) : (
                   <br />
@@ -228,47 +249,22 @@ const ProductDetail = ({ children, eventKey }) => {
             <h5 className="tblack fw-bold">Thông tin chi tiết sản phẩm</h5>
             <hr />
             <div className="d-flex flex-column align-items-center">
-              <p>{product.description}</p>
+              <h5>{product.ProductName}</h5>
               <img
                 className="img mb-4"
-                src={product.images[1]}
-                alt={product.name}
+                src={`${imageBaseUrl}${product.Image}`}
+                alt={product.ProductName}
                 style={{ width: "45%", height: "auto" }}
               />
 
               {/* Nội dung Collapse */}
-              <Collapse in={open}>
-                <div id="product-collapse" className="w-100 mt-3">
-                  <h4>
-                    Cảm biến FullFrame BSI CMOS 45.7MP và Bộ xử lý EXPEED 5
-                  </h4>
-                  <p>{product.description}</p>
-
-                  <div className="d-flex justify-content-center">
-                    <img
-                      className="img imgdetail2"
-                      src={product.images[2]}
-                      alt={product.name}
-                    />
-                  </div>
-
-                  <p>{product.description}</p>
-
-                  <h4>Hệ thống Multi-CAM 20K 153 điểm lấy nét</h4>
-
-                  <p>{product.description}</p>
-
-                  <div className="d-flex justify-content-center">
-                    <img
-                      className="img imgdetail2"
-                      src={product.images[0]}
-                      alt={product.name}
-                    />
-                  </div>
-
-                  <p>{product.description}</p>
-                </div>
-              </Collapse>
+             <Collapse in={open}>
+               <div id="product-collapse" className="w-100 mt-3 product-description">
+                <div
+                  dangerouslySetInnerHTML={{ __html: product.productDescription }}
+                ></div>
+              </div>
+            </Collapse>
 
               {/* Nút để mở/đóng Collapse */}
               <Button
@@ -282,7 +278,6 @@ const ProductDetail = ({ children, eventKey }) => {
               </Button>
             </div>
           </Col>
-
           <Col md={5} xs={12} className="mt-4" style={{ marginRight: -12 }}>
             <Col
               className="p-4"

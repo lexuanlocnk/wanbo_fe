@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormCheck } from "react-bootstrap";
-import ProductCart from "./ProductCart"; // Import component mới
+import ProductCart from "./ProductCart"; 
 import { useNavigate } from "react-router-dom";
 
 const BoxCart = ({ isInModal }) => {
@@ -114,7 +114,7 @@ const BoxCart = ({ isInModal }) => {
         >
           {cartItems.map((item) => (
             <ProductCart
-              key={item.id}
+              key={item.ProductId}
               item={item}
               selectedItems={selectedItems}
               handleSelectItem={handleSelectItem}
@@ -137,8 +137,8 @@ const BoxCart = ({ isInModal }) => {
           >
             <h6> Tổng cộng:</h6>
 
-            <span style={{ color: "red" }}>
-              <h6>{totalPrice.toLocaleString("vi-VN")} ₫</h6>
+            <span >
+              <h6 style={{ color: "red", fontWeight: "bold" }}>{totalPrice.toLocaleString("vi-VN")} ₫</h6>
             </span>
           </div>
 

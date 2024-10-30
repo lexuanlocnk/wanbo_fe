@@ -11,6 +11,7 @@ import {
   FloatingLabel,
   ButtonGroup,
 } from "react-bootstrap";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const Checkout = () => {
   const { cartItems } = useContext(CartContext); // Lấy sản phẩm từ CartContext
@@ -177,7 +178,7 @@ const Checkout = () => {
                     >
                       <span style={{ position: "relative" }}>
                         <img
-                          src={item.images}
+                          src={`${imageBaseUrl}${item.images}`}
                           alt={item.name}
                           style={{
                             width: "50px",

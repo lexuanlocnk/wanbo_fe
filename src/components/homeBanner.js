@@ -4,6 +4,8 @@ import img2 from "./../assets/slider_2.webp";
 import imgBanner from "./../assets/img_banner_slide.webp";
 import imgBanner2 from "./../assets/img_banner_slide_2.webp";
 import imgBanner3 from "./../assets/image_service1.webp";
+import maychieu from "./../assets/images/maychieu.webp"
+import wanboT from "./../assets/images/wanboT.webp"
 
 const HomeBanner = () => {
   return (
@@ -12,25 +14,26 @@ const HomeBanner = () => {
         <div className="row">
           {/* Phần hình ảnh chính */}
           <div className="col-lg-8 col-md-12 mb-4 ">
-            <Carousel fade controls={true} indicators={true}>
+            <Carousel fade controls={true} indicators={true} >
               <Carousel.Item
-                interval={4000}
+                interval={3000}
                 style={{ border: "none", borderRadius: 50 }}
               >
                 <img
                   alt=""
-                  src={img2}
+                  src="https://wanbo.cn/cdn/shop/files/1_2.png?v=1715770224&width=750"
                   width="100%"
                   className="d-block align-top hover-zoom"
+                  style={{ borderRadius: 7, objectFit: "cover", height: 352,  objectPosition: "center" }}
                 />
               </Carousel.Item>
-              <Carousel.Item interval={1000}>
+              <Carousel.Item interval={3000}>
                 <img
                   alt=""
-                  src={img}
+                  src="https://wanbo.cn/cdn/shop/files/1_2_2.png?v=1715770223&width=1500"
                   width="100%"
                   className="d-block align-top hover-zoom"
-                  style={{ borderRadius: 7 }}
+                  style={{ borderRadius: 7, objectFit: "cover", height: 352  }}
                 />
               </Carousel.Item>
             </Carousel>
@@ -42,9 +45,10 @@ const HomeBanner = () => {
               <div className="col-6 col-md-12 mb-4">
                 <img
                   alt=""
-                  src={imgBanner}
+                  src="https://xiaomiworld.vn/upload_images/images/davinci-1-pro-__01.jpg"
                   width="100%"
                   className="d-block align-top "
+                   style={{ borderRadius: 7, objectFit: "cover", height: 164  }}
                 />
               </div>
 
@@ -52,9 +56,10 @@ const HomeBanner = () => {
               <div className="col-6 col-md-12">
                 <img
                   alt=""
-                  src={imgBanner2}
+                  src="https://miworld.vn/upload_images/images/banner_wanbo.jpg"
                   width="100%"
                   className="d-block align-top"
+                   style={{ borderRadius: 7, objectFit: "cover", height: 164  }}
                 />
               </div>
             </div>

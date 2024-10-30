@@ -27,9 +27,9 @@ const AppContent = () => {
 
       <Route path="/introduce" element={<Introduce />} />
 
-      <Route path="/news" element={<News />} />
+      <Route path="/news/:urlNew" element={<News />} />
 
-      <Route path="/news/:id" element={<NewsDetail />} />
+      <Route path="/new/:id" element={<NewsDetail />} />
 
       <Route path="/cart" element={<Cart />} />
 

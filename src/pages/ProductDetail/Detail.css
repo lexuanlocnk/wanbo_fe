@@ -77,3 +77,11 @@
 td{
   font-size: 15px;
 }
+
+
+.product-description img {
+  max-width: 100%;
+  /* Đảm bảo ảnh không lớn hơn khung chứa */
+  height: auto;
+  /* Đảm bảo ảnh giữ nguyên tỷ lệ */
+}

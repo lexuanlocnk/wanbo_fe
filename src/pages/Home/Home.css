@@ -1,7 +1,9 @@
 .imgBanner img {
   height: 207px;
 }
-
+body {
+  font-family:Arial, Helvetica, sans-serif;
+}
 p {
   font-size: 13px;
 }
@@ -82,7 +84,6 @@ a :hover {
   transition: 0.3s ease;
 }
 .img {
-  
   object-fit: cover; /* Đảm bảo hình ảnh vừa khung mà không méo */
   object-position: center;
 }
