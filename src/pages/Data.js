@@ -412,7 +412,7 @@ const newsItems = [
   },
   {
     id: 2,
-    title: "So Sánh Insta360 Flow Và DJI Osmo Mobile 6",
+    title: "So Sánh Insta360 Flow Và DJI Osmo Mobile 6: Đi Tìm Chiếc Gimbal Điện Thoại Quốc Dân",
     date: "02/10/2024",
     description:
       "Những chiếc điện thoại thông minh càng được nâng cấp về camera và khiến chúng trở thành những thiết bị ghi hình không thể thiếu. Hiểu được điều đó các hãng phụ kiện liên tục đưa ra những mẫu gimbal dành riêng cho điện thoại với vô vàn chức năng ấn tượng.",

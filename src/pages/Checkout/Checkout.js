@@ -11,6 +11,7 @@ import {
   FloatingLabel,
   ButtonGroup,
 } from "react-bootstrap";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const Checkout = () => {
   const { cartItems } = useContext(CartContext); // Lấy sản phẩm từ CartContext
@@ -37,7 +38,7 @@ const Checkout = () => {
       <div className="container">
         <Row className="py-4">
           {/* Cột Thông tin nhận hàng */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }}>
               <Card.Body>
                 <Col className="d-flex flex-row align-items-center justify-content-between">
@@ -92,7 +93,7 @@ const Checkout = () => {
                   <Form.Group controlId="formNote" className="mt-3">
                     <Form.Control
                       as="textarea"
-                      rows={2}
+                      rows={3}
                       placeholder="Ghi chú (tùy chọn)"
                     />
                   </Form.Group>
@@ -102,7 +103,7 @@ const Checkout = () => {
           </Col>
 
           {/* Cột Vận chuyển */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }}>
               <Card.Body>
                 <Card.Title>Vận chuyển</Card.Title>
@@ -155,7 +156,7 @@ const Checkout = () => {
           </Col>
 
           {/* Cột Đơn hàng */}
-          <Col md={4}>
+          <Col lg={4}>
             <Card style={{ border: "none" }} className="">
               <Card.Body>
                 <Card.Title>Đơn hàng ({totalItems} sản phẩm)</Card.Title>
@@ -177,7 +178,7 @@ const Checkout = () => {
                     >
                       <span style={{ position: "relative" }}>
                         <img
-                          src={item.images}
+                          src={`${imageBaseUrl}${item.images}`}
                           alt={item.name}
                           style={{
                             width: "50px",
@@ -236,7 +237,8 @@ const Checkout = () => {
                       style={{
                         width: "100%",
                         height: "100%",
-                        backgroundColor: "#1E90FF",
+                        backgroundColor: "#0d6efd",
+                        fontSize: 14
                       }}
                     >
                       Áp dụng
@@ -247,7 +249,7 @@ const Checkout = () => {
 
                 <Row>
                   <Col
-                    md={8}
+                    md={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -257,7 +259,7 @@ const Checkout = () => {
                   </Col>
 
                   <Col
-                    md={4}
+                    md={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -303,7 +305,7 @@ const Checkout = () => {
                     Tổng cộng:
                   </h5>
 
-                  <h5 style={{ color: "#1E90FF" }}>
+                  <h5 style={{ color: "#0d6efd" }}>
                     {(total + ship).toLocaleString("vi-VN")} ₫
                   </h5>
                 </div>
@@ -330,7 +332,7 @@ const Checkout = () => {
                       style={{
                         width: "100%",
                         height: 50,
-                        backgroundColor: "#1E90FF",
+                        backgroundColor: "#0d6efd",
                       }}
                     >
                       Đặt hàng

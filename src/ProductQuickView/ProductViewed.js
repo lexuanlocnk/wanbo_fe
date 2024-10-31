@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./product-viewed.css";
+import { imageBaseUrl } from "../api/axiosConfig";
+import { CartContext } from "../pages/Cart/CartContext";
+import { Modal } from "react-bootstrap";
+import BoxCart from "../components/componentProduct/BoxCart";
 
 const ProductViewed = ({
   item,
@@ -7,8 +11,9 @@ const ProductViewed = ({
   setQuantityView,
   setQuickView,
 }) => {
-  const [activeImg, setActiveImg] = useState(item.images[0]);
-
+  const [activeImg, setActiveImg] = useState(item.Image);
+    // Lấy hàm addToCart từ context
+  const { addToCart } = useContext(CartContext);
   const handleIncrease = () => {
     setQuantityView((prevQuantity) => prevQuantity + 1);
   };
@@ -18,6 +23,21 @@ const ProductViewed = ({
       prevQuantity > 1 ? prevQuantity - 1 : 1
     );
   };
+  const [smShow, setSmShow] = useState(false);
+  const handleAddToCart = () => {
+    addToCart({
+      id: item.ProductId,
+      name: item.ProductName,
+      price: item.Price,
+      images: item.Image,
+      quantity: quantityView,
+      originalPrice: item.PriceOld,
+    });
+    setSmShow(true);
+
+    // setQuickView(false);
+
+  }; 
 
   return (
     <>
@@ -28,10 +48,10 @@ const ProductViewed = ({
         <div className="product-details">
           <div className="left-detail">
             <div className="img-thumbnail">
-              <img src={activeImg} loading="lazy" alt="Active product" />
+              <img src={`${imageBaseUrl}${item.Image}`} loading="lazy" alt="Active product" />
             </div>
             <div className="img-swiper">
-              {Array.isArray(item.images) &&
+              {/* {Array.isArray(item.images) &&
                 item.images.map((img, index) => (
                   <div className="img-swiper-item" key={index}>
                     <img
@@ -41,29 +61,41 @@ const ProductViewed = ({
                       className={`${activeImg === img ? "activeImg" : ""}`}
                     />
                   </div>
-                ))}
+                ))} */}
+
+                 {item && item.Image && (
+                <img
+                  src={`${imageBaseUrl}${item.Image}`}
+                  alt="Thumbnail 1"
+                  className="thumbnail-image"
+                />
+              )}
             </div>
           </div>
           <div className="right-detail">
             <h3 className="title-product">
-              <a href={`/product/${item.id}`}>{item.name}</a>
+               <a href={`/product/${item.UrlProduct}`}>{item.ProductName}</a>
             </h3>
             <div className="left_vend">
-              <div className="first_status">
+              {/* <div className="first_status">
                 Thương hiệu: <span className="vendor_status_name">Nikon</span>
               </div>
               <div className="line_tt">|</div>
               <div className="top_sku first_status">
                 Mã sản phẩm:{" "}
                 <span className="sku_status_name">Đang cập nhật</span>
+              </div> */}
+              <div className="first_status">
+                Danh mục: <span className="vendor_status_name">{item.Category}</span>
               </div>
+
             </div>
             <div className="quickview-info">
               <span className="prices price-box">
                 <span className="price product-price sale-price">
-                  150.000.000₫
+                   {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}                  
                 </span>
-                <del className="old-price">163.990.000₫</del>
+                <del className="old-price">{item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : " "} </del>
               </span>
             </div>
             {/* nút tăng giảm */}
@@ -79,11 +111,38 @@ const ProductViewed = ({
               </div>
             </div>
             {/* thêm vào giỏ hàng */}
-            <div class="button_actions">
-              <button type="submit" class=" btn_add_to_cart ">
-                <i class="bi bi-cart3"></i>
-                <span class="btn-content text_1">Thêm vào giỏ hàng</span>
+            <div className="button_actions">
+              <button type="submit" className=" btn_add_to_cart" onClick={handleAddToCart}>
+                <i className="bi bi-cart3"></i>
+                <span className="btn-content text_1">Thêm vào giỏ hàng</span>
               </button>
+              <Modal
+                size="xl"
+                show={smShow}
+                onHide={() => setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+              >
+                <Modal.Header
+                  closeButton
+                  style={{ backgroundColor: "blue", color: "white" }}
+                >
+                  <Modal.Title id="example-modal-sizes-title-sm">
+                    <i className="bi bi-check-circle me-2" />
+                    Đã thêm{" "}
+                    <a
+                      href={`/product/${item.UrlProduct}`}
+                      style={{ fontSize: 24, color: "white" }}
+                    >
+                      [{item.ProductName}]
+                    </a>{" "}
+                    vào giỏ hàng
+                  </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <BoxCart isInModal={true} />
+                </Modal.Body>
+              </Modal>
             </div>
           </div>
         </div>

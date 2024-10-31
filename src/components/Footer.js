@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
+import wanboLogo from "../assets/wanbo.png"; //wanbo.png
 import "./footer.css";
 
 export default function Footer() {
@@ -27,13 +28,12 @@ export default function Footer() {
             height={180}
           />
           <Card.ImgOverlay className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            {/* Nội dung bên trái chiếm 6 phần */}
             <div
               className=" text-content flex-grow-1 me-md-3"
               style={{ flexBasis: "60%" }}
             >
-              <Card.Title className="nameDK" >
-                Đăng ký để nhận tin tức khuyến mãi mới nhất
+              <Card.Title className="nameDK">
+                ĐĂNG KÝ ĐỂ NHẬN TIN TỨC MỚI NHẤT
               </Card.Title>
               <Card.Text className="nameTT">
                 Bạn hãy để lại email để không bỏ lỡ hàng ngàn sản phẩm và các
@@ -41,26 +41,22 @@ export default function Footer() {
               </Card.Text>
             </div>
 
-            {/* Thanh tìm kiếm chiếm 4 phần */}
-            <div
-              className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0"
-          
-            >
+            <div className="search-ft d-flex justify-content-center align-items-center mt-3 mt-md-0">
               <Navbar.Collapse
                 id="navbarScroll"
                 className="flex-grow-1 d-flex justify-content-center mx-0 mx-md-5"
-                style={{width:"100%"}}
+                style={{ width: "100%" }}
               >
-                <div
-                  className="d-flex"
-                  style={{ position: "relative" }}
-                >
+                <div className="d-flex" style={{ position: "relative" }}>
                   <input
-                    className="form-control me-2 inputEmail"
-                    placeholder="Email của bạn"
+                    className="form-control me-2 inputEmail p-4"
+                    placeholder="Nhập email của bạn"
+                    onFocus={(e) => {
+                      e.target.style.boxShadow = "none";
+                    }}
                   />
-                  <Button className="search">
-                    <div  style={{ padding: 2.8}} >Gửi</div>
+                  <Button className="search px-4">
+                    <div style={{ padding: 6 }}>Gửi</div>
                   </Button>
                 </div>
               </Navbar.Collapse>
@@ -71,34 +67,53 @@ export default function Footer() {
 
       <section className="">
         <MDBContainer className="text-start text-md-start mt-5">
-          <MDBRow className="mt-3">
-            <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-2">
-              <img
+          <MDBRow className="mt-5 justify-content-center">
+            <MDBCol md="3" lg="4" xl="5" className=" mb-2">
+              {/* <img
                 alt=""
-                src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/logo_footer.png?1708522711041"
-                width="150px"
+                src={wanboLogo}
+                width="100%"
                 className="d-inline-block align-top mb-2"
-              />
+              /> */}
+              <span className="footer_company_name">
+                CÔNG TY TNHH THƯƠNG MẠI KẾT NỐI THÔNG MINH
+              </span>
               <p>
-                <a href="#!" className="text-reset">
-                  Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
+                <a href="" className="text-reset22 d-flex  align-items-center ">
+                  <i className="bi bi-send me-2" style={{ fontSize: 25 }} />{" "}
+                  <div>
+                    245A Trần Quang Khải, P. Tân Định, Quận 1, Tp.Hồ Chí Minh
+                  </div>
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
-                  1900 6750
+                <a
+                  href=""
+                  className="text-reset22 d-flex  align-items-center  "
+                >
+                  <i
+                    className="bi bi-telephone me-2"
+                    style={{ fontSize: 25 }}
+                  />
+                  <div>Hotline: 093.886.9759</div>
                 </a>
               </p>
               <p>
-                <a href="#!" className="text-reset">
-                  support@sapo.vn
+                <a
+                  href=""
+                  className="text-reset22 d-flex  align-items-center  "
+                >
+                  <i className="bi bi-envelope me-2" style={{ fontSize: 25 }} />
+                  <div>Email: cskh@smartconnection.com.vn</div>
                 </a>
               </p>
             </MDBCol>
 
-            <MDBCol md="2" lg="2" xl="2" className="mx-auto">
+            <MDBCol md="2" lg="2" xl="2" className="">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">Về chúng tôi</h6>
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
+                  Về chúng tôi
+                </h6>
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
@@ -118,36 +133,38 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showAboutUs ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Trang chủ
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Giới thiệu
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Sản phẩm
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Tin tức
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    liên hệ
+                  <a href="#!" className="text-reset2">
+                    Liên hệ
                   </a>
                 </p>
               </div>
             </MDBCol>
 
-            <MDBCol md="3" lg="2" xl="2" className="mx-auto">
+            <MDBCol md="3" lg="2" xl="2" className="">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">Chính sách</h6>
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
+                  Chính sách
+                </h6>
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
@@ -167,31 +184,36 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showPolicy ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Chính sách giao hàng
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
+                  <a href="#!" className="text-reset2">
                     Chính sách đổi trả
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Chính sách bán hàng
+                  <a href="#!" className="text-reset2">
+                    Giao hàng & thanh toán
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
-                    Hướng dẫn trả góp
+                  <a href="#!" className="text-reset2">
+                    Điều khoản bảo hành
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset2">
+                    Chính sách bảo mật
+                  </a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset2">
+                    Chính sách Cookie
                   </a>
                 </p>
               </div>
             </MDBCol>
 
-            <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0">
+            <MDBCol md="4" lg="3" xl="3" className=" mb-md-0">
               <div className="w-100 footer-title-menu">
-                <h6 className="text-uppercase mb-0 fw-bold">
+                <h6 className="text-uppercase mb-0 fw-bold text-reset2">
                   Tư vấn khách hàng
                 </h6>
                 <div className="collapse-menu-btn">
@@ -213,22 +235,43 @@ export default function Footer() {
               </div>
               <div className={`about-sub-item ${showAdvice ? "show" : ""}`}>
                 <p>
-                  <MDBIcon icon="home" className="me-3" />
-                  Mua hàng: 1900 6750
+                  Mua hàng:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="envelope" className="me-3" />
-                  Khiếu nại: 1900 6750
+                  Khiếu nại:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="phone" className="me-3" /> Bảo hành: 1900 6750
+                  Bảo hành:{" "}
+                  <span className="text-reset2 fw-bold">1900 6750</span>
                 </p>
                 <p>
-                  <MDBIcon icon="print" className="me-3" /> Phương thức thanh
-                  toán
+                  <h6 className=" text-uppercase fw-bold text-reset2">
+                    Phương thức thanh toán
+                  </h6>
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_1.png?1708522711041"
+                    className="d-inline-block align-top "
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_2.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_3.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
+                  <img
+                    alt=""
+                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_4.png?1708522711041"
+                    className="d-inline-block align-top mb-2"
+                  />
                 </p>
               </div>
-              <h6 className="text-uppercase fw-bold">Phương thức thanh toán</h6>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
@@ -238,7 +281,7 @@ export default function Footer() {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
         © Bản quyền thuộc về Lofi Team
-        <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
+        <a className="text-reset2 fw-bold" href="https://mdbootstrap.com/">
           | Cung cấp bởi Sapo
         </a>
       </div>

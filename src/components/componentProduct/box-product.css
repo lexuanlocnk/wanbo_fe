@@ -1,10 +1,70 @@
-/* @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .modal-product-viewed {
-    min-width: 700px;
-  }
+.custom-modal-header .btn-close {
+  filter: brightness(100) invert(9);
 }
-@media screen and (max-width: 768px) {
-  .modal-product-viewed {
-    min-width: 90%;
-  }
-} */
+
+.custom-modal-header .btn-close:hover {
+  background-color: transparent; /* Xóa nền khi hover */
+}
+
+.item-compare-wrap {
+  width: calc(97% / 3);
+  justify-content: center;
+  align-items: center;
+  padding: 15px 10px;
+  border: 1px solid #2854e5;
+  border-radius: 5px;
+  display: flex;
+}
+.item-compare-img-thumb {
+  width: 30%;
+}
+.item-compare-wrap .product-info {
+  width: 70%;
+  text-align: left;
+  padding-left: 20px;
+}
+.item-compare-wrap .product-info .product-name {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  min-height: 35px;
+}
+.item-compare-wrap .product-info .price-box .price {
+  font-size: 14px;
+  font-weight: 400;
+}
+.item-compare-wrap .product-info .price-box .compare-price {
+  font-weight: 400;
+  margin-left: 5px;
+  color: #bbbbbb;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+.item-compare-wrap .remove-compare-item:hover,
+.item-compare-wrap .product-info .product-name:hover {
+  cursor: pointer;
+  color: rgb(40, 84, 229);
+}
+
+.item-compare-img-thumb img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.compare-navigate-but {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+.compare-navigate-but a {
+  color: rgb(40, 84, 229) !important;
+}
+.ant-drawer-content-wrapper {
+  height: 330px !important;
+}
+.box-product {
+}

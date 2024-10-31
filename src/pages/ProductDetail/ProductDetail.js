@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
-import { newItems, newsItems, cameraItem, lendItem } from "../Data";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Detail.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import { Collapse, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 
 import Accordion from "react-bootstrap/Accordion";
@@ -17,11 +16,32 @@ import BoxProduct from "../../components/componentProduct/BoxProduct";
 import { CartContext } from "../Cart/CartContext";
 import FeaturedNews from "../../components/FeaturedNews";
 import BoxCart from "../../components/componentProduct/BoxCart";
+import HomeApi from "../../api/homeApi";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
-const ProductDetail = ({ children, eventKey }) => {
+const ProductDetail = ({ children, eventKey, item }) => {
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const product = lendItem.find((item) => item.id === parseInt(id));
+  const { urlProduct } = useParams();
+
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProductDetail = async () => {
+      try {
+        const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
+        const data = await response.json();
+         if (data.status === true && data.productDetail) {
+            setProduct(data.productDetail);
+          } 
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    fetchProductDetail();
+  }, [urlProduct]);
+
 
   // Lấy hàm addToCart từ context
   const { addToCart } = useContext(CartContext);
@@ -30,10 +50,7 @@ const ProductDetail = ({ children, eventKey }) => {
   const [modalShow, setModalShow] = useState(false);
 
   //lấy 5 sản phẩm đầu tương tự
-  const topItems = lendItem.slice(0, 5);
-
-  // lưu hình ảnh đầu tiên
-  const [mainImage, setMainImage] = useState(product.images[0]);
+ 
 
   // State để lưu số lượng sản phẩm
   const [quantity, setQuantity] = useState(1);
@@ -52,7 +69,14 @@ const ProductDetail = ({ children, eventKey }) => {
   const [smShow, setSmShow] = useState(false);
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity }); // Thêm sản phẩm vào giỏ hàng
+    addToCart({
+      id: product.ProductId,
+      name: product.ProductName,
+      price: product.Price,
+      images: product.Image,
+      quantity: quantity,
+      originalPrice: product.PriceOld,
+    });
     setSmShow(true);
   };
 
@@ -61,8 +85,8 @@ const ProductDetail = ({ children, eventKey }) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }}>
-      <div className="container py-5">
+    <div style={{ backgroundColor: "#f4f4f4" }} className="py-4">
+      <div className="container">
         <div className="row p-4 pb-5" style={{ backgroundColor: "white" }}>
           <div
             className="col-md-7 d-flex flex-column align-items-center"
@@ -70,43 +94,48 @@ const ProductDetail = ({ children, eventKey }) => {
           >
             <img
               className="img imgdetail fade-in"
-              src={mainImage}
+              src={`${imageBaseUrl}${product.Image}`}
               alt={product.name}
             />
 
             <div className="d-flex justify-content-between mt-3">
-              {product.images.map((img, index) => (
+              {/* này là 1 mảng ảnh */}
+              {/* {product.Image.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`Thumbnail ${index + 1}`}
-                  onClick={() => setMainImage(img)} // Cập nhật ảnh lớn khi nhấn vào
-                  style={{
-                    border:
-                      mainImage === img ? "1px solid #007bff" : "1px #ddd",
-                  }}
+                  alt={`Thumbnail ${index + 1}`}                               
                   className="thumbnail-image"
                 />
-              ))}
+              ))} */}   
+
+              {product && product.Image && (
+                <img
+                  src={`${imageBaseUrl}${product.Image}`}
+                  alt="Thumbnail 1"
+                  className="thumbnail-image"
+                />
+              )}
+
             </div>
           </div>
+
           <div style={{ position: "absolute", width: "15%" }}>
-            <LightboxButton productId={product.id} />
+            <LightboxButton productId={product.ProductId} />
           </div>
 
           <div className="col-md-5">
-            <h3>{product.name}</h3>
-            <h6>Thương hiệu Canon</h6>
+            <h4 className="fw-bold">{product.ProductName}</h4>
+            <h6>Danh mục: {product.Category}</h6>
             <div className="d-flex align-items-center">
-              <p className="pricedetail me-3">
-                {" "}
-                {product.price.toLocaleString("vi-VN")} VND
+              <p className="pricedetail me-3">               
+                {product.Price ? `${product.Price.toLocaleString("vi-VN")} đ` : "N/A"}
               </p>
 
               <p className="original-priceDetail">
-                {product.discountPercentage > 0 ? (
+                {product.PriceOld != null ? (
                   <>
-                    {product.originalPrice.toLocaleString("vi-VN")} VND <br />
+                    {product.PriceOld ? `${product.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}
                   </>
                 ) : (
                   <br />
@@ -115,8 +144,10 @@ const ProductDetail = ({ children, eventKey }) => {
             </div>
             <p className="VAT">Giá đã bao gồm 10% VAT</p>
 
-            <Row className="mt-1 ms-1 align-items-center">
-              <Col xs="auto">Số lượng:</Col>
+            <div className="d-flex mt-1 align-items-center">
+              <Col xs="auto" className="me-4">
+                Số lượng:
+              </Col>
               <Col xs="auto">
                 <div className="border p-1 d-flex align-items-center">
                   <button
@@ -125,7 +156,7 @@ const ProductDetail = ({ children, eventKey }) => {
                     style={{
                       width: 30,
                       backgroundColor: "white",
-                      textDecoration: "none"
+                      textDecoration: "none",
                     }}
                   >
                     <b className="operationDetail">-</b>
@@ -137,14 +168,14 @@ const ProductDetail = ({ children, eventKey }) => {
                     style={{
                       width: 30,
                       backgroundColor: "white",
-                      textDecoration: "none"
+                      textDecoration: "none",
                     }}
                   >
                     <b className="operationDetail">+</b>
                   </button>
                 </div>
               </Col>
-            </Row>
+            </div>
 
             {/* Nút mua hàng */}
             <Button variant="danger" className="my-3 p-2 buy">
@@ -190,7 +221,7 @@ const ProductDetail = ({ children, eventKey }) => {
               </Modal>
 
               <Button variant="primary" className="adddetail">
-                Trả góp <br />
+                TRẢ GÓP <br />
                 <p style={{ fontSize: 12 }}>(Mua trả góp lãi suất thấp)</p>
               </Button>
             </div>
@@ -200,10 +231,10 @@ const ProductDetail = ({ children, eventKey }) => {
                 KHUYẾN MÃI
               </Card.Header>
               <Card.Body>
-                <li>Nhập mã LOFI thêm 5% đơn hàng</li>
-                <li>Giảm giá 10% khi mua từ sản phẩm thứ 2</li>
-                <li>Tặng phiếu mua hàng khi mua từ 1000k</li>
-                <li>Đổi trả hàng trong vòng 30 ngày</li>
+                <li className="f14">Nhập mã LOFI thêm 5% đơn hàng</li>
+                <li className="f14">Giảm giá 10% khi mua từ sản phẩm thứ 2</li>
+                <li className="f14">Tặng phiếu mua hàng khi mua từ 1000k</li>
+                <li className="f14">Đổi trả hàng trong vòng 30 ngày</li>
               </Card.Body>
             </Card>
           </div>
@@ -215,63 +246,44 @@ const ProductDetail = ({ children, eventKey }) => {
             className="mt-4 p-4"
             style={{ backgroundColor: "white", height: "auto" }}
           >
-            <h5>Thông tin chi tiết sản phẩm</h5>
+            <h5 className="tblack fw-bold">Thông tin chi tiết sản phẩm</h5>
             <hr />
             <div className="d-flex flex-column align-items-center">
-              <p>{product.description}</p>
+              <h5>{product.ProductName}</h5>
               <img
-                className="img"
-                src={product.images[1]}
-                alt={product.name}
+                className="img mb-4"
+                src={`${imageBaseUrl}${product.Image}`}
+                alt={product.ProductName}
                 style={{ width: "45%", height: "auto" }}
               />
 
-              <Accordion className="d-flex flex-column align-items-center shadow4 mt-5">
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <b>Xem thêm</b>
-                  </Accordion.Header>
-                  <Accordion.Body style={{ width: "100%" }}>
-                    <h2>
-                      Cảm biến FullFrame BSI CMOS 45.7MP và Bộ xử lý EXPEED 5
-                    </h2>
-                    <p>{product.description}</p>
+              {/* Nội dung Collapse */}
+             <Collapse in={open}>
+               <div id="product-collapse" className="w-100 mt-3 product-description">
+                <div
+                  dangerouslySetInnerHTML={{ __html: product.productDescription }}
+                ></div>
+              </div>
+            </Collapse>
 
-                    <div className="d-flex justify-content-center">
-                      <img
-                        className="img imgdetail2"
-                        src={product.images[2]}
-                        alt={product.name}
-                      />
-                    </div>
-
-                    <p>{product.description}</p>
-
-                    <h3>Hệ thống Multi-CAM 20K 153 điểm lấy nét</h3>
-
-                    <p>{product.description}</p>
-
-                    <div className="d-flex justify-content-center">
-                      <img
-                        className="img imgdetail2"
-                        src={product.images[2]}
-                        alt={product.name}
-                      />
-                    </div>
-
-                    <p>{product.description}</p>
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
+              {/* Nút để mở/đóng Collapse */}
+              <Button
+                variant="outline-dark"
+                onClick={() => setOpen(!open)}
+                aria-controls="product-collapse"
+                aria-expanded={open}               
+                className="close"
+              >
+                {open ? "Thu gọn" : "Xem thêm"}
+              </Button>
             </div>
           </Col>
-
           <Col md={5} xs={12} className="mt-4" style={{ marginRight: -12 }}>
             <Col
               className="p-4"
               style={{ height: "auto", backgroundColor: "white" }}
             >
-              <h5>Thông số kỹ thuật</h5>
+               <h5 className="tblack fw-bold">Thông số kỹ thuật</h5>
               <hr />
               <Table striped bordered hover>
                 <tbody>

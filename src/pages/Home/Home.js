@@ -1,20 +1,11 @@
-import React, { useRef, useState } from "react";
-
-import Carousel from "react-bootstrap/Carousel";
-import img from "./../../assets/slider_1.webp";
-import img2 from "./../../assets/slider_2.webp";
-import imgBanner from "./../../assets/img_banner_slide.webp";
-import imgBanner2 from "./../../assets/img_banner_slide_2.webp";
-import imgBanner3 from "./../../assets/image_service1.webp";
+import React, { useEffect, useRef, useState } from "react";
 import imgBanner4 from "./../../assets/img_one_banner.webp";
 import imgBanner5 from "./../../assets/banner_bottom_1.webp";
 import imgBanner6 from "./../../assets/banner_bottom_2.webp";
 import imgBanner7 from "./../../assets/banner_bottom_3.webp";
 import imgBanner8 from "./../../assets/banner_bottom_4.webp";
 import "react-multi-carousel/lib/styles.css";
-
 import Carouselm from "react-multi-carousel";
-
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
@@ -31,8 +22,35 @@ import "./Home.css";
 import { auto } from "@popperjs/core";
 import BoxProduct from "../../components/componentProduct/BoxProduct";
 import FlashSaleCountdown from "../../components/FlashSaleCountdown";
+import HomeBanner from "../../components/homeBanner";
+import HomeApi from "../../api/homeApi";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const Home = (props) => {
+  const [categoryData, setCategoryData] = useState([]);
+  const [flashSaleData, setFlashSaleData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchProjetorLists = async () => {
+      const homeApi = new HomeApi();
+      try {
+        const response = await homeApi.getProduct();
+        setCategoryData(response.data.data); // Lấy data từ response
+
+        const responseFl = await homeApi.getFlashSale();
+        setFlashSaleData(responseFl.data.ProductFlashSale);
+             
+      } catch (err) {
+        console.log("Fetch MenuCategory Data Error: ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjetorLists();
+  }, []);
+
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -87,144 +105,13 @@ const Home = (props) => {
     },
   };
 
+
   return (
-    <div >
-      <div className="my-4 container" >
-        <div className="mt-4">
-          <div className="row">
-            {/* Phần hình ảnh chính */}
-            <div className="col-lg-8 col-md-12 mb-4">
-              <Carousel fade controls={true}>
-                <Carousel.Item interval={1000}>
-                  <img
-                    alt=""
-                    src={img2}
-                    width="100%"
-                    className="d-block align-top hover-zoom"
-                  />
-                </Carousel.Item>
-                <Carousel.Item interval={1000}>
-                  <img
-                    alt=""
-                    src={img}
-                    width="100%"
-                    className="d-block align-top hover-zoom"
-                  />
-                </Carousel.Item>
-              </Carousel>
-            </div>
+    <div>
+      <div className="my-4 container">
+        <HomeBanner />
 
-            {/* Phần các banner */}
-            <div className="col-lg-4 col-md-12">
-              <div className="row">
-                {/* Banner 1 */}
-                <div className="col-6 col-md-12 mb-4">
-                  <img
-                    alt=""
-                    src={imgBanner}
-                    width="100%"
-                    className="d-block align-top "
-                  />
-                </div>
-
-                {/* Banner 2 */}
-                <div className="col-6 col-md-12">
-                  <img
-                    alt=""
-                    src={imgBanner2}
-                    width="100%"
-                    className="d-block align-top"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* tien ich */}
-        <div className="row text-center text-md-start mt-2 ">
-          {/* Đổi trả dễ dàng */}
-          <div className="col-6 col-sm-6 col-md-3">
-            <div className="d-flex align-items-center">
-              <div className="text-center me-3">
-                <img
-                  alt=""
-                  src={imgBanner3}
-                  width="50px"
-                  className="d-block align-top mx-auto"
-                />
-              </div>
-              <div className="d-flex flex-column justify-content-center">
-                <h6>Đổi trả dễ dàng</h6>
-                <p className="d-none d-md-block">
-                  Đổi trả trong 30 ngày đầu tiên cho tất cả các sản phẩm
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Giao hàng toàn quốc */}
-          <div className="col-6 col-sm-6 col-md-3">
-            <div className="d-flex align-items-center">
-              <div className="text-center me-3">
-                <img
-                  alt=""
-                  src={imgBanner3}
-                  width="50px"
-                  className="d-block align-top mx-auto"
-                />
-              </div>
-              <div className="d-flex flex-column justify-content-center">
-                <h6>Giao hàng toàn quốc</h6>
-                <p className="d-none d-md-block">
-                  Miễn phí giao hàng với các đơn hàng trị giá trên 5.000.000Đ
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Quà tặng hấp dẫn */}
-          <div className="col-6 col-sm-6 col-md-3">
-            <div className="d-flex align-items-center">
-              <div className="text-center me-3">
-                <img
-                  alt=""
-                  src={imgBanner3}
-                  width="50px"
-                  className="d-block align-top mx-auto"
-                />
-              </div>
-              <div className="d-flex flex-column justify-content-center">
-                <h6>Quà tặng hấp dẫn</h6>
-                <p className=" d-none d-md-block">
-                  Chương trình khuyến mãi cực lớn và hấp dẫn hàng tháng
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Hỗ trợ online 24/7 */}
-          <div className="col-6 col-sm-6 col-md-3">
-            <div className="d-flex align-items-center">
-              <div className="text-center me-3">
-                <img
-                  alt=""
-                  src={imgBanner3}
-                  width="50px"
-                  className="d-block align-top mx-auto"
-                />
-              </div>
-              <div className="d-flex flex-column justify-content-center">
-                <h6>Hỗ trợ online 24/7</h6>
-                <p className=" d-none d-md-block">
-                  Luôn hỗ trợ khách hàng 24/24 giờ các ngày trong tuần
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* item phu kien */}
+        {/* item category Data */}
         <div className="border rounded shadow4 p-4 my-3">
           <Carouselm
             swipeable={true}
@@ -243,7 +130,7 @@ const Home = (props) => {
             autoPlay={props.deviceType !== "mobile" ? true : false}
             deviceType={props.deviceType}
           >
-            {items.map((item) => (
+           {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
               <div
                 className="d-flex align-items-center me-3 mb-3"
                 key={item.id}
@@ -251,12 +138,14 @@ const Home = (props) => {
               >
                 <div className="flex-grow-1">
                   <a href={`/product/${item.id}`} className="card-title">
-                    <h5>{item.name}</h5>
+                    <h6 className="f16">{item?.Category}</h6>
                   </a>
-                  <p className="card-text">Số lượng: {item.quantitysale}</p>
+                  <p className="card-text tgray">
+                    Số lượng: {item.countProduct}
+                  </p>
                 </div>
                 <img
-                  src={item.images}
+                  src={`${imageBaseUrl}${item.imageCategory}`}
                   alt={item.name}
                   className="card-img-top img"
                   style={{
@@ -266,158 +155,173 @@ const Home = (props) => {
                   }}
                 />
               </div>
-            ))}
+            )): []}
           </Carouselm>
         </div>
       </div>
-
 
       {/* Flash Sale */}
       <div
-        className=" align-items-center py-4"
-        style={{ width: "100%", height: "auto", backgroundColor: "blue" }}
-      >
-        <div className="container">
-        <div className="d-flex  align-items-center flex-column-mobile">
-          <h2 style={{ color: "white" }} className="me-5">
-            Flash Sale
-          </h2>
-          <FlashSaleCountdown />
-        </div>
-
-        <Carouselm
-          swipeable={true}
-          draggable={true}
-          showDots={true}
-          responsive={responsive}
-          ssr={true}
-          infinite={true}
-          autoPlaySpeed={3000}
-          keyBoardControl={true}
-          customTransition="all 1.1s"
-          transitionDuration={1100}
-          containerClass="carousel-container"
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-50-px"
-          autoPlay={props.deviceType !== "mobile" ? true : false}
-          deviceType={props.deviceType}
-        >
-          {newItems.map((item) => (
-            <BoxProduct key={item.id} item={item} />
-          ))}
-        </Carouselm>
+        className=" align-items-center py-4 my-5 flashsale-carousel"
+        style={{ width: "100%", height: "auto", backgroundColor: "#0d6efd" }}
+      >          
+          <div className="container">
+            <div className="d-flex  align-items-center flex-column-mobile">
+              <h2 style={{ color: "white" }} className="">
+                Flash Sale
+               </h2>
+               <div className="mx-4" />
+              <FlashSaleCountdown />
+             </div>         
+                <Carouselm
+                  swipeable={true}
+                  draggable={true}
+                  showDots={true}
+                  responsive={responsive}
+                  ssr={true}
+                  infinite={true}
+                  autoPlaySpeed={3000}
+                  keyBoardControl={true}
+                  customTransition="all 1.1s"
+                  transitionDuration={1100}
+                  containerClass="carousel-container"
+                  dotListClass="custom-dot-list-style"
+                  itemClass="carousel-item-padding-50-px"
+                  autoPlay={props.deviceType !== "mobile" ? true : false}
+                  deviceType={props.deviceType}
+                >
+                  {flashSaleData && flashSaleData.length > 0 ? flashSaleData.map(( item ) => {
+                   return (              
+                      <BoxProduct key={item.ProductId} item={item} />                         
+                      )
+                    }):[] 
+                  }
+                </Carouselm>                             
+         </div>
       </div>
-      </div>
+      
 
-      {/* May anh */}
-
-      <div className="row align-items-center container my-5 d-flex">
-        <div className=" col-6 col-md-3 d-flex">
-          <h3>Máy ảnh</h3>
-        </div>
-        <div className=" col-6 col-md-9 d-flex justify-content-end">
-          <div className="d-flex">
-            <div className="d-none d-lg-flex">
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Mirrorless
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Compact
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Instax
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Medium Format
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Film
-              </Button>
+      {/* May chieu */}
+      {categoryData && categoryData.length > 0 ? categoryData.map(( item ) => {
+          return (
+            <div className=" align-items-center container ">
+            <div className="row">
+              <div className=" col-6 col-md-3 d-flex">
+                <h5
+                  style={{
+                    textTransform: "uppercase",
+                    marginTop: 10,
+                    fontWeight: "600",
+                  }}
+                >
+                 {item?.Category}
+                </h5>
+              </div>
+              <div className=" col-6 col-md-9 d-flex justify-content-end">
+                {/* <div className="d-flex">
+                  <div className="d-none d-lg-flex">
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Mirrorless
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Compact
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Instax
+                    </Button>
+                    <Button
+                      className="me-2 btn2"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                    >
+                      Máy ảnh Medium Format
+                    </Button>
+                  </div>
+                </div> */}
+                <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+                  Xem tất cả
+                </Button>
+              </div>
             </div>
-            <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
-              Xem tất cả
-            </Button>
-          </div>
-        </div>
-
-        <div className="py-2">
-          <Carouselm
-            swipeable={true}
-            draggable={true}
-            showDots={true}
-            responsive={responsive}
-            ssr={true}
-            infinite={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all 1.1s"
-            transitionDuration={1100}
-            containerClass="carousel-container"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-50-px"
-            autoPlay={props.deviceType !== "mobile" ? true : false}
-            deviceType={props.deviceType}
-          >
-            {cameraItem.map((item) => (
-              <BoxProduct key={item.id} item={item} />
-            ))}
-          </Carouselm>
-        </div>
-      </div>
+    
+            <div className="py-2">
+              <Carouselm
+                swipeable={true}
+                draggable={true}
+                showDots={true}
+                responsive={responsive}
+                ssr={true}
+                infinite={true}
+                autoPlaySpeed={50000}
+                keyBoardControl={true}
+                customTransition="all 1.1s"
+                transitionDuration={1100}
+                containerClass="carousel-container"
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-50-px"
+                autoPlay={props.deviceType !== "mobile" ? true : false}
+                deviceType={props.deviceType}
+              >
+                {item?.ProductChild && item.ProductChild?.length> 0 ? item.ProductChild?.map((item) => (
+                  <BoxProduct key={item.ProductId} item={item} />
+                )): []}
+              </Carouselm>
+            </div>
+          </div> 
+          )
+        }):[] 
+      }
 
       {/* Ong kính */}
-      <div className="row align-items-center container my-4">
-      <div className=" col-6 col-md-2 d-flex">
-          <h3>Ống kính</h3>
-        </div>
-        <div className=" col-6 col-md-10 d-flex justify-content-end">
-          <div className="d-flex">
-            <div className="d-none d-lg-flex">
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Mirrorless
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Compact
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Instax
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Medium Format
-              </Button>
-              <Button
-                className="me-2 btn2"
-                style={{ backgroundColor: "#EEEEEE" }}
-              >
-                Máy ảnh Film
-              </Button>
+      {/* <div className=" align-items-center container">
+        <div className="row">
+          <div className=" col-6 col-md-2 d-flex">
+            <h5
+              style={{
+                textTransform: "uppercase",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              ống kính
+            </h5>
+          </div>
+          <div className=" col-6 col-md-10 d-flex justify-content-end">
+            <div className="d-flex">
+              <div className="d-none d-lg-flex">
+                <Button
+                  className="me-2 btn2"
+                  style={{ backgroundColor: "#EEEEEE" }}
+                >
+                  Máy ảnh Mirrorless
+                </Button>
+                <Button
+                  className="me-2 btn2"
+                  style={{ backgroundColor: "#EEEEEE" }}
+                >
+                  Máy ảnh Compact
+                </Button>
+                <Button
+                  className="me-2 btn2"
+                  style={{ backgroundColor: "#EEEEEE" }}
+                >
+                  Máy ảnh Instax
+                </Button>
+                <Button
+                  className="me-2 btn2"
+                  style={{ backgroundColor: "#EEEEEE" }}
+                >
+                  Máy ảnh Medium Format
+                </Button>
+              </div>
             </div>
             <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
               Xem tất cả
@@ -448,9 +352,9 @@ const Home = (props) => {
             ))}
           </Carouselm>
         </div>
-      </div>
+      </div> */}
       {/* anh banner */}
-      <div className="img-container container my-2 rounded">
+      {/* <div className="img-container container my-2 rounded">
         <a href={`/product`} className="card-title ">
           <img
             // alt="/product"
@@ -459,11 +363,19 @@ const Home = (props) => {
             className="d-block align-top hover-zoom"
           />
         </a>
-      </div>
+      </div> */}
       {/* Máy quay phim */}
-      <div className="row align-items-center container my-4">
+      {/* <div className="row align-items-center container my-4">
         <div>
-          <h3>Máy quay phim</h3>
+          <h5
+            style={{
+              textTransform: "uppercase",
+              marginTop: 10,
+              fontWeight: "600",
+            }}
+          >
+            Máy quay phim
+          </h5>
         </div>
 
         <div className="py-2">
@@ -489,17 +401,19 @@ const Home = (props) => {
             ))}
           </Carouselm>
         </div>
-      </div>
+      </div> */}
       {/* anh banner 2 */}
       <div className="img-container my-5 rounded container">
         <a href="/product" className="card-title">
           <img
-            src={imgBanner5}
+          style={{height: 280, objectFit: "cover",border: 15}}
+            src="https://wanbo.cn/cdn/shop/files/3_33b7f516-cc50-4a3e-8487-ba768b98ca8b.jpg?v=1716813493&width=2000"
             className="d-block w-100 img-fluid align-top hover-zoom"
             alt="Banner lớn"
+            
           />
         </a>
-      </div>
+      </div>  
 
       {/* Ba hình ảnh banner nhỏ */}
       <div className="my-5 container">
@@ -508,7 +422,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner6}
+                  src="https://wanbo.cn/cdn/shop/files/1_5.jpg?v=1717726984&width=550"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 1"
                 />
@@ -520,7 +434,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner7}
+                  src="https://wanbo.cn/cdn/shop/files/2_3.jpg?v=1717726987&width=750"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 2"
                 />
@@ -532,7 +446,7 @@ const Home = (props) => {
             <div className="img-container rounded">
               <a href="/product">
                 <img
-                  src={imgBanner8}
+                  src="https://wanbo.cn/cdn/shop/files/211022-wanboT6_-_-_0337.jpg?v=1716115219&width=1500"
                   className="bannerbottom hover-zoom img-fluid"
                   alt="Banner nhỏ 3"
                 />
@@ -543,14 +457,11 @@ const Home = (props) => {
       </div>
 
       {/* tin tuc */}
-      <h5 className="container  mt-5">TIN TỨC</h5>
-      <div className="d-flex flex-wrap justify-content-around mb-5 container">
-        
+      <div className=" mt-5" />
+      <h5 className="container mt-5 fw-bold">TIN TỨC</h5>
+      <div className="d-flex flex-wrap justify-content-between mb-5 container">
         {newsItems.map((item) => (
-          <Card
-            key={item.id}
-            className="m-1 news"
-          >
+          <Card key={item.id} className="m-1 news">
             <div className="img-container">
               <Card.Img
                 variant="top"
@@ -559,18 +470,30 @@ const Home = (props) => {
               />
             </div>
             <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <Card.Text className="bi bi-clock-history">{item.date}</Card.Text>
-              <Card.Text className="text-truncate-3">
+              <Card.Title className="f16 tblack fw-bold h6">
+                {item.title}
+              </Card.Title>
+              <div className="d-flex">
+                <Card.Text className="bi bi-person me-2 tgray">
+                  Team dev
+                </Card.Text>
+                <p>|</p>
+                <Card.Text className="ms-2 tgray">
+                  <span className="bi bi-clock-history me-1" />
+                  {item.date}
+                </Card.Text>
+              </div>
+              <Card.Text className="text-truncate-3 tgray">
                 {item.description}
               </Card.Text>
               <a href={`/news/${item.id}`} className="card-title">
-                <h6>Xem thêm</h6>
+                <h6 className="h6 f14 tblack fw-bold">Xem thêm</h6>
               </a>
             </Card.Body>
           </Card>
         ))}
       </div>
+      <div className=" mb-5" />
     </div>
   );
 };

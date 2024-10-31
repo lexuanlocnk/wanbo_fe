@@ -4,8 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import wanboLogo from "../assets/logo.webp";
-import call from "../assets/call.png";
+import wanboLogo from "../assets/wanbo.png"; //wanbo.png
 import user from "../assets/user.png";
 import "../components/AppHeader.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,8 +22,8 @@ function Search() {
   return (
     <Navbar
       expand="lg"
-      className="custom-navbar py-4"
-      style={{ borderBottom: "1px solid gray" }}
+      className="custom-navbar"
+      style={{ borderBottom: "0.5px solid #DCDCDC" }}
     >
       <Container
         fluid
@@ -43,76 +42,74 @@ function Search() {
           </Link>
 
           {/* Thanh tìm kiếm và các nút */}
-          <div className="d-flex flex-column flex-md-row-reverse align-items-center w-100">
+          <div className="d-flex flex-column flex-md-row-reverse align-items-end w-100">
             <div className="d-flex align-items-center mt-2 mt-md-0">
               {/* Gọi mua hàng */}
               <div className="d-none d-md-flex align-items-center text-center me-3">
-                <img
-                  alt="Call"
-                  src={call}
-                  width="auto"
-                  height="30"
-                  className="d-inline-block align-top me-2"
-                />
-                <div>
+                <i
+                  className="bi bi-telephone-inbound-fill"
+                  style={{ fontSize: 20 }}
+                ></i>
+                <div style={{ fontSize: 13, fontWeight: "600", marginLeft: 5 }}>
                   Gọi mua hàng <br />
-                  <span style={{ fontSize: "0.9rem" }}>01245678910</span>
+                  <span>1900 6750</span>
                 </div>
               </div>
 
               {/* Tài khoản */}
               <div className="d-none d-md-flex align-items-center text-center me-3">
-                <img
-                  alt="User"
-                  src={user}
-                  width="auto"
-                  height="30"
-                  className="d-inline-block align-top me-2"
-                />
-                <Col>
-                  <a
-                    href={`/login`}
-                    style={{ color: "white", fontSize: "0.9rem" }}
-                  >
-                    Tài khoản
-                  </a>
-                  <br />
-                  <a
-                    href={`/login`}
-                    style={{ color: "white", fontSize: "0.9rem" }}
-                  >
+                <i className="bi bi-person-fill" style={{ fontSize: 30 }}></i>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: "600",
+                    color: "#000",
+                    marginLeft: 5,
+                  }}
+                >
+                  Tài khoản <br />
+                  <a className="login-nav-btn" href="/login" style={{ color: "#000" }}>
                     Đăng nhập
                   </a>
-                </Col>
+                </div>
               </div>
-
+              <a
+                className="bi-telephone d-block d-md-none"
+                style={{ fontSize: 22, marginRight: 15, color: "white" }}
+              />
               {/* Giỏ hàng */}
               <Button
-                variant="outline-light"
+                variant="outline-primary"
                 onClick={() => navigate("/cart")}
-                className="position-relative d-flex align-items-center"
+                className="position-relative d-flex align-items-end align-items-centers button-cart"
+                style={{ color: "#000", border: "1px solid #000" }}
               >
                 <Badge
                   bg="primary"
-                  style={{ position: "absolute", left: 27, top: 7 }}
+                  style={{
+                    position: "absolute",
+                    left: 27,
+                    top: 7,
+                    fontSize: 10,
+                  }}
                 >
                   {totalItems}
                 </Badge>
-                <span
-                  className="bi bi-basket"
-                  style={{ fontSize: 24, marginRight: 10 }}
+                <i
+                  className="bi bi-basket "
+                  style={{ fontSize: 22, marginRight: 15 }}
                 />
-                Giỏ hàng
+                <div className="d-none d-md-flex mb-1">Giỏ hàng</div>
               </Button>
             </div>
           </div>
         </div>
         {/* Thanh tìm kiếm */}
-        
+
         <div className="meme">
           <div
-            className="d-flex w-100 justify-content-center"
-            style={{ maxWidth: 600, position: "relative" }}
+            className="d-flex justify-content-center"
+            style={{ Width: 800, position: "relative" }}
           >
             <input
               className="form-control me-2"
@@ -124,13 +121,15 @@ function Search() {
                 borderRadius: 5,
               }}
               placeholder="Tìm kiếm"
+              onFocus={(e) => {
+                e.target.style.boxShadow = "none"; // Loại bỏ hiệu ứng màu xanh
+              }}
             />
             <Button className="search">
-              <div className="bi bi-search" style={{ padding: 2.8 }} />
+              <div className="bi bi-search" style={{ padding: 2.7 }} />
             </Button>
           </div>
         </div>
-
       </Container>
     </Navbar>
   );

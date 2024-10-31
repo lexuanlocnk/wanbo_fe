@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Row, Col, Card, FormCheck } from "react-bootstrap";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const ProductCart = ({
   item,
@@ -11,7 +12,7 @@ const ProductCart = ({
 }) => {
   return (
     <>
-      <Row className="align-items-center border-bottom" key={item.id}>
+      <Row className="align-items-center border-bottom" key={item.ProductId}>
         {/* Checkbox chọn sản phẩm */}
         <Col
           sm={1}
@@ -27,7 +28,7 @@ const ProductCart = ({
         {/* Hình ảnh sản phẩm */}
         <Col xs={4} sm={2}>
           <img
-            src={item.images}
+            src={`${imageBaseUrl}${item.images}`}
             alt={item.name}
             className="img-fluid p-1 p-md-3 mt-2"
             style={{
@@ -54,7 +55,7 @@ const ProductCart = ({
         {/* Giá sản phẩm */}
         <Col xs={7} sm={2} className="mt-2 mt-sm-0 text-end2">
           <Card.Text style={{color: "red", fontWeight: "600" }} className="text-Tong">
-            {item.price.toLocaleString("vi-VN")} ₫
+            {item.price} ₫
           </Card.Text>
         </Col>
 
@@ -104,7 +105,7 @@ const ProductCart = ({
           
         >
           <Card.Text style={{ color: "red", fontWeight: "600" }} className="text-Tong">
-            {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
+            {(item.price * item.quantity)} ₫
           </Card.Text>
         </Col>
 

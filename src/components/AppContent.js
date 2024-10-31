@@ -23,13 +23,13 @@ const AppContent = () => {
 
       <Route path="/register" element={<Register />} />
 
-      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/product/:urlProduct" element={<ProductDetail />} />
 
       <Route path="/introduce" element={<Introduce />} />
 
-      <Route path="/news" element={<News />} />
+      <Route path="/news/:urlNew" element={<News />} />
 
-      <Route path="/news/:id" element={<NewsDetail />} />
+      <Route path="/news/:urlNew/:urlDetail" element={<NewsDetail />} />
 
       <Route path="/cart" element={<Cart />} />
 

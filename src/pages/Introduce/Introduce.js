@@ -2,7 +2,7 @@ import React from "react";
 
 const Introduce = () => {
   return (
-    <div className="m-5">
+    <div className="container">
       <h3>Giới thiệu</h3>
       <p style={{fontSize: 16}}>Là công ty hoạt động trong lĩnh vực thiết bị nhiếp ảnh và video.</p>
       <p style={{fontSize: 16}}>
@@ -28,7 +28,7 @@ const Introduce = () => {
 
       <h3>Văn hóa tổ chức</h3>
 
-      <p style={{fontSize: 16}}>
+      <p style={{fontSize: 16}} className="mb-5">
         Nhằm phục vụ cộng đồng yêu công nghệ tại VN, Digi Tech xây dựng đội ngủ
         trẻ trung, năng động, nhiệt huyết và ham học hỏi. “Thái độ quan trọng và
         trình độ là cần thiết” luôn đảm bảo tinh chuyên nghiệp khi làm việc cũng

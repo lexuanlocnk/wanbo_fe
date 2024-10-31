@@ -5,36 +5,55 @@ const Breadcrumb = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
-  // Xử lý Pathname theo từng trang
+  // Đối tượng ánh xạ các đường dẫn sang tiếng Việt
+  const breadcrumbLabels = {
+    home: "Trang chủ",
+    product: "Sản phẩm",
+    introduce: "Giới thiệu",
+    contact: "Liên hệ",
+    news: "Tin tức",
+    new: "Tin tức",
+    cart: "Giỏ hàng",
+    login: "Đăng nhập",
+    register: "Đăng ký",
+    checkout: "Thanh toán",
+    "new-product": "Sản phẩm mới ",
+    // Thêm các ánh xạ khác ở đây
+  };
+
   const breadcrumbItems = pathnames.map((pathname, index) => {
     const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
     const isLast = index === pathnames.length - 1;
+    const label = breadcrumbLabels[pathname] || pathname; // Lấy từ tiếng Việt, nếu không thì giữ nguyên
 
     return (
       <span key={routeTo}>
         {!isLast ? (
           <Link to={routeTo} className="breadcrumb-item">
-            {pathname}
+            {label}
           </Link>
         ) : (
-          <span className="breadcrumb-item" style={{color: "#2854e5"}}>{pathname}</span>
+          <span className="breadcrumb-item" style={{ color: "#2854e5" }}>
+            {label}
+          </span>
         )}
         {!isLast && <span className="breadcrumb-separator"> {">"} </span>}
       </span>
     );
   });
 
-  // Kiểm tra xem có phải là trang chủ không
   if (location.pathname === "/home") {
-    return null; // Không hiển thị breadcrumb nếu ở trang chủ
+    return null;
   }
 
   return (
-    <nav aria-label="pathname" className="py-2">
+    <nav aria-label="pathname" className="py-1">
       <div className="container">
-        <Link to="/home">Home</Link>
-        <span className="breadcrumb-separator"> {">"} </span>
-        {breadcrumbItems}
+        <div className="timeOpen">
+          <Link to="/home">Trang chủ</Link>
+          <span className="breadcrumb-separator"> {">"} </span>
+          {breadcrumbItems}
+        </div>
       </div>
     </nav>
   );
