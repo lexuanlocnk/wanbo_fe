@@ -13,11 +13,14 @@ const NewsCategory = () => {
 
 
   useEffect(() => {
-    const fetchNewCategory = async () => {
+     const fetchNewCategory = async () => {
       try {
         const response = await fetch(`http://192.168.245.190:8002/api/member/news-category/may-chieu-mini-wanbo`);
-         setCategoryData(response.data);
-        console.log(">>>>>>>>>>", categoryData)
+        const data = await response.json(); 
+        if (data.status === true && data.data.news_category_desc) {
+            setCategoryData(data.data);
+          }
+        console.log(">>>>>>>>>>", categoryData);
       } catch (error) {
         console.error("Error fetching NewCategory:", error);
       }
@@ -32,11 +35,11 @@ const NewsCategory = () => {
       style={{ height: "auto", backgroundColor: "white", fontSize: 15 }}
     >
       <h5 className="my-3">DANH MỤC TIN TỨC</h5>
-{categoryData && categoryData.length > 0 ? categoryData.map((item) => (
-      <Nav.Link className="my-3" href="/home">
-        Trang chủ {item.display}
-      </Nav.Link>
-         )): []}
+      {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
+        <Nav.Link className="my-3" href="/home">
+            {item?.news_category_desc?.cat_name}
+        </Nav.Link>
+        )): []}
 
       {/* <Nav.Link className="my-3" href="/introduce">
         Giới thiệu
