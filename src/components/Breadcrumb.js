@@ -12,6 +12,7 @@ const Breadcrumb = () => {
     introduce: "Giới thiệu",
     contact: "Liên hệ",
     news: "Tin tức",
+    new: "Tin tức",
     cart: "Giỏ hàng",
     login: "Đăng nhập",
     register: "Đăng ký",

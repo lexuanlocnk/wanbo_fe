@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { newsItems } from "../Data";
+import React, { useEffect, useState } from "react";
+import { newDetails } from "../Data";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
@@ -9,12 +9,33 @@ import "./News.css"; // Ensure the CSS is imported
 import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
 import { useParams } from "react-router-dom";
+import { imageBaseUrl } from "../../api/axiosConfig";
 
 const NewsDetail = () => {
-  const { id } = useParams();
 
-  // Tìm bài viết dựa trên id
-  const newsItem = newsItems.find((item) => item.id === parseInt(id));
+  const [newDetail, setNewDetail] = useState({});
+  const { urlDetail, urlNew } = useParams();
+  
+
+  useEffect(() => {
+    const fetchNewDetail = async () => {
+      try {
+        //  console.log(">>>>>>>>>>", urlNew);
+        //   console.log(">>>>>>>>>>", urlDetail);
+        const response = await fetch(`http://192.168.245.190:8002/api/member/news-detail/${urlDetail}`);
+        //const response = await fetch(`http://192.168.245.190:8002/api/member/news-detail/${urlNew}`);
+        const data = await response.json();
+         if (data.status === true && data.data) {
+            setNewDetail(data.data);
+          } 
+           console.log(">>>>>>>>>>", response);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    fetchNewDetail();
+  }, [urlNew, urlDetail]);
 
   // State để lưu trữ thông tin bình luận
   const [commentData, setCommentData] = useState({
@@ -36,7 +57,7 @@ const NewsDetail = () => {
     // Xử lý thêm gửi bình luận lên server hoặc hiển thị trên UI...
   };
 
-  if (!newsItem) {
+  if (!newDetail) {
     return <div>Không tìm thấy tin tức</div>;
   }
 
@@ -54,20 +75,21 @@ const NewsDetail = () => {
               className="news-detail-content"
               style={{ backgroundColor: "white", padding: 20 }}
             >
-              <h5>{newsItem.title}</h5>
+              <h5>{newDetail.title}</h5>
               <div className="d-flex align-items-center">
                 <p className="me-3 bi bi-person">Team dev</p>
-                <p className="bi bi-clock-history me-1" /> <p>{newsItem.date}</p>
+                <p className="bi bi-clock-history me-1" /> <p>{newDetail.news?.date_post}</p>
               </div>
               <img
-                src={newsItem.images}
-                alt={newsItem.title}
+                src={`${imageBaseUrl}${newDetail.news?.picture}`}
+                alt={newDetail.title}
                 className="news-detail-image my-4"
                 style={{ width: "75%", height: "auto" }}
               />
-              <p>{newsItem.description}</p>
+              <p>{newDetail.description}</p>
+
               <div
-                dangerouslySetInnerHTML={{ __html: newsItem.content }}
+                dangerouslySetInnerHTML={{ __html: newDetail.content }}
               />{" "}
               {/* Hiển thị nội dung chi tiết do admin nhập vào */}
             </div>

@@ -1,9 +1,10 @@
 import axios from "axios";
-
+const token = localStorage.token;
 const axiosClient = axios.create({
   baseURL: "http://192.168.245.190:8002/api",
   headers: {
     "Content-Type": "application/json",
+    'Authorization': `Bearer ${token}`
   },
   timeout: 5000,
 });

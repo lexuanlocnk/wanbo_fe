@@ -55,7 +55,7 @@ const AppHeader = () => {
 
         <Navbar.Toggle
           aria-controls="navbarScroll"
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: "white"}}
         />
 
         <Navbar.Collapse id="navbarScroll">

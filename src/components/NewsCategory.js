@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
+import newApi from "../api/newApi";
 
 const NewsCategory = () => {
   // State để quản lý hiển thị danh sách sản phẩm
@@ -14,13 +15,15 @@ const NewsCategory = () => {
 
   useEffect(() => {
      const fetchNewCategory = async () => {
+      // const NewApi = new newApi();
       try {
+        // const response = await NewApi.getNewCategory();
         const response = await fetch(`http://192.168.245.190:8002/api/member/news-category/may-chieu-mini-wanbo`);
         const data = await response.json(); 
-        if (data.status === true && data.data.news_category_desc) {
+        if (data.status === true && data.data) {
             setCategoryData(data.data);
           }
-        console.log(">>>>>>>>>>", categoryData);
+        // console.log(">>>>>>>>>>", categoryData);
       } catch (error) {
         console.error("Error fetching NewCategory:", error);
       }
@@ -36,8 +39,8 @@ const NewsCategory = () => {
     >
       <h5 className="my-3">DANH MỤC TIN TỨC</h5>
       {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
-        <Nav.Link className="my-3" href="/home">
-            {item?.news_category_desc?.cat_name}
+        <Nav.Link className="my-3" href={`/news/${item.news_category_desc?.friendly_url}`}>
+            {item.news_category_desc?.cat_name}
         </Nav.Link>
         )): []}
 

@@ -1,10 +1,10 @@
 import axiosClient from "./axiosConfig";
 
-class NewApi {
+class newApi {
   getNewCategory = () => {
     const url = `/member/news-category/may-chieu-mini-wanbo`;
     return axiosClient.get(url);
   };
 }
 
-export default NewApi;
+export default newApi;

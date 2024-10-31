@@ -29,7 +29,7 @@ const AppContent = () => {
 
       <Route path="/news/:urlNew" element={<News />} />
 
-      <Route path="/new/:id" element={<NewsDetail />} />
+      <Route path="/news/:urlNew/:urlDetail" element={<NewsDetail />} />
 
       <Route path="/cart" element={<Cart />} />
 

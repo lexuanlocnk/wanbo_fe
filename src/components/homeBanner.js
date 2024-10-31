@@ -4,6 +4,9 @@ import img2 from "./../assets/slider_2.webp";
 import imgBanner from "./../assets/img_banner_slide.webp";
 import imgBanner2 from "./../assets/img_banner_slide_2.webp";
 import imgBanner3 from "./../assets/image_service1.webp";
+import imgBanner4 from "./../assets/image_service2.webp";
+import imgBanner5 from "./../assets/image_service3.webp";
+import imgBanner6 from "./../assets/image_service4.webp";
 import maychieu from "./../assets/images/maychieu.webp"
 import wanboT from "./../assets/images/wanboT.webp"
 
@@ -94,7 +97,7 @@ const HomeBanner = () => {
             <div className="text-center me-3">
               <img
                 alt=""
-                src={imgBanner3}
+                src={imgBanner4}
                 width="50px"
                 className="d-block align-top mx-auto"
               />
@@ -114,7 +117,7 @@ const HomeBanner = () => {
             <div className="text-center me-3">
               <img
                 alt=""
-                src={imgBanner3}
+                src={imgBanner5}
                 width="50px"
                 className="d-block align-top mx-auto"
               />
@@ -134,7 +137,7 @@ const HomeBanner = () => {
             <div className="text-center me-3">
               <img
                 alt=""
-                src={imgBanner3}
+                src={imgBanner6}
                 width="50px"
                 className="d-block align-top mx-auto"
               />
