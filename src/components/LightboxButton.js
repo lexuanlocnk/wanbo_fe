@@ -16,7 +16,9 @@ const LightboxButton = ({ productId }) => {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
+        const response = await fetch(
+          `http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`
+        );
         const data = await response.json();
         setProduct(data.productDetail || null);
       } catch (error) {
@@ -32,13 +34,26 @@ const LightboxButton = ({ productId }) => {
 
   // Chuyển đổi images thành slides cho Lightbox
   //const slides = product ? product.Image.map((src) => ({ src })) : [];   // mảng ảnh
-  const slides = product && product.Image ? [{ src: `${imageBaseUrl}${product.Image}` }] : []; // ảnh đơn
+  const slides =
+    product && product.Image
+      ? [{ src: `${imageBaseUrl}${product.Image}` }]
+      : []; // ảnh đơn
 
   return (
     <div>
-      <Button variant="outline-secondary" onClick={() => setOpen(true)} style={{backgroundColor: "white", color: "black", fontSize: 14}}>
-      <i class="bi bi-eye"></i>
-      </Button>
+      <Button
+        variant="outline-secondary w-100 h-100"
+        onClick={() => setOpen(true)}
+        style={{
+          backgroundColor: "transparent",
+          color: "black",
+          fontSize: 14,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          border: "none",
+        }}
+      ></Button>
 
       <Lightbox
         plugins={[Thumbnails]}

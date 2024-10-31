@@ -29,11 +29,13 @@ const ProductDetail = ({ children, eventKey, item }) => {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await fetch(`http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`);
+        const response = await fetch(
+          `http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`
+        );
         const data = await response.json();
-         if (data.status === true && data.productDetail) {
-            setProduct(data.productDetail);
-          } 
+        if (data.status === true && data.productDetail) {
+          setProduct(data.productDetail);
+        }
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -42,7 +44,6 @@ const ProductDetail = ({ children, eventKey, item }) => {
     fetchProductDetail();
   }, [urlProduct]);
 
-
   // Lấy hàm addToCart từ context
   const { addToCart } = useContext(CartContext);
 
@@ -50,7 +51,6 @@ const ProductDetail = ({ children, eventKey, item }) => {
   const [modalShow, setModalShow] = useState(false);
 
   //lấy 5 sản phẩm đầu tương tự
- 
 
   // State để lưu số lượng sản phẩm
   const [quantity, setQuantity] = useState(1);
@@ -97,18 +97,7 @@ const ProductDetail = ({ children, eventKey, item }) => {
               src={`${imageBaseUrl}${product.Image}`}
               alt={product.name}
             />
-
             <div className="d-flex justify-content-between mt-3">
-              {/* này là 1 mảng ảnh */}
-              {/* {product.Image.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Thumbnail ${index + 1}`}                               
-                  className="thumbnail-image"
-                />
-              ))} */}   
-
               {product && product.Image && (
                 <img
                   src={`${imageBaseUrl}${product.Image}`}
@@ -116,26 +105,25 @@ const ProductDetail = ({ children, eventKey, item }) => {
                   className="thumbnail-image"
                 />
               )}
-
             </div>
-          </div>
-
-          <div style={{ position: "absolute", width: "15%" }}>
             <LightboxButton productId={product.ProductId} />
           </div>
-
           <div className="col-md-5">
             <h4 className="fw-bold">{product.ProductName}</h4>
             <h6>Danh mục: {product.Category}</h6>
             <div className="d-flex align-items-center">
-              <p className="pricedetail me-3">               
-                {product.Price ? `${product.Price.toLocaleString("vi-VN")} đ` : "N/A"}
+              <p className="pricedetail me-3">
+                {product.Price
+                  ? `${product.Price.toLocaleString("vi-VN")} đ`
+                  : "N/A"}
               </p>
 
               <p className="original-priceDetail">
                 {product.PriceOld != null ? (
                   <>
-                    {product.PriceOld ? `${product.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}
+                    {product.PriceOld
+                      ? `${product.PriceOld.toLocaleString("vi-VN")} đ`
+                      : "N/A"}
                   </>
                 ) : (
                   <br />
@@ -258,20 +246,25 @@ const ProductDetail = ({ children, eventKey, item }) => {
               />
 
               {/* Nội dung Collapse */}
-             <Collapse in={open}>
-               <div id="product-collapse" className="w-100 mt-3 product-description">
+              <Collapse in={open}>
                 <div
-                  dangerouslySetInnerHTML={{ __html: product.productDescription }}
-                ></div>
-              </div>
-            </Collapse>
+                  id="product-collapse"
+                  className="w-100 mt-3 product-description"
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product.productDescription,
+                    }}
+                  ></div>
+                </div>
+              </Collapse>
 
               {/* Nút để mở/đóng Collapse */}
               <Button
                 variant="outline-dark"
                 onClick={() => setOpen(!open)}
                 aria-controls="product-collapse"
-                aria-expanded={open}               
+                aria-expanded={open}
                 className="close"
               >
                 {open ? "Thu gọn" : "Xem thêm"}
@@ -283,7 +276,7 @@ const ProductDetail = ({ children, eventKey, item }) => {
               className="p-4"
               style={{ height: "auto", backgroundColor: "white" }}
             >
-               <h5 className="tblack fw-bold">Thông số kỹ thuật</h5>
+              <h5 className="tblack fw-bold">Thông số kỹ thuật</h5>
               <hr />
               <Table striped bordered hover>
                 <tbody>

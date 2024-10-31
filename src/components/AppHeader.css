@@ -320,6 +320,10 @@ a {
   color: white;
 }
 
+.dropdown-toggle::after {
+  display: none;
+}
+
 /* Màn hình trung bình (Tablet) */
 @media (min-width: 768px) and (max-width: 991px) {
   .custom-img {

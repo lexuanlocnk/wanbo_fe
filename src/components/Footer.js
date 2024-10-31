@@ -19,9 +19,9 @@ export default function Footer() {
   const [showAdvice, setShowAdvice] = useState();
 
   return (
-    <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
+    <MDBFooter bgColor="light" className="text-center text-muted">
       <section className="d-flex justify-content-center justify-content-lg-between border-bottom">
-        <Card className="text-white d-flex flex-row justify-content-center align-items-center text-center">
+        <Card className="text-white w-100 d-flex flex-row justify-content-center align-items-center text-center">
           <Card.Img
             src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/bg-mail.png?1705828865662"
             alt="Card image"
