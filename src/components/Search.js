@@ -18,6 +18,12 @@ function Search() {
     (total, item) => total + item.quantity,
     0
   );
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
 
   return (
     <Navbar
@@ -67,10 +73,16 @@ function Search() {
                     marginLeft: 5,
                   }}
                 >
-                  Tài khoản <br />
-                  <a className="login-nav-btn" href="/login" style={{ color: "#000" }}>
-                    Đăng nhập
-                  </a>
+                  <a className="login-nav-btn" href="/information" style={{ color: "#000" }}>Tài khoản</a> <br />
+                  {isLoggedIn ? (
+                    <a className="login-nav-btn" onClick={handleLogout} style={{ color: "#000", cursor: "pointer" }}>
+                      Đăng xuất
+                    </a>
+                  ) : (
+                    <a className="login-nav-btn" href="/login" style={{ color: "#000" }}>
+                      Đăng nhập
+                    </a>
+                  )}
                 </div>
               </div>
               <a

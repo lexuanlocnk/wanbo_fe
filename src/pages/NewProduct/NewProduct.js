@@ -89,6 +89,8 @@ const NewProduct = (props) => {
   const [activeSortOption, setActiveSortOption] = useState();
   const [selectedFilters, setSelectedFilters] = useState([]);
 
+  // const [filters, setFilters] = useState([]);
+
   const [selectedSortOptions, setSelectedSortOptions] = useState([]);
 
   // Hàm xử lý khi chọn checkbox filter
