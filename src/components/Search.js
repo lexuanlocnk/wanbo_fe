@@ -15,7 +15,7 @@ function Search() {
   const { cartItems } = useContext(CartContext);
 
   const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) => total + item.quality,
     0
   );
   const handleLogout = () => {

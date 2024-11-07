@@ -18,6 +18,11 @@ class AccountApi {
         return axiosClient.post(url, data);
     };
 
+    postUploadInformation = (data) => {
+        const url = `/member/upload-information-member`;
+        return axiosClient.post(url, data);
+    };
+
 }
 
 export default AccountApi;

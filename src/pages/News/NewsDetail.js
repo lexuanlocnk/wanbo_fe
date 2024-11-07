@@ -15,20 +15,16 @@ const NewsDetail = () => {
 
   const [newDetail, setNewDetail] = useState({});
   const { urlDetail, urlNew } = useParams();
-  
 
   useEffect(() => {
     const fetchNewDetail = async () => {
       try {
-        //  console.log(">>>>>>>>>>", urlNew);
-        //   console.log(">>>>>>>>>>", urlDetail);
         const response = await fetch(`http://192.168.245.190:8002/api/member/news-detail/${urlDetail}`);
         //const response = await fetch(`http://192.168.245.190:8002/api/member/news-detail/${urlNew}`);
         const data = await response.json();
-         if (data.status === true && data.data) {
-            setNewDetail(data.data);
-          } 
-           console.log(">>>>>>>>>>", response);
+        if (data.status === true && data.data) {
+          setNewDetail(data.data);
+        }
       } catch (error) {
         console.error("Error fetching product:", error);
       }

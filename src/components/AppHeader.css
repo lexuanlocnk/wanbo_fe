@@ -136,7 +136,9 @@ a {
 .compare-nav-container a:hover {
   color: #0d6efd;
 }
-
+.navbar-toggler:focus{
+  box-shadow: none !important;
+}
 .compare-nav-container a:hover i,
 .compare-nav-container a:hover span,
 .login-nav-btn:hover {

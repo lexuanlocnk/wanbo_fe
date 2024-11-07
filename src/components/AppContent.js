@@ -40,11 +40,11 @@ const AppContent = () => {
 
       <Route path="/checkout" element={<Checkout />} />
 
-      <Route path="/" element={<Navigate to="home" replace />} />
-
       <Route path="/compare-product" element={<CompareProduct />} />
 
       <Route path="/information" element={<Information />} />
+
+      <Route path="/" element={<Navigate to="home" replace />} />
     </Routes>
   );
 };

@@ -7,6 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 
 import { Thumbnails } from "yet-another-react-lightbox/plugins";
 import { imageBaseUrl } from "../api/axiosConfig";
+import HomeApi from "../api/homeApi";
 
 const LightboxButton = ({ productId }) => {
   const [open, setOpen] = useState(false);
@@ -15,10 +16,13 @@ const LightboxButton = ({ productId }) => {
 
   useEffect(() => {
     const fetchProductDetail = async () => {
+      // const homeApi = new HomeApi();
       try {
         const response = await fetch(
           `http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`
         );
+        //const response = await homeApi.getProductDetail(urlProduct);
+
         const data = await response.json();
         setProduct(data.productDetail || null);
       } catch (error) {

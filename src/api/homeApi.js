@@ -10,15 +10,37 @@ class HomeApi {
     return axiosClient.get(url);
   };
 
-  // getProductDetail = (slug) => {
-  //   const url = `/member/product-detail/${slug}`;
-  //   return axiosClient.get(url);
-  // };
+  getProductDetail = (urlProduct) => {
+    const url = `/member/product-detail/${urlProduct}`;
+    return axiosClient.get(url);
+  };
 
-  getFlashSale= () => {
+  getFlashSale = () => {
     const url = `/member/show-all-flash-sale`;
     return axiosClient.get(url);
   };
+
+  // api cho carrt
+  postListCart = (data) => {
+    const url = `/member/list-cart`;
+    return axiosClient.post(url, data);
+  };
+
+  putListCart = (id, data) => {
+    const url = `/member/list-cart/${id}`;
+    return axiosClient.put(url, data);
+  };
+
+  getListCart = () => {
+    const url = `/member/list-cart`;
+    return axiosClient.get(url);
+  };
+
+  deleteListCart = (id) => {
+    const url = `/member/list-cart/${id}`;
+    return axiosClient.delete(url);
+  };
+
 }
 
 export default HomeApi;

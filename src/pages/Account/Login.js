@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Row, Col, Alert, Collapse } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import AccountApi from "../../api/AccountApi";
-import Modal from 'react-bootstrap/Modal';
+import PasswordResetModal from "./PasswordResetModal";
 
 const Login = () => {
   const [emailNew, setEmailNew] = useState("");
@@ -13,9 +12,11 @@ const Login = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [load, setLoad] = useState(false);
+  const [show, setShow] = useState(false);
 
   const [passwordToken, setPasswordToken] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,12 +28,7 @@ const Login = () => {
       });
 
       if (response.data.status === false) {
-        if (response.data.message === "existUserName") {
-          setError("Tên tài khoản đã tồn tại. Vui lòng chọn tên khác.");
-        }
-        else {
-          setError(response.data.message || "Email hoặc mật khẩu không chính xác.");
-        }
+        setError(response.data.message || "Email hoặc mật khẩu không chính xác.");
       } else {
         localStorage.setItem("token", response.data.token);
         navigate("/home");
@@ -42,63 +38,53 @@ const Login = () => {
     }
   };
 
-  //boostrap modal
-  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-
 
   const handleShow = async (e) => {
     e.preventDefault();
     if (emailNew.trim() === "") {
-      // alert("Vui lòng nhập email.");
+      setError("Vui lòng nhập email.");
       return;
     }
-    setLoad(true)
+    setLoad(true);
     const accountApi = new AccountApi();
     try {
-      const response = await accountApi.postforgetPassword({
-        email: emailNew
-      });
-
+      const response = await accountApi.postforgetPassword({ email: emailNew });
       if (response.data.status === false) {
-        if (response.data.mess === "Email no exist") {
-          setError("Email không chính xác");
-        }
-        else {
-          setError(response.data.mess);
-        }
+        setError(response.data.mess === "Email no exist" ? "Email không chính xác" : response.data.mess);
       } else {
-        setShow(true)
+        setShow(true);
       }
     } catch (error) {
-      setError("Có lỗi xảy ra. Vui lòng thử lại.", error);
+      setError("Có lỗi xảy ra. Vui lòng thử lại.");
     } finally {
-      setLoad(false)
+      setLoad(false);
+      setOpen(false)
     }
   };
 
-
-  const handleShow2 = async (e) => {
-    e.preventDefault();
+  const handlePasswordChange = async () => {
+    if (passwordNew !== confirmPassword) {
+      setError("Mật khẩu xác nhận không khớp.");
+      return;
+    }
+    setLoad(true);
     const accountApi = new AccountApi();
     try {
       const response = await accountApi.postforgetPasswordChange({
         password_token: passwordToken,
-        password_new: passwordNew
+        password_new: passwordNew,
       });
-
       if (response.data.status === false) {
-        if (response.data.mess === "Email no exist") {
-          setError("lỗi");
-        }
-        else {
-          setError(response.data.mess);
-        }
+        setError(response.data.mess);
       } else {
-        navigate("/login")
+        navigate("/login");
+        setShow(false);
       }
     } catch (error) {
-      setError("Có lỗi xảy ra. Vui lòng thử lại.", error);
+      setError("Có lỗi xảy ra. Vui lòng thử lại.");
+    } finally {
+      setLoad(false);
     }
   };
 
@@ -106,7 +92,7 @@ const Login = () => {
     <div className="login-container p-5">
       <Container className="p-4 login-box">
         <Row className="justify-content-center">
-          <Col sm={12} md={10} lg={8} xl={4}>
+          <Col sm={12} md={10} lg={8} xl={5}>
             <h2 className="text-center" style={{ fontWeight: 400 }}>ĐĂNG NHẬP</h2>
             <p className="text-center mb-4" style={{ fontSize: 14 }}>
               Nếu bạn chưa có tài khoản,{" "}
@@ -115,7 +101,6 @@ const Login = () => {
 
             {error && <Alert variant="danger">{error}</Alert>}
 
-            {/* <Form name="myForm" onSubmit={handleSubmit} className="text-center"> */}
             <Form.Group controlId="formBasicEmail" className="mb-3">
               <Form.Control
                 type="email"
@@ -132,16 +117,12 @@ const Login = () => {
                 placeholder="Mật khẩu"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                // required
-                name="password"
                 style={{ padding: 12, backgroundColor: "#f4f4f4" }}
               />
             </Form.Group>
 
             <Button variant="primary" className="w-100 p-2" onClick={handleSubmit}>Đăng Nhập</Button>
 
-
-            {/* quen mat khau */}
             <p className="text-center pt-3" style={{ fontSize: 14 }}>
               <a
                 onClick={() => setOpen(!open)}
@@ -153,7 +134,6 @@ const Login = () => {
               </a>
 
               <Collapse in={open}>
-
                 <div id="example-collapse-text">
                   <Form.Group controlId="formBasicEmail" className="my-3">
                     <Form.Control
@@ -169,60 +149,27 @@ const Login = () => {
                     variant="primary"
                     className="w-100 p-2"
                     onClick={handleShow}
-                    disabled={!emailNew.trim() || load} // Chặn nút nếu email trống
+                    disabled={!emailNew.trim() || load}
                   >
                     {load ? "Đang gửi mã code..." : "Lấy lại mật khẩu"}
-
                   </Button>
                 </div>
               </Collapse>
             </p>
 
-            <Modal show={show} onHide={handleClose} className="mt-5">
-              <Modal.Header closeButton>
-                <Modal.Title>Mã code đã được gửi tới mail của bạn</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Mã code</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Nhập mã"
-                      value={passwordToken}
-                      onChange={(e) => setPasswordToken(e.target.value)}
-                      autoFocus
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="exampleForm.formBasicPassword">
-                    <Form.Label>Mật khẩu mới</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Mật khẩu"
-                      value={passwordNew}
-                      onChange={(e) => setPasswordNew(e.target.value)}
-                      autoFocus
-                    />
-                  </Form.Group>
-
-                  {/* <Form.Group className="mb-3" controlId="exampleForm.formBasicPassword">
-                    <Form.Label>Xác nhận mật khẩu mới</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Mật khẩu"
-                      autoFocus
-                    />
-                  </Form.Group> */}
-
-                </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="primary" onClick={handleShow2}>
-                  Xác nhận
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            {/* Password Reset Modal */}
+            <PasswordResetModal
+              show={show}
+              handleClose={handleClose}
+              passwordToken={passwordToken}
+              setPasswordToken={setPasswordToken}
+              passwordNew={passwordNew}
+              setPasswordNew={setPasswordNew}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+              handlePasswordChange={handlePasswordChange}
+              load={load}
+            />
 
             <p className="text-center">Hoặc đăng nhập bằng</p>
 
@@ -234,7 +181,6 @@ const Login = () => {
                 <i className="bi bi-google me-2" /> Google
               </Button>
             </div>
-            {/* </Form> */}
           </Col>
         </Row>
       </Container>

@@ -76,7 +76,7 @@ export default function Footer() {
                 className="d-inline-block align-top mb-2"
               /> */}
               <span className="footer_company_name">
-                CÔNG TY TNHH THƯƠNG MẠI KẾT NỐI THÔNG MINH
+                CÔNG TY TNHH CÔNG NGHỆ CHÍNH NHÂN
               </span>
               <p>
                 <a href="" className="text-reset22 d-flex  align-items-center ">
@@ -117,17 +117,15 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
-                    className={`bi bi-dash transform-dash ${
-                      showAboutUs
-                        ? "transition-dash-rotate1"
-                        : "transition-dash-rotate2"
-                    }`}
+                    className={`bi bi-dash transform-dash ${showAboutUs
+                      ? "transition-dash-rotate1"
+                      : "transition-dash-rotate2"
+                      }`}
                   ></i>
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
-                    className={`bi bi-dash fixed-dash ${
-                      showAboutUs ? "transition-dash-disappear" : ""
-                    }`}
+                    className={`bi bi-dash fixed-dash ${showAboutUs ? "transition-dash-disappear" : ""
+                      }`}
                   ></i>
                 </div>
               </div>
@@ -168,17 +166,15 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
-                    className={`bi bi-dash transform-dash ${
-                      showPolicy
-                        ? "transition-dash-rotate1"
-                        : "transition-dash-rotate2"
-                    }`}
+                    className={`bi bi-dash transform-dash ${showPolicy
+                      ? "transition-dash-rotate1"
+                      : "transition-dash-rotate2"
+                      }`}
                   ></i>
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
-                    className={`bi bi-dash fixed-dash ${
-                      showPolicy ? "transition-dash-disappear" : ""
-                    }`}
+                    className={`bi bi-dash fixed-dash ${showPolicy ? "transition-dash-disappear" : ""
+                      }`}
                   ></i>
                 </div>
               </div>
@@ -219,17 +215,15 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAdvice(!showAdvice)}
-                    className={`bi bi-dash transform-dash ${
-                      showAdvice
-                        ? "transition-dash-rotate1"
-                        : "transition-dash-rotate2"
-                    }`}
+                    className={`bi bi-dash transform-dash ${showAdvice
+                      ? "transition-dash-rotate1"
+                      : "transition-dash-rotate2"
+                      }`}
                   ></i>
                   <i
                     onClick={() => setShowAdvice(!showAdvice)}
-                    className={`bi bi-dash fixed-dash ${
-                      showAdvice ? "transition-dash-disappear" : ""
-                    }`}
+                    className={`bi bi-dash fixed-dash ${showAdvice ? "transition-dash-disappear" : ""
+                      }`}
                   ></i>
                 </div>
               </div>
@@ -280,9 +274,9 @@ export default function Footer() {
         className="text-center p-4"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
-        © Bản quyền thuộc về Lofi Team
-        <a className="text-reset2 fw-bold" href="https://mdbootstrap.com/">
-          | Cung cấp bởi Sapo
+        © Bản quyền thuộc về Wanbo Team |
+        <a className="text-reset2 fw-bold ms-1" href="https://mdbootstrap.com/">
+          Cung cấp bởi Sapo
         </a>
       </div>
     </MDBFooter>
