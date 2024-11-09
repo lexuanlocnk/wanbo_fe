@@ -4,6 +4,7 @@ import { imageBaseUrl } from "../api/axiosConfig";
 import { CartContext } from "../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "../components/componentProduct/BoxCart";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ProductViewed = ({
   item,
@@ -11,8 +12,9 @@ const ProductViewed = ({
   setQuantityView,
   setQuickView,
 }) => {
+  const navigate = useNavigate();
   const [activeImg, setActiveImg] = useState(item.Image);
-    // Lấy hàm addToCart từ context
+  // Lấy hàm addToCart từ context
   const { addToCart } = useContext(CartContext);
   const handleIncrease = () => {
     setQuantityView((prevQuantity) => prevQuantity + 1);
@@ -25,19 +27,25 @@ const ProductViewed = ({
   };
   const [smShow, setSmShow] = useState(false);
   const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.");
+      return;
+    }
     addToCart({
-      id: item.ProductId,
-      name: item.ProductName,
+      product_id: item.ProductId,
+      picture: item.Image,
+      cat_name: item.Category,
+      title: item.ProductName,
+      quality: quantityView,
       price: item.Price,
-      images: item.Image,
-      quantity: quantityView,
-      originalPrice: item.PriceOld,
     });
     setSmShow(true);
 
     // setQuickView(false);
 
-  }; 
+  };
 
   return (
     <>
@@ -63,7 +71,7 @@ const ProductViewed = ({
                   </div>
                 ))} */}
 
-                 {item && item.Image && (
+              {item && item.Image && (
                 <img
                   src={`${imageBaseUrl}${item.Image}`}
                   alt="Thumbnail 1"
@@ -74,7 +82,7 @@ const ProductViewed = ({
           </div>
           <div className="right-detail">
             <h3 className="title-product">
-               <a href={`/product/${item.UrlProduct}`}>{item.ProductName}</a>
+              <a href={`/product/${item.UrlProduct}`}>{item.ProductName}</a>
             </h3>
             <div className="left_vend">
               {/* <div className="first_status">
@@ -93,9 +101,9 @@ const ProductViewed = ({
             <div className="quickview-info">
               <span className="prices price-box">
                 <span className="price product-price sale-price">
-                   {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}                  
+                  {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : ""}
                 </span>
-                <del className="old-price">{item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : " "} </del>
+                <del className="old-price">{item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : ""} </del>
               </span>
             </div>
             {/* nút tăng giảm */}
@@ -123,7 +131,6 @@ const ProductViewed = ({
                 aria-labelledby="example-modal-sizes-title-sm"
               >
                 <Modal.Header
-                  closeButton
                   style={{ backgroundColor: "blue", color: "white" }}
                 >
                   <Modal.Title id="example-modal-sizes-title-sm">
@@ -136,6 +143,7 @@ const ProductViewed = ({
                       [{item.ProductName}]
                     </a>{" "}
                     vào giỏ hàng
+                    <i className="bi bi-x-lg" style={{ position: "absolute", right: 20, cursor: "pointer" }} onClick={() => setSmShow(false)} />
                   </Modal.Title>
                 </Modal.Header>
 

@@ -17,6 +17,7 @@ const Breadcrumb = () => {
     login: "Đăng nhập",
     register: "Đăng ký",
     checkout: "Thanh toán",
+    information: "Thông tin tài khoản",
     "new-product": "Sản phẩm mới ",
     // Thêm các ánh xạ khác ở đây
   };

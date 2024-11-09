@@ -9,9 +9,12 @@ import "./box-product.css";
 import componentProduct from "./componentProduct.css";
 import { Drawer, Space } from "antd";
 import { imageBaseUrl } from "../../api/axiosConfig";
+import axios from 'axios';
+import HomeApi from "../../api/homeApi";
+import { useNavigate } from "react-router-dom";
 
 const BoxProduct = ({ item }) => {
-  const { addToCart } = useContext(CartContext);
+  const { cartItems, addToCart } = useContext(CartContext);
   const [smShow, setSmShow] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [quickView, setQuickView] = useState(false);
@@ -19,6 +22,9 @@ const BoxProduct = ({ item }) => {
   const [isCompared, setIsCompared] = useState(false);
   const [compareList, setCompareList] = useState([]);
 
+  const navigate = useNavigate();
+
+  // hàm so sánh sản phẩm 
   useEffect(() => {
     // Lấy danh sách sản phẩm từ localStorage khi Drawer được mở
     if (isCompared) {
@@ -55,18 +61,60 @@ const BoxProduct = ({ item }) => {
   const handleCloseCompare = () => {
     setIsCompared(false);
   };
+  //modal thông báo chưa đăng nhập
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
 
-  const handleAddToCart = () => {
+  const handleAddToCartN = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setShow(true)
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      return;
+    }
     addToCart({
-      id: item.ProductId,
-      name: item.ProductName,
+      product_id: item.ProductId,
+      picture: item.Image,
+      cat_name: item.Category,
+      title: item.ProductName,
+      quality: quantity,
       price: item.Price,
-      images: item.Image,
-      quantity: quantity,
-      originalPrice: item.PriceOld,
     });
+
     setSmShow(true);
   };
+
+  // const handleAddToCartN = async () => {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //     navigate("/login")
+  //     alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
+  //     return;
+  //   }
+
+  //   try {
+  //     const homeApi = new HomeApi();
+  //     const response = await homeApi.postListCart({
+  //       product_id: item.ProductId,
+  //       picture: item.Image,
+  //       cat_name: item.Category,
+  //       title: item.ProductName,
+  //       quality: quantity,
+  //       price: item.Price,
+  //     });
+
+  //     if (response.status === 200) {
+  //       setSmShow(true);
+  //     } else {
+  //       console.log('Có lỗi xảy ra, vui lòng thử lại.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Lỗi khi thêm sản phẩm vào giỏ hàng:', error);
+  //     console.log('Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.');
+  //   }
+  // }
 
   const sale = Math.round(((item.PriceOld - item.Price) / item.PriceOld) * 100);
 
@@ -88,10 +136,24 @@ const BoxProduct = ({ item }) => {
             <div style={{ margin: 20 }}></div>
           )}
 
+          {/* hover hiện 3 nút */}
           <div className="hover-buttons">
-            <Button variant="secondary" onClick={handleAddToCart}>
+
+            <Button variant="secondary" onClick={handleAddToCartN}>
               <i className="bi bi-cart-plus" />
             </Button>
+            {/* modal thêm thất bại*/}
+            <Modal show={show} onHide={handleClose} animation={false} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Thông báo</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!</Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" onClick={handleClose}>
+                  Ok
+                </Button>
+              </Modal.Footer>
+            </Modal>
 
             <Modal size="xl" show={smShow} onHide={() => setSmShow(false)} aria-labelledby="example-modal-sizes-title-sm">
               <Modal.Header className="custom-modal-header" style={{ backgroundColor: "#0d6efd", color: "white" }}>

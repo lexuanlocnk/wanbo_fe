@@ -9,32 +9,54 @@ import {
   Collapse,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import AccountApi from "../../api/AccountApi";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accountName, setaccountName] = useState("");
+  const [numberPhone, setnumberPhone] = useState("");
+  const [fullName, setfullName] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const accountApi = new AccountApi();
+    try {
+      const response = await accountApi.postRegister({
+        email,
+        password,
+        accountName,
+        numberPhone,
+        fullName
+      });
 
-    // Giả sử có điều kiện kiểm tra email và mật khẩu đúng (giả lập)
-    if (email === "admin@example.com" && password === "password123") {
-      // Điều hướng sang trang chủ sau khi đăng nhập thành công
-      navigate("/home");
-    } else {
-      setError("Email hoặc mật khẩu không chính xác.");
+      if (response.data.status === false) {
+        if (response.data.message === "existUserName") {
+          setError("Tên tài khoản đã tồn tại. Vui lòng chọn tên khác.");
+        }
+        else if (response.data.message === "existEmail") {
+          setError("Email đã tồn tại. Vui lòng chọn email khác.");
+        }
+        else {
+          setError(response.data.message || "Có lỗi xảy ra.");
+        }
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      setError("Có lỗi xảy ra. Vui lòng thử lại.");
     }
-  };
+  }
 
   return (
     <div className="login-container p-5">
       <Container className="p-4 login-box">
         <Row className="justify-content-center">
-          <Col sm={12} md={10} lg={8} xl={4}>
+          <Col sm={12} md={10} lg={8} xl={5}>
             <h2 className="text-center" style={{ fontWeight: 400 }}>
               ĐĂNG KÝ
             </h2>
@@ -48,22 +70,29 @@ const Register = () => {
             {error && <Alert variant="danger">{error}</Alert>}
 
             <Form onSubmit={handleSubmit} className="text-center">
+
               <Form.Group controlId="formBasicEmail" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Họ"
+                  placeholder="Họ và tên"
+                  value={fullName}
+                  onChange={(e) => setfullName(e.target.value)}
                   required
                   style={{ padding: 12, backgroundColor: "#f4f4f4" }}
                 />
               </Form.Group>
+
               <Form.Group controlId="formBasicEmail" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Tên"
+                  placeholder="Tên đăng nhập"
+                  value={accountName}
+                  onChange={(e) => setaccountName(e.target.value)}
                   required
                   style={{ padding: 12, backgroundColor: "#f4f4f4" }}
                 />
               </Form.Group>
+
               <Form.Group controlId="formBasicEmail" className="mb-3">
                 <Form.Control
                   type="email"
@@ -79,6 +108,8 @@ const Register = () => {
                 <Form.Control
                   type="number"
                   placeholder="Số điện thoại"
+                  value={numberPhone}
+                  onChange={(e) => setnumberPhone(e.target.value)}
                   required
                   style={{ padding: 12, backgroundColor: "#f4f4f4" }}
                 />
@@ -96,7 +127,7 @@ const Register = () => {
               </Form.Group>
 
               <Button variant="primary" type="submit" className="w-100 p-2">
-                Đăng Nhập
+                Đăng ký
               </Button>
 
               <p className="mt-4">Hoặc đăng nhập bằng</p>

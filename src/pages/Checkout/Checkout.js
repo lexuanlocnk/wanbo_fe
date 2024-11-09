@@ -22,12 +22,12 @@ const Checkout = () => {
 
   // tổng số lượng sản phẩm
   const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) => total + item.quality,
     0
   );
   // tổng số tiền
   const total = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.price * item.quality,
     0
   );
 
@@ -178,7 +178,7 @@ const Checkout = () => {
                     >
                       <span style={{ position: "relative" }}>
                         <img
-                          src={`${imageBaseUrl}${item.images}`}
+                          src={`${imageBaseUrl}${item.picture}`}
                           alt={item.name}
                           style={{
                             width: "50px",
@@ -198,12 +198,12 @@ const Checkout = () => {
                             right: 2,
                           }}
                         >
-                          {item.quantity}
+                          {item.quality}
                         </Badge>
                       </span>
 
                       <div style={{ fontSize: 14, width: "50%" }}>
-                        {item.name}
+                        {item.title}
                       </div>
 
                       <span
@@ -215,7 +215,7 @@ const Checkout = () => {
                         }}
                         className="ms-2 text-end"
                       >
-                        {(item.price * item.quantity).toLocaleString("vi-VN")} ₫
+                        {(item.price * item.quality).toLocaleString("vi-VN")} ₫
                       </span>
                     </li>
                   ))}
@@ -224,7 +224,7 @@ const Checkout = () => {
 
                 <Row>
                   <Col md={8}>
-                    <Form.Group controlId="formdiscount">
+                    <Form.Group controlId="formdiscount" className="mt-2">
                       <Form.Control
                         type="discount"
                         placeholder="Nhập mã giảm giá"
@@ -232,7 +232,7 @@ const Checkout = () => {
                     </Form.Group>
                   </Col>
 
-                  <Col md={4}>
+                  <Col md={4} className="mt-2">
                     <Button
                       style={{
                         width: "100%",
@@ -249,7 +249,7 @@ const Checkout = () => {
 
                 <Row>
                   <Col
-                    md={6}
+                    xs={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -259,7 +259,7 @@ const Checkout = () => {
                   </Col>
 
                   <Col
-                    md={6}
+                    xs={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -272,7 +272,7 @@ const Checkout = () => {
 
                 <Row>
                   <Col
-                    md={8}
+                    xs={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -282,7 +282,7 @@ const Checkout = () => {
                   </Col>
 
                   <Col
-                    md={4}
+                    xs={6}
                     style={{
                       color: "gray",
                       fontWeight: "500",
@@ -315,6 +315,7 @@ const Checkout = () => {
                     md={7}
                     style={{
                       fontWeight: "500",
+                      marginBottom: 10
                     }}
                   >
                     <a href="/cart"> ❮ Quay về giỏ hàng</a>

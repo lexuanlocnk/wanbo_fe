@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
+import axios from "axios";
 import newApi from "../api/newApi";
 
 const NewsCategory = () => {
@@ -14,16 +15,17 @@ const NewsCategory = () => {
 
 
   useEffect(() => {
-     const fetchNewCategory = async () => {
-      // const NewApi = new newApi();
+    const fetchNewCategory = async () => {
+      const NewApi = new newApi();
       try {
-        // const response = await NewApi.getNewCategory();
-        const response = await fetch(`http://192.168.245.190:8002/api/member/news-category/may-chieu-mini-wanbo`);
-        const data = await response.json(); 
-        if (data.status === true && data.data) {
-            setCategoryData(data.data);
-          }
-        // console.log(">>>>>>>>>>", categoryData);
+        const response = await NewApi.getNewCategory();
+        // const response = await axios.get(
+        //   "http://192.168.245.190:8002/api/member/news-category/may-chieu-mini-wanbo"
+        // );
+
+        if (response.data.status === true && response.data.data) {
+          setCategoryData(response.data.data);
+        }
       } catch (error) {
         console.error("Error fetching NewCategory:", error);
       }
@@ -40,9 +42,9 @@ const NewsCategory = () => {
       <h5 className="my-3">DANH MỤC TIN TỨC</h5>
       {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
         <Nav.Link className="my-3" href={`/news/${item.news_category_desc?.friendly_url}`}>
-            {item.news_category_desc?.cat_name}
+          {item.news_category_desc?.cat_name}
         </Nav.Link>
-        )): []}
+      )) : []}
 
       {/* <Nav.Link className="my-3" href="/introduce">
         Giới thiệu
@@ -74,7 +76,7 @@ const NewsCategory = () => {
 
       <Nav.Link className="my-3" href="/news/may-chieu-mini-wanbo">Tin tức</Nav.Link>
       <Nav.Link className="my-3" href="/news/tin-khuyen-mai">Tin khuyến mãi</Nav.Link> */}
-      
+
     </div>
   );
 };

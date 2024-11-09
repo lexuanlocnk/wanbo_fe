@@ -13,6 +13,7 @@ import NewProduct from "../pages/NewProduct/NewProduct";
 import Contact from "../pages/Contact/Contact";
 import Checkout from "../pages/Checkout/Checkout";
 import CompareProduct from "../pages/Compare/compare";
+import Information from "../pages/Account/Information";
 
 const AppContent = () => {
   return (
@@ -39,9 +40,11 @@ const AppContent = () => {
 
       <Route path="/checkout" element={<Checkout />} />
 
-      <Route path="/" element={<Navigate to="home" replace />} />
-
       <Route path="/compare-product" element={<CompareProduct />} />
+
+      <Route path="/information" element={<Information />} />
+
+      <Route path="/" element={<Navigate to="home" replace />} />
     </Routes>
   );
 };

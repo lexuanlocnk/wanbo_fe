@@ -21,7 +21,7 @@ const News = () => {
          if (data.status === true && data.listNew.data) {
             setNewCategory(data.listNew.data);
           } 
-           console.log(">>>>>>>>>>", newCategory);
+          //  console.log(">>>>>>>>>>", newCategory);
       } catch (error) {
         console.error("Error fetching product:", error);
       }

@@ -4,28 +4,15 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormCheck } from "react-bootstrap";
-import ProductCart from "./ProductCart"; 
+import ProductCart from "./ProductCart";
 import { useNavigate } from "react-router-dom";
 
 const BoxCart = ({ isInModal }) => {
-  const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
+  const { cartItems, removeFromCart } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
 
-  // Hàm để tăng số lượng
-  const increaseQuantity = (id) => {
-    updateQuantity(id, 1);
-  };
-
-  // Hàm để giảm số lượng
-  const decreaseQuantity = (id, quantity) => {
-    if (quantity > 1) {
-      updateQuantity(id, -1);
-    } else {
-      removeFromCart(id);
-    }
-  };
 
   // Hàm để xử lý chọn/deselect các mục
   const handleSelectItem = (id) => {
@@ -49,12 +36,11 @@ const BoxCart = ({ isInModal }) => {
   // Hàm để xóa các mục đã chọn
   const handleRemoveSelectedItems = () => {
     selectedItems.forEach((id) => removeFromCart(id));
-    setSelectedItems([]); // Reset danh sách đã chọn sau khi xóa
   };
 
   // Tính tổng tiền của giỏ hàng
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.price * item.quality,
     0
   );
   const handleCheckout = () => {
@@ -118,8 +104,6 @@ const BoxCart = ({ isInModal }) => {
               item={item}
               selectedItems={selectedItems}
               handleSelectItem={handleSelectItem}
-              increaseQuantity={increaseQuantity}
-              decreaseQuantity={decreaseQuantity}
               removeFromCart={removeFromCart}
             />
           ))}
@@ -145,7 +129,7 @@ const BoxCart = ({ isInModal }) => {
           <Button
             variant="primary"
             className="mt-4 p-2"
-            style={{ width: "100%"}}
+            style={{ width: "100%" }}
             disabled={totalPrice === 0}
             onClick={handleCheckout}
           >

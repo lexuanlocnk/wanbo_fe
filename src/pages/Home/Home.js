@@ -40,7 +40,7 @@ const Home = (props) => {
 
         const responseFl = await homeApi.getFlashSale();
         setFlashSaleData(responseFl.data.ProductFlashSale);
-             
+
       } catch (err) {
         console.log("Fetch MenuCategory Data Error: ", err);
       } finally {
@@ -130,7 +130,7 @@ const Home = (props) => {
             autoPlay={props.deviceType !== "mobile" ? true : false}
             deviceType={props.deviceType}
           >
-           {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
+            {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
               <div
                 className="d-flex align-items-center me-3 mb-3"
                 key={item.id}
@@ -155,7 +155,7 @@ const Home = (props) => {
                   }}
                 />
               </div>
-            )): []}
+            )) : []}
           </Carouselm>
         </div>
       </div>
@@ -164,49 +164,49 @@ const Home = (props) => {
       <div
         className=" align-items-center py-4 my-5 flashsale-carousel"
         style={{ width: "100%", height: "auto", backgroundColor: "#0d6efd" }}
-      >          
-          <div className="container">
-            <div className="d-flex  align-items-center flex-column-mobile">
-              <h2 style={{ color: "white" }} className="">
-                Flash Sale
-               </h2>
-               <div className="mx-4" />
-              <FlashSaleCountdown />
-             </div>         
-                <Carouselm
-                  swipeable={true}
-                  draggable={true}
-                  showDots={true}
-                  responsive={responsive}
-                  ssr={true}
-                  infinite={true}
-                  autoPlaySpeed={3000}
-                  keyBoardControl={true}
-                  customTransition="all 1.1s"
-                  transitionDuration={1100}
-                  containerClass="carousel-container"
-                  dotListClass="custom-dot-list-style"
-                  itemClass="carousel-item-padding-50-px"
-                  autoPlay={props.deviceType !== "mobile" ? true : false}
-                  deviceType={props.deviceType}
-                >
-                  {flashSaleData && flashSaleData.length > 0 ? flashSaleData.map(( item ) => {
-                   return (              
-                      <BoxProduct key={item.ProductId} item={item} />                         
-                      )
-                    }):[] 
-                  }
-                </Carouselm>                             
-         </div>
+      >
+        <div className="container">
+          <div className="d-flex  align-items-center flex-column-mobile">
+            <h2 style={{ color: "white" }} className="">
+              Flash Sale
+            </h2>
+            <div className="mx-4" />
+            <FlashSaleCountdown />
+          </div>
+          <Carouselm
+            swipeable={true}
+            draggable={true}
+            showDots={true}
+            responsive={responsive}
+            ssr={true}
+            infinite={true}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="all 1.1s"
+            transitionDuration={1100}
+            containerClass="carousel-container"
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-50-px"
+            autoPlay={props.deviceType !== "mobile" ? true : false}
+            deviceType={props.deviceType}
+          >
+            {flashSaleData && flashSaleData.length > 0 ? flashSaleData.map((item) => {
+              return (
+                <BoxProduct key={item.ProductId} item={item} />
+              )
+            }) : []
+            }
+          </Carouselm>
+        </div>
       </div>
-      
+
 
       {/* May chieu */}
-      {categoryData && categoryData.length > 0 ? categoryData.map(( item ) => {
-          return (
-            <div className=" align-items-center container ">
+      {categoryData && categoryData.length > 0 ? categoryData.map((item) => {
+        return (
+          <div className=" align-items-center container ">
             <div className="row">
-              <div className=" col-6 col-md-3 d-flex">
+              <div className=" col-7 col-md-6 d-flex">
                 <h5
                   style={{
                     textTransform: "uppercase",
@@ -214,10 +214,10 @@ const Home = (props) => {
                     fontWeight: "600",
                   }}
                 >
-                 {item?.Category}
+                  {item?.Category}
                 </h5>
               </div>
-              <div className=" col-6 col-md-9 d-flex justify-content-end">
+              <div className=" col-5 col-md-6 d-flex justify-content-end">
                 {/* <div className="d-flex">
                   <div className="d-none d-lg-flex">
                     <Button
@@ -251,7 +251,7 @@ const Home = (props) => {
                 </Button>
               </div>
             </div>
-    
+
             <div className="py-2">
               <Carouselm
                 swipeable={true}
@@ -260,7 +260,7 @@ const Home = (props) => {
                 responsive={responsive}
                 ssr={true}
                 infinite={true}
-                autoPlaySpeed={50000}
+                autoPlaySpeed={5000}
                 keyBoardControl={true}
                 customTransition="all 1.1s"
                 transitionDuration={1100}
@@ -270,14 +270,14 @@ const Home = (props) => {
                 autoPlay={props.deviceType !== "mobile" ? true : false}
                 deviceType={props.deviceType}
               >
-                {item?.ProductChild && item.ProductChild?.length> 0 ? item.ProductChild?.map((item) => (
+                {item?.ProductChild && item.ProductChild?.length > 0 ? item.ProductChild?.map((item) => (
                   <BoxProduct key={item.ProductId} item={item} />
-                )): []}
+                )) : []}
               </Carouselm>
             </div>
-          </div> 
-          )
-        }):[] 
+          </div>
+        )
+      }) : []
       }
 
       {/* Ong kính */}
@@ -406,14 +406,14 @@ const Home = (props) => {
       <div className="img-container my-5 rounded container">
         <a href="/product" className="card-title">
           <img
-          style={{height: 280, objectFit: "cover",border: 15}}
+            style={{ height: 280, objectFit: "cover", border: 15 }}
             src="https://wanbo.cn/cdn/shop/files/3_33b7f516-cc50-4a3e-8487-ba768b98ca8b.jpg?v=1716813493&width=2000"
             className="d-block w-100 img-fluid align-top hover-zoom"
             alt="Banner lớn"
-            
+
           />
         </a>
-      </div>  
+      </div>
 
       {/* Ba hình ảnh banner nhỏ */}
       <div className="my-5 container">
