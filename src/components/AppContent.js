@@ -14,6 +14,8 @@ import Contact from "../pages/Contact/Contact";
 import Checkout from "../pages/Checkout/Checkout";
 import CompareProduct from "../pages/Compare/compare";
 import Information from "../pages/Account/Information";
+import NewProducts from "../pages/NewProduct/NewProducts";
+import Search from "../pages/Search/Search";
 
 const AppContent = () => {
   return (
@@ -35,6 +37,10 @@ const AppContent = () => {
       <Route path="/cart" element={<Cart />} />
 
       <Route path="/new-product" element={<NewProduct />} />
+
+      <Route path="/:catUrl" element={<NewProducts />} />
+
+      <Route path="/search" element={<Search />} />
 
       <Route path="/contact" element={<Contact />} />
 

@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BannerCollection from "../../assets/images/banner-collection.png";
 import "./NewProduct.css";
 import ProductItem from "../../components/productItem/productItem";
 import ProductImg from "../../assets/images/product-img-test.png";
 import BoxProduct from "../../components/componentProduct/BoxProduct";
+import axios from "axios";
 
 const filters = [
   {
     title: "Loại sản phẩm",
-    options: ["Camera hành động", "Máy ảnh", "Máy quay phim", "Ống kính"],
-  },
-  {
-    title: "Thương hiệu",
-    options: ["Canon", "Blackmagic", "DJI", "GoPro"],
+    options: ["Wanbo T Series", "Wanbo X Series", "Davinci Series", "Mozart Series", "Phụ kiện"],
   },
   {
     title: "Chọn mức giá",
-    options: ["Giá dưới 5tr", "5tr - 10tr", "10tr - 15tr", "15tr - 20tr"],
+    options: ["Giá dưới 5 trăm", "5trăm - 1tr", "1tr - 2tr", "2tr - 5tr", "5tr - 11tr"],
   },
 ];
 
@@ -39,59 +36,88 @@ const sortOptions = [
   },
 ];
 
-const productsData = [
-  {
-    id: 21,
-    name: "Máy ảnh Nikon D850 (Body Only)",
-    price: 50990000,
-    originalPrice: 57990000,
-    discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
-    images: [
-      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
-      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
-      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d8502-500x500.jpg?v=1683468092477",
-    ],
-    description:
-      "Nikon D850 là một máy ảnh DSLR cao cấp với cảm biến FullFrame 45.7MP và bộ xử lý hình ảnh EXPEED 5. Được thiết kế cho các nhiếp ảnh gia chuyên nghiệp và yêu cầu cao về chất lượng hình ảnh.",
-  },
-  {
-    id: 22,
-    name: "Máy ảnh Nikon D780 + Lens 24-120mm F/4G ED Nano",
-    price: 50990000,
-    originalPrice: 57990000,
-    discountPercentage: Math.round(((57990000 - 50990000) / 57990000) * 100),
-    images: [
-      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d780-with-24-120-lens-7-500x500.jpg?v=1683467618777",
-      "https://example.com/nikon-d780-second-images.jpg",
-      "https://example.com/nikon-d780-third-images.jpg",
-    ],
-    description:
-      "Nikon D780 là sự kết hợp giữa một máy ảnh DSLR truyền thống và công nghệ mirrorless tiên tiến, kèm theo ống kính 24-120mm cho khả năng chụp linh hoạt trong mọi tình huống.",
-  },
-  {
-    id: 23,
-    name: "Máy ảnh Nikon D6 Body Only",
-    price: 138990000,
-    originalPrice: 159990000,
-    discountPercentage: Math.round(((159990000 - 138990000) / 159990000) * 100),
-    images: [
-      "https://bizweb.dktcdn.net/100/482/909/products/nikon-d6-01-500x500.jpg?v=1683467136367",
-      "https://example.com/nikon-d6-second-images.jpg",
-      "https://example.com/nikon-d6-third-images.jpg",
-    ],
-    description:
-      "Nikon D6 là dòng máy ảnh DSLR hàng đầu của Nikon, nổi bật với khả năng chụp ảnh tốc độ cao và hiệu suất cao cấp cho các nhiếp ảnh gia chuyên nghiệp.",
-  },
-];
 
 const NewProduct = (props) => {
   const [selectedOption, setSelectedOption] = useState("Mặc định");
   const [activeSortOption, setActiveSortOption] = useState();
   const [selectedFilters, setSelectedFilters] = useState([]);
 
+  const [products, setProducts] = useState([]);
+  const categoryMapping = {
+    "Wanbo T Series": "wanbo-t",
+    "Wanbo X Series": "wanbo-x",
+    "Davinci Series": "davinci-series",
+    "Mozart Series": "mozart",
+    "Phụ kiện": "phu-kien",
+  };
+
+  const fetchProducts = async () => {
+    const selectedCategoryName = selectedFilters.find(filter => filter.filter === "Loại sản phẩm")?.option || '';
+    const selectedCategory = categoryMapping[selectedCategoryName] || '';
+    const selectedPriceRange = selectedFilters.find(filter => filter.filter === "Chọn mức giá")?.option || '';
+    const [minPrice, maxPrice] = parsePriceRange(selectedPriceRange);
+
+    try {
+      const response = await axios.get(`http://192.168.245.190:8002/api/member/filter-category`, {
+        params: {
+          catUrl: selectedCategory,
+          minPrice: minPrice || 0,
+          maxPrice: maxPrice || 100000000,
+        },
+      });
+      if (response.data.status) {
+        setProducts(response.data.listProduct);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [selectedFilters]);
+
+  const parsePriceRange = (range) => {
+    switch (range) {
+      case "Giá dưới 5 trăm":
+        return [1, 500000];
+      case "5trăm - 1tr":
+        return [500000, 1000000];
+      case "1tr - 2tr":
+        return [1000000, 2000000];
+      case "2tr - 5tr":
+        return [2000000, 5000000];
+      case "5tr - 11tr":
+        return [5000000, 20000000];
+      default:
+        return [0, 100000000]; // No filter
+    }
+  };
+
+
   // const [filters, setFilters] = useState([]);
 
   const [selectedSortOptions, setSelectedSortOptions] = useState([]);
+
+
+  // Hàm xử lý khi chọn checkbox filter
+  // const handleFilterChange = (filterTitle, option) => {
+  //   const isSelected = selectedFilters.some(
+  //     (selected) =>
+  //       selected.option === option && selected.filter === filterTitle
+  //   );
+
+  //   if (isSelected) {
+  //     setSelectedFilters(
+  //       selectedFilters.filter(
+  //         (selected) =>
+  //           !(selected.option === option && selected.filter === filterTitle)
+  //       )
+  //     );
+  //   } else {
+  //     setSelectedFilters([...selectedFilters, { filter: filterTitle, option }]);
+  //   }
+  // };
 
   // Hàm xử lý khi chọn checkbox filter
   const handleFilterChange = (filterTitle, option) => {
@@ -101,6 +127,7 @@ const NewProduct = (props) => {
     );
 
     if (isSelected) {
+      // Hủy chọn tùy chọn nếu nó đã được chọn
       setSelectedFilters(
         selectedFilters.filter(
           (selected) =>
@@ -108,9 +135,14 @@ const NewProduct = (props) => {
         )
       );
     } else {
-      setSelectedFilters([...selectedFilters, { filter: filterTitle, option }]);
+      // Loại bỏ các tùy chọn khác trong cùng nhóm và thêm tùy chọn mới
+      setSelectedFilters([
+        ...selectedFilters.filter((selected) => selected.filter !== filterTitle),
+        { filter: filterTitle, option }
+      ]);
     }
   };
+
 
   // Hàm xử lý xoá tag
   const handleRemoveFilterTag = (filter) => {
@@ -144,12 +176,13 @@ const NewProduct = (props) => {
   // Tính toán sản phẩm sẽ hiển thị dựa trên trang hiện tại
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = productsData.slice(
+
+  const currentProducts = products.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
-  const totalPages = Math.ceil(productsData.length / itemsPerPage);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
 
   // Hàm xử lý khi người dùng nhấn vào số trang
   const handlePageClick = (pageNumber) => {
@@ -245,9 +278,8 @@ const NewProduct = (props) => {
               {sortOptions.map((option) => (
                 <div
                   key={option.value}
-                  className={`sort-by-item ${
-                    activeSortOption === option.label ? "active2" : ""
-                  }`}
+                  className={`sort-by-item ${activeSortOption === option.label ? "active2" : ""
+                    }`}
                   onClick={() => handleSelectSortOption(option)}
                 >
                   {option.label}
@@ -255,14 +287,17 @@ const NewProduct = (props) => {
               ))}
             </div>
           </div>
+
+
           <div className="products-view">
             <div className="row">
               {/* Hiển thị 9 sản phẩm trên trang hiện tại */}
-              {currentProducts.map((product) => (
+              {products.map((product) => (
                 <div className="product-item col-6 col-xl-4 col-lg-4 col-md-4">
                   <BoxProduct key={product.id} item={product} />
                 </div>
               ))}
+
               {/* Pagination của Bootstrap */}
               <nav aria-label="" className="product-pagination">
                 <ul className="pagination pagination-sm">
@@ -280,9 +315,8 @@ const NewProduct = (props) => {
                   {Array.from({ length: totalPages }, (_, i) => (
                     <li
                       key={i}
-                      className={`page-item ${
-                        currentPage === i + 1 ? "active2" : ""
-                      }`}
+                      className={`page-item ${currentPage === i + 1 ? "active2" : ""
+                        }`}
                     >
                       <span
                         className="page-link"

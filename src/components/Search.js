@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../pages/Cart/CartContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -9,8 +9,11 @@ import user from "../assets/user.png";
 import "../components/AppHeader.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Badge, Col } from "react-bootstrap";
+import axios from "axios";
 
 function Search() {
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
   const { cartItems } = useContext(CartContext);
 
@@ -24,6 +27,42 @@ function Search() {
   };
 
   const isLoggedIn = Boolean(localStorage.getItem("token"));
+  // Thêm phần xử lý tìm kiếm vào trong component `AppHeader`
+  const [searchKey, setSearchKey] = useState("");
+
+  // const fetchSuggestions = async (key) => {
+  //   try {
+  //     const response = await axios.get(`http://192.168.245.190:8002/api/member/search-product`, {
+  //       params: { key },
+  //     });
+  //     if (response.data.status) {
+  //       setSuggestions(response.data.product);
+  //       setShowSuggestions(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching suggestions:", error);
+  //   }
+  // };
+  // const handleInputChange = (e) => {
+  //   const value = e.target.value;
+  //   setSearchKey(value);
+  //   if (value) {
+  //     fetchSuggestions(value);
+  //   } else {
+  //     setShowSuggestions(false);
+  //   }
+  // };
+
+  const handleSearch = () => {
+    if (searchKey.trim()) {
+      navigate(`/search?key=${encodeURIComponent(searchKey)}`);
+    }
+  };
+
+  // const handleSuggestionClick = (suggestion) => {
+  //   navigate(`/product/${suggestion.id}`);
+  //   setShowSuggestions(false);
+  // };
 
   return (
     <Navbar
@@ -125,22 +164,32 @@ function Search() {
           >
             <input
               className="form-control me-2"
-              style={{
-                height: 43,
-                border: "1px solid #ccc",
-                outline: "none",
-                paddingLeft: 15,
-                borderRadius: 5,
-              }}
               placeholder="Tìm kiếm"
+              value={searchKey}
               onFocus={(e) => {
                 e.target.style.boxShadow = "none"; // Loại bỏ hiệu ứng màu xanh
               }}
+              onChange={(e) => setSearchKey(e.target.value)}
+              style={{ height: 43, border: "1px solid #ccc", paddingLeft: 15, borderRadius: 5 }}
             />
-            <Button className="search">
+            <Button className="search" onClick={handleSearch}>
               <div className="bi bi-search" style={{ padding: 2.7 }} />
             </Button>
           </div>
+          {/* Gợi ý */}
+          {/* {showSuggestions && suggestions.length > 0 && (
+            <div className="search__item-result">
+              {suggestions.map((item) => (
+                <div
+                  key={item.id}
+                  className="suggestion-item"
+                  onClick={() => handleSuggestionClick(item)}
+                >
+                  {item.title}
+                </div>
+              ))}
+            </div>
+          )} */}
         </div>
       </Container>
     </Navbar>

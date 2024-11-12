@@ -25,6 +25,8 @@ import FlashSaleCountdown from "../../components/FlashSaleCountdown";
 import HomeBanner from "../../components/homeBanner";
 import HomeApi from "../../api/homeApi";
 import { imageBaseUrl } from "../../api/axiosConfig";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = (props) => {
   const [categoryData, setCategoryData] = useState([]);
@@ -108,6 +110,7 @@ const Home = (props) => {
 
   return (
     <div>
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="my-4 container">
         <HomeBanner />
 

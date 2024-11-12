@@ -17,7 +17,9 @@ const Breadcrumb = () => {
     login: "Đăng nhập",
     register: "Đăng ký",
     checkout: "Thanh toán",
+    search: "Tìm kiếm",
     information: "Thông tin tài khoản",
+    "compare-product": "So sánh sản phẩm",
     "new-product": "Sản phẩm mới ",
     // Thêm các ánh xạ khác ở đây
   };
