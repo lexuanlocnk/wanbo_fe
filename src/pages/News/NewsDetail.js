@@ -76,16 +76,15 @@ const NewsDetail = () => {
                 <p className="me-3 bi bi-person">Team dev</p>
                 <p className="bi bi-clock-history me-1" /> <p>{newDetail.news?.date_post}</p>
               </div>
-              <img
+              {/* <img
                 src={`${imageBaseUrl}${newDetail.news?.picture}`}
                 alt={newDetail.title}
                 className="news-detail-image my-4"
                 style={{ width: "75%", height: "auto" }}
-              />
-              <p>{newDetail.description}</p>
+              /> */}
 
               <div
-                dangerouslySetInnerHTML={{ __html: newDetail.content }}
+                dangerouslySetInnerHTML={{ __html: newDetail.description }}
               />{" "}
               {/* Hiển thị nội dung chi tiết do admin nhập vào */}
             </div>

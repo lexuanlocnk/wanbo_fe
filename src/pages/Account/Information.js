@@ -36,7 +36,7 @@ const Information = () => {
                 setIsEditing(false);
             }
         } catch (error) {
-            setError("Email hoặc mật khẩu không chính xác.");
+            setError("lỗi.");
         }
     };
 

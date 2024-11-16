@@ -12,6 +12,8 @@ import { imageBaseUrl } from "../../api/axiosConfig";
 import axios from 'axios';
 import HomeApi from "../../api/homeApi";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BoxProduct = ({ item }) => {
   const { cartItems, addToCart } = useContext(CartContext);
@@ -35,14 +37,22 @@ const BoxProduct = ({ item }) => {
 
   const handleOpenCompare = () => {
     let storedCompareList = JSON.parse(localStorage.getItem("compareList")) || [];
-
+    // Kiểm tra nếu sản phẩm đã có trong danh sách so sánh
     if (storedCompareList.find(product => product.id === item.ProductId)) {
-      alert("Sản phẩm này đã có trong danh sách so sánh!");
+      toast.info("Sản phẩm này đã có trong danh sách so sánh!");
+      // setIsCompared(true);
+      return;
+    }
+    // Kiểm tra nếu đã có tối đa 3 sản phẩm trong danh sách so sánh
+    if (storedCompareList.length >= 3) {
+      toast.warn("Chỉ có thể so sánh tối đa 3 sản phẩm.");
+      setIsCompared(true);
       return;
     }
 
-    if (storedCompareList.length >= 3) {
-      alert("Chỉ có thể so sánh tối đa 3 sản phẩm.");
+    // Kiểm tra nếu danh mục của sản phẩm mới khớp với danh mục của các sản phẩm đã thêm
+    if (storedCompareList.length > 0 && storedCompareList[0].category !== item.Category) {
+      toast.warn("Chỉ có thể so sánh các sản phẩm cùng danh mục.");
       return;
     }
 
@@ -52,6 +62,7 @@ const BoxProduct = ({ item }) => {
       price: item.Price,
       priceOld: item.PriceOld,
       image: item.Image,
+      category: item.Category,
     });
 
     localStorage.setItem("compareList", JSON.stringify(storedCompareList));
@@ -116,10 +127,23 @@ const BoxProduct = ({ item }) => {
   //   }
   // }
 
+  const handleRemoveFromCompare = (productId) => {
+    const storedCompareList = JSON.parse(localStorage.getItem("compareList")) || [];
+
+    // Loại bỏ sản phẩm có id bằng productId
+    const updatedCompareList = storedCompareList.filter((product) => product.id !== productId);
+
+    // Cập nhật lại localStorage và state
+    localStorage.setItem("compareList", JSON.stringify(updatedCompareList));
+    setCompareList(updatedCompareList);
+  };
+
+
   const sale = Math.round(((item.PriceOld - item.Price) / item.PriceOld) * 100);
 
   return (
     <div className="my-4 rounded box-product mx-1" key={item.ProductId} style={{ display: "inline-block", position: "relative", width: "98%" }}>
+
       <Card className="prdItem border-0 shadow4">
         <a href={`/product/${item.UrlProduct}`}>
           <Card.Img variant="top" src={`${imageBaseUrl}${item.Image}`} className="p-4 img" />
@@ -209,7 +233,7 @@ const BoxProduct = ({ item }) => {
                   <span className="price">{product.price ? `${product.price.toLocaleString("vi-VN")} đ` : ""}</span>
                   <span className="compare-price">{product.priceOld ? `${product.priceOld.toLocaleString("vi-VN")} đ` : ""}</span>
                 </div>
-                <div className="remove-compare-item" >
+                <div className="remove-compare-item" onClick={() => handleRemoveFromCompare(product.id)}>
                   Xoá
                 </div>
               </div>

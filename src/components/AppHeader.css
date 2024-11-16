@@ -67,6 +67,34 @@
   cursor: pointer;
 }
 
+
+.search-bar {
+  position: relative;
+}
+
+.search__item-result {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
 /* Tùy chỉnh cho các Sub-dropdown */
 .sub-dropdown {
   margin-left: -1px;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../Cart/CartContext";
 import {
   Row,
@@ -343,6 +343,7 @@ const Checkout = () => {
               </Card.Body>
             </Card>
           </Col>
+
         </Row>
       </div>
     </div>

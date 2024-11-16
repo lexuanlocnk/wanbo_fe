@@ -80,7 +80,7 @@ const AppHeader = () => {
               <NavDropdown.Item href="/new-product">
                 Sẩn phẩm mới
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action2">
+              <NavDropdown.Item href="/new-products">
                 Sản phẩm nổi bật
               </NavDropdown.Item>
             </NavDropdown>
