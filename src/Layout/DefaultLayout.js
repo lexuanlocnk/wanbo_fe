@@ -9,17 +9,19 @@ import Address from "../components/Address";
 import BackToTop from "../components/BackToTop";
 import { CartProvider } from "../pages/Cart/CartContext";
 import Breadcrumb from "../components/Breadcrumb";
+import { toast, ToastContainer } from 'react-toastify';
 
 const DefaultLayout = () => {
   return (
     <div>
       <CartProvider>
+        <ToastContainer position="top-right" autoClose={3000} />
         <BackToTop />
 
         <Address />
         <Search />
         <AppHeader />
-        <Breadcrumb/>
+        <Breadcrumb />
 
         <AppContent />
 

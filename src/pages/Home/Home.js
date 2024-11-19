@@ -25,12 +25,12 @@ import FlashSaleCountdown from "../../components/FlashSaleCountdown";
 import HomeBanner from "../../components/homeBanner";
 import HomeApi from "../../api/homeApi";
 import { imageBaseUrl } from "../../api/axiosConfig";
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = (props) => {
   const [categoryData, setCategoryData] = useState([]);
   const [flashSaleData, setFlashSaleData] = useState([]);
+  const [newTopData, setNewTopData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -51,6 +51,25 @@ const Home = (props) => {
     };
     fetchProjetorLists();
   }, []);
+
+
+  useEffect(() => {
+    const fetchNewTop = async () => {
+      const homeApi = new HomeApi();
+      try {
+        const response = await homeApi.getNewtop();
+        setNewTopData(response.data.listNew?.data); // Lấy data từ response
+
+      } catch (err) {
+        console.log("Fetch setNewTopData Data Error: ", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNewTop();
+  }, []);
+
+  // console.log(">>>>>>>>>>>", newTopData)
 
 
   const responsive = {
@@ -110,7 +129,7 @@ const Home = (props) => {
 
   return (
     <div>
-      <ToastContainer position="top-right" autoClose={3000} />
+
       <div className="my-4 container">
         <HomeBanner />
 
@@ -462,15 +481,19 @@ const Home = (props) => {
       {/* tin tuc */}
       <div className=" mt-5" />
       <h5 className="container mt-5 fw-bold">TIN TỨC</h5>
+
       <div className="d-flex flex-wrap justify-content-between mb-5 container">
-        {newsItems.map((item) => (
-          <Card key={item.id} className="m-1 news">
+        {newTopData.map((item) => (
+          <Card className="m-1 news">
             <div className="img-container">
-              <Card.Img
-                variant="top"
-                src={item.images}
-                className="hover-zoom"
-              />
+              <a href={`/news/${item.url_cat}/${item.friendly_url}`} >
+                <Card.Img
+                  variant="top"
+                  src={`${imageBaseUrl}${item.picture}`}
+                  className="hover-zoom"
+                // style={{ height: "100%" }}
+                />
+              </a>
             </div>
             <Card.Body>
               <Card.Title className="f16 tblack fw-bold h6">
@@ -483,19 +506,20 @@ const Home = (props) => {
                 <p>|</p>
                 <Card.Text className="ms-2 tgray">
                   <span className="bi bi-clock-history me-1" />
-                  {item.date}
+                  {item.date_post}
                 </Card.Text>
               </div>
               <Card.Text className="text-truncate-3 tgray">
-                {item.description}
+                {item.short}
               </Card.Text>
-              <a href={`/news/${item.id}`} className="card-title">
+              <a href={`/news/${item.url_cat}/${item.friendly_url}`} className="card-title">
                 <h6 className="h6 f14 tblack fw-bold">Xem thêm</h6>
               </a>
             </Card.Body>
           </Card>
         ))}
       </div>
+
       <div className=" mb-5" />
     </div>
   );

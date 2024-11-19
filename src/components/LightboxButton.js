@@ -16,12 +16,12 @@ const LightboxButton = ({ productId }) => {
 
   useEffect(() => {
     const fetchProductDetail = async () => {
-      // const homeApi = new HomeApi();
+      const homeApi = new HomeApi();
       try {
         const response = await fetch(
           `http://192.168.245.190:8002/api/member/product-detail/${urlProduct}`
         );
-        //const response = await homeApi.getProductDetail(urlProduct);
+        // const response = await homeApi.getProductDetail(urlProduct);
 
         const data = await response.json();
         setProduct(data.productDetail || null);

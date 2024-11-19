@@ -41,6 +41,18 @@ class HomeApi {
     return axiosClient.delete(url);
   };
 
+  // api cho newtop
+  getNewtop = () => {
+    const url = `/member/news-top/may-chieu-mini-wanbo`;
+    return axiosClient.get(url);
+  };
+
+  // search
+  getSearch = (key) => {
+    const url = `/member/search-product`;
+    return axiosClient.get(url, key);
+  };
+
 }
 
 export default HomeApi;

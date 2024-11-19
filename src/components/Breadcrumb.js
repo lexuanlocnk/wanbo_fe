@@ -19,8 +19,10 @@ const Breadcrumb = () => {
     checkout: "Thanh toán",
     search: "Tìm kiếm",
     information: "Thông tin tài khoản",
+    "tin-khuyen-mai": "Tin khuyến mãi",
     "compare-product": "So sánh sản phẩm",
     "new-product": "Sản phẩm mới ",
+    thankyou: "Cám ơn",
     // Thêm các ánh xạ khác ở đây
   };
 
