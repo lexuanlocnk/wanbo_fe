@@ -11,27 +11,124 @@ import {
   FloatingLabel,
   ButtonGroup,
 } from "react-bootstrap";
+import axios from "axios";
 import { imageBaseUrl } from "../../api/axiosConfig";
+import CheckoutApi from "../../api/CheckoutApi";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext); // Lấy sản phẩm từ CartContext
-
+  const { cartItems } = useContext(CartContext);
+  const navigate = useNavigate();
+  // Form fields for user data
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [note, setNote] = useState("");
   const [isChecked, setIsChecked] = useState(true);
+
+  const [userData, setUserData] = useState({ email: "" });
+  const [error, setError] = useState("");
 
   const [open, setOpen] = useState(false);
 
-  // tổng số lượng sản phẩm
-  const totalItems = cartItems.reduce(
-    (total, item) => total + item.quality,
-    0
-  );
-  // tổng số tiền
-  const total = cartItems.reduce(
-    (total, item) => total + item.price * item.quality,
-    0
-  );
+  const [addresses, setAddresses] = useState([]); // State để lưu danh sách địa chỉ
+  const [selectedAddressId, setSelectedAddressId] = useState(""); // ID địa chỉ đã chọn
 
+
+  // Lấy danh sách địa chỉ từ API
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     axios
+  //       .get("http://192.168.245.190:8002/api/member/show-address-member", {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         setAddresses(response.data.address); // Lưu danh sách địa chỉ
+  //       })
+  //       .catch(() => setError("Không thể tải danh sách địa chỉ"));
+  //   } else {
+  //     setError("Không tìm thấy tài khoản");
+  //   }
+  // }, []);
+
+  // // Khi chọn địa chỉ từ Select, tự động điền thông tin
+  // const handleAddressSelect = (e) => {
+  //   const selectedId = e.target.value;
+  //   setSelectedAddressId(selectedId);
+
+  //   // Tìm địa chỉ đã chọn trong danh sách và cập nhật các input
+  //   const selectedAddress = addresses.find((addr) => addr.id === selectedId);
+  //   if (selectedAddress) {
+  //     setName(selectedAddress.name);
+  //     setPhone(selectedAddress.phone);
+  //     setAddress(selectedAddress.address);
+  //   }
+  // };
+
+  // tổng số lượng sản phẩm
+
+  const totalItems = cartItems.reduce((total, item) => total + item.quality, 0);
+  const total = cartItems.reduce((total, item) => total + item.price * item.quality, 0);
   const ship = 40000;
+
+  // Handle checkout
+  const handleCheckout = async () => {
+    // Map cart items to API format
+    const orders = cartItems.map(item => ({
+      price: item.price,
+      productId: item.product_id,
+      productName: item.title,
+      quality: item.quality,
+      picture: item.picture
+    }));
+
+    const data = {
+      total_cart: total,
+      shipping_method: "Giao tận nơi",
+      payment_method: open ? "tiền mặt" : "khác",
+      note,
+      orders,
+      total_price: total + ship,
+      d_email: userData,
+      d_name: name,
+      d_address: address,
+      d_phone: phone
+    };
+    const checkoutApi = new CheckoutApi();
+    try {
+      const response = await checkoutApi.postCheckoutApi(data);
+      toast.success("Đặt hàng thành công");
+      navigate("/thankyou")
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      toast.warn("Có lỗi xảy ra, vui lòng thử lại.");
+    }
+  };
+
+  // Lấy thông tin user
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.get("http://192.168.245.190:8002/api/member/information-member", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          setUserData(
+            response.data.member?.email,
+          );
+        })
+        .catch(() => setError("Không thể tải thông tin tài khoản"));
+    } else {
+      setError("Không tìm thấy tài khoản");
+    }
+  }, []);
 
   return (
     <div style={{ backgroundColor: " #F8F8FF" }}>
@@ -43,25 +140,45 @@ const Checkout = () => {
               <Card.Body>
                 <Col className="d-flex flex-row align-items-center justify-content-between">
                   <Card.Title className="me-2">Thông tin nhận hàng</Card.Title>
-                  <a href="/login">
+                  {/* <a href="/login">
                     <i className="bi bi-person-circle me-1" />
                     <span>Đăng nhập</span>
-                  </a>
+                  </a> */}
                 </Col>
 
                 <Form>
+                  <Form.Select aria-label="Tỉnh thành" className="my-3">
+                    <option>Địa chỉ khác...</option>
+                    <option value="1">TP Hồ Chí Minh</option>
+                    <option value="2">TP Hà nội</option>
+                    <option value="3">Huế</option>
+                  </Form.Select>
+
                   <Form.Group controlId="formMail">
-                    <Form.Control type="email" placeholder="Email" />
+                    <Form.Control
+                      type="email"
+                      placeholder="Email"
+                      value={userData}
+                      //onChange={(e) => setEmail(e.target.value)}
+                      disabled
+                    />
                   </Form.Group>
 
                   <Form.Group controlId="formName" className="mt-3">
-                    <Form.Control type="text" placeholder="Nhập họ và tên" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Nhập họ và tên"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </Form.Group>
 
                   <Form.Group controlId="formPhone" className="mt-3">
                     <Form.Control
                       type="text"
                       placeholder="Nhập số điện thoại"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </Form.Group>
 
@@ -69,11 +186,13 @@ const Checkout = () => {
                     <Form.Control
                       as="textarea"
                       rows={2}
-                      placeholder="Địa chỉ (tùy chọn)"
+                      placeholder="Địa chỉ"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                     />
                   </Form.Group>
 
-                  <Form.Select aria-label="Tỉnh thành" className="mt-3">
+                  {/* <Form.Select aria-label="Tỉnh thành" className="mt-3">
                     <option>Tỉnh thành</option>
                     <option value="1">TP Hồ Chí Minh</option>
                     <option value="2">TP Hà nội</option>
@@ -88,19 +207,84 @@ const Checkout = () => {
                   <Form.Select aria-label="Phường xã" className="mt-3">
                     <option>Phường xã (tùy chọn)</option>
                     <option value="1">Thành Phố</option>
-                  </Form.Select>
+                  </Form.Select> */}
 
                   <Form.Group controlId="formNote" className="mt-3">
                     <Form.Control
                       as="textarea"
                       rows={3}
                       placeholder="Ghi chú (tùy chọn)"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
                     />
                   </Form.Group>
                 </Form>
               </Card.Body>
             </Card>
           </Col>
+
+          {/* Cột Thông tin nhận hàng test*/}
+          {/* <Col lg={4}>
+            <Card style={{ border: "none" }}>
+              <Card.Body>
+                <Card.Title className="me-2">Thông tin nhận hàng</Card.Title>
+                <Form>
+                  <Form.Group controlId="formAddressSelect">
+                    <Form.Select
+                      className="my-3"
+                      value={selectedAddressId}
+                      onChange={handleAddressSelect}
+                    >
+                      <option value="">Chọn địa chỉ...</option>
+                      {addresses?.map((addr) => (
+                        <option key={addr.id} value={addr.id}>
+                          {addr.address} - {addr.name}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Form.Group controlId="formName" className="mt-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Nhập họ và tên"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formPhone" className="mt-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Nhập số điện thoại"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formAddress" className="mt-3">
+                    <Form.Control
+                      as="textarea"
+                      rows={2}
+                      placeholder="Địa chỉ"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formNote" className="mt-3">
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      placeholder="Ghi chú (tùy chọn)"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col> */}
 
           {/* Cột Vận chuyển */}
           <Col lg={4}>
@@ -112,7 +296,6 @@ const Checkout = () => {
                   <div className="d-flex">
                     <Form.Check
                       type="radio"
-                      aria-label="radio 1"
                       checked={isChecked}
                       className="me-2"
                     />
@@ -129,7 +312,6 @@ const Checkout = () => {
                   <div className="d-flex m-2">
                     <Form.Check
                       type="radio"
-                      aria-label="radio2"
                       className="me-2"
                       onClick={() => setOpen(true)}
                     />
@@ -157,39 +339,26 @@ const Checkout = () => {
 
           {/* Cột Đơn hàng */}
           <Col lg={4}>
-            <Card style={{ border: "none" }} className="">
+            <Card style={{ border: "none" }}>
               <Card.Body>
                 <Card.Title>Đơn hàng ({totalItems} sản phẩm)</Card.Title>
                 <hr />
-
-                <ul
-                  className="list-group"
-                  style={{
-                    height: "200px",
-                    overflowY: "auto",
-                    overflowX: "hidden",
-                  }}
-                >
+                <ul className="list-group" style={{ height: "200px", overflowY: "auto", overflowX: "hidden" }}>
                   {cartItems.map((item) => (
-                    <li
-                      key={item.id}
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                      style={{ border: "none" }}
-                    >
+                    <li key={item.id} style={{ border: "none" }} className="list-group-item d-flex justify-content-between align-items-center">
                       <span style={{ position: "relative" }}>
                         <img
                           src={`${imageBaseUrl}${item.picture}`}
-                          alt={item.name}
+                          alt={item.title}
                           style={{
                             width: "50px",
                             height: "50px",
                             objectFit: "cover", // Giữ tỷ lệ ảnh
                             marginRight: "10px",
                             border: "1px solid #f4f4f4",
-                            borderRadius: 5,
+                            borderRadius: 5
                           }}
-                        />
-                        <Badge
+                        /><Badge
                           style={{
                             fontSize: 10,
                             backgroundColor: "red",
@@ -201,20 +370,12 @@ const Checkout = () => {
                           {item.quality}
                         </Badge>
                       </span>
-
-                      <div style={{ fontSize: 14, width: "50%" }}>
-                        {item.title}
-                      </div>
-
-                      <span
-                        style={{
-                          fontSize: 14,
-                          width: "30%",
-                          color: "gray",
-                          fontWeight: "500",
-                        }}
-                        className="ms-2 text-end"
-                      >
+                      <div style={{ fontSize: 14, width: "50%" }}>{item.title}</div>
+                      <span className="ms-2 text-end" style={{
+                        fontSize: 14, width: "30%",
+                        color: "gray",
+                        fontWeight: "500",
+                      }}>
                         {(item.price * item.quality).toLocaleString("vi-VN")} ₫
                       </span>
                     </li>
@@ -330,6 +491,7 @@ const Checkout = () => {
                     className="text-end"
                   >
                     <Button
+                      onClick={handleCheckout}
                       style={{
                         width: "100%",
                         height: 50,

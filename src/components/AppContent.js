@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
@@ -16,8 +16,11 @@ import CompareProduct from "../pages/Compare/compare";
 import Information from "../pages/Account/Information";
 import NewProducts from "../pages/NewProduct/NewProducts";
 import Search from "../pages/Search/Search";
+import Test from "../pages/NewProduct/Test";
+import Thankyou from "../pages/Checkout/Thankyou";
 
 const AppContent = () => {
+  const { cartItems } = useContext(CartContext);
   return (
     <Routes>
       <Route path="/home" element={<Home />} />
@@ -38,19 +41,24 @@ const AppContent = () => {
 
       <Route path="/new-product" element={<NewProduct />} />
 
-      <Route path="/:catUrl" element={<NewProducts />} />
+      <Route path="/product" element={<NewProducts />} />
+      {/* <Route path="/Test" element={<Test />} /> */}
 
       <Route path="/search" element={<Search />} />
 
       <Route path="/contact" element={<Contact />} />
 
-      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout"
+        element={
+          cartItems.length > 0 ? <Checkout /> : <Navigate to="/home" replace />
+        } />
+      <Route path="/thankyou" element={<Thankyou />} />
 
       <Route path="/compare-product" element={<CompareProduct />} />
 
       <Route path="/information" element={<Information />} />
 
-      <Route path="/" element={<Navigate to="home" replace />} />
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
 };

@@ -45,7 +45,7 @@ const AppHeader = () => {
           {categories.map((category) => (
             <Dropdown.Item
               key={category.friendly_url}
-              href={`/${category.friendly_url}`} // Link đến trang danh mục sản phẩm
+              href={`/product?catUrl=${category.friendly_url}`} // Link đến trang danh mục sản phẩm  
               className="d-flex justify-content-between"
             >
               <div>{category.cat_name}</div>
@@ -80,7 +80,7 @@ const AppHeader = () => {
               <NavDropdown.Item href="/new-product">
                 Sẩn phẩm mới
               </NavDropdown.Item>
-              <NavDropdown.Item href="/new-products">
+              <NavDropdown.Item href="/product?catUrl=wanbo-t">
                 Sản phẩm nổi bật
               </NavDropdown.Item>
             </NavDropdown>

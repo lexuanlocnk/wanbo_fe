@@ -4,6 +4,7 @@ import BannerCollection from "../../assets/images/banner-collection.png";
 import "./../NewProduct/NewProduct.css";
 import axios from "axios";
 import BoxProduct from "../../components/componentProduct/BoxProduct";
+import HomeApi from "../../api/homeApi";
 
 const Search = () => {
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -19,10 +20,9 @@ const Search = () => {
     }, [location]);
 
     const fetchProducts = async (key) => {
+        const homeApi = new HomeApi();
         try {
-            const response = await axios.get(`http://192.168.245.190:8002/api/member/search-product`, {
-                params: { key },
-            });
+            const response = await homeApi.getSearch({ params: { key } });
             if (response.data.status) {
                 setProducts(response.data.product);
             }

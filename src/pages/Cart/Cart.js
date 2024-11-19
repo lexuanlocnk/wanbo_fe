@@ -34,11 +34,11 @@ const Cart = () => {
       <div className="container">
         <h3 className="mb-4">GIỎ HÀNG</h3>
         {cartItems.length === 0 ? (
-          <h5>Giỏ hàng của bạn trống.</h5>
+          <h5 className="m-5">Giỏ hàng của bạn trống.</h5>
         ) : (
           <div>
             <div>
-              <Row style={{ backgroundColor: "white", justifyContent:"space-evenly" }}>
+              <Row style={{ backgroundColor: "white", justifyContent: "space-evenly" }}>
                 <Col lg={9} xs={12} className="p-4 ">
                   {/* list cart */}
                   <BoxCart />
@@ -60,9 +60,9 @@ const Cart = () => {
                           dateFormat="dd/MM/yyyy"
                           minDate={new Date()} // Không cho phép chọn ngày trước hôm nay
                           placeholderText="Chọn ngày"
-                          style={{fontSize: 14}}
+                          style={{ fontSize: 14 }}
                         />
-                        <Form.Select aria-label="Chọn thời gian" className="ms-1" style={{fontSize: 14.5}}>
+                        <Form.Select aria-label="Chọn thời gian" className="ms-1" style={{ fontSize: 14.5 }}>
                           <option>Chọn thời gian</option>
                           <option value="1">08h00 - 12h00</option>
                           <option value="2">14h00 - 18h00</option>
@@ -137,7 +137,7 @@ const Cart = () => {
                   </div>
                 </Col>
               </Row>
-              
+
             </div>
           </div>
         )}
