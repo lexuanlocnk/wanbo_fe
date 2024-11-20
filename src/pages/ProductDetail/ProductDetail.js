@@ -91,6 +91,29 @@ const ProductDetail = ({ children, eventKey, item }) => {
     setSmShow(true);
   };
 
+  const handleMuaToCart = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setShow(true)
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      return;
+    }
+    addToCart({
+      product_id: product.ProductId,
+      picture: product.Image,
+      cat_name: product.Category,
+      title: product.ProductName,
+      quality: quantity,
+      price: product.Price,
+    });
+    setTimeout(() => {
+      navigate("/checkout");
+    }, 1000);
+
+  };
+
   if (!product) {
     return <h1 className="m-5">Sản phẩm</h1>;
   }
@@ -177,7 +200,7 @@ const ProductDetail = ({ children, eventKey, item }) => {
             </div>
 
             {/* Nút mua hàng */}
-            <Button variant="danger" className="my-3 p-2 buy">
+            <Button variant="danger" className="my-3 p-2 buy" onClick={handleMuaToCart}>
               MUA NGAY <br />
               Giao hàng tận nơi hoặc nhận tại cửa hàng
             </Button>
@@ -243,7 +266,7 @@ const ProductDetail = ({ children, eventKey, item }) => {
                 KHUYẾN MÃI
               </Card.Header>
               <Card.Body>
-                <li className="f14">Nhập mã LOFI thêm 5% đơn hàng</li>
+                <li className="f14">Nhập mã Wanbo thêm 5% đơn hàng</li>
                 <li className="f14">Giảm giá 10% khi mua từ sản phẩm thứ 2</li>
                 <li className="f14">Tặng phiếu mua hàng khi mua từ 1000k</li>
                 <li className="f14">Đổi trả hàng trong vòng 30 ngày</li>

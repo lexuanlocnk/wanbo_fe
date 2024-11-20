@@ -3,13 +3,13 @@ import { newsItems } from "../Data";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
-import "./News.css"; 
+import "./News.css";
 import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
 import { useParams } from "react-router-dom";
 import { imageBaseUrl } from "../../api/axiosConfig";
 
-const News = () => { 
+const News = () => {
   const [newCategory, setNewCategory] = useState([]);
   const { urlNew } = useParams();
 
@@ -18,10 +18,10 @@ const News = () => {
       try {
         const response = await fetch(`http://192.168.245.190:8002/api/member/news/${urlNew}`);
         const data = await response.json();
-         if (data.status === true && data.listNew.data) {
-            setNewCategory(data.listNew.data);
-          } 
-          //  console.log(">>>>>>>>>>", newCategory);
+        if (data.status === true && data.listNew.data) {
+          setNewCategory(data.listNew.data);
+        }
+        //  console.log(">>>>>>>>>>", newCategory);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -33,7 +33,7 @@ const News = () => {
   return (
     <div className="py-4" style={{ backgroundColor: "#f4f4f4" }}>
       <div className="container ">
-      <h5 className="tblack fw-bold">TIN TỨC{newCategory.cat_name}</h5>
+        <h5 className="tblack fw-bold">TIN TỨC{newCategory.cat_name}</h5>
 
         <Row className="justify-content-between">
 
@@ -43,29 +43,35 @@ const News = () => {
             style={{ backgroundColor: "white", height: "auto" }}
           >
             <div className="d-flex flex-wrap">
-             {newCategory && newCategory.length > 0 ? newCategory.map((item) => (
+              {newCategory && newCategory.length > 0 ? newCategory.map((item) => (
                 <Card
                   key={item.news_id}
-                  className="news-card" 
+                  className="news-card"
                   style={{ border: "none" }}
-                > 
+                >
                   <Card.Img
                     variant="top"
                     src={`${imageBaseUrl}${item.picture}`}
                     className="news-image p-2 m-2"
-                    href={`/news/${urlNew}/${item.friendly_url}`} 
+                    href={`/news/${urlNew}/${item.friendly_url}`}
                   />
                   <div className="d-flex flex-column justify-content-center mx-2 news-content">
-                    <Card.Title className="tblack fw-bold">{item.title}</Card.Title>
-
+                    <a href={`/news/${urlNew}/${item.friendly_url}`}>
+                      <Card.Title className="tblack fw-bold">{item.title}</Card.Title>
+                    </a>
                     <div className="d-flex" >
                       <Card.Text className="bi bi-person me-2 tgray">
                         Team dev
                       </Card.Text>
                       <p>|</p>
                       <Card.Text className="ms-2">
-                        <span className="bi bi-clock-history me-1 tgray"/>
-                        {item.date_post}
+                        <span className="bi bi-clock-history me-1 tgray" />
+                        {/* {item.date_post} */}
+                        {new Date(item.date_post * 1000).toLocaleDateString("vi-VN", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })}
                       </Card.Text>
                     </div>
 
@@ -79,7 +85,7 @@ const News = () => {
                     </a>
                   </div>
                 </Card>
-             )): []}
+              )) : []}
             </div>
           </Col>
 

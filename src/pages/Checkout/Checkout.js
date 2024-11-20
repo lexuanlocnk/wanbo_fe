@@ -25,6 +25,7 @@ const Checkout = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+
   const [note, setNote] = useState("");
   const [isChecked, setIsChecked] = useState(true);
 
@@ -36,27 +37,54 @@ const Checkout = () => {
   const [addresses, setAddresses] = useState([]); // State để lưu danh sách địa chỉ
   const [selectedAddressId, setSelectedAddressId] = useState(""); // ID địa chỉ đã chọn
 
-
+  //làm tới đây
   // Lấy danh sách địa chỉ từ API
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     axios
-  //       .get("http://192.168.245.190:8002/api/member/show-address-member", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         setAddresses(response.data.address); // Lưu danh sách địa chỉ
-  //       })
-  //       .catch(() => setError("Không thể tải danh sách địa chỉ"));
-  //   } else {
-  //     setError("Không tìm thấy tài khoản");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://192.168.245.190:8002/api/member/show-address-member", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setAddresses(response.data.address); // Lưu danh sách địa chỉ
+        })
+        .catch(() => setError("Không thể tải danh sách địa chỉ"));
+    } else {
+      setError("Không tìm thấy tài khoản");
+    }
+  }, []);
 
-  // // Khi chọn địa chỉ từ Select, tự động điền thông tin
+  // Khi chọn địa chỉ từ Select, tự động điền thông tin
+  const handleAddressSelect = (e) => {
+    const selectedId = parseInt(e.target.value, 10); // Chuyển thành số
+    setSelectedAddressId(selectedId);
+
+    // Tìm địa chỉ đã chọn trong danh sách và cập nhật các input
+    if (addresses.length > 0) {
+      const selectedAddress = addresses.find((addr) => addr.id === selectedId);
+      if (selectedAddress) {
+        setName(selectedAddress.fullName);
+        setPhone(selectedAddress.Phone);
+        // setAddress(selectedAddress.address);
+
+        setAddress(
+          `${selectedAddress.address}, ${selectedAddress.ward}, ${selectedAddress.district}, ${selectedAddress.province}`
+        );
+
+      } else {
+        setName("");
+        setPhone("");
+        setAddress("");
+      }
+    } else {
+      console.error("Danh sách địa chỉ rỗng hoặc chưa được tải.");
+    }
+  };
+
+  // Khi chọn địa chỉ từ Select, tự động điền thông tin
   // const handleAddressSelect = (e) => {
   //   const selectedId = e.target.value;
   //   setSelectedAddressId(selectedId);
@@ -64,8 +92,8 @@ const Checkout = () => {
   //   // Tìm địa chỉ đã chọn trong danh sách và cập nhật các input
   //   const selectedAddress = addresses.find((addr) => addr.id === selectedId);
   //   if (selectedAddress) {
-  //     setName(selectedAddress.name);
-  //     setPhone(selectedAddress.phone);
+  //     setName(selectedAddress.fullName);
+  //     setPhone(selectedAddress.Phone);
   //     setAddress(selectedAddress.address);
   //   }
   // };
@@ -147,12 +175,20 @@ const Checkout = () => {
                 </Col>
 
                 <Form>
-                  <Form.Select aria-label="Tỉnh thành" className="my-3">
-                    <option>Địa chỉ khác...</option>
-                    <option value="1">TP Hồ Chí Minh</option>
-                    <option value="2">TP Hà nội</option>
-                    <option value="3">Huế</option>
-                  </Form.Select>
+                  <Form.Group controlId="formAddressSelect">
+                    <Form.Select
+                      className="my-3"
+                      value={selectedAddressId}
+                      onChange={handleAddressSelect}
+                    >
+                      <option value="">Địa chỉ tùy chọn...</option>
+                      {addresses?.map((addr) => (
+                        <option key={addr.id} value={addr.id}>
+                          {addr.address} - {addr.ward} - {addr.district}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
 
                   <Form.Group controlId="formMail">
                     <Form.Control
@@ -222,69 +258,6 @@ const Checkout = () => {
               </Card.Body>
             </Card>
           </Col>
-
-          {/* Cột Thông tin nhận hàng test*/}
-          {/* <Col lg={4}>
-            <Card style={{ border: "none" }}>
-              <Card.Body>
-                <Card.Title className="me-2">Thông tin nhận hàng</Card.Title>
-                <Form>
-                  <Form.Group controlId="formAddressSelect">
-                    <Form.Select
-                      className="my-3"
-                      value={selectedAddressId}
-                      onChange={handleAddressSelect}
-                    >
-                      <option value="">Chọn địa chỉ...</option>
-                      {addresses?.map((addr) => (
-                        <option key={addr.id} value={addr.id}>
-                          {addr.address} - {addr.name}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group controlId="formName" className="mt-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Nhập họ và tên"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="formPhone" className="mt-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Nhập số điện thoại"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="formAddress" className="mt-3">
-                    <Form.Control
-                      as="textarea"
-                      rows={2}
-                      placeholder="Địa chỉ"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="formNote" className="mt-3">
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      placeholder="Ghi chú (tùy chọn)"
-                      value={note}
-                      onChange={(e) => setNote(e.target.value)}
-                    />
-                  </Form.Group>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col> */}
 
           {/* Cột Vận chuyển */}
           <Col lg={4}>

@@ -59,7 +59,7 @@ const Thankyou = () => {
                         <i className="bi bi-check-circle me-4" style={{ fontSize: 80, color: "green" }}></i>
                         <div className=" ">
                             <h6 className="fw-bold">CÁM ƠN BẠN ĐÃ ĐẶT HÀNG</h6>
-                            <p>Một email xác nhận đã được gửi tới {orderInfo.d_gmail}<br />
+                            <p>Một email xác nhận đã được gửi tới {orderInfo?.d_gmail}<br />
                                 Xin vui lòng kiểm tra email của bạn</p>
                         </div>
                     </div>
@@ -68,7 +68,7 @@ const Thankyou = () => {
                             <div className="align-items-center ">
                                 <div className=" ">
                                     <h6 className="fw-bold">Thông tin mua hàng</h6>
-                                    <p>{orderInfo.d_name}<br /> {orderInfo.d_gmail}<br />
+                                    <p>{orderInfo.d_name}<br /> {orderInfo?.d_gmail}<br />
                                         {orderInfo.d_phone}</p>
                                 </div>
                             </div>

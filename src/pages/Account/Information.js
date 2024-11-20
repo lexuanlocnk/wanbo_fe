@@ -7,6 +7,7 @@ import AccountInfo from "./ComponentsInfo/AccountInfo";
 import Orders from "./ComponentsInfo/Orders";
 import ChangePassword from "./ComponentsInfo/ChangePassword";
 import AddressBook from "./ComponentsInfo/AddressBook";
+import OrderDetail from "./ComponentsInfo/OrderDetail";
 
 const Information = () => {
     const [selectedComponent, setSelectedComponent] = useState("info");
@@ -45,6 +46,8 @@ const Information = () => {
                 return <AccountInfo userData={userData} setUserData={setUserData} />;
             case "orders":
                 return <Orders />;
+            case "orderDetail":
+                return <OrderDetail />;
             case "changePassword":
                 return <ChangePassword />;
             case "addressBook":

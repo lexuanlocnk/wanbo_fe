@@ -74,7 +74,14 @@ const NewsDetail = () => {
               <h5>{newDetail.title}</h5>
               <div className="d-flex align-items-center">
                 <p className="me-3 bi bi-person">Team dev</p>
-                <p className="bi bi-clock-history me-1" /> <p>{newDetail.news?.date_post}</p>
+                <p className="bi bi-clock-history me-1" /> <p>
+                  {/* {newDetail.news?.date_post} */}
+                  {new Date(newDetail.news?.date_post * 1000).toLocaleDateString("vi-VN", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
               </div>
               {/* <img
                 src={`${imageBaseUrl}${newDetail.news?.picture}`}

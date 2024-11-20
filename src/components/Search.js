@@ -96,7 +96,7 @@ function Search() {
                 <i className="bi bi-telephone-inbound-fill" style={{ fontSize: 20 }}></i>
                 <div style={{ fontSize: 13, fontWeight: "600", marginLeft: 5 }}>
                   Gọi mua hàng <br />
-                  <span>1900 571 200</span>
+                  <span>1900 6739</span>
                 </div>
               </div>
 
