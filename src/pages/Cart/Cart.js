@@ -30,13 +30,20 @@ const Cart = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#f4f4f4" }}>
+    <div >
       <div className="container">
-        <h3 className="mb-4">GIỎ HÀNG</h3>
         {cartItems.length === 0 ? (
-          <h5 className="m-5">Giỏ hàng của bạn trống.</h5>
+          <Row className="pb-5" style={{ backgroundColor: "white", justifyContent: "space-evenly" }}>
+            <Col className="m-4 text-center">
+              <i style={{ fontSize: 30 }} className="bi bi-cart-x-fill"></i> <br />
+              <div style={{ fontSize: 20 }}>
+                Giỏ hàng của bạn trống
+              </div>
+            </Col>
+          </Row>
         ) : (
           <div>
+            <h4 className="mb-2  mt-2">GIỎ HÀNG</h4>
             <div>
               <Row style={{ backgroundColor: "white", justifyContent: "space-evenly" }}>
                 <Col lg={9} xs={12} className="p-4 ">

@@ -76,14 +76,18 @@ const AppHeader = () => {
               Giới thiệu
             </Nav.Link>
 
-            <NavDropdown title="Sản phẩm" href="/product" className="Home">
-              {/* <NavDropdown.Item href="/new-product">
+            <Nav.Link href="/product?catUrl=wanbo-t" className="Home">
+              Sản phẩm
+            </Nav.Link>
+
+            {/* <NavDropdown title="Sản phẩm" href="/product" className="Home">
+              <NavDropdown.Item href="/new-product">
                 Sẩn phẩm mới
-              </NavDropdown.Item> */}
+              </NavDropdown.Item>
               <NavDropdown.Item href="/product?catUrl=wanbo-t">
                 Sản phẩm
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
 
             <Nav.Link href="/news/tin-khuyen-mai" className="Home">
               Tin tức
