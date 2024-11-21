@@ -18,6 +18,7 @@ import NewProducts from "../pages/NewProduct/NewProducts";
 import Search from "../pages/Search/Search";
 import Test from "../pages/NewProduct/Test";
 import Thankyou from "../pages/Checkout/Thankyou";
+import OrderDetail from "../pages/Account/ComponentsInfo/OrderDetail"
 
 const AppContent = () => {
   const { cartItems } = useContext(CartContext);
@@ -57,6 +58,8 @@ const AppContent = () => {
       <Route path="/compare-product" element={<CompareProduct />} />
 
       <Route path="/information" element={<Information />} />
+
+      <Route path="/information/:id" element={<OrderDetail />} />
 
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

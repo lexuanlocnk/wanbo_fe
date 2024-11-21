@@ -47,6 +47,7 @@ const AddressBook = () => {
     const fetchAddress = async () => {
         try {
             const token = localStorage.getItem("token");
+
             const response = await axios.get(
                 "http://192.168.245.190:8002/api/member/show-address-member",
                 {

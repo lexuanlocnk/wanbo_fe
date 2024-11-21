@@ -10,7 +10,6 @@ const Thankyou = () => {
     const [content, setContent] = useState("");
     const [orderInfo, setOrderInfo] = useState("");
     const navigate = useNavigate();
-    const ship = 40000
     // useEffect(() => {
     //     const fetchIntroduceData = async () => {
     //         try {
@@ -59,7 +58,7 @@ const Thankyou = () => {
                         <i className="bi bi-check-circle me-4" style={{ fontSize: 80, color: "green" }}></i>
                         <div className=" ">
                             <h6 className="fw-bold">CÁM ƠN BẠN ĐÃ ĐẶT HÀNG</h6>
-                            <p>Một email xác nhận đã được gửi tới {orderInfo.d_gmail}<br />
+                            <p>Một email xác nhận đã được gửi tới {orderInfo?.d_gmail}<br />
                                 Xin vui lòng kiểm tra email của bạn</p>
                         </div>
                     </div>
@@ -68,7 +67,7 @@ const Thankyou = () => {
                             <div className="align-items-center ">
                                 <div className=" ">
                                     <h6 className="fw-bold">Thông tin mua hàng</h6>
-                                    <p>{orderInfo.d_name}<br /> {orderInfo.d_gmail}<br />
+                                    <p>{orderInfo.d_name}<br /> {orderInfo?.d_gmail}<br />
                                         {orderInfo.d_phone}</p>
                                 </div>
                             </div>
@@ -184,30 +183,6 @@ const Thankyou = () => {
                                     className="text-end"
                                 >
                                     {orderInfo.CouponDiscout ? `${orderInfo.CouponDiscout.toLocaleString("vi-VN")} đ` : "0"}
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col
-                                    xs={6}
-                                    style={{
-                                        color: "gray",
-                                        fontWeight: "500",
-                                    }}
-                                >
-                                    Phí vận chuyển
-                                </Col>
-
-                                <Col
-                                    xs={6}
-                                    style={{
-                                        color: "gray",
-                                        fontWeight: "500",
-                                    }}
-                                    className="text-end"
-                                >
-                                    {ship ? `${ship.toLocaleString("vi-VN")} đ` : ""}
-
                                 </Col>
                             </Row>
 

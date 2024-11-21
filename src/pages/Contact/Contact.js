@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Contact.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 const Contact = (props) => {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [body, setBody] = useState("");
+
+  const [contact, setContact] = useState("");
+
+  const fetchContact = async () => {
+    try {
+      const response = await axios.get("http://192.168.245.190:8002/api/member/show-contact-config");
+      setContact(response.data?.list);
+    } catch (err) {
+      console.log("Fetch fetchContact Data Error: ", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchContact();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://192.168.245.190:8002/api/member/add-contact",
+        {
+          email: email,
+          numberPhone: phone,
+          fullName: name,
+          content: body
+        }
+      )
+      if (response.data?.status === true) {
+        toast.success("Gửi thông tin thành công")
+        setBody("")
+        setName("")
+        setPhone("")
+        setEmail("")
+      } else {
+        toast.error("Có lỗi xảy ra. Vui lòng thử lại.")
+      }
+
+    } catch (error) {
+      console.error("Có lỗi xảy ra. Vui lòng thử lại.");
+      toast.error("Có lỗi xảy ra. Vui lòng thử lại.")
+    }
+
+  }
+
   return (
     <>
       <div className="bg-home">
@@ -10,7 +61,7 @@ const Contact = (props) => {
             <div className="row my-3">
               <div className="col-lg-6 col-12">
                 <div class="contact">
-                  <h4>Công ty TNHH Công nghệ Chính Nhân</h4>
+                  <h4>{contact.company}</h4>
                   <div class="time_work">
                     <div class="item">
                       <svg
@@ -29,8 +80,9 @@ const Contact = (props) => {
                           class=""
                         ></path>
                       </svg>
-                      <b>Địa chỉ: </b>
-                      245B Trần Quang Khải, phường Tân Định, Q1, Tp.Hồ Chí Minh
+                      <div className="d-flex">
+                        <p className="fw-bold">Địa chỉ: </p> <span dangerouslySetInnerHTML={{ __html: contact.address }}></span>
+                      </div>
                     </div>
                     <div class="item">
                       <svg
@@ -50,7 +102,7 @@ const Contact = (props) => {
                         ></path>
                       </svg>
                       <b>Email:</b>{" "}
-                      <a href="mailto:support@sapo.vn">support@sapo.vn</a>
+                      <a href="mailto:cskh@nguyenkimvn.vn">{contact.email}</a>
                     </div>
                     <div class="item">
                       <svg
@@ -69,10 +121,10 @@ const Contact = (props) => {
                           class=""
                         ></path>
                       </svg>
-                      <b>Hotline:</b>{" "}
-                      <a class="fone" href="tel:19006750">
-                        1900 6750
-                      </a>
+                      <div className="d-flex mt-3">
+                        <p className="fw-bold">Hotline: </p> <span dangerouslySetInnerHTML={{ __html: contact.phone }}></span>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -84,7 +136,8 @@ const Contact = (props) => {
                       type="text"
                       class="form-control  form-control-lg"
                       required=""
-                      value=""
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       name="contact[Name]"
                     />
                     <input
@@ -94,7 +147,8 @@ const Contact = (props) => {
                       required=""
                       id="email1"
                       class="form-control form-control-lg"
-                      value=""
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       name="contact[email]"
                     />
                     <input
@@ -102,6 +156,8 @@ const Contact = (props) => {
                       placeholder="Điện thoại*"
                       name="contact[phone]"
                       class="form-control form-control-lg"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       required=""
                     />
                     <textarea
@@ -111,8 +167,10 @@ const Contact = (props) => {
                       class="form-control content-area form-control-lg"
                       rows="5"
                       required=""
+                      value={body}
+                      onChange={(e) => setBody(e.target.value)}
                     ></textarea>
-                    <button type="submit" class="btn-contact">
+                    <button onClick={(e) => handleSubmit(e)} class="btn-contact">
                       Gửi thông tin
                     </button>
                   </div>
@@ -120,19 +178,7 @@ const Contact = (props) => {
               </div>
               <div className="col-lg-6 col-12">
                 <div style={{ width: "100%" }}>
-                  <iframe
-                    style={{
-                      width: "100%",
-                      height: "450px", // Thay đổi từ '600' thành '600px' để có đơn vị rõ ràng
-                    }}
-                    frameBorder="0" // Thay đổi thành camelCase
-                    scrolling="no"
-                    marginHeight="0" // Thay đổi thành camelCase
-                    marginWidth="0" // Thay đổi thành camelCase
-                    src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=245A%20Tr%E1%BA%A7n%20Quang%20Kh%E1%BA%A3i,%20P.%20T%C3%A2n%20%C4%90%E1%BB%8Bnh,%20Qu%E1%BA%ADn%201,%20Th%C3%A0nh%20ph%E1%BB%9F%20H%E1%BB%93%20Ch%C3%AD%20Minh+(C%C3%94NG%20TY%20TNHH%20TH%C6%ƯƠNG%20M%E1%BA%A0I%20K%E1%BA%BET%20N%E1%BB%90I%20TH%C3%94NG%20MINH)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                  >
-                    <a href="https://www.gps.ie/">gps tracker sport</a>
-                  </iframe>
+                  <span dangerouslySetInnerHTML={{ __html: contact.map }}></span>
                 </div>
               </div>
             </div>

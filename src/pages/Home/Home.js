@@ -1,9 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import imgBanner4 from "./../../assets/img_one_banner.webp";
-import imgBanner5 from "./../../assets/banner_bottom_1.webp";
-import imgBanner6 from "./../../assets/banner_bottom_2.webp";
-import imgBanner7 from "./../../assets/banner_bottom_3.webp";
-import imgBanner8 from "./../../assets/banner_bottom_4.webp";
 import "react-multi-carousel/lib/styles.css";
 import Carouselm from "react-multi-carousel";
 import Button from "react-bootstrap/Button";
@@ -159,7 +154,7 @@ const Home = (props) => {
                 style={{ borderRight: "1px solid gray" }}
               >
                 <div className="flex-grow-1">
-                  <a href={`/product/${item.id}`} className="card-title">
+                  <a href={`/product?catUrl=${item.CatUrl}`} className="card-title">
                     <h6 className="f16">{item?.Category}</h6>
                   </a>
                   <p className="card-text tgray">
@@ -268,7 +263,7 @@ const Home = (props) => {
                     </Button>
                   </div>
                 </div> */}
-                <Button className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
+                <Button href={`/product?catUrl=${item?.CatUrl}`} className="btn2" style={{ backgroundColor: "#EEEEEE" }}>
                   Xem tất cả
                 </Button>
               </div>
@@ -484,44 +479,52 @@ const Home = (props) => {
 
       <div className="d-flex flex-wrap justify-content-between mb-5 container">
         {newTopData.map((item) => (
+
           <Card className="m-1 news">
-            <div className="img-container">
-              <a href={`/news/${item.url_cat}/${item.friendly_url}`} >
+            <a href={`/news/${item.url_cat}/${item.friendly_url}`} >
+              <div className="img-container">
+
                 <Card.Img
                   variant="top"
                   src={`${imageBaseUrl}${item.picture}`}
                   className="hover-zoom"
                 // style={{ height: "100%" }}
                 />
-              </a>
-            </div>
-            <Card.Body>
-              <Card.Title className="f16 tblack fw-bold h6">
-                {item.title}
-              </Card.Title>
-              <div className="d-flex">
-                <Card.Text className="bi bi-person me-2 tgray">
-                  Team dev
-                </Card.Text>
-                <p>|</p>
-                <Card.Text className="ms-2 tgray">
-                  <span className="bi bi-clock-history me-1" />
-                  {item.date_post}
-                </Card.Text>
+
               </div>
-              <Card.Text className="text-truncate-3 tgray">
-                {item.short}
-              </Card.Text>
-              <a href={`/news/${item.url_cat}/${item.friendly_url}`} className="card-title">
-                <h6 className="h6 f14 tblack fw-bold">Xem thêm</h6>
-              </a>
-            </Card.Body>
+              <Card.Body>
+                <Card.Title className="f16 tblack fw-bold h6">
+                  {item.title}
+                </Card.Title>
+                <div className="d-flex">
+                  <Card.Text className="bi bi-person me-2 tgray">
+                    Team dev
+                  </Card.Text>
+                  <p>|</p>
+                  <Card.Text className="ms-2 tgray">
+                    <span className="bi bi-clock-history me-1" />
+                    {new Date(item.date_post * 1000).toLocaleDateString("vi-VN", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </Card.Text>
+                </div>
+                <Card.Text className="text-truncate-3 tgray">
+                  {item.short}
+                </Card.Text>
+                <a href={`/news/${item.url_cat}/${item.friendly_url}`} className="card-title">
+                  <h6 className="h6 f14 tblack fw-bold">Xem thêm</h6>
+                </a>
+              </Card.Body>
+            </a>
           </Card>
+
         ))}
       </div>
 
       <div className=" mb-5" />
-    </div>
+    </div >
   );
 };
 

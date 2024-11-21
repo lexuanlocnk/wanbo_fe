@@ -76,13 +76,13 @@ export default function Footer() {
                 className="d-inline-block align-top mb-2"
               /> */}
               <span className="footer_company_name">
-                CÔNG TY TNHH CÔNG NGHỆ CHÍNH NHÂN
+                Công ty TNHH Nguyên Kim
               </span>
               <p>
                 <a href="" className="text-reset22 d-flex  align-items-center ">
                   <i className="bi bi-send me-2" style={{ fontSize: 25 }} />{" "}
                   <div>
-                    245A Trần Quang Khải, P. Tân Định, Quận 1, Tp.Hồ Chí Minh
+                    245B Trần Quang Khải, Phường Tân Định, Quận 1, Hồ Chí Minh
                   </div>
                 </a>
               </p>
@@ -95,7 +95,7 @@ export default function Footer() {
                     className="bi bi-telephone me-2"
                     style={{ fontSize: 25 }}
                   />
-                  <div>Hotline: 093.886.9759</div>
+                  <div>Hotline: 1900 6739</div>
                 </a>
               </p>
               <p>
@@ -104,7 +104,7 @@ export default function Footer() {
                   className="text-reset22 d-flex  align-items-center  "
                 >
                   <i className="bi bi-envelope me-2" style={{ fontSize: 25 }} />
-                  <div>Email: cskh@smartconnection.com.vn</div>
+                  <div>Email: cskh@nguyenkimvn.vn</div>
                 </a>
               </p>
             </MDBCol>
@@ -230,15 +230,15 @@ export default function Footer() {
               <div className={`about-sub-item ${showAdvice ? "show" : ""}`}>
                 <p>
                   Mua hàng:{" "}
-                  <span className="text-reset2 fw-bold">1900 6750</span>
+                  <span className="text-reset2 fw-bold">1900 6739</span>
                 </p>
                 <p>
                   Khiếu nại:{" "}
-                  <span className="text-reset2 fw-bold">1900 6750</span>
+                  <span className="text-reset2 fw-bold">0933.808 837</span>
                 </p>
                 <p>
                   Bảo hành:{" "}
-                  <span className="text-reset2 fw-bold">1900 6750</span>
+                  <span className="text-reset2 fw-bold">0933.806.678 </span>
                 </p>
                 <p>
                   <h6 className=" text-uppercase fw-bold text-reset2">
