@@ -18,7 +18,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, fetchCartItems } = useContext(CartContext);
   const navigate = useNavigate();
   // Form fields for user data
   const [email, setEmail] = useState("");
@@ -33,6 +33,7 @@ const Checkout = () => {
   const [error, setError] = useState("");
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [addresses, setAddresses] = useState([]); // State để lưu danh sách địa chỉ
   const [selectedAddressId, setSelectedAddressId] = useState(""); // ID địa chỉ đã chọn
@@ -116,8 +117,15 @@ const Checkout = () => {
 
   // Handle checkout
   const handleCheckout = async () => {
+    setLoading(true)
     if (!selectedShippingMethod || !selectedPaymentMethod) {
       toast.warn("Vui lòng chọn phương thức vận chuyển và thanh toán.");
+      setLoading(false)
+      return;
+    }
+    if (!address) {
+      toast.warn("Vui lòng điền địa chỉ!");
+      setLoading(false)
       return;
     }
     // Map cart items to API format
@@ -148,10 +156,15 @@ const Checkout = () => {
       const checkoutApi = new CheckoutApi();
       const response = await checkoutApi.postCheckoutApi(data);
       toast.success("Đặt hàng thành công");
+      fetchCartItems()
+      setLoading(false)
       navigate("/thankyou")
     } catch (error) {
+      setLoading(false)
       console.error("Error during checkout:", error);
       toast.warn("Có lỗi xảy ra, vui lòng thử lại.");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -483,8 +496,10 @@ const Checkout = () => {
                         height: 50,
                         backgroundColor: "#0d6efd",
                       }}
+                      disabled={loading}
                     >
-                      Đặt hàng
+                      {loading ? "Đang Đặt hàng" : "Đặt hàng"}
+
                     </Button>
                   </Col>
                 </Row>
