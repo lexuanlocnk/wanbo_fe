@@ -217,6 +217,8 @@ const NewProducts = () => {
                 <div className="product_collection_container col-lg-9 col-12">
                     <div className="banner-collection">
                         <img src={BannerCollection} alt="Banner Collection" />
+                        {/* <img src={"https://xiaomiworld.vn/upload_images/images/20233181633788405.jpg"} alt="Banner Collection" /> */}
+
                     </div>
                     {/* hiển thị danh sách tag được chọn */}
                     <div className="selected-tags">

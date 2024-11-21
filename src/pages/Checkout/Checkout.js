@@ -37,7 +37,35 @@ const Checkout = () => {
   const [addresses, setAddresses] = useState([]); // State để lưu danh sách địa chỉ
   const [selectedAddressId, setSelectedAddressId] = useState(""); // ID địa chỉ đã chọn
 
-  //làm tới đây
+  const [shippingMethods, setShippingMethods] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+
+  // Lấy danh sách phương thức vận chuyển và thanh toán
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      // Lấy phương thức vận chuyển
+      axios
+        .get("http://192.168.245.190:8002/api/member/show-shipping-method", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => setShippingMethods(response.data.data))
+        .catch(() => toast.error("Không thể tải phương thức vận chuyển."));
+
+      // Lấy phương thức thanh toán
+      axios
+        .get("http://192.168.245.190:8002/api/member/show-payment-method", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => setPaymentMethods(response.data.data))
+        .catch(() => toast.error("Không thể tải phương thức thanh toán."));
+    }
+  }, []);
+
+
   // Lấy danh sách địa chỉ từ API
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -83,29 +111,15 @@ const Checkout = () => {
       console.error("Danh sách địa chỉ rỗng hoặc chưa được tải.");
     }
   };
-
-  // Khi chọn địa chỉ từ Select, tự động điền thông tin
-  // const handleAddressSelect = (e) => {
-  //   const selectedId = e.target.value;
-  //   setSelectedAddressId(selectedId);
-
-  //   // Tìm địa chỉ đã chọn trong danh sách và cập nhật các input
-  //   const selectedAddress = addresses.find((addr) => addr.id === selectedId);
-  //   if (selectedAddress) {
-  //     setName(selectedAddress.fullName);
-  //     setPhone(selectedAddress.Phone);
-  //     setAddress(selectedAddress.address);
-  //   }
-  // };
-
-  // tổng số lượng sản phẩm
-
   const totalItems = cartItems.reduce((total, item) => total + item.quality, 0);
   const total = cartItems.reduce((total, item) => total + item.price * item.quality, 0);
-  const ship = 40000;
 
   // Handle checkout
   const handleCheckout = async () => {
+    if (!selectedShippingMethod || !selectedPaymentMethod) {
+      toast.warn("Vui lòng chọn phương thức vận chuyển và thanh toán.");
+      return;
+    }
     // Map cart items to API format
     const orders = cartItems.map(item => ({
       price: item.price,
@@ -117,18 +131,21 @@ const Checkout = () => {
 
     const data = {
       total_cart: total,
-      shipping_method: "Giao tận nơi",
-      payment_method: open ? "tiền mặt" : "khác",
+      shipping_method: selectedShippingMethod,
+      payment_method: selectedPaymentMethod,
       note,
       orders,
-      total_price: total + ship,
+      total_price: total,
       d_email: userData,
       d_name: name,
       d_address: address,
-      d_phone: phone
+      d_phone: phone,
     };
-    const checkoutApi = new CheckoutApi();
+    // console.log(">>>>>>>>>", selectedShippingMethod)
+
+
     try {
+      const checkoutApi = new CheckoutApi();
       const response = await checkoutApi.postCheckoutApi(data);
       toast.success("Đặt hàng thành công");
       navigate("/thankyou")
@@ -264,49 +281,45 @@ const Checkout = () => {
             <Card style={{ border: "none" }}>
               <Card.Body>
                 <Card.Title>Vận chuyển</Card.Title>
-
-                <Col className="d-flex justify-content-between border p-3 rounded">
-                  <div className="d-flex">
-                    <Form.Check
-                      type="radio"
-                      checked={isChecked}
-                      className="me-2"
-                    />
-                    Giao hàng tận nơi
-                  </div>
-                  {ship.toLocaleString("vi-VN")} ₫
-                </Col>
+                {shippingMethods.map((method) => (
+                  <Col
+                    key={method.name}
+                    className="d-flex justify-content-between border p-3 mb-2 rounded"
+                  >
+                    <div className="d-flex">
+                      <Form.Check
+                        type="radio"
+                        name="shipping"
+                        className="me-2"
+                        onChange={() => setSelectedShippingMethod(method.name)}
+                      />
+                      {method.title}
+                    </div>
+                  </Col>
+                ))}
               </Card.Body>
 
               <Card.Body>
                 <Card.Title>Thanh toán</Card.Title>
-
-                <Col className="d-flex justify-content-between border p-2 rounded align-items-center">
-                  <div className="d-flex m-2">
-                    <Form.Check
-                      type="radio"
-                      className="me-2"
-                      onClick={() => setOpen(true)}
-                    />
-                    Thanh toán khi giao hàng (COD)
-                  </div>
-                  <i
-                    className="bi bi-cash"
-                    style={{ color: "blue", fontSize: 25 }}
-                  />
-                </Col>
-
-                <Collapse in={open}>
-                  <div>
-                    <div
-                      className="w-100 p-4 rounded"
-                      style={{ backgroundColor: "#f4f4f4", fontSize: 14 }}
-                    >
-                      Bạn chỉ phải thanh toán khi nhận được hàng
+                {paymentMethods.map((method) => (
+                  <Col
+                    key={method.name}
+                    className="d-flex justify-content-between border p-2 mb-2 rounded align-items-center"
+                  >
+                    <div className="d-flex m-2">
+                      <Form.Check
+                        type="radio"
+                        name="payment"
+                        className="me-2"
+                        onChange={() => setSelectedPaymentMethod(method.name)}
+                      />
+                      {method.title}
                     </div>
-                  </div>
-                </Collapse>
+                    <i className="bi bi-cash" style={{ color: "blue", fontSize: 25 }} />
+                  </Col>
+                ))}
               </Card.Body>
+
             </Card>
           </Col>
 
@@ -412,7 +425,7 @@ const Checkout = () => {
                       fontWeight: "500",
                     }}
                   >
-                    Phí vận chuyển
+                    Mã giảm giá
                   </Col>
 
                   <Col
@@ -423,7 +436,7 @@ const Checkout = () => {
                     }}
                     className="text-end"
                   >
-                    {ship.toLocaleString("vi-VN")} ₫
+                    0 ₫
                   </Col>
                 </Row>
 
@@ -440,7 +453,7 @@ const Checkout = () => {
                   </h5>
 
                   <h5 style={{ color: "#0d6efd" }}>
-                    {(total + ship).toLocaleString("vi-VN")} ₫
+                    {(total).toLocaleString("vi-VN")} ₫
                   </h5>
                 </div>
 

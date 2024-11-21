@@ -69,7 +69,9 @@ const Orders = () => {
                     <div style={{ fontSize: 13, textAlign: "center" }} className="border-bottom p-2" key={order.order_id}>
                         <Row className="align-items-center justify-content-center">
                             <Col md={2}>
-                                <strong>{order.order_code}</strong>
+                                <a href={`/information/${order.order_id}`}>
+                                    <strong >{order.order_code}</strong>
+                                </a>
                             </Col>
                             <Col md={2}>
                                 {new Date(order.date_order * 1000).toLocaleDateString("vi-VN")}
@@ -81,24 +83,12 @@ const Orders = () => {
                                 {order.total_price.toLocaleString("vi-VN")} đ
                             </Col>
                             <Col md={2}>
-                                {order.payment_method || "Chưa thanh toán"}
+                                {/* {order?.payment_method || "Chưa thanh toán"} */}
                             </Col>
                             <Col md={2}>
                                 {order.order_status?.title || "Chưa vận chuyển"}
                             </Col>
                         </Row>
-                        {/* <Row>
-                            <Col xs={12} className="mt-2">
-                                <ul>
-                                    {order.order_detail.map((detail, index) => (
-                                        <li key={index}>
-                                            {detail.item_title} -{" "}
-                                            {Number(detail.item_price).toLocaleString("vi-VN")} đ
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Col>
-                        </Row> */}
                     </div>
                 ))
             )}

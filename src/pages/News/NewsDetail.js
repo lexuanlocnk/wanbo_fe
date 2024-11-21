@@ -10,11 +10,14 @@ import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
 import { useParams } from "react-router-dom";
 import { imageBaseUrl } from "../../api/axiosConfig";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const NewsDetail = () => {
 
   const [newDetail, setNewDetail] = useState({});
   const { urlDetail, urlNew } = useParams();
+
 
   useEffect(() => {
     const fetchNewDetail = async () => {
@@ -35,7 +38,7 @@ const NewsDetail = () => {
 
   // State để lưu trữ thông tin bình luận
   const [commentData, setCommentData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     content: "",
   });
@@ -47,10 +50,41 @@ const NewsDetail = () => {
   };
 
   // Hàm xử lý khi người dùng gửi bình luận
-  const handleSubmitComment = (e) => {
+  const handleSubmitComment = async (e) => {
     e.preventDefault();
-    console.log("Bình luận đã gửi:", commentData);
-    // Xử lý thêm gửi bình luận lên server hoặc hiển thị trên UI...
+    const payload = {
+      fullName: commentData.fullName,
+      email: commentData.email,
+      content: commentData.content,
+      postId: newDetail.news_id, // Lấy từ newDetail
+    };
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Vui lòng đăng nhập để gửi bình luận.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://192.168.245.190:8002/api/member/add-comment",
+        payload,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (response.data.status === true) {
+        toast.success("Gửi bình luận thành công!");
+        // Reset form sau khi gửi thành công
+        setCommentData({ fullName: "", email: "", content: "" });
+      } else {
+        toast.error("Gửi bình luận thất bại. Vui lòng thử lại.");
+      }
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      toast.error("Có lỗi xảy ra khi gửi bình luận.");
+    }
   };
 
   if (!newDetail) {
@@ -83,17 +117,10 @@ const NewsDetail = () => {
                   })}
                 </p>
               </div>
-              {/* <img
-                src={`${imageBaseUrl}${newDetail.news?.picture}`}
-                alt={newDetail.title}
-                className="news-detail-image my-4"
-                style={{ width: "75%", height: "auto" }}
-              /> */}
 
               <div
                 dangerouslySetInnerHTML={{ __html: newDetail.description }}
               />{" "}
-              {/* Hiển thị nội dung chi tiết do admin nhập vào */}
             </div>
 
             {/* Form nhập bình luận */}
@@ -107,8 +134,8 @@ const NewsDetail = () => {
                       <Form.Control
                         type="text"
                         placeholder="Nhập họ tên"
-                        name="name"
-                        value={commentData.name}
+                        name="fullName"
+                        value={commentData.fullName}
                         onChange={handleInputChange}
                         required
                       />

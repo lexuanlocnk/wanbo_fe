@@ -8,6 +8,7 @@ import Orders from "./ComponentsInfo/Orders";
 import ChangePassword from "./ComponentsInfo/ChangePassword";
 import AddressBook from "./ComponentsInfo/AddressBook";
 import OrderDetail from "./ComponentsInfo/OrderDetail";
+import AccountApi from "../../api/AccountApi";
 
 const Information = () => {
     const [selectedComponent, setSelectedComponent] = useState("info");

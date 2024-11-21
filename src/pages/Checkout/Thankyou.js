@@ -10,7 +10,6 @@ const Thankyou = () => {
     const [content, setContent] = useState("");
     const [orderInfo, setOrderInfo] = useState("");
     const navigate = useNavigate();
-    const ship = 40000
     // useEffect(() => {
     //     const fetchIntroduceData = async () => {
     //         try {
@@ -184,30 +183,6 @@ const Thankyou = () => {
                                     className="text-end"
                                 >
                                     {orderInfo.CouponDiscout ? `${orderInfo.CouponDiscout.toLocaleString("vi-VN")} đ` : "0"}
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col
-                                    xs={6}
-                                    style={{
-                                        color: "gray",
-                                        fontWeight: "500",
-                                    }}
-                                >
-                                    Phí vận chuyển
-                                </Col>
-
-                                <Col
-                                    xs={6}
-                                    style={{
-                                        color: "gray",
-                                        fontWeight: "500",
-                                    }}
-                                    className="text-end"
-                                >
-                                    {ship ? `${ship.toLocaleString("vi-VN")} đ` : ""}
-
                                 </Col>
                             </Row>
 

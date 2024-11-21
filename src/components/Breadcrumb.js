@@ -23,13 +23,18 @@ const Breadcrumb = () => {
     "compare-product": "So sánh sản phẩm",
     "new-product": "Sản phẩm mới ",
     thankyou: "Cám ơn",
-    // Thêm các ánh xạ khác ở đây
+    orderdetail: "Chi tiết đơn hàng",
   };
 
   const breadcrumbItems = pathnames.map((pathname, index) => {
     const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
     const isLast = index === pathnames.length - 1;
-    const label = breadcrumbLabels[pathname] || pathname; // Lấy từ tiếng Việt, nếu không thì giữ nguyên
+
+    // Kiểm tra nếu là số thì gán nhãn "Chi tiết đơn hàng"
+    const isNumber = /^\d+$/.test(pathname);
+    const label = isNumber
+      ? `Chi tiết đơn hàng ${pathname}`
+      : breadcrumbLabels[pathname] || pathname; // Lấy từ tiếng Việt, nếu không thì giữ nguyên
 
     return (
       <span key={routeTo}>

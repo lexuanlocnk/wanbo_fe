@@ -23,6 +23,18 @@ class AccountApi {
         return axiosClient.post(url, data);
     };
 
+    //lấy thông tin user
+    getInformation = () => {
+        const url = `/member/information-member`;
+        return axiosClient.get(url);
+    };
+
+    //thêm thông tin user về địa chỉ
+    getAddress = () => {
+        const url = `/member/show-address-member`;
+        return axiosClient.get(url);
+    };
+
 }
 
 export default AccountApi;
