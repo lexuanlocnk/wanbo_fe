@@ -4,7 +4,7 @@ import { imageBaseUrl } from "../api/axiosConfig";
 import { CartContext } from "../pages/Cart/CartContext";
 import { Modal } from "react-bootstrap";
 import BoxCart from "../components/componentProduct/BoxCart";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ProductViewed = ({
   item,
@@ -82,7 +82,7 @@ const ProductViewed = ({
           </div>
           <div className="right-detail">
             <h3 className="title-product">
-              <a href={`/product/${item.UrlProduct}`}>{item.ProductName}</a>
+              <Link to={`/product/${item.UrlProduct}`}>{item.ProductName}</Link>
             </h3>
             <div className="left_vend">
               {/* <div className="first_status">

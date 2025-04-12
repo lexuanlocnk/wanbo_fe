@@ -5,15 +5,29 @@ import ProductItem from "../../components/productItem/productItem";
 import ProductImg from "../../assets/images/product-img-test.png";
 import BoxProduct from "../../components/componentProduct/BoxProduct";
 import axios from "axios";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import NoProduct from "../../components/NoProduct";
 
 const filters = [
   {
     title: "Loại sản phẩm",
-    options: ["Wanbo T Series", "Wanbo X Series", "Davinci Series", "Mozart Series", "Phụ kiện"],
+    options: [
+      "Wanbo T Series",
+      "Wanbo X Series",
+      "Davinci Series",
+      "Mozart Series",
+      "Phụ kiện",
+    ],
   },
   {
     title: "Chọn mức giá",
-    options: ["Giá dưới 5 trăm", "5trăm - 1tr", "1tr - 2tr", "2tr - 5tr", "5tr - 11tr"],
+    options: [
+      "Giá dưới 5 trăm",
+      "5trăm - 1tr",
+      "1tr - 2tr",
+      "2tr - 5tr",
+      "5tr - 11tr",
+    ],
   },
 ];
 
@@ -36,12 +50,12 @@ const sortOptions = [
   },
 ];
 
-
 const NewProduct = (props) => {
   const [selectedOption, setSelectedOption] = useState("Mặc định");
   const [activeSortOption, setActiveSortOption] = useState();
   const [selectedFilters, setSelectedFilters] = useState([]);
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const categoryMapping = {
     "Wanbo T Series": "wanbo-t",
@@ -51,20 +65,27 @@ const NewProduct = (props) => {
     "Phụ kiện": "phu-kien",
   };
 
+  // Lấy sản phẩm từ API theo query string
   const fetchProducts = async () => {
-    const selectedCategoryName = selectedFilters.find(filter => filter.filter === "Loại sản phẩm")?.option || '';
-    const selectedCategory = categoryMapping[selectedCategoryName] || '';
-    const selectedPriceRange = selectedFilters.find(filter => filter.filter === "Chọn mức giá")?.option || '';
-    const [minPrice, maxPrice] = parsePriceRange(selectedPriceRange);
+    const urlParams = new URLSearchParams(location.search);
+    const catUrl = urlParams.get("catUrl") || "";
+    const minPrice = urlParams.get("minPrice");
+    const maxPrice = urlParams.get("maxPrice");
+    // if (catUrl) {
+    //     setSelectedFilters(catUrl)
+    // }
 
     try {
-      const response = await axios.get(`http://192.168.245.190:8002/api/member/filter-category`, {
-        params: {
-          catUrl: selectedCategory,
-          minPrice: minPrice || 0,
-          maxPrice: maxPrice || 100000000,
-        },
-      });
+      const response = await axios.get(
+        `http://192.168.245.190:8002/api/member/filter-category`,
+        {
+          params: {
+            catUrl,
+            minPrice: minPrice || 0,
+            maxPrice: maxPrice || 100000000,
+          },
+        }
+      );
       if (response.data.status) {
         setProducts(response.data.listProduct);
       }
@@ -72,11 +93,67 @@ const NewProduct = (props) => {
       console.error("Error fetching products:", error);
     }
   };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const catUrl = urlParams.get("catUrl");
+    const minPrice = parseInt(urlParams.get("minPrice")) || 0;
+    const maxPrice = parseInt(urlParams.get("maxPrice")) || 100000000;
 
+    const filtersFromUrl = [];
+
+    // Xử lý category từ catUrl
+    if (catUrl) {
+      const matchedCategory = Object.entries(categoryMapping).find(
+        ([label, value]) => value === catUrl
+      );
+      if (matchedCategory) {
+        filtersFromUrl.push({
+          filter: "Loại sản phẩm",
+          option: matchedCategory[0],
+        });
+      }
+    }
+
+    // Xử lý price range từ min-max
+    for (let option of filters.find((f) => f.title === "Chọn mức giá")
+      .options) {
+      const [min, max] = parsePriceRange(option);
+      if (min === minPrice && max === maxPrice) {
+        filtersFromUrl.push({
+          filter: "Chọn mức giá",
+          option,
+        });
+        break;
+      }
+    }
+
+    setSelectedFilters(filtersFromUrl);
+  }, []);
+  useEffect(() => {
+    const selectedCategoryName =
+      selectedFilters.find((filter) => filter.filter === "Loại sản phẩm")
+        ?.option || "";
+    const selectedCategory = categoryMapping[selectedCategoryName] || "";
+    const selectedPriceRange =
+      selectedFilters.find((filter) => filter.filter === "Chọn mức giá")
+        ?.option || "";
+    const [minPrice, maxPrice] = parsePriceRange(selectedPriceRange);
+
+    const searchParams = new URLSearchParams();
+    if (selectedCategory) searchParams.append("catUrl", selectedCategory);
+    if (minPrice !== 0 || maxPrice !== 100000000) {
+      // Chỉ thêm khi khác giá trị mặc định
+      searchParams.append("minPrice", minPrice);
+      searchParams.append("maxPrice", maxPrice);
+    }
+
+    navigate({ search: searchParams.toString() });
+  }, [selectedFilters, navigate]);
+
+  // Gọi API khi URL thay đổi
   useEffect(() => {
     fetchProducts();
-  }, [selectedFilters]);
-
+  }, [location.search]);
   const parsePriceRange = (range) => {
     switch (range) {
       case "Giá dưới 5 trăm":
@@ -94,11 +171,9 @@ const NewProduct = (props) => {
     }
   };
 
-
   // const [filters, setFilters] = useState([]);
 
   const [selectedSortOptions, setSelectedSortOptions] = useState([]);
-
 
   // Hàm xử lý khi chọn checkbox filter
   // const handleFilterChange = (filterTitle, option) => {
@@ -137,12 +212,13 @@ const NewProduct = (props) => {
     } else {
       // Loại bỏ các tùy chọn khác trong cùng nhóm và thêm tùy chọn mới
       setSelectedFilters([
-        ...selectedFilters.filter((selected) => selected.filter !== filterTitle),
-        { filter: filterTitle, option }
+        ...selectedFilters.filter(
+          (selected) => selected.filter !== filterTitle
+        ),
+        { filter: filterTitle, option },
       ]);
     }
   };
-
 
   // Hàm xử lý xoá tag
   const handleRemoveFilterTag = (filter) => {
@@ -278,8 +354,9 @@ const NewProduct = (props) => {
               {sortOptions.map((option) => (
                 <div
                   key={option.value}
-                  className={`sort-by-item ${activeSortOption === option.label ? "active2" : ""
-                    }`}
+                  className={`sort-by-item ${
+                    activeSortOption === option.label ? "active2" : ""
+                  }`}
                   onClick={() => handleSelectSortOption(option)}
                 >
                   {option.label}
@@ -288,15 +365,18 @@ const NewProduct = (props) => {
             </div>
           </div>
 
-
           <div className="products-view">
             <div className="row">
               {/* Hiển thị 9 sản phẩm trên trang hiện tại */}
-              {products.map((product) => (
-                <div className="product-item col-6 col-xl-4 col-lg-4 col-md-4">
-                  <BoxProduct key={product.id} item={product} />
-                </div>
-              ))}
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <div className="product-item col-6 col-xl-4 col-lg-4 col-md-4">
+                    <BoxProduct key={product.id} item={product} />
+                  </div>
+                ))
+              ) : (
+                <NoProduct />
+              )}
 
               {/* Pagination của Bootstrap */}
               <nav aria-label="" className="product-pagination">
@@ -315,8 +395,9 @@ const NewProduct = (props) => {
                   {Array.from({ length: totalPages }, (_, i) => (
                     <li
                       key={i}
-                      className={`page-item ${currentPage === i + 1 ? "active2" : ""
-                        }`}
+                      className={`page-item ${
+                        currentPage === i + 1 ? "active2" : ""
+                      }`}
                     >
                       <span
                         className="page-link"

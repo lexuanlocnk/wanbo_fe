@@ -47,6 +47,16 @@ const CompareTable = ({ products }) => {
                 </td>
               ))}
             </tr>
+            <tr className="price">
+              <td className="first-col">Giá</td>
+              {products.map((product, index) => (
+                <td className="product-price" key={index}>
+                  {product.price ? `${(product.price * 1).toLocaleString("vi-VN")} đ` : ""}
+                  <span className="ms-2" style={{ fontSize: 11, color: "gray", textDecoration: "line-through" }}>{product.priceOld}</span>
+
+                </td>
+              ))}
+            </tr>
             <tr className="status">
               <td className="first-col">Tác vụ</td>
               {products.map((product, index) => (

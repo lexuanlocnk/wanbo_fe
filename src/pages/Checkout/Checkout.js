@@ -14,8 +14,9 @@ import {
 import axios from "axios";
 import { imageBaseUrl } from "../../api/axiosConfig";
 import CheckoutApi from "../../api/CheckoutApi";
-import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import "./Checkout.css";
 
 const Checkout = () => {
   const { cartItems, fetchCartItems } = useContext(CartContext);
@@ -66,7 +67,6 @@ const Checkout = () => {
     }
   }, []);
 
-
   // Lấy danh sách địa chỉ từ API
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -102,7 +102,6 @@ const Checkout = () => {
         setAddress(
           `${selectedAddress.address}, ${selectedAddress.ward}, ${selectedAddress.district}, ${selectedAddress.province}`
         );
-
       } else {
         setName("");
         setPhone("");
@@ -113,28 +112,31 @@ const Checkout = () => {
     }
   };
   const totalItems = cartItems.reduce((total, item) => total + item.quality, 0);
-  const total = cartItems.reduce((total, item) => total + item.price * item.quality, 0);
+  const total = cartItems.reduce(
+    (total, item) => total + item.price * item.quality,
+    0
+  );
 
   // Handle checkout
   const handleCheckout = async () => {
-    setLoading(true)
+    setLoading(true);
     if (!selectedShippingMethod || !selectedPaymentMethod) {
       toast.warn("Vui lòng chọn phương thức vận chuyển và thanh toán.");
-      setLoading(false)
+      setLoading(false);
       return;
     }
     if (!address) {
       toast.warn("Vui lòng điền địa chỉ!");
-      setLoading(false)
+      setLoading(false);
       return;
     }
     // Map cart items to API format
-    const orders = cartItems.map(item => ({
+    const orders = cartItems.map((item) => ({
       price: item.price,
       productId: item.product_id,
       productName: item.title,
       quality: item.quality,
-      picture: item.picture
+      picture: item.picture,
     }));
 
     const data = {
@@ -151,20 +153,19 @@ const Checkout = () => {
     };
     // console.log(">>>>>>>>>", selectedShippingMethod)
 
-
     try {
       const checkoutApi = new CheckoutApi();
       const response = await checkoutApi.postCheckoutApi(data);
       toast.success("Đặt hàng thành công");
-      fetchCartItems()
-      setLoading(false)
-      navigate("/thankyou")
+      fetchCartItems();
+      setLoading(false);
+      navigate("/thankyou");
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.error("Error during checkout:", error);
       toast.warn("Có lỗi xảy ra, vui lòng thử lại.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -172,15 +173,14 @@ const Checkout = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      axios.get("http://192.168.245.190:8002/api/member/information-member", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then(response => {
-          setUserData(
-            response.data.member?.email,
-          );
+      axios
+        .get("http://192.168.245.190:8002/api/member/information-member", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setUserData(response.data.member?.email);
         })
         .catch(() => setError("Không thể tải thông tin tài khoản"));
     } else {
@@ -191,6 +191,11 @@ const Checkout = () => {
   return (
     <div style={{ backgroundColor: " #F8F8FF" }}>
       <div className="container">
+        <Col md={7} style={{ marginTop: 5 }}>
+          <Link to="/cart" className="back-link">
+            ❮ Quay về giỏ hàng
+          </Link>
+        </Col>
         <Row className="py-4">
           {/* Cột Thông tin nhận hàng */}
           <Col lg={4}>
@@ -328,11 +333,13 @@ const Checkout = () => {
                       />
                       {method.title}
                     </div>
-                    <i className="bi bi-cash" style={{ color: "blue", fontSize: 25 }} />
+                    <i
+                      className="bi bi-cash"
+                      style={{ color: "blue", fontSize: 25 }}
+                    />
                   </Col>
                 ))}
               </Card.Body>
-
             </Card>
           </Col>
 
@@ -342,9 +349,20 @@ const Checkout = () => {
               <Card.Body>
                 <Card.Title>Đơn hàng ({totalItems} sản phẩm)</Card.Title>
                 <hr />
-                <ul className="list-group" style={{ height: "200px", overflowY: "auto", overflowX: "hidden" }}>
+                <ul
+                  className="list-group"
+                  style={{
+                    height: "200px",
+                    overflowY: "auto",
+                    overflowX: "hidden",
+                  }}
+                >
                   {cartItems.map((item) => (
-                    <li key={item.id} style={{ border: "none" }} className="list-group-item d-flex justify-content-between align-items-center">
+                    <li
+                      key={item.id}
+                      style={{ border: "none" }}
+                      className="list-group-item d-flex justify-content-between align-items-center"
+                    >
                       <span style={{ position: "relative" }}>
                         <img
                           src={`${imageBaseUrl}${item.picture}`}
@@ -355,9 +373,10 @@ const Checkout = () => {
                             objectFit: "cover", // Giữ tỷ lệ ảnh
                             marginRight: "10px",
                             border: "1px solid #f4f4f4",
-                            borderRadius: 5
+                            borderRadius: 5,
                           }}
-                        /><Badge
+                        />
+                        <Badge
                           style={{
                             fontSize: 10,
                             backgroundColor: "red",
@@ -369,12 +388,18 @@ const Checkout = () => {
                           {item.quality}
                         </Badge>
                       </span>
-                      <div style={{ fontSize: 14, width: "50%" }}>{item.title}</div>
-                      <span className="ms-2 text-end" style={{
-                        fontSize: 14, width: "30%",
-                        color: "gray",
-                        fontWeight: "500",
-                      }}>
+                      <div style={{ fontSize: 14, width: "50%" }}>
+                        {item.title}
+                      </div>
+                      <span
+                        className="ms-2 text-end"
+                        style={{
+                          fontSize: 14,
+                          width: "30%",
+                          color: "gray",
+                          fontWeight: "500",
+                        }}
+                      >
                         {(item.price * item.quality).toLocaleString("vi-VN")} ₫
                       </span>
                     </li>
@@ -398,7 +423,7 @@ const Checkout = () => {
                         width: "100%",
                         height: "100%",
                         backgroundColor: "#0d6efd",
-                        fontSize: 14
+                        fontSize: 14,
                       }}
                     >
                       Áp dụng
@@ -466,21 +491,11 @@ const Checkout = () => {
                   </h5>
 
                   <h5 style={{ color: "#0d6efd" }}>
-                    {(total).toLocaleString("vi-VN")} ₫
+                    {total.toLocaleString("vi-VN")} ₫
                   </h5>
                 </div>
 
-                <Row className="mt-3 align-items-center">
-                  <Col
-                    md={7}
-                    style={{
-                      fontWeight: "500",
-                      marginBottom: 10
-                    }}
-                  >
-                    <a href="/cart"> ❮ Quay về giỏ hàng</a>
-                  </Col>
-
+                <Row className="mt-3 align-items-center justify-content-end">
                   <Col
                     md={5}
                     style={{
@@ -499,14 +514,12 @@ const Checkout = () => {
                       disabled={loading}
                     >
                       {loading ? "Đang Đặt hàng" : "Đặt hàng"}
-
                     </Button>
                   </Col>
                 </Row>
               </Card.Body>
             </Card>
           </Col>
-
         </Row>
       </div>
     </div>

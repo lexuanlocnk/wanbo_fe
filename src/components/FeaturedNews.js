@@ -3,9 +3,9 @@ import Card from "react-bootstrap/Card";
 import { newsItems } from "../pages/Data";
 import HomeApi from "../api/homeApi";
 import { imageBaseUrl } from "../api/axiosConfig";
+import { Link } from "react-router-dom";
 
 const FeaturedNews = () => {
-
   const [newTopData, setNewTopData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,6 @@ const FeaturedNews = () => {
       try {
         const response = await homeApi.getNewtop();
         setNewTopData(response.data.listNew?.data); // Lấy data từ response
-
       } catch (err) {
         console.log("Fetch setNewTopData Data Error: ", err);
       } finally {
@@ -26,6 +25,9 @@ const FeaturedNews = () => {
   }, []);
   // console.log(">>>>>>>>>>>", newTopData)
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div
@@ -45,27 +47,22 @@ const FeaturedNews = () => {
               <Card.Img
                 variant="top"
                 src={`${imageBaseUrl}${item.picture}`}
-                className=" custom-img" // Sử dụng lớp tùy chỉnh
+                className="custom-img" // Sử dụng lớp tùy chỉnh
                 style={{
                   objectFit: "cover",
                 }}
               />
 
               <div className="d-flex flex-column justify-content-center mx-1">
-                <a
-                  href={`/news/${item.url_cat}/${item.friendly_url}`}
+                <Link
+                  to={`/news/${item.url_cat}/${item.friendly_url}`}
                   className="title-new truncate-text"
+                  onClick={scrollToTop}
                 >
                   {item.title}
-                </a>
-                <a href={`/news/${item.url_cat}/${item.friendly_url}`} className="card-title">
-                  <b className="seemore">
-                    Xem thêm <span className="bi bi-arrow-right" />
-                  </b>
-                </a>
+                </Link>
               </div>
             </Card>
-
           </div>
         ))}
       </div>

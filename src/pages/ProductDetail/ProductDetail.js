@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "./Detail.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -69,11 +69,10 @@ const ProductDetail = ({ children, eventKey, item }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
-
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setShow(true)
+      setShow(true);
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -94,7 +93,7 @@ const ProductDetail = ({ children, eventKey, item }) => {
   const handleMuaToCart = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setShow(true)
+      setShow(true);
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -111,7 +110,6 @@ const ProductDetail = ({ children, eventKey, item }) => {
     setTimeout(() => {
       navigate("/checkout");
     }, 1000);
-
   };
 
   if (!product) {
@@ -200,7 +198,11 @@ const ProductDetail = ({ children, eventKey, item }) => {
             </div>
 
             {/* Nút mua hàng */}
-            <Button variant="danger" className="my-3 p-2 buy" onClick={handleMuaToCart}>
+            <Button
+              variant="danger"
+              className="my-3 p-2 buy"
+              onClick={handleMuaToCart}
+            >
               MUA NGAY <br />
               Giao hàng tận nơi hoặc nhận tại cửa hàng
             </Button>
@@ -214,11 +216,18 @@ const ProductDetail = ({ children, eventKey, item }) => {
               </Button>
 
               {/* modal thêm thất bại*/}
-              <Modal show={show} onHide={handleClose} animation={false} centered>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                animation={false}
+                centered
+              >
                 <Modal.Header closeButton>
                   <Modal.Title>Thông báo</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!</Modal.Body>
+                <Modal.Body>
+                  Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!
+                </Modal.Body>
                 <Modal.Footer>
                   <Button variant="primary" onClick={handleClose}>
                     Ok
@@ -246,7 +255,15 @@ const ProductDetail = ({ children, eventKey, item }) => {
                       [{product.ProductName}]
                     </a>{" "}
                     vào giỏ hàng
-                    <i className="bi bi-x-lg" style={{ position: "absolute", right: 20, cursor: "pointer" }} onClick={() => setSmShow(false)} />
+                    <i
+                      className="bi bi-x-lg"
+                      style={{
+                        position: "absolute",
+                        right: 20,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setSmShow(false)}
+                    />
                   </Modal.Title>
                 </Modal.Header>
 
@@ -255,10 +272,10 @@ const ProductDetail = ({ children, eventKey, item }) => {
                 </Modal.Body>
               </Modal>
 
-              <Button variant="primary" className="adddetail">
-                TRẢ GÓP <br />
-                <p style={{ fontSize: 12 }}>(Mua trả góp lãi suất thấp)</p>
-              </Button>
+                <Button variant="primary" className="adddetail">
+                  TRẢ GÓP <br />
+                  <p style={{ fontSize: 12 }}>(Mua trả góp lãi suất thấp)</p>
+                </Button>
             </div>
             <Card className="mt-3">
               <Card.Header as="h5" className="danger">

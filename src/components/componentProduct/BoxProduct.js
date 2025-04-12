@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { CartContext } from "../../pages/Cart/CartContext";
@@ -9,11 +9,11 @@ import "./box-product.css";
 import componentProduct from "./componentProduct.css";
 import { Drawer, Space } from "antd";
 import { imageBaseUrl } from "../../api/axiosConfig";
-import axios from 'axios';
+import axios from "axios";
 import HomeApi from "../../api/homeApi";
-import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BoxProduct = ({ item }) => {
   const { cartItems, addToCart } = useContext(CartContext);
@@ -23,22 +23,27 @@ const BoxProduct = ({ item }) => {
   const [quantityView, setQuantityView] = useState(1);
   const [isCompared, setIsCompared] = useState(false);
   const [compareList, setCompareList] = useState([]);
-
   const navigate = useNavigate();
-
-  // hàm so sánh sản phẩm 
+  const dragRef = useRef(false);
+  const startXRef = useRef(0);
+  const startYRef = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragThreshold = 5;
+  // hàm so sánh sản phẩm
   useEffect(() => {
     // Lấy danh sách sản phẩm từ localStorage khi Drawer được mở
     if (isCompared) {
-      const storedCompareList = JSON.parse(localStorage.getItem("compareList")) || [];
+      const storedCompareList =
+        JSON.parse(localStorage.getItem("compareList")) || [];
       setCompareList(storedCompareList.slice(0, 3)); // Giới hạn 3 sản phẩm
     }
   }, [isCompared]);
 
   const handleOpenCompare = () => {
-    let storedCompareList = JSON.parse(localStorage.getItem("compareList")) || [];
+    let storedCompareList =
+      JSON.parse(localStorage.getItem("compareList")) || [];
     // Kiểm tra nếu sản phẩm đã có trong danh sách so sánh
-    if (storedCompareList.find(product => product.id === item.ProductId)) {
+    if (storedCompareList.find((product) => product.id === item.ProductId)) {
       toast.info("Sản phẩm này đã có trong danh sách so sánh!");
       // setIsCompared(true);
       return;
@@ -51,7 +56,10 @@ const BoxProduct = ({ item }) => {
     }
 
     // Kiểm tra nếu danh mục của sản phẩm mới khớp với danh mục của các sản phẩm đã thêm
-    if (storedCompareList.length > 0 && storedCompareList[0].category !== item.Category) {
+    if (
+      storedCompareList.length > 0 &&
+      storedCompareList[0].category !== item.Category
+    ) {
       toast.warn("Chỉ có thể so sánh các sản phẩm cùng danh mục.");
       return;
     }
@@ -66,6 +74,7 @@ const BoxProduct = ({ item }) => {
     });
 
     localStorage.setItem("compareList", JSON.stringify(storedCompareList));
+    toast.success(`Đã thêm sản phẩm vào danh sách so sánh`);
     setIsCompared(true);
   };
 
@@ -79,7 +88,7 @@ const BoxProduct = ({ item }) => {
   const handleAddToCartN = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setShow(true)
+      setShow(true);
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -97,64 +106,105 @@ const BoxProduct = ({ item }) => {
     setSmShow(true);
   };
 
-  // const handleAddToCartN = async () => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     navigate("/login")
-  //     alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
-  //     return;
-  //   }
-
-  //   try {
-  //     const homeApi = new HomeApi();
-  //     const response = await homeApi.postListCart({
-  //       product_id: item.ProductId,
-  //       picture: item.Image,
-  //       cat_name: item.Category,
-  //       title: item.ProductName,
-  //       quality: quantity,
-  //       price: item.Price,
-  //     });
-
-  //     if (response.status === 200) {
-  //       setSmShow(true);
-  //     } else {
-  //       console.log('Có lỗi xảy ra, vui lòng thử lại.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Lỗi khi thêm sản phẩm vào giỏ hàng:', error);
-  //     console.log('Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.');
-  //   }
-  // }
-
   const handleRemoveFromCompare = (productId) => {
-    const storedCompareList = JSON.parse(localStorage.getItem("compareList")) || [];
+    const storedCompareList =
+      JSON.parse(localStorage.getItem("compareList")) || [];
 
     // Loại bỏ sản phẩm có id bằng productId
-    const updatedCompareList = storedCompareList.filter((product) => product.id !== productId);
+    const updatedCompareList = storedCompareList.filter(
+      (product) => product.id !== productId
+    );
 
     // Cập nhật lại localStorage và state
     localStorage.setItem("compareList", JSON.stringify(updatedCompareList));
     setCompareList(updatedCompareList);
   };
 
-
   const sale = Math.round(((item.PriceOld - item.Price) / item.PriceOld) * 100);
 
-  return (
-    <div className="my-4 rounded box-product mx-1" key={item.ProductId} style={{ display: "inline-block", position: "relative", width: "98%" }}>
+  const handleMouseDown = (e) => {
+    startXRef.current = e.clientX;
+    startYRef.current = e.clientY;
+    dragRef.current = false;
+    setIsDragging(false);
 
-      <Card className="prdItem border-0 shadow4">
-        <a href={`/product/${item.UrlProduct}`}>
-          <Card.Img variant="top" src={`${imageBaseUrl}${item.Image}`} className="p-4 img" />
-        </a>
+    // Add global event listeners to detect drag outside component
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (e) => {
+    const deltaX = Math.abs(e.clientX - startXRef.current);
+    const deltaY = Math.abs(e.clientY - startYRef.current);
+
+    if (deltaX > dragThreshold || deltaY > dragThreshold) {
+      dragRef.current = true;
+      setIsDragging(true);
+    }
+  };
+
+  const handleMouseUp = () => {
+    // Clean up global event listeners
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+
+    // Keep dragRef.current true for a short time to prevent click right after drag
+    setTimeout(() => {
+      dragRef.current = false;
+    }, 100);
+  };
+
+  const handleCardClick = (e) => {
+    // If dragging, prevent all clicks
+    if (isDragging || dragRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  const handleLinkClick = (e) => {
+    // Prevent navigation if we're dragging
+    if (isDragging || dragRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+  return (
+    <div
+      className="my-4 rounded box-product mx-1"
+      key={item.ProductId}
+      style={{ display: "inline-block", position: "relative", width: "98%" }}
+    >
+      <Card
+        className="prdItem shadow4"
+        style={{ border: "1px solid #f0f0f0" }}
+        onMouseDown={handleMouseDown}
+        onClick={handleCardClick}
+      >
+        <Link to={`/product/${item.UrlProduct}`} onClick={handleLinkClick}>
+          <Card.Img
+            variant="top"
+            src={`${imageBaseUrl}${item.Image}`}
+            className="img"
+          />
+        </Link>
         {sale > 0 && <Card.Text className="sale">-{sale} %</Card.Text>}
         <Card.Body>
-          <div className="prdName">{item.ProductName}</div>
-          <div className="price">{item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}</div>
+          <Link
+            to={`/product/${item.UrlProduct}`}
+            className="prdName"
+            onClick={handleLinkClick}
+          >
+            {item.ProductName}
+          </Link>
+          <div className="price">
+            {item.Price ? `${item.Price.toLocaleString("vi-VN")} đ` : "N/A"}
+          </div>
           {sale > 0 ? (
             <div className="original-price tgray fw-bold">
-              {item.PriceOld ? `${item.PriceOld.toLocaleString("vi-VN")} đ` : "N/A"}
+              {item.PriceOld
+                ? `${item.PriceOld.toLocaleString("vi-VN")} đ`
+                : "N/A"}
             </div>
           ) : (
             <div style={{ margin: 20 }}></div>
@@ -162,8 +212,7 @@ const BoxProduct = ({ item }) => {
 
           {/* hover hiện 3 nút */}
           <div className="hover-buttons">
-
-            <Button variant="secondary" onClick={handleAddToCartN}>
+            <Button className="icon-buttons" onClick={handleAddToCartN}>
               <i className="bi bi-cart-plus" />
             </Button>
             {/* modal thêm thất bại*/}
@@ -171,7 +220,9 @@ const BoxProduct = ({ item }) => {
               <Modal.Header closeButton>
                 <Modal.Title>Thông báo</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!</Modal.Body>
+              <Modal.Body>
+                Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!
+              </Modal.Body>
               <Modal.Footer>
                 <Button variant="primary" onClick={handleClose}>
                   Ok
@@ -179,16 +230,35 @@ const BoxProduct = ({ item }) => {
               </Modal.Footer>
             </Modal>
 
-            <Modal size="xl" show={smShow} onHide={() => setSmShow(false)} aria-labelledby="example-modal-sizes-title-sm">
-              <Modal.Header className="custom-modal-header" style={{ backgroundColor: "#0d6efd", color: "white" }}>
+            <Modal
+              size="xl"
+              show={smShow}
+              onHide={() => setSmShow(false)}
+              aria-labelledby="example-modal-sizes-title-sm"
+            >
+              <Modal.Header
+                className="custom-modal-header"
+                style={{ backgroundColor: "#0d6efd", color: "white" }}
+              >
                 <Modal.Title id="example-modal-sizes-title-sm">
                   <i className="bi bi-check-circle me-2" />
                   Đã thêm{" "}
-                  <a href={`/product/${item.UrlProduct}`} style={{ fontSize: 20, color: "white", fontWeight: "400" }}>
+                  <Link
+                    to={`/product/${item.UrlProduct}`}
+                    style={{ fontSize: 20, color: "white", fontWeight: "400" }}
+                  >
                     [{item.ProductName}]
-                  </a>{" "}
+                  </Link>{" "}
                   vào giỏ hàng
-                  <i className="bi bi-x-lg" style={{ position: "absolute", right: 20, cursor: "pointer" }} onClick={() => setSmShow(false)} />
+                  <i
+                    className="bi bi-x-lg"
+                    style={{
+                      position: "absolute",
+                      right: 20,
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setSmShow(false)}
+                  />
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -196,16 +266,26 @@ const BoxProduct = ({ item }) => {
               </Modal.Body>
             </Modal>
 
-            <Button variant="secondary" onClick={() => setQuickView(true)}>
+            <Button className="icon-buttons" onClick={() => setQuickView(true)}>
               <i className="bi bi-eye" />
             </Button>
-            <Modal size="xl" className="" dialogClassName="modal-product-viewed" show={quickView}>
+            <Modal
+              size="xl"
+              className=""
+              dialogClassName="modal-product-viewed"
+              show={quickView}
+            >
               <Modal.Body className="box-product-viewed">
-                <ProductViewed item={item} quantityView={quantityView} setQuantityView={setQuantityView} setQuickView={setQuickView} />
+                <ProductViewed
+                  item={item}
+                  quantityView={quantityView}
+                  setQuantityView={setQuantityView}
+                  setQuickView={setQuickView}
+                />
               </Modal.Body>
             </Modal>
 
-            <Button variant="secondary" onClick={handleOpenCompare}>
+            <Button className="icon-buttons" onClick={handleOpenCompare}>
               <i className="bi bi-repeat" />
             </Button>
           </div>
@@ -225,22 +305,36 @@ const BoxProduct = ({ item }) => {
           {compareList.map((product) => (
             <div key={product.id} className="item-compare-wrap m-1">
               <a className="item-compare-img-thumb">
-                <img src={`${imageBaseUrl}${product.image}`} alt={product.name} />
+                <img
+                  src={`${imageBaseUrl}${product.image}`}
+                  alt={product.name}
+                />
               </a>
               <div className="product-info">
                 <a className="product-name">{product.name}</a>
                 <div className="price-box">
-                  <span className="price">{product.price ? `${product.price.toLocaleString("vi-VN")} đ` : ""}</span>
-                  <span className="compare-price">{product.priceOld ? `${product.priceOld.toLocaleString("vi-VN")} đ` : ""}</span>
+                  <span className="price">
+                    {product.price
+                      ? `${product.price.toLocaleString("vi-VN")} đ`
+                      : ""}
+                  </span>
+                  <span className="compare-price">
+                    {product.priceOld
+                      ? `${product.priceOld.toLocaleString("vi-VN")} đ`
+                      : ""}
+                  </span>
                 </div>
-                <div className="remove-compare-item" onClick={() => handleRemoveFromCompare(product.id)}>
+                <div
+                  className="remove-compare-item"
+                  onClick={() => handleRemoveFromCompare(product.id)}
+                >
                   Xoá
                 </div>
               </div>
             </div>
           ))}
           <div className="compare-navigate-but">
-            <a href="/compare-product">Đi đến trang so sánh sản phẩm</a>
+            <Link to="/compare-product">Đi đến trang so sánh sản phẩm</Link>
           </div>
         </div>
       </Drawer>

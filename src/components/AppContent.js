@@ -18,8 +18,12 @@ import NewProducts from "../pages/NewProduct/NewProducts";
 import Search from "../pages/Search/Search";
 import Test from "../pages/NewProduct/Test";
 import Thankyou from "../pages/Checkout/Thankyou";
-import OrderDetail from "../pages/Account/ComponentsInfo/OrderDetail"
-
+import OrderDetail from "../pages/Account/ComponentsInfo/OrderDetail";
+import ReturnPolicy from "../pages/Policy/ReturnPolicy";
+import DeliveryAndPayment from "../pages/Policy/DeliveryAndPayment";
+import WarrantyTerms from "../pages/Policy/WarrantyTerms";
+import PrivacyPolicy from "../pages/Policy/PrivacyPolicy";
+import CookiePolicy from "../pages/Policy/CookiePolicy";
 const AppContent = () => {
   const { cartItems } = useContext(CartContext);
   return (
@@ -49,10 +53,12 @@ const AppContent = () => {
 
       <Route path="/contact" element={<Contact />} />
 
-      <Route path="/checkout"
+      <Route
+        path="/checkout"
         element={
           cartItems.length > 0 ? <Checkout /> : <Navigate to="/home" replace />
-        } />
+        }
+      />
       <Route path="/thankyou" element={<Thankyou />} />
 
       <Route path="/compare-product" element={<CompareProduct />} />
@@ -60,6 +66,16 @@ const AppContent = () => {
       <Route path="/information" element={<Information />} />
 
       <Route path="/information/:id" element={<OrderDetail />} />
+
+      <Route path="/return-policy" element={<ReturnPolicy />} />
+
+      <Route path="/delivery-and-payment" element={<DeliveryAndPayment />} />
+
+      <Route path="/warranty-terms" element={<WarrantyTerms />} />
+
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+      <Route path="/cookie-policy" element={<CookiePolicy />} />
 
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

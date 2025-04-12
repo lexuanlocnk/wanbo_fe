@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Contact.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 
 const Contact = (props) => {
@@ -102,7 +103,7 @@ const Contact = (props) => {
                         ></path>
                       </svg>
                       <b>Email:</b>{" "}
-                      <a href="mailto:cskh@nguyenkimvn.vn">{contact.email}</a>
+                      <Link to="mailto:cskh@nguyenkimvn.vn">{contact.email}</Link>
                     </div>
                     <div class="item">
                       <svg

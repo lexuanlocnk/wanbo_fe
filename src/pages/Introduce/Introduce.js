@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Introduce.css";
 
 const Introduce = () => {
   const [content, setContent] = useState("");
@@ -6,7 +7,9 @@ const Introduce = () => {
   useEffect(() => {
     const fetchIntroduceData = async () => {
       try {
-        const response = await fetch("http://192.168.245.190:8002/api/member/detail-about/gioi-thieu-ve-cong-ty");
+        const response = await fetch(
+          "http://192.168.245.190:8002/api/member/detail-about/gioi-thieu-ve-cong-ty"
+        );
         const result = await response.json();
 
         if (result.status) {
@@ -25,10 +28,13 @@ const Introduce = () => {
     <div className="container">
       <h3>Giới thiệu</h3>
       {/* Render HTML content from API response */}
-      <div style={{ fontSize: 16 }} dangerouslySetInnerHTML={{ __html: content }} />
+      <div
+        className="introduce-content"
+        style={{ fontSize: 16 }}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </div>
   );
 };
 
 export default Introduce;
-

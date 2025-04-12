@@ -1,8 +1,8 @@
 .prdName {
   display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
   white-space: "normal";
   word-wrap: "break-word";
 }
@@ -21,54 +21,58 @@
 }
 
 .hover-buttons {
-  position: absolute;
-  top: 40%;
-  left: 20%; /* Đặt các nút vào giữa Card */
-  display: none; /* Ẩn các nút ban đầu */
-  text-align: center;
-  z-index: 1;
+  opacity: 0;
+  transform: translate(20%, -400%) scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .hover-buttons button {
   margin: 5px;
 }
 
+.prdName:hover {
+  color: #0d6efd;
+}
 /* Màn hình lớn (Desktop)  */
 @media (min-width: 1024px) {
   .prdName {
     font-size: 16px;
   }
   .prdItem:hover .hover-buttons {
-    display: block;
+    opacity: 1;
+    transform: translate(20%, -500%) scale(1);
   }
-  .text-Tong{
+  .text-Tong {
     font-size: 14px;
   }
-  .FormCheck{
+  .FormCheck {
     width: 45px;
   }
 }
 
 /* Màn hình trung bình (Tablet) */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .prdName {  
+  .prdName {
     font-size: 15px;
   }
   .price {
     font-size: 17px;
   }
 
+  .hover-buttons {
+    display: none;
+  }
+
   .prdItem:hover .hover-buttons {
     display: none;
   }
-  .text-Tong{
+  .text-Tong {
     font-size: 12px;
   }
-  .FormCheck{
+  .FormCheck {
     width: 40px;
     justify-content: space-between;
   }
-  
 }
 
 /* Màn hình nhỏ (Mobile) */
@@ -80,6 +84,10 @@
     font-size: 12px;
   }
 
+  .hover-buttons {
+    display: none;
+  }
+
   .prdItem:hover .hover-buttons {
     display: none;
   }
@@ -87,11 +95,39 @@
     flex-direction: column !important;
     text-align: center;
   }
-  .FormCheck{
+  .FormCheck {
     width: 0px;
   }
-  .text-end2{
+  .text-end2 {
     text-align: end;
   }
+}
 
+.product-item .hover-buttons {
+  opacity: 0;
+  transform: translate(25%, -400%) scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product-item:hover .hover-buttons {
+  opacity: 1;
+  transform: translate(30%, -600%) scale(1);
+}
+
+@media (max-width: 1450px) {
+  .product-item:hover .hover-buttons {
+    transform: translate(25%, -570%) scale(1);
+  }
+}
+
+@media (max-width: 1280px) {
+  .product-item:hover .hover-buttons {
+    transform: translate(20%, -500%) scale(1);
+  }
+}
+
+@media (max-width: 1100px) {
+  .product-item:hover .hover-buttons {
+    transform: translate(20%, -470%) scale(1);
+  }
 }

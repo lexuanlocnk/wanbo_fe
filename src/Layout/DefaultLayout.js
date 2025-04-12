@@ -10,7 +10,7 @@ import BackToTop from "../components/BackToTop";
 import { CartProvider } from "../pages/Cart/CartContext";
 import Breadcrumb from "../components/Breadcrumb";
 import { toast, ToastContainer } from 'react-toastify';
-
+import './DefaultLayout.css'
 const DefaultLayout = () => {
   return (
     <div>

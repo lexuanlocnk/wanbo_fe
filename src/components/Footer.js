@@ -9,14 +9,20 @@ import {
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import Card from "react-bootstrap/Card";
 import wanboLogo from "../assets/wanbo.png"; //wanbo.png
 import "./footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
-  const [showAboutUs, setShowAboutUs] = useState();
-  const [showPolicy, setShowPolicy] = useState();
-  const [showAdvice, setShowAdvice] = useState();
+  const [showAboutUs, setShowAboutUs] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
+  const [showAdvice, setShowAdvice] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <MDBFooter bgColor="light" className="text-center text-muted">
@@ -79,7 +85,7 @@ export default function Footer() {
                 Công ty TNHH Nguyên Kim
               </span>
               <p>
-                <a href="" className="text-reset22 d-flex  align-items-center ">
+                <a className="text-reset22 d-flex  align-items-center ">
                   <i className="bi bi-send me-2" style={{ fontSize: 25 }} />{" "}
                   <div>
                     245B Trần Quang Khải, Phường Tân Định, Quận 1, Hồ Chí Minh
@@ -117,43 +123,65 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
-                    className={`bi bi-dash transform-dash ${showAboutUs
-                      ? "transition-dash-rotate1"
-                      : "transition-dash-rotate2"
-                      }`}
+                    className={`bi bi-dash transform-dash ${
+                      showAboutUs
+                        ? "transition-dash-rotate1"
+                        : "transition-dash-rotate2"
+                    }`}
                   ></i>
                   <i
                     onClick={() => setShowAboutUs(!showAboutUs)}
-                    className={`bi bi-dash fixed-dash ${showAboutUs ? "transition-dash-disappear" : ""
-                      }`}
+                    className={`bi bi-dash fixed-dash ${
+                      showAboutUs ? "transition-dash-disappear" : ""
+                    }`}
                   ></i>
                 </div>
               </div>
               <div className={`about-sub-item ${showAboutUs ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/home"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Trang chủ
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/introduce"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Giới thiệu
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/product?catUrl=wanbo-t"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Sản phẩm
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/news/tin-khuyen-mai"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Tin tức
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/contact"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Liên hệ
-                  </a>
+                  </Link>
                 </p>
               </div>
             </MDBCol>
@@ -166,47 +194,68 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
-                    className={`bi bi-dash transform-dash ${showPolicy
-                      ? "transition-dash-rotate1"
-                      : "transition-dash-rotate2"
-                      }`}
+                    className={`bi bi-dash transform-dash ${
+                      showPolicy
+                        ? "transition-dash-rotate1"
+                        : "transition-dash-rotate2"
+                    }`}
                   ></i>
                   <i
                     onClick={() => setShowPolicy(!showPolicy)}
-                    className={`bi bi-dash fixed-dash ${showPolicy ? "transition-dash-disappear" : ""
-                      }`}
+                    className={`bi bi-dash fixed-dash ${
+                      showPolicy ? "transition-dash-disappear" : ""
+                    }`}
                   ></i>
                 </div>
               </div>
               <div className={`about-sub-item ${showPolicy ? "show" : ""}`}>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/return-policy"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Chính sách đổi trả
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/delivery-and-payment"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Giao hàng & thanh toán
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/warranty-terms"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Điều khoản bảo hành
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/privacy-policy"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Chính sách bảo mật
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset2">
+                  <Link
+                    to="/cookie-policy"
+                    className="text-reset2"
+                    onClick={scrollToTop}
+                  >
                     Chính sách Cookie
-                  </a>
+                  </Link>
                 </p>
               </div>
             </MDBCol>
-
             <MDBCol md="4" lg="3" xl="3" className=" mb-md-0">
               <div className="w-100 footer-title-menu">
                 <h6 className="text-uppercase mb-0 fw-bold text-reset2">
@@ -215,15 +264,17 @@ export default function Footer() {
                 <div className="collapse-menu-btn">
                   <i
                     onClick={() => setShowAdvice(!showAdvice)}
-                    className={`bi bi-dash transform-dash ${showAdvice
-                      ? "transition-dash-rotate1"
-                      : "transition-dash-rotate2"
-                      }`}
+                    className={`bi bi-dash transform-dash ${
+                      showAdvice
+                        ? "transition-dash-rotate1"
+                        : "transition-dash-rotate2"
+                    }`}
                   ></i>
                   <i
                     onClick={() => setShowAdvice(!showAdvice)}
-                    className={`bi bi-dash fixed-dash ${showAdvice ? "transition-dash-disappear" : ""
-                      }`}
+                    className={`bi bi-dash fixed-dash ${
+                      showAdvice ? "transition-dash-disappear" : ""
+                    }`}
                   ></i>
                 </div>
               </div>
@@ -240,31 +291,31 @@ export default function Footer() {
                   Bảo hành:{" "}
                   <span className="text-reset2 fw-bold">0933.806.678 </span>
                 </p>
-                <p>
-                  <h6 className=" text-uppercase fw-bold text-reset2">
-                    Phương thức thanh toán
-                  </h6>
-                  <img
-                    alt=""
-                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_1.png?1708522711041"
-                    className="d-inline-block align-top "
-                  />
-                  <img
-                    alt=""
-                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_2.png?1708522711041"
-                    className="d-inline-block align-top mb-2"
-                  />
-                  <img
-                    alt=""
-                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_3.png?1708522711041"
-                    className="d-inline-block align-top mb-2"
-                  />
-                  <img
-                    alt=""
-                    src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_4.png?1708522711041"
-                    className="d-inline-block align-top mb-2"
-                  />
-                </p>
+              </div>
+              <div>
+                <h6 className="text-uppercase fw-bold text-reset2 my-2">
+                  Phương thức thanh toán
+                </h6>
+                <img
+                  alt=""
+                  src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_1.png?1708522711041"
+                  className="d-inline-block align-top "
+                />
+                <img
+                  alt=""
+                  src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_2.png?1708522711041"
+                  className="d-inline-block align-top mb-2"
+                />
+                <img
+                  alt=""
+                  src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_3.png?1708522711041"
+                  className="d-inline-block align-top mb-2"
+                />
+                <img
+                  alt=""
+                  src="https://bizweb.dktcdn.net/100/482/909/themes/903912/assets/icon_payment_4.png?1708522711041"
+                  className="d-inline-block align-top mb-2"
+                />
               </div>
             </MDBCol>
           </MDBRow>

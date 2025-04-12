@@ -23,6 +23,7 @@
 @media (max-width: 768px) {
   .news-card {
     flex-direction: column; /* When the screen is smaller, stack the content vertically */
+    justify-content: start;
   }
 
   .news-image {
@@ -32,7 +33,7 @@
   }
 
   .news-content {
-    text-align: center; /* Center text below the image */
+    text-align: left; /* Center text below the image */
     padding: 10px;
   }
 }
@@ -45,6 +46,12 @@
 
 @media (max-width: 768px) {
   .sticky-sidebar {
-    position: static; /* Khi màn hình nhỏ, cho phép phần sidebar trở lại bình thường */
+    position: static; 
   }
+}
+.news-detail-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 10px auto;
 }

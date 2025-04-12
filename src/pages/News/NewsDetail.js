@@ -105,7 +105,7 @@ const NewsDetail = () => {
               className="news-detail-content"
               style={{ backgroundColor: "white", padding: 20 }}
             >
-              <h5>{newDetail.title}</h5>
+              <h3 style={{fontWeight: "bold"}}>{newDetail.title}</h3>
               <div className="d-flex align-items-center">
                 <p className="me-3 bi bi-person">Team dev</p>
                 <p className="bi bi-clock-history me-1" /> <p>

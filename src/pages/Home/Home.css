@@ -2,7 +2,7 @@
   height: 207px;
 }
 body {
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p {
   font-size: 13px;
@@ -20,7 +20,8 @@ p {
   box-shadow: 0 0 5px 2px rgba(65, 63, 63, 0.234);
 }
 .shadow4 {
-  box-shadow: 0 0 10px 1px rgba(132, 131, 131, 0.234);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
 }
 
 a :hover {
@@ -51,6 +52,9 @@ a :hover {
 }
 .f16 {
   font-size: 16px;
+}
+.f16:hover {
+  color: #0d6efd;
 }
 .f14 {
   font-size: 14px;
@@ -94,9 +98,8 @@ a :hover {
 }
 
 .hover-zoom {
-  transition: transform 0.3s ease;
-  width: 100%;
-  height: auto;
+  border-style: none;
+  transition: all 0.5s ease-in-out;
 }
 
 .hover-zoom:hover {
@@ -104,13 +107,24 @@ a :hover {
 }
 
 .btn2:hover {
-  color: #263bf3;
+  background-color: #0d6efd;
+  color: white;
 }
 
 .btn2 {
   background-color: #c3c2c2;
   border: none;
   color: black;
+  padding: 5px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item-spacing {
+  padding: 7px;
 }
 
 .flashsale-carousel .react-multi-carousel-dot button {
@@ -133,4 +147,120 @@ a :hover {
 
 .prdItem {
   width: 100%;
+}
+.prdItem:hover {
+  cursor: pointer;
+}
+
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.swiper-button-prev-custom {
+  left: -10px;
+}
+
+.swiper-button-next-custom {
+  right: -10px;
+}
+
+.truncate-text:hover {
+  color: #355fe7;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .custom-arrow {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-invoice {
+    display: none;
+  }
+}
+
+.cart-dropdown {
+  display: block;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ddd;
+  min-width: 450px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  right: 0;
+  transform: translateX(-10%);
+  padding-bottom: "60px";
+}
+
+.carousel-container * {
+  user-select: none; /* Chặn bôi đen văn bản */
+  -webkit-user-drag: none; /* Safari chặn kéo ảnh */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.block-phone a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  max-width: 40px;
+}
+
+@media (max-width: 768px) {
+  .block-phone a {
+    margin-right: 15px;
+    color: black;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+.react-multiple-carousel__arrow--left {
+  left: 0px;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: 0px;
+}
+
+.swiper-category {
+  cursor: grab;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white; /* Đổi màu mũi tên */
+  padding: 10px;
+  border-radius: 10%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Đổi kích cỡ icon mũi tên */
+  font-weight: bold;
 }

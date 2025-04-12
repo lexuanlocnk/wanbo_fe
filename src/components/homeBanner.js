@@ -7,9 +7,18 @@ import imgBanner3 from "./../assets/image_service1.webp";
 import imgBanner4 from "./../assets/image_service2.webp";
 import imgBanner5 from "./../assets/image_service3.webp";
 import imgBanner6 from "./../assets/image_service4.webp";
-import maychieu from "./../assets/images/maychieu.webp"
-import wanboT from "./../assets/images/wanboT.webp"
+import maychieu from "./../assets/images/maychieu.webp";
+import wanboT from "./../assets/images/wanboT.webp";
+// Import React và các component của Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+// Import các module nếu cần
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 const HomeBanner = () => {
   return (
     <>
@@ -17,7 +26,7 @@ const HomeBanner = () => {
         <div className="row">
           {/* Phần hình ảnh chính */}
           <div className="col-lg-8 col-md-12 mb-4 ">
-            <Carousel fade controls={true} indicators={true} >
+            <Carousel fade controls={true} indicators={true}>
               <Carousel.Item
                 interval={3000}
                 style={{ border: "none", borderRadius: 50 }}
@@ -27,7 +36,12 @@ const HomeBanner = () => {
                   src="https://wanbo.cn/cdn/shop/files/1_2.png?v=1715770224&width=750"
                   width="100%"
                   className="d-block align-top hover-zoom"
-                  style={{ borderRadius: 7, objectFit: "cover", height: 352,  objectPosition: "center" }}
+                  style={{
+                    borderRadius: 7,
+                    objectFit: "cover",
+                    height: 352,
+                    objectPosition: "center",
+                  }}
                 />
               </Carousel.Item>
               <Carousel.Item interval={3000}>
@@ -36,7 +50,7 @@ const HomeBanner = () => {
                   src="https://wanbo.cn/cdn/shop/files/1_2_2.png?v=1715770223&width=1500"
                   width="100%"
                   className="d-block align-top hover-zoom"
-                  style={{ borderRadius: 7, objectFit: "cover", height: 352  }}
+                  style={{ borderRadius: 7, objectFit: "cover", height: 352 }}
                 />
               </Carousel.Item>
             </Carousel>
@@ -51,7 +65,7 @@ const HomeBanner = () => {
                   src="https://xiaomiworld.vn/upload_images/images/davinci-1-pro-__01.jpg"
                   width="100%"
                   className="d-block align-top "
-                   style={{ borderRadius: 7, objectFit: "cover", height: 164  }}
+                  style={{ borderRadius: 7, objectFit: "cover", height: 164 }}
                 />
               </div>
 
@@ -62,18 +76,42 @@ const HomeBanner = () => {
                   src="https://miworld.vn/upload_images/images/banner_wanbo.jpg"
                   width="100%"
                   className="d-block align-top"
-                   style={{ borderRadius: 7, objectFit: "cover", height: 164  }}
+                  style={{ borderRadius: 7, objectFit: "cover", height: 164 }}
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* tien ich */}
-      <div className="row text-center text-md-start mt-2 ">
-        {/* Đổi trả dễ dàng */}
-        <div className="col-6 col-sm-6 col-md-3">
-          <div className="d-flex align-items-center">
+      <Swiper
+        className="py-4 swiper-category"
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={30}
+        slidesPerView={4}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000 }}
+        loop={true}
+        speed={1100}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          992: {
+            slidesPerView: 3,
+          },
+          1200: {
+            slidesPerView: 4,
+          },
+        }}
+      >
+        <SwiperSlide>
+          <div className="d-flex align-items-center justify-content-center">
             <div className="text-center me-3">
               <img
                 alt=""
@@ -89,11 +127,9 @@ const HomeBanner = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Giao hàng toàn quốc */}
-        <div className="col-6 col-sm-6 col-md-3">
-          <div className="d-flex align-items-center">
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="d-flex align-items-center justify-content-center">
             <div className="text-center me-3">
               <img
                 alt=""
@@ -109,11 +145,9 @@ const HomeBanner = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Quà tặng hấp dẫn */}
-        <div className="col-6 col-sm-6 col-md-3">
-          <div className="d-flex align-items-center">
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="d-flex align-items-center justify-content-center">
             <div className="text-center me-3">
               <img
                 alt=""
@@ -129,11 +163,9 @@ const HomeBanner = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Hỗ trợ online 24/7 */}
-        <div className="col-6 col-sm-6 col-md-3">
-          <div className="d-flex align-items-center">
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="d-flex align-items-center justify-content-center">
             <div className="text-center me-3">
               <img
                 alt=""
@@ -149,8 +181,8 @@ const HomeBanner = () => {
               </p>
             </div>
           </div>
-        </div>
-      </div>
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 };

@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Button, Form, Container, Row, Col, Alert, Collapse } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Form,
+  Container,
+  Row,
+  Col,
+  Alert,
+  Collapse,
+} from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import AccountApi from "../../api/AccountApi";
 import PasswordResetModal from "./PasswordResetModal";
-
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 const Login = () => {
   const [emailNew, setEmailNew] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +37,9 @@ const Login = () => {
       });
 
       if (response.data.status === false) {
-        setError(response.data.message || "Email hoặc mật khẩu không chính xác.");
+        setError(
+          response.data.message || "Email hoặc mật khẩu không chính xác."
+        );
       } else {
         localStorage.setItem("token", response.data.token);
         navigate("/home");
@@ -51,7 +62,11 @@ const Login = () => {
     try {
       const response = await accountApi.postforgetPassword({ email: emailNew });
       if (response.data.status === false) {
-        setError(response.data.mess === "Email no exist" ? "Email không chính xác" : response.data.mess);
+        setError(
+          response.data.mess === "Email no exist"
+            ? "Email không chính xác"
+            : response.data.mess
+        );
       } else {
         setShow(true);
       }
@@ -59,7 +74,7 @@ const Login = () => {
       setError("Có lỗi xảy ra. Vui lòng thử lại.");
     } finally {
       setLoad(false);
-      setOpen(false)
+      setOpen(false);
     }
   };
 
@@ -88,15 +103,43 @@ const Login = () => {
     }
   };
 
+  const handleLoginGoogleSuccess = async (res) => {
+    const token = res.credential;
+    const decoded = jwtDecode(token);
+    localStorage.setItem("googleToken", token);
+    localStorage.setItem(
+      "username",
+      `${decoded.family_name} ${decoded.given_name}`
+    );
+    localStorage.setItem("email", decoded.email);
+    try {
+      const response = await fetch(decoded.picture);
+      const blob = await response.blob();
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        localStorage.setItem("picture", reader.result);
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      console.error("Lỗi khi tải ảnh:", error);
+    }
+    navigate("/");
+  };
+
   return (
     <div className="login-container p-5">
       <Container className="p-4 login-box">
         <Row className="justify-content-center">
           <Col sm={12} md={10} lg={8} xl={5}>
-            <h2 className="text-center" style={{ fontWeight: 400 }}>ĐĂNG NHẬP</h2>
+            <h2 className="text-center" style={{ fontWeight: 400 }}>
+              ĐĂNG NHẬP
+            </h2>
             <p className="text-center mb-4" style={{ fontSize: 14 }}>
               Nếu bạn chưa có tài khoản,{" "}
-              <a href={`/register`} style={{ color: "blue" }}>đăng ký tại đây</a>
+              <Link to={`/register`} style={{ color: "blue" }}>
+                đăng ký tại đây
+              </Link>
             </p>
 
             {error && <Alert variant="danger">{error}</Alert>}
@@ -121,7 +164,13 @@ const Login = () => {
               />
             </Form.Group>
 
-            <Button variant="primary" className="w-100 p-2" onClick={handleSubmit}>Đăng Nhập</Button>
+            <Button
+              variant="primary"
+              className="w-100 p-2"
+              onClick={handleSubmit}
+            >
+              Đăng Nhập
+            </Button>
 
             <p className="text-center pt-3" style={{ fontSize: 14 }}>
               <a
@@ -174,12 +223,15 @@ const Login = () => {
             <p className="text-center">Hoặc đăng nhập bằng</p>
 
             <div className="d-flex justify-content-center">
-              <Button variant="primary" className="me-2" style={{ width: 140 }}>
+              {/* <Button variant="primary" className="me-2" style={{ width: 140 }}>
                 <i className="bi bi-facebook me-2" /> Facebook
-              </Button>
-              <Button variant="danger" className="ms-2" style={{ width: 140 }}>
-                <i className="bi bi-google me-2" /> Google
-              </Button>
+              </Button> */}
+              <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <GoogleLogin
+                  onSuccess={handleLoginGoogleSuccess}
+                  cookiePolicy={"single_host_origin"}
+                />
+              </div>
             </div>
           </Col>
         </Row>

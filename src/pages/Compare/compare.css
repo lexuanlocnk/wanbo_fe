@@ -41,6 +41,7 @@ table .first-col {
   font-weight: 500;
   cursor: pointer;
   border: none
+
 }
 .remove-item-but:hover {
   background-color: #0077ff;

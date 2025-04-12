@@ -1,0 +1,9 @@
+.back-link:hover {
+  color: #007bff;
+}
+
+.back-link {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}

@@ -6,6 +6,18 @@
   background-color: transparent; /* Xóa nền khi hover */
 }
 
+.icon-buttons {
+  background-color: white;
+  color: black;
+  border: none;
+  width: 40px;
+  height: 40px;
+}
+
+.icon-buttons:hover {
+  background-color: #2854e5;
+}
+
 .item-compare-wrap {
   width: calc(97% / 3);
   justify-content: center;

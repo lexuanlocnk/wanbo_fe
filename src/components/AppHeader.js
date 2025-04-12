@@ -10,11 +10,16 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import HomeApi from "../api/homeApi";
 import "../components/AppHeader.css";
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
+import CIcon from "@coreui/icons-react";
+import { cilCaretBottom, cilCaretTop, cilList } from "@coreui/icons";
+import { NavLink } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const AppHeader = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLargeOpen, setIsLargeOpen] = useState(false);
   useEffect(() => {
     const fetchCategories = async () => {
       const homeApi = new HomeApi();
@@ -41,16 +46,51 @@ const AppHeader = () => {
       style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
     >
       <Container>
-        <DropdownButton id="dropdown-basic-button" title="DANH MỤC SẢN PHẨM">
-          {categories.map((category) => (
-            <Dropdown.Item
-              key={category.friendly_url}
-              href={`/product?catUrl=${category.friendly_url}`} // Link đến trang danh mục sản phẩm  
-              className="d-flex justify-content-between"
-            >
-              <div>{category.cat_name}</div>
-            </Dropdown.Item>
-          ))}
+        <DropdownButton
+          id="dropdown-basic-button"
+          title={
+            <span className="d-flex align-items-center">
+              <CIcon icon={cilList} className="me-2 dropdown-icon" /> DANH MỤC
+              SẢN PHẨM
+            </span>
+          }
+          onMouseEnter={() => setIsLargeOpen(true)}
+          onMouseLeave={() => setIsLargeOpen(false)}
+          onClick={() => setIsLargeOpen(!isLargeOpen)}
+          show={isLargeOpen}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{
+              opacity: isLargeOpen ? 1 : 0,
+              y: isLargeOpen ? -4 : -10,
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="dropdown-menu show d-none d-lg-block"
+          >
+            {categories.map((category) => (
+              <Dropdown.Item
+                as={Link}
+                key={category.friendly_url}
+                to={`/product?catUrl=${category.friendly_url}`}
+                className="d-flex justify-content-between dropdown-item"
+              >
+                {category.cat_name}
+              </Dropdown.Item>
+            ))}
+          </motion.div>
+          <div className="d-lg-none">
+            {categories.map((category) => (
+              <Dropdown.Item
+                as={Link}
+                key={category.friendly_url}
+                to={`/product?catUrl=${category.friendly_url}`}
+                className="d-flex justify-content-between dropdown-item"
+              >
+                {category.cat_name}
+              </Dropdown.Item>
+            ))}
+          </div>
         </DropdownButton>
 
         <Navbar.Toggle
@@ -58,7 +98,7 @@ const AppHeader = () => {
           style={{
             border: "1px solid #ccc",
             outline: "none",
-            backgroundColor: "white"
+            backgroundColor: "white",
           }}
         />
 
@@ -68,32 +108,80 @@ const AppHeader = () => {
             style={{ maxHeight: "500px" }}
             navbarScroll
           >
-            <Nav.Link href="/home" className="Home">
+            <Nav.Link as={Link} to="/home" className="Home">
               Trang chủ
             </Nav.Link>
 
-            <Nav.Link href="/introduce" className="Home">
+            <Nav.Link as={Link} to="/introduce" className="Home">
               Giới thiệu
             </Nav.Link>
 
-            <Nav.Link href="/product?catUrl=wanbo-t" className="Home">
-              Sản phẩm
-            </Nav.Link>
+            <NavDropdown
+              title={
+                <span className="d-flex align-items-center nav-dropdown">
+                  Sản phẩm
+                  <motion.i
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="ms-2"
+                  >
+                    <i class="bi bi-caret-down-fill"></i>
+                  </motion.i>
+                </span>
+              }
+              to="/product"
+              className="Home"
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+              onClick={() => setIsOpen(!isOpen)}
+              show={isOpen}
+            >
+              <motion.i
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? -4 : -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="dropdown-menu show d-none d-lg-block"
+              >
+                <NavDropdown.Item
+                  as={Link}
+                  to="/new-product"
+                  className="dropdown-item"
+                >
+                  Sản phẩm mới
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/product?catUrl=wanbo-t"
+                  className="dropdown-item"
+                >
+                  Sản phẩm
+                </NavDropdown.Item>
+              </motion.i>
+              <div className="d-lg-none">
+                <NavDropdown.Item
+                  as={Link}
+                  to="/new-product"
+                  className="dropdown-item"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  Sản phẩm mới
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/product?catUrl=wanbo-t"
+                  className="dropdown-item"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  Sản phẩm
+                </NavDropdown.Item>
+              </div>
+            </NavDropdown>
 
-            {/* <NavDropdown title="Sản phẩm" href="/product" className="Home">
-              <NavDropdown.Item href="/new-product">
-                Sẩn phẩm mới
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/product?catUrl=wanbo-t">
-                Sản phẩm
-              </NavDropdown.Item>
-            </NavDropdown> */}
-
-            <Nav.Link href="/news/tin-khuyen-mai" className="Home">
+            <Nav.Link as={Link} to="/news/tin-khuyen-mai" className="Home">
               Tin tức
             </Nav.Link>
 
-            <Nav.Link href="/contact" className="Home">
+            <Nav.Link as={Link} to="/contact" className="Home">
               Liên hệ
             </Nav.Link>
           </Nav>

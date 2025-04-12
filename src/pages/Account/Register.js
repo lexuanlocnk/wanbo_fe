@@ -8,7 +8,7 @@ import {
   Alert,
   Collapse,
 } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountApi from "../../api/AccountApi";
 
 const Register = () => {
@@ -62,9 +62,9 @@ const Register = () => {
             </h2>
             <p className="text-center mb-4" style={{ fontSize: 14 }}>
               Đã có tài khoản,{" "}
-              <a href={`/login`} style={{ color: "blue" }}>
+              <Link to={`/login`} style={{ color: "blue" }}>
                 đăng nhập tại đây
-              </a>
+              </Link>
             </p>
 
             {error && <Alert variant="danger">{error}</Alert>}

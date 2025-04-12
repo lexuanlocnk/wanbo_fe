@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import "./News.css";
 import NewsCategory from "../../components/NewsCategory";
 import FeaturedNews from "../../components/FeaturedNews";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { imageBaseUrl } from "../../api/axiosConfig";
 
 const News = () => {
@@ -56,9 +56,9 @@ const News = () => {
                     href={`/news/${urlNew}/${item.friendly_url}`}
                   />
                   <div className="d-flex flex-column justify-content-center mx-2 news-content">
-                    <a href={`/news/${urlNew}/${item.friendly_url}`}>
+                    <Link to={`/news/${urlNew}/${item.friendly_url}`}>
                       <Card.Title className="tblack fw-bold">{item.title}</Card.Title>
-                    </a>
+                    </Link>
                     <div className="d-flex" >
                       <Card.Text className="bi bi-person me-2 tgray">
                         Team dev
@@ -78,11 +78,11 @@ const News = () => {
                     <div className="text-truncate-3 tgray">
                       {item.short}
                     </div>
-                    <a href={`/news/${urlNew}/${item.friendly_url}`} className="card-title">
+                    <Link to={`/news/${urlNew}/${item.friendly_url}`} className="card-title">
                       <h6>
                         Xem thêm <span className="bi bi-arrow-right" />
                       </h6>
-                    </a>
+                    </Link>
                   </div>
                 </Card>
               )) : []}

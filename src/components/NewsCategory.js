@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import axios from "axios";
 import newApi from "../api/newApi";
+import { Link } from "react-router-dom";
 
 const NewsCategory = () => {
   // State để quản lý hiển thị danh sách sản phẩm
@@ -12,7 +13,6 @@ const NewsCategory = () => {
   const toggleProducts = () => {
     setShowProducts(!showProducts);
   };
-
 
   useEffect(() => {
     const fetchNewCategory = async () => {
@@ -39,12 +39,19 @@ const NewsCategory = () => {
       className="p-4"
       style={{ height: "auto", backgroundColor: "white", fontSize: 15 }}
     >
-      <h5 className="my-3">DANH MỤC TIN TỨC</h5>
-      {categoryData && categoryData.length > 0 ? categoryData.map((item) => (
-        <Nav.Link className="my-3" href={`/news/${item.news_category_desc?.friendly_url}`}>
-          {item.news_category_desc?.cat_name}
-        </Nav.Link>
-      )) : []}
+      <h5 className="my-3 fw-bold">DANH MỤC TIN TỨC</h5>
+      {categoryData && categoryData.length > 0
+        ? categoryData.map((item, index) => (
+            <Nav.Link
+              as={Link}
+              key={index}
+              className="my-3"
+              to={`/news/${item.news_category_desc?.friendly_url}`}
+            >
+              {item.news_category_desc?.cat_name}
+            </Nav.Link>
+          ))
+        : []}
 
       {/* <Nav.Link className="my-3" href="/introduce">
         Giới thiệu
@@ -76,7 +83,6 @@ const NewsCategory = () => {
 
       <Nav.Link className="my-3" href="/news/may-chieu-mini-wanbo">Tin tức</Nav.Link>
       <Nav.Link className="my-3" href="/news/tin-khuyen-mai">Tin khuyến mãi</Nav.Link> */}
-
     </div>
   );
 };
